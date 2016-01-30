@@ -5467,3 +5467,105 @@
 {"name":"hexo","hostname":"Yong-MacBook-Pro.local","pid":89640,"level":20,"msg":"Rendering post: \u001b[35m2016/01/28/iOS证书过期解决方案/index.html\u001b[39m","time":"2016-01-28T02:56:20.215Z","v":0}
 {"name":"hexo","hostname":"Yong-MacBook-Pro.local","pid":89640,"level":30,"msg":"Have a nice day","time":"2016-01-28T02:56:57.567Z","v":0}
 {"name":"hexo","hostname":"Yong-MacBook-Pro.local","pid":89640,"level":20,"msg":"Database saved","time":"2016-01-28T02:56:57.588Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Hexo version: \u001b[35m3.1.1\u001b[39m","time":"2016-01-30T13:38:40.744Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Working directory: \u001b[35m~/Desktop/hexo_gitHub/ifgyong.github.io/\u001b[39m","time":"2016-01-30T13:38:40.747Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Config loaded: \u001b[35m~/Desktop/hexo_gitHub/ifgyong.github.io/_config.yml\u001b[39m","time":"2016-01-30T13:38:40.839Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2016-01-30T13:38:40.853Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2016-01-30T13:38:40.856Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2016-01-30T13:38:40.857Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2016-01-30T13:38:40.858Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2016-01-30T13:38:40.860Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2016-01-30T13:38:40.863Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2016-01-30T13:38:40.927Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2016-01-30T13:38:41.029Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2016-01-30T13:38:41.102Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Loading database.","time":"2016-01-30T13:38:41.111Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/CNAME\u001b[39m","time":"2016-01-30T13:38:41.179Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/MAC-重置MySQL-root-密码.md\u001b[39m","time":"2016-01-30T13:38:41.179Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/hello-world.md\u001b[39m","time":"2016-01-30T13:38:41.179Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/hexo自定义域名.md\u001b[39m","time":"2016-01-30T13:38:41.180Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS-WebView设置cookie.md\u001b[39m","time":"2016-01-30T13:38:41.180Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS-static-const-extern-用法技巧.md\u001b[39m","time":"2016-01-30T13:38:41.180Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS自动化打包第一步.md\u001b[39m","time":"2016-01-30T13:38:41.181Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS证书过期解决方案.md\u001b[39m","time":"2016-01-30T13:38:41.181Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/about/index.md\u001b[39m","time":"2016-01-30T13:38:41.181Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/categories/index.md\u001b[39m","time":"2016-01-30T13:38:41.181Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/tags/index.md\u001b[39m","time":"2016-01-30T13:38:41.182Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/pic.png\u001b[39m","time":"2016-01-30T13:38:41.182Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/debug.log\u001b[39m","time":"2016-01-30T13:38:41.183Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35mCNAME\u001b[39m","time":"2016-01-30T13:38:41.187Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/debug.log\u001b[39m","time":"2016-01-30T13:38:41.188Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35mpic.png\u001b[39m","time":"2016-01-30T13:38:41.189Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35mtags/index.md\u001b[39m","time":"2016-01-30T13:38:41.191Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35mcategories/index.md\u001b[39m","time":"2016-01-30T13:38:41.192Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35mabout/index.md\u001b[39m","time":"2016-01-30T13:38:41.193Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/iOS证书过期解决方案.md\u001b[39m","time":"2016-01-30T13:38:41.194Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/iOS自动化打包第一步.md\u001b[39m","time":"2016-01-30T13:38:41.196Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/iOS-static-const-extern-用法技巧.md\u001b[39m","time":"2016-01-30T13:38:41.198Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/iOS-WebView设置cookie.md\u001b[39m","time":"2016-01-30T13:38:41.199Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/hexo自定义域名.md\u001b[39m","time":"2016-01-30T13:38:41.200Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/hello-world.md\u001b[39m","time":"2016-01-30T13:38:41.201Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Processed: \u001b[35m_posts/MAC-重置MySQL-root-密码.md\u001b[39m","time":"2016-01-30T13:38:41.202Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2016-01-30T13:38:41.785Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2016-01-30T13:38:41.786Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2016-01-30T13:38:41.786Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2016-01-30T13:38:41.786Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2016-01-30T13:38:41.786Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2016-01-30T13:38:41.786Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2016-01-30T13:38:41.787Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":30,"msg":"Hexo is running at \u001b[4mhttp://0.0.0.0:4000/\u001b[24m. Press Ctrl+C to stop.","time":"2016-01-30T13:38:41.794Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Database saved","time":"2016-01-30T13:38:41.802Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":30,"msg":"See you again","time":"2016-01-30T13:39:07.018Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2429,"level":20,"msg":"Database saved","time":"2016-01-30T13:39:07.026Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Hexo version: \u001b[35m3.1.1\u001b[39m","time":"2016-01-30T13:39:33.646Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Working directory: \u001b[35m~/Desktop/hexo_gitHub/ifgyong.github.io/\u001b[39m","time":"2016-01-30T13:39:33.650Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Config loaded: \u001b[35m~/Desktop/hexo_gitHub/ifgyong.github.io/_config.yml\u001b[39m","time":"2016-01-30T13:39:33.738Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2016-01-30T13:39:33.751Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2016-01-30T13:39:33.754Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2016-01-30T13:39:33.755Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2016-01-30T13:39:33.756Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2016-01-30T13:39:33.756Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2016-01-30T13:39:33.759Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2016-01-30T13:39:33.821Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2016-01-30T13:39:33.924Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2016-01-30T13:39:33.997Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Loading database.","time":"2016-01-30T13:39:34.008Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/CNAME\u001b[39m","time":"2016-01-30T13:39:34.074Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/MAC-重置MySQL-root-密码.md\u001b[39m","time":"2016-01-30T13:39:34.074Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/hello-world.md\u001b[39m","time":"2016-01-30T13:39:34.074Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/hexo自定义域名.md\u001b[39m","time":"2016-01-30T13:39:34.074Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS-WebView设置cookie.md\u001b[39m","time":"2016-01-30T13:39:34.075Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS-static-const-extern-用法技巧.md\u001b[39m","time":"2016-01-30T13:39:34.075Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS自动化打包第一步.md\u001b[39m","time":"2016-01-30T13:39:34.075Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/iOS证书过期解决方案.md\u001b[39m","time":"2016-01-30T13:39:34.075Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/about/index.md\u001b[39m","time":"2016-01-30T13:39:34.075Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/categories/index.md\u001b[39m","time":"2016-01-30T13:39:34.076Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/tags/index.md\u001b[39m","time":"2016-01-30T13:39:34.076Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/pic.png\u001b[39m","time":"2016-01-30T13:39:34.076Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Unchanged: \u001b[35msource/_posts/debug.log\u001b[39m","time":"2016-01-30T13:39:34.077Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35mCNAME\u001b[39m","time":"2016-01-30T13:39:34.081Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/debug.log\u001b[39m","time":"2016-01-30T13:39:34.082Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35mpic.png\u001b[39m","time":"2016-01-30T13:39:34.082Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35mtags/index.md\u001b[39m","time":"2016-01-30T13:39:34.085Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35mcategories/index.md\u001b[39m","time":"2016-01-30T13:39:34.086Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35mabout/index.md\u001b[39m","time":"2016-01-30T13:39:34.087Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/iOS证书过期解决方案.md\u001b[39m","time":"2016-01-30T13:39:34.089Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/iOS自动化打包第一步.md\u001b[39m","time":"2016-01-30T13:39:34.090Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/iOS-static-const-extern-用法技巧.md\u001b[39m","time":"2016-01-30T13:39:34.091Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/iOS-WebView设置cookie.md\u001b[39m","time":"2016-01-30T13:39:34.092Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/hexo自定义域名.md\u001b[39m","time":"2016-01-30T13:39:34.093Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/hello-world.md\u001b[39m","time":"2016-01-30T13:39:34.094Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Processed: \u001b[35m_posts/MAC-重置MySQL-root-密码.md\u001b[39m","time":"2016-01-30T13:39:34.095Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2016-01-30T13:39:34.663Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2016-01-30T13:39:34.663Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2016-01-30T13:39:34.663Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2016-01-30T13:39:34.663Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2016-01-30T13:39:34.663Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2016-01-30T13:39:34.663Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2016-01-30T13:39:34.664Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":30,"msg":"Hexo is running at \u001b[4mhttp://0.0.0.0:4000/\u001b[24m. Press Ctrl+C to stop.","time":"2016-01-30T13:39:34.671Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Database saved","time":"2016-01-30T13:39:34.677Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":40,"msg":"No layout: \u001b[35mindex.html\u001b[39m","time":"2016-01-30T13:39:43.628Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":40,"msg":"No layout: \u001b[35mindex.html\u001b[39m","time":"2016-01-30T13:40:10.458Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":30,"msg":"Bye!","time":"2016-01-30T13:40:33.574Z","v":0}
+{"name":"hexo","hostname":"fgyMacBook.local","pid":2433,"level":20,"msg":"Database saved","time":"2016-01-30T13:40:33.582Z","v":0}
