@@ -5,6 +5,7 @@ tags:
 - hexo
 categories: 建站
 ---
+
 ## hexo换了电脑处理方法
 为了可以在多个电脑上面都处理hexo博客，所以我把source文件和网站的文件分别放在hexo和master分支上面了。
 克隆到本地你的仓库

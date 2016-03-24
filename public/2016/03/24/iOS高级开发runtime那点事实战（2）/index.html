@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,iOS高级开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="获取class的property属性List1234567891011-(void)printPropertyList&amp;#123;    unsigned int count ;//存储属性的数量的    objc_property_t * methodsVar = class_copyPropertyList([UINavigationController class], &amp;amp;count)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS高级开发runtime那点事实战（2）">
+<meta property="og:url" content="http://yoursite.com/2016/03/24/iOS高级开发runtime那点事实战（2）/index.html">
+<meta property="og:site_name" content="兜兜转转">
+<meta property="og:description" content="获取class的property属性List1234567891011-(void)printPropertyList&amp;#123;    unsigned int count ;//存储属性的数量的    objc_property_t * methodsVar = class_copyPropertyList([UINavigationController class], &amp;amp;count)">
+<meta property="og:updated_time" content="2016-03-24T03:03:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS高级开发runtime那点事实战（2）">
+<meta name="twitter:description" content="获取class的property属性List1234567891011-(void)printPropertyList&amp;#123;    unsigned int count ;//存储属性的数量的    objc_property_t * methodsVar = class_copyPropertyList([UINavigationController class], &amp;amp;count)">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> iOS高级开发runtime那点事实战（2） | 兜兜转转 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">兜兜转转</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS高级开发runtime那点事实战（2）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-24T11:01:56+08:00" content="2016-03-24">
+              2016-03-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/24/iOS高级开发runtime那点事实战（2）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（2）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="u83B7_u53D6class_u7684property_u5C5E_u6027List"><a href="#u83B7_u53D6class_u7684property_u5C5E_u6027List" class="headerlink" title="获取class的property属性List"></a>获取class的property属性List</h3><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-(void)printPropertyList&#123;</span><br><span class="line">    unsigned <span class="keyword">int</span> count <span class="comment">;//存储属性的数量的</span></span><br><span class="line">    objc_property_t * methodsVar = class_copyPropertyList([UINavigationController class], &amp;count) <span class="comment">;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span><span class="comment">; i &lt; count; i ++) &#123;</span></span><br><span class="line">        objc_property_t var = methodsVar[i] <span class="comment">;</span></span><br><span class="line">        NSString * strName =[NSString stringWithUTF8String:property_getName(var)]<span class="comment">;</span></span><br><span class="line">        NSString * <span class="keyword">str</span> =[NSString stringWithUTF8String:property_getAttributes(var)]<span class="comment">;</span></span><br><span class="line">        NSLog(@<span class="string">"属性 %@   名字  %@"</span>,<span class="keyword">str</span>,strName)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    free(methodsVar)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u83B7_u53D6class_u7684_u7684_u540D_u5B57"><a href="#u83B7_u53D6class_u7684_u7684_u540D_u5B57" class="headerlink" title="获取class的的名字"></a>获取class的的名字</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)printfClassName&#123;</span><br><span class="line">    Class clas = <span class="built_in">NSClassFromString</span>(<span class="string">@"NSString"</span>);</span><br><span class="line">   printf(<span class="string">"%s"</span>, class_getName(clas)); <span class="comment">//当clas为空的话 return value 是nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：<span class="built_in">NSString</span></span><br></pre></td></tr></table></figure>
+<h3 id="u83B7_u53D6_u7C7B_u7684_u7236_u7C7B_u5E76_u8F93_u51FA"><a href="#u83B7_u53D6_u7C7B_u7684_u7236_u7C7B_u5E76_u8F93_u51FA" class="headerlink" title="获取类的父类并输出"></a>获取类的父类并输出</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-<span class="params">(void)</span>printfClassName:<span class="params">(Class )</span>clas&#123;</span><br><span class="line">   printf<span class="params">(<span class="string">"%s"</span>, class_getName(clas))</span>;</span><br><span class="line">&#125;</span><br><span class="line">-<span class="params">(Class)</span>getSuperClass:<span class="params">(Class)</span>clas&#123;</span><br><span class="line">    return class_getSuperclass<span class="params">(clas)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[self printfClassName:[self getSuperClass:NSClassFromString<span class="params">(@<span class="string">"UIView"</span>)</span>]];</span><br><span class="line">输出：UIResponder</span><br></pre></td></tr></table></figure>
+<h3 id="u8BBE_u7F6E_u7C7B_u7684_u7236_u7C7B"><a href="#u8BBE_u7F6E_u7C7B_u7684_u7236_u7C7B" class="headerlink" title="设置类的父类"></a>设置类的父类</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span><br><span class="line"> * Sets the superclass of a given class.</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@param</span> cls The class whose superclass you want to set.</span><br><span class="line"> * <span class="doctag">@param</span> newSuper The new superclass for cls.</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@return</span> The old superclass for cls.</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@warning</span> You should not use this function. 警告不要用</span><br><span class="line"> */</span></span><br><span class="line">OBJC_EXPORT Class class_setSuperclass(Class cls, Class newSuper) </span><br><span class="line">     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_5, __IPHONE_2_0,__IPHONE_2_0);</span><br><span class="line">     </span><br><span class="line">    [self <span class="string">printfClassName:</span>[self <span class="string">getSuperClass:</span>NSClassFromString(@<span class="string">"FY"</span>)]];第一次输出NSObjec</span><br><span class="line">    [self <span class="string">setClass:</span>NSClassFromString(@<span class="string">"FY"</span>) <span class="string">newSuperClass:</span>NSClassFromString(@<span class="string">"UIImageView"</span>)];<span class="comment">//设置新的父类</span></span><br><span class="line">    [self <span class="string">printfClassName:</span>[self <span class="string">getSuperClass:</span>NSClassFromString(@<span class="string">"FY"</span>)]];<span class="comment">//再次输出是UIImageView 说明设置新的父类是可用的</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)<span class="string">printfClassName:</span>(Class )clas&#123;</span><br><span class="line">   printf(<span class="string">"%s\n"</span>, class_getName(clas));</span><br><span class="line">&#125;</span><br><span class="line">-(Class)<span class="string">getSuperClass:</span>(Class)clas&#123;</span><br><span class="line">    <span class="keyword">return</span> class_getSuperclass(clas);</span><br><span class="line">&#125;</span><br><span class="line">-(Class)<span class="string">setClass:</span>(Class)clas <span class="string">newSuperClass:</span>(Class)superClas&#123;</span><br><span class="line">   <span class="keyword">return</span>   class_setSuperclass(clas, superClas);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u5BF9_u8C61_u548C_u7C7B_u7684_u533A_u5206"><a href="#u5BF9_u8C61_u548C_u7C7B_u7684_u533A_u5206" class="headerlink" title="对象和类的区分"></a>对象和类的区分</h3><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-(void)isMetaClass&#123;</span><br><span class="line">    NSMutableArray *arr = [[NSMutableArray alloc] init]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    [arr addObject:[NSObject class]]<span class="comment">;</span></span><br><span class="line">    [arr addObject:[NSValue class]]<span class="comment">;</span></span><br><span class="line">    [arr addObject:[NSNumber class]]<span class="comment">;</span></span><br><span class="line">    [arr addObject:[NSPredicate class]]<span class="comment">;</span></span><br><span class="line">    [arr addObject:@"not a class object"]<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    for (int i<span class="comment">; i&lt;[arr count]; i++) &#123;</span></span><br><span class="line">        id obj = [arr objectAtIndex:i]<span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">        if(class_isMetaClass(object_getClass(obj)))</span><br><span class="line">        &#123;</span><br><span class="line">            //do sth</span><br><span class="line">            NSLog(@"Class: %@", obj)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            NSLog(@"Instance: %@", obj)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出：<span class="number">2016-03-18</span> <span class="number">15:46:56.235</span> runTimeObj[<span class="number">18396</span>:<span class="number">2997316</span>] Class: NSObject</span><br><span class="line"><span class="number">2016-03-18</span> <span class="number">15:46:56.236</span> runTimeObj[<span class="number">18396</span>:<span class="number">2997316</span>] Class: NSValue</span><br><span class="line"><span class="number">2016-03-18</span> <span class="number">15:46:56.236</span> runTimeObj[<span class="number">18396</span>:<span class="number">2997316</span>] Class: NSNumber</span><br><span class="line"><span class="number">2016-03-18</span> <span class="number">15:46:56.236</span> runTimeObj[<span class="number">18396</span>:<span class="number">2997316</span>] Class: NSPredicate</span><br><span class="line"><span class="number">2016-03-18</span> <span class="number">15:46:56.236</span> runTimeObj[<span class="number">18396</span>:<span class="number">2997316</span>] Instance: not a class object</span><br></pre></td></tr></table></figure>
+<h3 id="u83B7_u5F97_u7C7B_u6240_u5360_u5B57_u8282_u7684_u5927_u5C0F"><a href="#u83B7_u5F97_u7C7B_u6240_u5360_u5B57_u8282_u7684_u5927_u5C0F" class="headerlink" title="获得类所占字节的大小"></a>获得类所占字节的大小</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">size_t size = class_getInstanceSize(<span class="name">NSClassFromString</span>(@<span class="string">"UIView"</span>))<span class="comment">;</span></span><br><span class="line">    printf(<span class="string">"%zu"</span>,size)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u83B7_u5F97_u7C7B_u7684_u5C5E_u6027_u53CA_u5176_u5C5E_u6027_u7684_u7C7B_u578B"><a href="#u83B7_u5F97_u7C7B_u7684_u5C5E_u6027_u53CA_u5176_u5C5E_u6027_u7684_u7C7B_u578B" class="headerlink" title="获得类的属性及其属性的类型"></a>获得类的属性及其属性的类型</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)ivarList&#123;</span><br><span class="line">    unsigned <span class="keyword">int</span> count;</span><br><span class="line">    Ivar * vars = class_copyIvarList(NSClassFromString(<span class="string">@"UIViewController"</span>), &amp;count)<span class="comment">//ivar 是结构体 包含 name,offset,type三个可读属性的结构体。</span></span><br><span class="line">    ;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i ++) &#123;</span><br><span class="line">        Ivar  <span class="keyword">var</span> = vars[i];</span><br><span class="line">        [self printIvar:<span class="keyword">var</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    free(vars);</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)printIvar:(Ivar)<span class="keyword">var</span>&#123;<span class="comment">//输出结构体</span></span><br><span class="line">    <span class="keyword">const</span>  <span class="keyword">char</span> * name = ivar_getName(<span class="keyword">var</span>);</span><br><span class="line">    <span class="keyword">long</span>  offset = ivar_getOffset(<span class="keyword">var</span>);</span><br><span class="line">    <span class="keyword">const</span>  <span class="keyword">char</span> * type = ivar_getTypeEncoding(<span class="keyword">var</span>);</span><br><span class="line">    printf(<span class="string">"%s %ld %s\n"</span>,name,offset,type);</span><br><span class="line">&#125;</span><br><span class="line">输出：</span><br><span class="line">_storyboard <span class="number">152</span> <span class="string">@"UIStoryboard"</span></span><br><span class="line">_externalObjectsTableForViewLoading <span class="number">160</span> <span class="string">@"NSDictionary"</span></span><br><span class="line">_topLevelObjectsToKeepAliveFromStoryboard <span class="number">168</span> <span class="string">@"NSArray"</span></span><br><span class="line">_savedHeaderSuperview <span class="number">176</span> <span class="string">@"UIView"</span></span><br><span class="line">_savedFooterSuperview <span class="number">184</span> <span class="string">@"UIView"</span></span><br></pre></td></tr></table></figure>
+<p>这些是apple <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ObjCRuntimeRef/index.html#//apple_ref/c/func/objc_msgSend" target="_blank" rel="external">Objectice-C Runtime Reference</a>,具体的更多的在这个网址可见。</p>
+<p>上一篇说了一个方法 名字是<code>void method_exchangeImplementations(Method m1, Method m2)</code><br>因为这个交换方法只能执行一次，所以解决了交换两次，就相当于没有交换了。具体代码：</p>
+<pre><code>static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+
+        void (^__method_swizzling)(Class, SEL, SEL) = ^(Class cls, SEL sel, SEL _sel) {
+            Method  method = class_getInstanceMethod(cls, sel);
+            Method _method = class_getInstanceMethod(cls, _sel);
+            method_exchangeImplementations(method, _method);
+        };
+      }
+</code></pre><p>在这里是把这个方法封装了一个c函数，保证了只会执行一次，最好把这个<code>dispatch</code>放在<code>+ load</code>函数里面，保证加载次数的减少。<br>更多博客在www.fgyong.cn可见。</p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/iOS高级开发/" rel="tag">#iOS高级开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/24/iOS高级开发runtime那点事实战（1）/" rel="next" title="iOS高级开发runtime那点事实战（1）">
+                <i class="fa fa-chevron-left"></i> iOS高级开发runtime那点事实战（1）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（2）/"
+           data-title="iOS高级开发runtime那点事实战（2）" data-url="http://yoursite.com/2016/03/24/iOS高级开发runtime那点事实战（2）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               alt="兜兜转转" />
+          <p class="site-author-name" itemprop="name">兜兜转转</p>
+          <p class="site-description motion-element" itemprop="description">不忘初心 方得始终</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u83B7_u53D6class_u7684property_u5C5E_u6027List"><span class="nav-number">1.</span> <span class="nav-text">获取class的property属性List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u83B7_u53D6class_u7684_u7684_u540D_u5B57"><span class="nav-number">2.</span> <span class="nav-text">获取class的的名字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u83B7_u53D6_u7C7B_u7684_u7236_u7C7B_u5E76_u8F93_u51FA"><span class="nav-number">3.</span> <span class="nav-text">获取类的父类并输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8BBE_u7F6E_u7C7B_u7684_u7236_u7C7B"><span class="nav-number">4.</span> <span class="nav-text">设置类的父类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5BF9_u8C61_u548C_u7C7B_u7684_u533A_u5206"><span class="nav-number">5.</span> <span class="nav-text">对象和类的区分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u83B7_u5F97_u7C7B_u6240_u5360_u5B57_u8282_u7684_u5927_u5C0F"><span class="nav-number">6.</span> <span class="nav-text">获得类所占字节的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u83B7_u5F97_u7C7B_u7684_u5C5E_u6027_u53CA_u5176_u5C5E_u6027_u7684_u7C7B_u578B"><span class="nav-number">7.</span> <span class="nav-text">获得类的属性及其属性的类型</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">兜兜转转</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fgyong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>
