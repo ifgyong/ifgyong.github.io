@@ -1,10 +1,7 @@
+'use strict';
 
 var lib = require('./src/lib');
 var env = require('./src/environment');
-var compiler = require('./src/compiler');
-var parser = require('./src/parser');
-var lexer = require('./src/lexer');
-var runtime = require('./src/runtime');
 var Loader = require('./src/loader');
 var loaders = require('./src/loaders');
 var precompile = require('./src/precompile');
@@ -15,12 +12,17 @@ module.exports.Template = env.Template;
 
 module.exports.Loader = Loader;
 module.exports.FileSystemLoader = loaders.FileSystemLoader;
+module.exports.PrecompiledLoader = loaders.PrecompiledLoader;
 module.exports.WebLoader = loaders.WebLoader;
 
-module.exports.compiler = compiler;
-module.exports.parser = parser;
-module.exports.lexer = lexer;
-module.exports.runtime = runtime;
+module.exports.compiler = require('./src/compiler');
+module.exports.parser = require('./src/parser');
+module.exports.lexer = require('./src/lexer');
+module.exports.runtime = require('./src/runtime');
+module.exports.lib = lib;
+module.exports.nodes = require('./src/nodes');
+
+module.exports.installJinjaCompat = require('./src/jinja-compat.js');
 
 // A single instance of an environment, since this is so commonly used
 
@@ -32,9 +34,21 @@ module.exports.configure = function(templatesPath, opts) {
         templatesPath = null;
     }
 
-    var noWatch = 'watch' in opts ? !opts.watch : false;
-    var loader = loaders.FileSystemLoader || loaders.WebLoader;
-    e = new env.Environment(new loader(templatesPath, noWatch), opts);
+    var TemplateLoader;
+    if(loaders.FileSystemLoader) {
+        TemplateLoader = new loaders.FileSystemLoader(templatesPath, {
+            watch: opts.watch,
+            noCache: opts.noCache
+        });
+    }
+    else if(loaders.WebLoader) {
+        TemplateLoader = new loaders.WebLoader(templatesPath, {
+            useCache: opts.web && opts.web.useCache,
+            async: opts.web && opts.web.async
+        });
+    }
+
+    e = new env.Environment(TemplateLoader, opts);
 
     if(opts && opts.express) {
         e.express(opts.express);

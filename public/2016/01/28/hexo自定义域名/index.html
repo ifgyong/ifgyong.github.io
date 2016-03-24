@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="兜兜转转">
 <meta property="og:description" content="注册购买域名就像买淘宝的宝贝一样简单，阿里云域名购买
 设置DNS 设置IP地址的时候设置成github的IP具体获取方法是  12345678$ nslookup fgyong.github.io//这个地址是你自己的地址下边的是输出来的，其中103.245.222.144便是上边需要的IP。 Server:        211.162.96.1 Address:    211.162.96.1">
-<meta property="og:updated_time" content="2016-01-31T03:13:19.000Z">
+<meta property="og:updated_time" content="2016-03-24T02:09:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo自定义域名">
 <meta name="twitter:description" content="注册购买域名就像买淘宝的宝贝一样简单，阿里云域名购买
@@ -292,12 +292,12 @@
 
       
         <h2 id="u6CE8_u518C_u8D2D_u4E70_u57DF_u540D"><a href="#u6CE8_u518C_u8D2D_u4E70_u57DF_u540D" class="headerlink" title="注册购买域名"></a>注册购买域名</h2><p>就像买淘宝的宝贝一样简单，<a href="http://wanwang.aliyun.com/domain/?spm=5176.200001.n2.13.iyigkk" target="_blank" rel="external">阿里云域名购买</a></p>
-<h2 id="u8BBE_u7F6EDNS"><a href="#u8BBE_u7F6EDNS" class="headerlink" title="设置DNS"></a>设置DNS</h2><p> 设置IP地址的时候设置成github的IP具体获取方法是<br>  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ nslookup fgyong<span class="class">.github</span><span class="class">.io</span><span class="comment">//这个地址是你自己的地址下边的是输出来的，其中103.245.222.144便是上边需要的IP。</span></span><br><span class="line"> Server:        <span class="number">211.162</span>.<span class="number">96.1</span></span><br><span class="line"> Address:    <span class="number">211.162</span>.<span class="number">96.1</span>#<span class="number">53</span></span><br><span class="line"></span><br><span class="line"> Non-authoritative answer: </span><br><span class="line"> fgyong<span class="class">.github</span><span class="class">.io</span>    canonical name = github<span class="class">.map</span><span class="class">.fastly</span><span class="class">.net</span>.</span><br><span class="line"> Name:    github<span class="class">.map</span><span class="class">.fastly</span><span class="class">.net</span></span><br><span class="line"> Address: <span class="number">103.245</span>.<span class="number">222.133</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="u8BBE_u7F6EDNS"><a href="#u8BBE_u7F6EDNS" class="headerlink" title="设置DNS"></a>设置DNS</h2><p> 设置IP地址的时候设置成github的IP具体获取方法是<br>  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ nslookup fgyong<span class="selector-class">.github</span><span class="selector-class">.io</span><span class="comment">//这个地址是你自己的地址下边的是输出来的，其中103.245.222.144便是上边需要的IP。</span></span><br><span class="line"> Server:        <span class="number">211.162</span>.<span class="number">96.1</span></span><br><span class="line"> Address:    <span class="number">211.162</span>.<span class="number">96.1</span>#<span class="number">53</span></span><br><span class="line"></span><br><span class="line"> Non-authoritative answer: </span><br><span class="line"> fgyong<span class="selector-class">.github</span><span class="selector-class">.io</span>    canonical name = github<span class="selector-class">.map</span><span class="selector-class">.fastly</span><span class="selector-class">.net</span>.</span><br><span class="line"> Name:    github<span class="selector-class">.map</span><span class="selector-class">.fastly</span><span class="selector-class">.net</span></span><br><span class="line"> Address: <span class="number">103.245</span>.<span class="number">222.133</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="u65B0_u5EFACNAME"><a href="#u65B0_u5EFACNAME" class="headerlink" title="新建CNAME"></a>新建CNAME</h2><pre><code>在hexo文件目录source下边执行
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi CNAME <span class="comment">//新建文件并打开</span></span><br><span class="line">然后把你买的域名写入文件退出并保存。</span><br><span class="line">比如我的是 <span class="string">http:</span><span class="comment">//fgyong.cn,写入文件的 网址是fgyong.cn.`没有http字样的`</span></span><br></pre></td></tr></table></figure>
 
 然后
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编译 hexo <span class="keyword">g</span></span><br><span class="line">上传github hexo <span class="literal">d</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编译 hexo <span class="keyword">g</span></span><br><span class="line">上传github hexo <span class="built_in">d</span></span><br></pre></td></tr></table></figure>
 
 大功告成，可以测试查看成果了。
 </code></pre>
@@ -399,7 +399,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -413,7 +413,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

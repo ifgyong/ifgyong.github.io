@@ -71,7 +71,7 @@
 2.进入安全模式
 1sudo mysqld_safe --skip-grant-tables
 这个地">
-<meta property="og:updated_time" content="2016-01-31T03:13:19.000Z">
+<meta property="og:updated_time" content="2016-03-24T02:09:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MAC 重置MySQL root 密码">
 <meta name="twitter:description" content="重置MySQL root 密码：当忘记密码，或者想要强行重置 MySQL 密码的时候，可以像下面这样：
@@ -312,8 +312,8 @@
 <p>然后输入任意密码就可以进入 MySQL 了。</p>
 <p>修改密码<br>进入了之后先不要急着使用 update 命令修改密码，先看看表中的字段名。不同版本密码的字段名可能不一样。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL 的用户信息是存在 mysql.<span class="keyword">user</span> <span class="title">这个表里面的。于是可以先选择 mysql</span> 这个数据库，再看数据库中 <span class="keyword">user</span> <span class="title">表中的字段名称。</span><br><span class="line">use</span> mysql; //切换数据库</span><br><span class="line">describe user; //查看user表的字段</span><br></pre></td></tr></table></figure></p>
 <p> 然后确定密码字段的名称，一般可能是 Password。然而在 OS X 的 MySQL 5.7 这个版本中，密码字段名称是 authentication_string 。记住这个字段名。</p>
-<p> 然后修改密码啊：<br> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">UPDATE</span> mysql.<span class="keyword">user</span> <span class="keyword">SET</span> authentication_string=<span class="keyword">PASSWORD</span>(‘<span class="number">123456</span>’) <span class="keyword">where</span> <span class="keyword">User</span>=’root’;</span> //将root用户密码改成 123456</span><br></pre></td></tr></table></figure></p>
-<p>  5.刷新权限，使配置生效<br>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span></span><br></pre></td></tr></table></figure></p>
+<p> 然后修改密码啊：<br> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> mysql.<span class="keyword">user</span> <span class="keyword">SET</span> authentication_string=<span class="keyword">PASSWORD</span>(‘<span class="number">123456</span>’) <span class="keyword">where</span> <span class="keyword">User</span>=’root’; //将root用户密码改成 123456</span><br></pre></td></tr></table></figure></p>
+<p>  5.刷新权限，使配置生效<br>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure></p>
 <p>   最后再启动 MySQL<br>   <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/<span class="built_in">local</span>/mysql/support-<span class="built_in">files</span>/mysql.server <span class="built_in">start</span></span><br></pre></td></tr></table></figure></p>
 <p>   当启动失败的话，可以直接用mac工具活动监视器：<br>   搜索mysql 进程名称列表有mysql的话，直接双击出现：这里写图片描述<br>   点击退出即可。</p>
 <p>   修改完之后记得刷新权限 和重新启动mysql服务才行。</p>
@@ -416,7 +416,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -430,7 +430,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

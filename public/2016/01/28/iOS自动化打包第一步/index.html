@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Shell,iOS,iOS自动化打包," />
+  <meta name="keywords" content="iOS,Shell,iOS自动化打包," />
 
 
 
@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="兜兜转转">
 <meta property="og:description" content="shell入门初探iOS打包有点烦人，现在就是想做个脚本一条命令执行之后打包然后上传到测试环境脚本。这是第一步在上传的基础上又写了一层上传只需要一条命令即可
 1234567891011121314151617181920 #!/bin/bash  if [ $# != 1 ] //判断输入参数    then     echo &quot;请输入版本号&quot;//没有参数直接报错     exit">
-<meta property="og:updated_time" content="2016-01-31T03:13:19.000Z">
+<meta property="og:updated_time" content="2016-03-24T02:09:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化打包第一步">
 <meta name="twitter:description" content="shell入门初探iOS打包有点烦人，现在就是想做个脚本一条命令执行之后打包然后上传到测试环境脚本。这是第一步在上传的基础上又写了一层上传只需要一条命令即可
@@ -292,9 +292,9 @@
 
       
         <h2 id="shell_u5165_u95E8_u521D_u63A2"><a href="#shell_u5165_u95E8_u521D_u63A2" class="headerlink" title="shell入门初探"></a>shell入门初探</h2><p>iOS打包有点烦人，现在就是想做个脚本一条命令执行之后打包然后上传到测试环境脚本。这是第一步在上传的基础上又写了一层上传只需要一条命令即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#!/bin/bash </span></span><br><span class="line"> <span class="keyword">if</span> [ <span class="variable">$#</span> != <span class="number">1</span> ] //判断输入参数</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">     <span class="built_in">echo</span> <span class="string">"请输入版本号"</span>//没有参数直接报错</span><br><span class="line">     <span class="built_in">exit</span>             //退出</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line">     version=<span class="variable">$&#123;1&#125;</span>    //获取输入的版本号</span><br><span class="line">     shorder=<span class="string">"./debug-publish.sh <span class="variable">$&#123;version&#125;</span> ios debug-<span class="variable">$&#123;version&#125;</span>.ipa"</span>//将要执行的shell脚本和命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      <span class="variable">$shorder</span> //执行字符串脚本</span><br><span class="line">      <span class="built_in">echo</span> <span class="string">"正在执行命令。。。"</span></span><br><span class="line">      <span class="keyword">if</span> [ $? <span class="operator">-eq</span> <span class="number">0</span> ]//判断执行命令的结果是否成功 <span class="number">0</span>是成功</span><br><span class="line">       <span class="keyword">then</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">"push successed"</span></span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"push faild"</span></span><br><span class="line">         <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#!/bin/bash </span></span><br><span class="line"> <span class="keyword">if</span> [ <span class="variable">$#</span> != 1 ] //判断输入参数</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">     <span class="built_in">echo</span> <span class="string">"请输入版本号"</span>//没有参数直接报错</span><br><span class="line">     <span class="built_in">exit</span>             //退出</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line">     version=<span class="variable">$&#123;1&#125;</span>    //获取输入的版本号</span><br><span class="line">     shorder=<span class="string">"./debug-publish.sh <span class="variable">$&#123;version&#125;</span> ios debug-<span class="variable">$&#123;version&#125;</span>.ipa"</span>//将要执行的shell脚本和命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      <span class="variable">$shorder</span> //执行字符串脚本</span><br><span class="line">      <span class="built_in">echo</span> <span class="string">"正在执行命令。。。"</span></span><br><span class="line">      <span class="keyword">if</span> [ $? <span class="_">-eq</span> 0 ]//判断执行命令的结果是否成功 0是成功</span><br><span class="line">       <span class="keyword">then</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">"push successed"</span></span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"push faild"</span></span><br><span class="line">         <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 <pre><code>完成之后就可以使用了记得给这个脚本权限哦
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x yourShellFile <span class="comment">//给执行权限</span></span><br><span class="line"></span><br><span class="line">./yourShellFile <span class="number">1.1</span><span class="number">.1</span> <span class="comment">//执行脚本在本目录下面</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +<span class="keyword">x</span> yourShellFile <span class="comment">//给执行权限</span></span><br><span class="line"></span><br><span class="line">./yourShellFile <span class="number">1.1</span>.1 <span class="comment">//执行脚本在本目录下面</span></span><br></pre></td></tr></table></figure>
 
 这是我的第一个脚本哦欢迎大虾指教。
 </code></pre>
@@ -305,9 +305,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Shell/" rel="tag">#Shell</a>
-          
             <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/Shell/" rel="tag">#Shell</a>
           
             <a href="/tags/iOS自动化打包/" rel="tag">#iOS自动化打包</a>
           
@@ -400,7 +400,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -414,7 +414,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

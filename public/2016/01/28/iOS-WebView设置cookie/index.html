@@ -67,7 +67,7 @@
 <meta property="og:description" content="添加cookie的时候必须先设置可以接受cookie1[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 然后设置cookie内容
 123456789101112NSMutableDictionary *cookiePropertiesUser =">
-<meta property="og:updated_time" content="2016-01-31T03:13:19.000Z">
+<meta property="og:updated_time" content="2016-03-24T02:09:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS WebView设置cookie">
 <meta name="twitter:description" content="添加cookie的时候必须先设置可以接受cookie1[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
@@ -294,10 +294,10 @@
       
 
       
-        <h2 id="u6DFB_u52A0cookie_u7684_u65F6_u5019_u5FC5_u987B_u5148_u8BBE_u7F6E_u53EF_u4EE5_u63A5_u53D7cookie"><a href="#u6DFB_u52A0cookie_u7684_u65F6_u5019_u5FC5_u987B_u5148_u8BBE_u7F6E_u53EF_u4EE5_u63A5_u53D7cookie" class="headerlink" title="添加cookie的时候必须先设置可以接受cookie"></a>添加cookie的时候必须先设置可以接受cookie</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[[NSHTTPCookieStorage sharedHTTPCookieStorage]</span> <span class="tag">setCookieAcceptPolicy</span><span class="pseudo">:NSHTTPCookieAcceptPolicyAlways</span>];</span><br></pre></td></tr></table></figure>
+        <h2 id="u6DFB_u52A0cookie_u7684_u65F6_u5019_u5FC5_u987B_u5148_u8BBE_u7F6E_u53EF_u4EE5_u63A5_u53D7cookie"><a href="#u6DFB_u52A0cookie_u7684_u65F6_u5019_u5FC5_u987B_u5148_u8BBE_u7F6E_u53EF_u4EE5_u63A5_u53D7cookie" class="headerlink" title="添加cookie的时候必须先设置可以接受cookie"></a>添加cookie的时候必须先设置可以接受cookie</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>然后设置cookie内容</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">NSMutableDictionary *cookiePropertiesUser = [NSMutableDictionary dictionary];</span><br><span class="line">NSString *cook = [[MDUserCache getInstance].user <span class="string">objectForKey:</span>@<span class="string">"cookie_key"</span>];</span><br><span class="line"><span class="keyword">if</span> ([cook length]) &#123;</span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"user_info"</span> <span class="string">forKey:</span>NSHTTPCookieName];<span class="comment">//cookie的名字</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>cook <span class="string">forKey:</span>NSHTTPCookieValue];<span class="comment">//cookie的值</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>[[NSDate date] <span class="string">dateByAddingTimeInterval:</span><span class="number">2629743</span>] <span class="string">forKey:</span>NSHTTPCookieExpires];<span class="comment">//过期时间</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"baidu.com"</span> <span class="string">forKey:</span>NSHTTPCookieDomain];<span class="comment">//给那个网址设置</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"/"</span> <span class="string">forKey:</span>NSHTTPCookiePath];</span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"0"</span> <span class="string">forKey:</span>NSHTTPCookieVersion];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSHTTPCookie *cookieuser = [NSHTTPCookie <span class="string">cookieWithProperties:</span>cookiePropertiesUser];</span><br></pre></td></tr></table></figure>
-<h2 id="u5220_u9664cookie"><a href="#u5220_u9664cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">[<span class="list">[<span class="keyword">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookieuser]<span class="comment">;</span></span><br><span class="line">删除cookie</span><br><span class="line"></span><br><span class="line">- <span class="list">(<span class="keyword">nullable</span> NSArray *)</span>cookiesForURL:<span class="list">(<span class="keyword">NSURL</span> *)</span>URL<span class="comment">;//先获取某个域名下的cookie然后删除</span></span><br><span class="line"></span><br><span class="line">- <span class="list">(<span class="keyword">void</span>)</span>deleteCookie:<span class="list">(<span class="keyword">NSHTTPCookie</span> *)</span>cookie<span class="comment">; //删除cookie</span></span></span></span><br></pre></td></tr></table></figure>
+<h2 id="u5220_u9664cookie"><a href="#u5220_u9664cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="name">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookieuser]<span class="comment">;</span></span><br><span class="line">删除cookie</span><br><span class="line"></span><br><span class="line">- (<span class="name">nullable</span> NSArray *)cookiesForURL:(<span class="name">NSURL</span> *)URL<span class="comment">;//先获取某个域名下的cookie然后删除</span></span><br><span class="line"></span><br><span class="line">- (<span class="name">void</span>)deleteCookie:(<span class="name">NSHTTPCookie</span> *)cookie<span class="comment">; //删除cookie</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -397,7 +397,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -411,7 +411,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
