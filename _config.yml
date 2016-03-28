@@ -66,7 +66,6 @@ plugins: hexo-generator-index,hexo-generator-archive,hexo-generator-tag
 index_generator:
   per_page: 10 ##首页默认10篇文章标题 如果值为0不分
 
-
 archive_generator:
     per_page: 10
 ##      yearly: true
@@ -86,4 +85,4 @@ deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
   branch: origin
-  message: 自动化打包第一步
+  message: 更新next插件

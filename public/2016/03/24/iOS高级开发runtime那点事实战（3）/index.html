@@ -98,6 +98,8 @@
 
 
 
+
+
   
   
     
@@ -132,7 +134,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -185,8 +187,6 @@
         </li>
       
 
-      
-      
       
     </ul>
   
@@ -277,6 +277,7 @@
 
           
           
+
         </div>
       </header>
     
@@ -298,6 +299,12 @@
 <figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">id method_invoke(id receiver, <span class="type">Method</span> m, ...) 调用receiver的方法 id 不能是<span class="keyword">nil</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">void</span> method_invoke_stret(id receiver, <span class="type">Method</span> m, ...) //<span class="type">Using</span> this function to call the implementation <span class="keyword">of</span> a <span class="keyword">method</span> <span class="keyword">is</span> faster than calling method_getImplementation <span class="keyword">and</span> method_getName. 官方描述就是比method_getName和method_getImplementation块</span><br><span class="line"></span><br><span class="line"><span class="type">IMP</span> method_getImplementation( <span class="type">Method</span> <span class="keyword">method</span>) //指向<span class="type">IMP</span>的方法指针</span><br><span class="line"><span class="type">IMP</span>是什么？本质上是一个指针，指向方法的指针，俗名就是函数指针。</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">char</span> * method_getTypeEncoding( <span class="type">Method</span> <span class="keyword">method</span>) //方法<span class="keyword">type</span> 返回一个c字符串</span><br><span class="line"></span><br><span class="line"><span class="built_in">char</span> * method_copyReturnType( <span class="type">Method</span> <span class="keyword">method</span>) 方法返回的类型 一个c字符串 用完要free(<span class="built_in">char</span> *)的</span><br><span class="line"></span><br><span class="line">unsigned method_getNumberOfArguments( <span class="type">Method</span> <span class="keyword">method</span>) //方法的元素数量</span><br><span class="line"></span><br><span class="line"><span class="built_in">void</span> method_getArgumentType( <span class="type">Method</span> <span class="keyword">method</span>, unsigned <span class="built_in">int</span> index, <span class="built_in">char</span> *dst, size_t dst_len) 获取<span class="keyword">method</span> 索引是index的参数 值赋给dst 要是dst = <span class="keyword">nil</span>；系统自动调用strncpy(dst, <span class="string">""</span>, dst_len)</span><br><span class="line"></span><br><span class="line"><span class="type">IMP</span> method_setImplementation( <span class="type">Method</span> <span class="keyword">method</span>, <span class="type">IMP</span> imp) 把imp赋给<span class="keyword">method</span> </span><br><span class="line"></span><br><span class="line"><span class="built_in">void</span> method_exchangeImplementations( <span class="type">Method</span> m1, <span class="type">Method</span> m2) 交换两个方法</span><br><span class="line">例如：<span class="type">IMP</span> imp1 = method_getImplementation(m1);</span><br><span class="line">     <span class="type">IMP</span> imp2 = method_getImplementation(m2);</span><br><span class="line">         method_setImplementation(m1, imp2);</span><br><span class="line">         method_setImplementation(m2, imp1);</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">char</span> * * objc_copyImageNames(unsigned <span class="built_in">int</span> *outCount)//返回所有加载的<span class="type">Objective</span>-C框架和动态库的名字。</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">char</span> *class_getImageName(<span class="type">Class</span> cls)//获取class的动态库的名字</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">char</span> * *objc_copyClassNamesForImage(<span class="keyword">const</span> <span class="built_in">char</span> *image, unsigned <span class="built_in">int</span> *outCount) //拷贝动态库</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">char</span>* sel_getName(<span class="type">SEL</span> aSelector) //获取<span class="type">SEL</span>的字符串名字</span><br><span class="line"></span><br><span class="line"><span class="type">SEL</span> sel_registerName(<span class="keyword">const</span> <span class="built_in">char</span> *str) //注册<span class="type">SEL</span> 名字是str 返回注册成功的<span class="type">SEL</span></span><br><span class="line"></span><br><span class="line"><span class="type">SEL</span> sel_getUid(<span class="keyword">const</span> <span class="built_in">char</span> *str) //获取str的方法<span class="type">SEL</span>指针</span><br><span class="line"></span><br><span class="line"><span class="type">BOOL</span> sel_isEqual(<span class="type">SEL</span> lhs, <span class="type">SEL</span> rhs) //判断两个<span class="type">SEL</span>是否是同一个<span class="type">SEL</span></span><br></pre></td></tr></table></figure>
 <p>今天就到这吧，明天吧协议和属性看了。更多文章在www.fgyong.cn</p>
 
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -399,19 +406,23 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">7</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -424,7 +435,8 @@
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
         </div>
 
@@ -464,7 +476,7 @@
   &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">兜兜转转</span>
 </div>
@@ -485,7 +497,9 @@
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
@@ -493,6 +507,14 @@
 
   
 
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
@@ -672,7 +694,7 @@
     NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.sidebar === 'post') {
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
           NexT.utils.displaySidebar();
         }
@@ -719,10 +741,11 @@
 
   
   
-
-  
   
 
+  
+
+  
 
 </body>
 </html>

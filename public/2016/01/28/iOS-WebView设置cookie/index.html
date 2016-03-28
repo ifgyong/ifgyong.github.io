@@ -104,6 +104,8 @@
 
 
 
+
+
   
   
     
@@ -138,7 +140,7 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -191,8 +193,6 @@
         </li>
       
 
-      
-      
       
     </ul>
   
@@ -283,6 +283,7 @@
 
           
           
+
         </div>
       </header>
     
@@ -299,6 +300,12 @@
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">NSMutableDictionary *cookiePropertiesUser = [NSMutableDictionary dictionary];</span><br><span class="line">NSString *cook = [[MDUserCache getInstance].user <span class="string">objectForKey:</span>@<span class="string">"cookie_key"</span>];</span><br><span class="line"><span class="keyword">if</span> ([cook length]) &#123;</span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"user_info"</span> <span class="string">forKey:</span>NSHTTPCookieName];<span class="comment">//cookie的名字</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>cook <span class="string">forKey:</span>NSHTTPCookieValue];<span class="comment">//cookie的值</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>[[NSDate date] <span class="string">dateByAddingTimeInterval:</span><span class="number">2629743</span>] <span class="string">forKey:</span>NSHTTPCookieExpires];<span class="comment">//过期时间</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"baidu.com"</span> <span class="string">forKey:</span>NSHTTPCookieDomain];<span class="comment">//给那个网址设置</span></span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"/"</span> <span class="string">forKey:</span>NSHTTPCookiePath];</span><br><span class="line">    [cookiePropertiesUser <span class="string">setObject:</span>@<span class="string">"0"</span> <span class="string">forKey:</span>NSHTTPCookieVersion];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSHTTPCookie *cookieuser = [NSHTTPCookie <span class="string">cookieWithProperties:</span>cookiePropertiesUser];</span><br></pre></td></tr></table></figure>
 <h2 id="u5220_u9664cookie"><a href="#u5220_u9664cookie" class="headerlink" title="删除cookie"></a>删除cookie</h2><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="name">NSHTTPCookieStorage</span> sharedHTTPCookieStorage] setCookie:cookieuser]<span class="comment">;</span></span><br><span class="line">删除cookie</span><br><span class="line"></span><br><span class="line">- (<span class="name">nullable</span> NSArray *)cookiesForURL:(<span class="name">NSURL</span> *)URL<span class="comment">;//先获取某个域名下的cookie然后删除</span></span><br><span class="line"></span><br><span class="line">- (<span class="name">void</span>)deleteCookie:(<span class="name">NSHTTPCookie</span> *)cookie<span class="comment">; //删除cookie</span></span><br></pre></td></tr></table></figure>
 
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -402,19 +409,23 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">7</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -427,7 +438,8 @@
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
         </div>
 
@@ -467,7 +479,7 @@
   &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">兜兜转转</span>
 </div>
@@ -488,7 +500,9 @@
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
@@ -496,6 +510,14 @@
 
   
 
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
@@ -675,7 +697,7 @@
     NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.sidebar === 'post') {
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
           NexT.utils.displaySidebar();
         }
@@ -722,10 +744,11 @@
 
   
   
-
-  
   
 
+  
+
+  
 
 </body>
 </html>
