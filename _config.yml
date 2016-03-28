@@ -84,5 +84,5 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
-  branch: origin
+  branch: master
   message: 更新next插件
