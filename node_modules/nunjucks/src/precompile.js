@@ -117,6 +117,8 @@ function _precompile(str, name, env) {
     var extensions = env.extensionsList;
     var template;
 
+    name = name.replace(/\\/g, '/');
+
     try {
         template = compiler.compile(str,
                                     asyncFilters,

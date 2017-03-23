@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,18 +27,48 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS,iOS高级," />
@@ -50,7 +80,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -62,8 +92,8 @@
 方法二 实例方法 1- (instancetype)ini">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS线程之NSThread">
-<meta property="og:url" content="http://yoursite.com/2016/04/13/iOS线程之NSThread/index.html">
-<meta property="og:site_name" content="兜兜转转">
+<meta property="og:url" content="http://fgyong.cn/2016/04/13/iOS线程之NSThread/index.html">
+<meta property="og:site_name" content="兜兜转转个人博客">
 <meta property="og:description" content="前两篇文章已经将了现在主流的GCD和NSOperationQueue,现在我们在聊一下NSThread。
 创建NSThread方法一 类方法1+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;
 方法二 实例方法 1- (instancetype)ini">
@@ -76,26 +106,55 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
-      author: '博主'
+      userId: '6226622511841281000',
+      author: '兜兜转转'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> iOS线程之NSThread | 兜兜转转 </title>
+
+
+  <link rel="canonical" href="http://fgyong.cn/2016/04/13/iOS线程之NSThread/"/>
+
+
+
+
+
+  <title> iOS线程之NSThread | 兜兜转转个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-93911317-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
 
 
 
@@ -115,25 +174,29 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta custom-logo">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">兜兜转转</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">兜兜转转个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -146,7 +209,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -156,7 +219,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -166,7 +229,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -176,7 +239,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -186,7 +249,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -199,6 +262,8 @@
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -213,49 +278,71 @@
     
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/04/13/iOS线程之NSThread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="兜兜转转">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兜兜转转个人博客">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
             
             
               
                 iOS线程之NSThread
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-13T11:23:40+08:00" content="2016-04-13">
-              2016-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-13T11:23:40+08:00">
+                2016-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/iOS/" itemprop="url" rel="index">
                     <span itemprop="name">iOS</span>
                   </a>
@@ -263,7 +350,6 @@
 
                 
                 
-
               
             </span>
           
@@ -271,17 +357,40 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/04/13/iOS线程之NSThread/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/13/iOS线程之NSThread/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/13/iOS线程之NSThread/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
+          
+             <span id="/2016/04/13/iOS线程之NSThread/" class="leancloud_visitors" data-flag-title="iOS线程之NSThread">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
           
 
         </div>
@@ -296,23 +405,23 @@
 
       
         <p>前两篇文章已经将了现在主流的GCD和NSOperationQueue,现在我们在聊一下NSThread。</p>
-<h3 id="u521B_u5EFANSThread"><a href="#u521B_u5EFANSThread" class="headerlink" title="创建NSThread"></a>创建NSThread</h3><p>方法一 类方法<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)<span class="string">detachNewThreadSelector:</span>(SEL)selector <span class="string">toTarget:</span>(id)target <span class="string">withObject:</span>(nullable id)argument;</span><br></pre></td></tr></table></figure></p>
-<p>方法二 实例方法<br> <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instance<span class="keyword">type</span>)initWithTarget:(id)target selector:(<span class="type">SEL</span>)selector object:(nullable id)argument <span class="type">NS_AVAILABLE</span>(10_5, 2_0);</span><br></pre></td></tr></table></figure></p>
+<h3 id="u521B_u5EFANSThread"><a href="#u521B_u5EFANSThread" class="headerlink" title="创建NSThread"></a>创建NSThread</h3><p>方法一 类方法<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)<span class="string">detachNewThreadSelector:</span>(SEL)selector <span class="string">toTarget:</span>(id)target <span class="string">withObject:</span>(nullable id)argument;</div></pre></td></tr></table></figure></p>
+<p>方法二 实例方法<br> <figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (instance<span class="keyword">type</span>)initWithTarget:(id)target selector:(<span class="type">SEL</span>)selector object:(nullable id)argument <span class="type">NS_AVAILABLE</span>(10_5, 2_0);</div></pre></td></tr></table></figure></p>
 <p>这两者的区别是 类方法是创建新的线程并且立即启动，而第二个方法是创建线程，但是没有启动，启动需要<code>[thread start]</code>。</p>
-<h3 id="u83B7_u53D6_u7EBF_u7A0B_u7684_u72B6_u6001"><a href="#u83B7_u53D6_u7EBF_u7A0B_u7684_u72B6_u6001" class="headerlink" title="获取线程的状态"></a>获取线程的状态</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">正在执行</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, getter=isExecuting) <span class="built_in">BOOL</span> executing <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</span><br><span class="line">完成</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, getter=isFinished) <span class="built_in">BOOL</span> finished <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</span><br><span class="line">取消</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, getter=isCancelled) <span class="built_in">BOOL</span> cancelled <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</span><br></pre></td></tr></table></figure>
-<h3 id="u66F4_u6539_u7EBF_u7A0B_u72B6_u6001"><a href="#u66F4_u6539_u7EBF_u7A0B_u72B6_u6001" class="headerlink" title="更改线程状态"></a>更改线程状态</h3><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">取消</span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">cancel <span class="title">NS_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span></span>;</span><br><span class="line">开始</span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">start <span class="title">NS_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span></span>;</span><br><span class="line">线程的主函数</span><br><span class="line">- (<span class="keyword">void</span>)<span class="function">main <span class="title">NS_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>在子线程中想要更新UI怎么办，这里官方直接提供了在子线程执行方法的函数，很实用的。<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">void</span>)performSelectorOnMainThread:(<span class="type">SEL</span>)aSelector withObject:(nullable id)arg waitUntilDone:(<span class="type">BOOL</span>)wait modes:(nullable <span class="type">NSArray</span>&lt;<span class="type">NSString</span> *&gt; *)<span class="built_in">array</span>;</span><br><span class="line">在主线程执行</span><br><span class="line">- (<span class="built_in">void</span>)performSelectorOnMainThread:(<span class="type">SEL</span>)aSelector withObject:(nullable id)arg waitUntilDone:(<span class="type">BOOL</span>)wait;</span><br><span class="line"></span><br><span class="line"> // equivalent to the first <span class="keyword">method</span> <span class="keyword">with</span> kCFRunLoopCommonModes</span><br><span class="line">- (<span class="built_in">void</span>)performSelector:(<span class="type">SEL</span>)aSelector </span><br><span class="line">                        onThread:(<span class="type">NSThread</span> *)thr </span><br><span class="line">                      withObject:(nullable id)arg </span><br><span class="line">                waitUntilDone:(<span class="type">BOOL</span>)wait </span><br><span class="line">                              modes:(nullable <span class="type">NSArray</span>&lt;<span class="type">NSString</span> *&gt; *)<span class="built_in">array</span> <span class="type">NS_AVAILABLE</span>(<span class="number">10_5</span>, <span class="number">2_0</span>);</span><br><span class="line">- (<span class="built_in">void</span>)performSelector:(<span class="type">SEL</span>)aSelector </span><br><span class="line">                          onThread:(<span class="type">NSThread</span> *)thr</span><br><span class="line">                       withObject:(nullable id)arg </span><br><span class="line">                waitUntilDone:(<span class="type">BOOL</span>)wait <span class="type">NS_AVAILABLE</span>(<span class="number">10_5</span>, <span class="number">2_0</span>);</span><br><span class="line"> // equivalent to the first <span class="keyword">method</span> <span class="keyword">with</span> kCFRunLoopCommonModes</span><br><span class="line">- (<span class="built_in">void</span>)performSelectorInBackground:(<span class="type">SEL</span>)aSelector</span><br><span class="line">                                                  withObject:(nullable id)arg <span class="type">NS_AVAILABLE</span>(<span class="number">10_5</span>, <span class="number">2_0</span>);</span><br></pre></td></tr></table></figure></p>
-<h3 id="u4EE3_u7801"><a href="#u4EE3_u7801" class="headerlink" title="代码"></a>代码</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)test6&#123;</span><br><span class="line">    <span class="built_in">NSThread</span> * thread = [[<span class="built_in">NSThread</span> alloc]initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(op1) object:<span class="literal">nil</span>];</span><br><span class="line">    thread.name = <span class="string">@"test6"</span>;</span><br><span class="line">    [thread start];</span><br><span class="line">    [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(print) withObject:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)print&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"线程info : %@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)op1&#123;</span><br><span class="line">    </span><br><span class="line">     <span class="built_in">NSLog</span>(<span class="string">@"op1 开始运行了"</span>);</span><br><span class="line">     sleep(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">     <span class="built_in">NSLog</span>(<span class="string">@"op1 结束"</span>);</span><br><span class="line">&#125;</span><br><span class="line">输出：</span><br><span class="line">**<span class="number">2016</span><span class="number">-04</span><span class="number">-13</span> <span class="number">10</span>:<span class="number">34</span>:<span class="number">23.515</span> GCD_Demo[<span class="number">33904</span>:<span class="number">647479</span>] op1 ****开始运行了**</span><br><span class="line">**<span class="number">2016</span><span class="number">-04</span><span class="number">-13</span> <span class="number">10</span>:<span class="number">34</span>:<span class="number">23.515</span> GCD_Demo[<span class="number">33904</span>:<span class="number">647480</span>] ****线程****info : &lt;<span class="built_in">NSThread</span>: <span class="number">0x7fcc81a1abe0</span>&gt;&#123;number = <span class="number">3</span>, name = (null)&#125;**</span><br><span class="line">**<span class="number">2016</span><span class="number">-04</span><span class="number">-13</span> <span class="number">10</span>:<span class="number">34</span>:<span class="number">26.521</span> GCD_Demo[<span class="number">33904</span>:<span class="number">647479</span>] op1 ****结束**</span><br></pre></td></tr></table></figure>
+<h3 id="u83B7_u53D6_u7EBF_u7A0B_u7684_u72B6_u6001"><a href="#u83B7_u53D6_u7EBF_u7A0B_u7684_u72B6_u6001" class="headerlink" title="获取线程的状态"></a>获取线程的状态</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">正在执行</div><div class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">getter</span>=isExecuting) <span class="built_in">BOOL</span> executing <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</div><div class="line">完成</div><div class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">getter</span>=isFinished) <span class="built_in">BOOL</span> finished <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</div><div class="line">取消</div><div class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, <span class="keyword">getter</span>=isCancelled) <span class="built_in">BOOL</span> cancelled <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</div></pre></td></tr></table></figure>
+<h3 id="u66F4_u6539_u7EBF_u7A0B_u72B6_u6001"><a href="#u66F4_u6539_u7EBF_u7A0B_u72B6_u6001" class="headerlink" title="更改线程状态"></a>更改线程状态</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">取消</div><div class="line">- (<span class="keyword">void</span>)<span class="function">cancel <span class="title">NS_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span></span>;</div><div class="line">开始</div><div class="line">- (<span class="keyword">void</span>)<span class="function">start <span class="title">NS_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span></span>;</div><div class="line">线程的主函数</div><div class="line">- (<span class="keyword">void</span>)<span class="function">main <span class="title">NS_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span></span>;</div></pre></td></tr></table></figure>
+<p>在子线程中想要更新UI怎么办，这里官方直接提供了在子线程执行方法的函数，很实用的。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)performSelectorOnMainThread:(SEL)aSelector withObject:(<span class="keyword">nullable</span> <span class="keyword">id</span>)arg waitUntilDone:(<span class="built_in">BOOL</span>)wait modes:(<span class="keyword">nullable</span> <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)array;</div><div class="line">在主线程执行</div><div class="line">- (<span class="keyword">void</span>)performSelectorOnMainThread:(SEL)aSelector withObject:(<span class="keyword">nullable</span> <span class="keyword">id</span>)arg waitUntilDone:(<span class="built_in">BOOL</span>)wait;</div><div class="line"></div><div class="line"> <span class="comment">// equivalent to the first method with kCFRunLoopCommonModes</span></div><div class="line">- (<span class="keyword">void</span>)performSelector:(SEL)aSelector </div><div class="line">                        onThread:(<span class="built_in">NSThread</span> *)thr </div><div class="line">                      withObject:(<span class="keyword">nullable</span> <span class="keyword">id</span>)arg </div><div class="line">                waitUntilDone:(<span class="built_in">BOOL</span>)wait </div><div class="line">                              modes:(<span class="keyword">nullable</span> <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)array <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</div><div class="line">- (<span class="keyword">void</span>)performSelector:(SEL)aSelector </div><div class="line">                          onThread:(<span class="built_in">NSThread</span> *)thr</div><div class="line">                       withObject:(<span class="keyword">nullable</span> <span class="keyword">id</span>)arg </div><div class="line">                waitUntilDone:(<span class="built_in">BOOL</span>)wait <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</div><div class="line"> <span class="comment">// equivalent to the first method with kCFRunLoopCommonModes</span></div><div class="line">- (<span class="keyword">void</span>)performSelectorInBackground:(SEL)aSelector</div><div class="line">                                                  withObject:(<span class="keyword">nullable</span> <span class="keyword">id</span>)arg <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);</div></pre></td></tr></table></figure></p>
+<h3 id="u4EE3_u7801"><a href="#u4EE3_u7801" class="headerlink" title="代码"></a>代码</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)test6&#123;</div><div class="line">    <span class="built_in">NSThread</span> * thread = [[<span class="built_in">NSThread</span> alloc]initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(op1) object:<span class="literal">nil</span>];</div><div class="line">    thread.name = <span class="string">@"test6"</span>;</div><div class="line">    [thread start];</div><div class="line">    [<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(print) withObject:<span class="literal">nil</span>];</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">void</span>)print&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"线程info : %@"</span>,[<span class="built_in">NSThread</span> currentThread]);</div><div class="line">&#125;</div><div class="line">- (<span class="keyword">void</span>)op1&#123;</div><div class="line">    </div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"op1 开始运行了"</span>);</div><div class="line">     sleep(<span class="number">3</span>);</div><div class="line"></div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"op1 结束"</span>);</div><div class="line">&#125;</div><div class="line">输出：</div><div class="line">**<span class="number">2016</span><span class="number">-04</span><span class="number">-13</span> <span class="number">10</span>:<span class="number">34</span>:<span class="number">23.515</span> GCD_Demo[<span class="number">33904</span>:<span class="number">647479</span>] op1 ****开始运行了**</div><div class="line">**<span class="number">2016</span><span class="number">-04</span><span class="number">-13</span> <span class="number">10</span>:<span class="number">34</span>:<span class="number">23.515</span> GCD_Demo[<span class="number">33904</span>:<span class="number">647480</span>] ****线程****info : &lt;<span class="built_in">NSThread</span>: <span class="number">0x7fcc81a1abe0</span>&gt;&#123;number = <span class="number">3</span>, name = (null)&#125;**</div><div class="line">**<span class="number">2016</span><span class="number">-04</span><span class="number">-13</span> <span class="number">10</span>:<span class="number">34</span>:<span class="number">26.521</span> GCD_Demo[<span class="number">33904</span>:<span class="number">647479</span>] op1 ****结束**</div></pre></td></tr></table></figure>
 <p>从输出结果看出来<code>[self performSelectorInBackground:@selector(print) withObject:nil];</code>又自动生成了子线程并且在子线程执行<code>print</code>函数。</p>
-<p>把test6函数改成下面的情况<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当waitUntilDone 是yes的时候，是同步执行</span></span><br><span class="line"> [self <span class="string">performSelectorOnMainThread:</span><span class="meta">@selector</span>(print) <span class="string">withObject:</span>nil <span class="string">waitUntilDone:</span>NO];</span><br><span class="line">    _thread = [[NSThread alloc]<span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="meta">@selector</span>(op1) <span class="string">object:</span>nil];</span><br><span class="line">    _thread.name = @<span class="string">"test6"</span>;</span><br><span class="line">    [_thread start];</span><br><span class="line">    [self <span class="string">performSelectorInBackground:</span><span class="meta">@selector</span>(print) <span class="string">withObject:</span>nil];</span><br></pre></td></tr></table></figure></p>
-<p>输出：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:41:32.534 GCD_Demo[34026:652753] test6 <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>开始运行了<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:41:32.534 GCD_Demo[34026:652754] <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>线程<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>info : <span class="variable">&lt;NSThread: 0x7fb7320a1bf0&gt;</span>&#123;number = 3, name = (null)&#125;<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:41:32.537 GCD_Demo[34026:652708] <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>线程<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>info : <span class="variable">&lt;NSThread: 0x7fb730c05a20&gt;</span>&#123;number = 1, name = main&#125;<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:41:35.539 GCD_Demo[34026:652753] test6 <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>结束<span class="keyword">*</span><span class="keyword">*</span></span><br></pre></td></tr></table></figure></p>
+<p>把test6函数改成下面的情况<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//当waitUntilDone 是yes的时候，是同步执行</span></div><div class="line"> [self <span class="string">performSelectorOnMainThread:</span><span class="meta">@selector</span>(print) <span class="string">withObject:</span>nil <span class="string">waitUntilDone:</span>NO];</div><div class="line">    _thread = [[NSThread alloc]<span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="meta">@selector</span>(op1) <span class="string">object:</span>nil];</div><div class="line">    _thread.name = @<span class="string">"test6"</span>;</div><div class="line">    [_thread start];</div><div class="line">    [self <span class="string">performSelectorInBackground:</span><span class="meta">@selector</span>(print) <span class="string">withObject:</span>nil];</div></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*<span class="strong">*2016-04-13 10:41:32.534 GCD_Demo[34026:652753] test6 *</span>**<span class="strong">*开始运行了*</span>*</div><div class="line">*<span class="strong">*2016-04-13 10:41:32.534 GCD_Demo[34026:652754] *</span>**<span class="strong">*线程*</span>**<span class="strong">*info : &lt;NSThread: 0x7fb7320a1bf0&gt;&#123;number = 3, name = (null)&#125;*</span>*</div><div class="line">*<span class="strong">*2016-04-13 10:41:32.537 GCD_Demo[34026:652708] *</span>**<span class="strong">*线程*</span>**<span class="strong">*info : &lt;NSThread: 0x7fb730c05a20&gt;&#123;number = 1, name = main&#125;*</span>*</div><div class="line">*<span class="strong">*2016-04-13 10:41:35.539 GCD_Demo[34026:652753] test6 *</span>**<span class="strong">*结束*</span><span class="strong">*</span></div></pre></td></tr></table></figure></p>
 <p><code>[self performSelectorOnMainThread:@selector(print) 
                                                 withObject:nil
                                          waitUntilDone:NO];</code><br>waitUntilDone为YES的时候是同步执行代码，为NO的时候异步执行代码。<br><code>[self performSelectorInBackground:@selector(print) withObject:nil];</code>开启子线程执行print函数。</p>
-<h3 id="cancel_thread"><a href="#cancel_thread" class="headerlink" title="cancel thread"></a>cancel thread</h3><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)test6&#123;</span><br><span class="line">    _thread = [[NSThread <span class="keyword">alloc</span>]initWithTarget:self selector:@selector(op1) object:nil]<span class="comment">;</span></span><br><span class="line">    _thread.name = @<span class="string">"test6"</span><span class="comment">;</span></span><br><span class="line">    [_thread start]<span class="comment">;</span></span><br><span class="line">    sleep(<span class="number">2</span>)<span class="comment">;</span></span><br><span class="line">    [_thread cancel]<span class="comment">;</span></span><br><span class="line">    <span class="keyword">if</span> (_thread.cancelled) &#123;</span><br><span class="line">        NSLog(@<span class="string">"%@ canceld"</span>,_thread.name)<span class="comment">;</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(_thread.executing)&#123;</span><br><span class="line">        NSLog(@<span class="string">"%@ execuitng"</span>,_thread.name)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:50:46.685 GCD_Demo[34128:657263] test6 <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>开始运行了<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:50:48.686 GCD_Demo[34128:657214] test6 canceld<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:50:48.692 GCD_Demo[34128:657214] <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>线程<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>info : <span class="variable">&lt;NSThread: 0x7ffb34004fb0&gt;</span>&#123;number = 1, name = main&#125;<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span>2016-04-13 10:51:16.689 GCD_Demo[34128:657263] test6 <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>结束<span class="keyword">*</span><span class="keyword">*</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="cancel_thread"><a href="#cancel_thread" class="headerlink" title="cancel thread"></a>cancel thread</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)test6&#123;</div><div class="line">    _thread = [[<span class="built_in">NSThread</span> alloc]initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(op1) object:<span class="literal">nil</span>];</div><div class="line">    _thread.name = <span class="string">@"test6"</span>;</div><div class="line">    [_thread start];</div><div class="line">    sleep(<span class="number">2</span>);</div><div class="line">    [_thread cancel];</div><div class="line">    <span class="keyword">if</span> (_thread.cancelled) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@ canceld"</span>,_thread.name);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(_thread.executing)&#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@ execuitng"</span>,_thread.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">**<span class="number">2016-04-13</span> <span class="number">10</span>:<span class="number">50:46.685</span> GCD_Demo[<span class="number">34128</span>:<span class="number">657263</span>] test6 ****开始运行了**</div><div class="line">**<span class="number">2016-04-13</span> <span class="number">10</span>:<span class="number">50:48.686</span> GCD_Demo[<span class="number">34128:657214</span>] test6 canceld**</div><div class="line">**<span class="number">2016-04-13</span> <span class="number">10</span>:<span class="number">50:48.692</span> GCD_Demo[<span class="number">34128:657214</span>] ****线程****info : &lt;NSThread: <span class="number">0</span>x7ffb34004fb0&gt;&#123;number = <span class="number">1</span>, name = main&#125;**</div><div class="line">**<span class="number">2016-04-13</span> <span class="number">10</span>:<span class="number">51:16.689</span> GCD_Demo[<span class="number">34128</span>:<span class="number">657263</span>] test6 ****结束**</div></pre></td></tr></table></figure></p>
 <p>其实thread取消也是在执行中的线程是没办法直接取消的，<code>[thread cancel]</code>紧紧是改了状态，却没有终止线程。和<code>[NSOperation cancel]</code>类似，当你cancel之后，如果线程在执行，那么他会执行完毕，如果线程还没执行，那么他会终止执行。</p>
-<p>关于thread的通知<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将要变成多线程 在有新的线程启动的时候会发送此通知</span></span><br><span class="line">FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSWillBecomeMultiThreadedNotification</span>;</span><br><span class="line"><span class="comment">//将要变成单独线程  官方标注: Not implemented.【没有实现】</span></span><br><span class="line">FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSDidBecomeSingleThreadedNotification</span>;</span><br><span class="line"><span class="comment">//线程退出</span></span><br><span class="line">FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSThreadWillExitNotification</span>;</span><br><span class="line"></span><br><span class="line">通过这三个通知可以监测线程的启动和现成的退出。</span><br><span class="line"><span class="comment">//监测线程启动，启动的线程是未知的所以object是nil</span></span><br><span class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(becomeMultiNsthread) name:<span class="built_in">NSWillBecomeMultiThreadedNotification</span> object:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//监测线程退出</span></span><br><span class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(exit:) name:<span class="built_in">NSThreadWillExitNotification</span> object:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></p>
+<p>关于thread的通知<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将要变成多线程 在有新的线程启动的时候会发送此通知</span></div><div class="line">FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSWillBecomeMultiThreadedNotification</span>;</div><div class="line"><span class="comment">//将要变成单独线程  官方标注: Not implemented.【没有实现】</span></div><div class="line">FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSDidBecomeSingleThreadedNotification</span>;</div><div class="line"><span class="comment">//线程退出</span></div><div class="line">FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSThreadWillExitNotification</span>;</div><div class="line"></div><div class="line">通过这三个通知可以监测线程的启动和现成的退出。</div><div class="line"><span class="comment">//监测线程启动，启动的线程是未知的所以object是nil</span></div><div class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(becomeMultiNsthread) name:<span class="built_in">NSWillBecomeMultiThreadedNotification</span> object:<span class="literal">nil</span>];</div><div class="line"></div><div class="line"><span class="comment">//监测线程退出</span></div><div class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(exit:) name:<span class="built_in">NSThreadWillExitNotification</span> object:<span class="literal">nil</span>];</div></pre></td></tr></table></figure></p>
 <p>线程的讨论暂时就这么多，有问题我们一起讨论，欢迎留言。。</p>
 
       
@@ -321,6 +430,21 @@
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -328,11 +452,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/iOS高级/" rel="tag">#iOS高级</a>
+            <a href="/tags/iOS高级/" rel="tag"># iOS高级</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -345,7 +473,13 @@
             
           </div>
 
+          <span class="post-nav-divider"></span>
+
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/22/Git到CocoaPods看我就够了/" rel="prev" title="Git到CocoaPods看我就够了">
+                Git到CocoaPods看我就够了 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -360,10 +494,29 @@
 
     <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/04/13/iOS线程之NSThread/"
+     data-title="iOS线程之NSThread"
+     data-content=""
+     data-url="http://fgyong.cn/2016/04/13/iOS线程之NSThread/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
     </div>
   </div>
 
-
+          
           </div>
           
 
@@ -372,7 +525,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/04/13/iOS线程之NSThread/"
-           data-title="iOS线程之NSThread" data-url="http://yoursite.com/2016/04/13/iOS线程之NSThread/">
+           data-title="iOS线程之NSThread" data-url="http://fgyong.cn/2016/04/13/iOS线程之NSThread/">
       </div>
     
   </div>
@@ -406,35 +559,44 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
-          <p class="site-description motion-element" itemprop="description">不忘初心 方得始终</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">15</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">2</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -446,35 +608,62 @@
 
         <div class="links-of-author motion-element">
           
-        </div>
-
-        
-        
-
-        
-        <div class="links-of-blogroll motion-element">
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ifgyong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
           
         </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
 
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u521B_u5EFANSThread"><span class="nav-number">1.</span> <span class="nav-text">创建NSThread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u83B7_u53D6_u7EBF_u7A0B_u7684_u72B6_u6001"><span class="nav-number">2.</span> <span class="nav-text">获取线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u66F4_u6539_u7EBF_u7A0B_u72B6_u6001"><span class="nav-number">3.</span> <span class="nav-text">更改线程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EE3_u7801"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cancel_thread"><span class="nav-number">5.</span> <span class="nav-text">cancel thread</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -489,16 +678,17 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2016</span>
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">兜兜转转</span>
 </div>
 
+
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -509,22 +699,38 @@
 </div>
 
 
+        
 
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
   </div>
 
   
-
-
-  
-
-
-
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -533,198 +739,59 @@
 </script>
 
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
 
 
 
-  
-  
 
-  
-  
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
-</script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -749,17 +816,160 @@
 
   
     
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
 
-  
+
+
+
+
+
+
+
+
   
   
 
   
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
 
   
 
