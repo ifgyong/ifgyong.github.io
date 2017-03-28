@@ -84,4 +84,4 @@ deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
   branch: master
-  message: add github 
+  message: fix about me 
