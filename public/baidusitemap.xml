@@ -261,6 +261,23 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2016/01/28/iOS-static-const-extern-%E7%94%A8%E6%B3%95%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2016-03-24T02:54:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS static const extern 用法技巧</title>
+        <pubTime>2016-01-28T03:07:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2016/01/30/Module-version-mismatch/</loc>
     <lastmod>2016-03-24T02:54:54.000Z</lastmod>
     <data>
@@ -277,23 +294,6 @@
              
               <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2016/01/28/iOS-static-const-extern-%E7%94%A8%E6%B3%95%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2016-03-24T02:54:54.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS static const extern 用法技巧</title>
-        <pubTime>2016-01-28T03:07:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
         </display>
     </data>
     </url>

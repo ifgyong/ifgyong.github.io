@@ -78,10 +78,11 @@ tag_generator:
 theme: next
 
 
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
   branch: master
-  message: fix about me 
+  message: add 打赏
