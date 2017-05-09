@@ -85,4 +85,4 @@ deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
   branch: master
-  message: add 打赏
+  message: add 数据结构
