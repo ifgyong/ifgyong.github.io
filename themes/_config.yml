@@ -136,8 +136,7 @@ font:
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 #social:
-  #LinkLabel: Link
-
+  
 
 # Social Links Icons
 # Icon Mapping:
@@ -210,6 +209,10 @@ sidebar:
 #links_layout: inline
 #links:
   #Title: http://example.com/
+links_title: 友情链接
+links_layout: inline
+links:
+  梦影雾花: http://www.mywhblog.cn/
 
 
 # ---------------------------------------------------------------

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS,iOS高级开发," />
@@ -80,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -88,11 +105,13 @@
 
 
 <meta name="description" content="添加类123456789101112objc_allocateClassPair(Class superclass, const char *name, size_t extraBytes)添加类 superclass 类是父类   name 类的名字  size_t 类占的空间void objc_disposeClassPair(Class cls) 销毁类void objc_registerC">
+<meta name="keywords" content="iOS,iOS高级开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS高级开发runtime那点事实战（3）">
 <meta property="og:url" content="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（3）/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
+<meta property="og:site_name" content="兜兜转转的技术博客">
 <meta property="og:description" content="添加类123456789101112objc_allocateClassPair(Class superclass, const char *name, size_t extraBytes)添加类 superclass 类是父类   name 类的名字  size_t 类占的空间void objc_disposeClassPair(Class cls) 销毁类void objc_registerC">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS高级开发runtime那点事实战（3）">
@@ -105,12 +124,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -130,11 +150,7 @@
 
 
 
-  <title> iOS高级开发runtime那点事实战（3） | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS高级开发runtime那点事实战（3） | 兜兜转转的技术博客</title>
   
 
 
@@ -159,23 +175,27 @@
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -277,17 +297,21 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（3）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -295,14 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS高级开发runtime那点事实战（3）
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">iOS高级开发runtime那点事实战（3）</h2>
         
 
         <div class="post-meta">
@@ -351,14 +368,15 @@
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/24/iOS高级开发runtime那点事实战（3）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（3）/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/03/24/iOS高级开发runtime那点事实战（3）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/03/24/iOS高级开发runtime那点事实战（3）/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -391,67 +409,54 @@
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h3 id="u6DFB_u52A0_u7C7B"><a href="#u6DFB_u52A0_u7C7B" class="headerlink" title="添加类"></a>添加类</h3><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">objc_allocateClassPair(<span class="keyword">Class</span> superclass, <span class="keyword">const</span> <span class="built_in">char</span> *name, size_t extraBytes)</div><div class="line">添加类 superclass 类是父类   name 类的名字  size_t 类占的空间</div><div class="line"></div><div class="line">void objc_disposeClassPair(<span class="keyword">Class</span> cls) 销毁类</div><div class="line"></div><div class="line"></div><div class="line">void objc_registerClassPair(<span class="keyword">Class</span> cls) 注册类</div><div class="line"></div><div class="line"></div><div class="line">objc_duplicateClass</div><div class="line"> Used <span class="keyword">by</span> Foundation<span class="comment">'s Key-Value Observing.官方说法是不让自己调用</span></div><div class="line"><span class="keyword">Do</span> <span class="keyword">not</span> <span class="keyword">call</span> this <span class="keyword">function</span> yourself.</div></pre></td></tr></table></figure>
+        <h3 id="添加类"><a href="#添加类" class="headerlink" title="添加类"></a>添加类</h3><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">objc_allocateClassPair(<span class="keyword">Class</span> superclass, <span class="keyword">const</span> <span class="built_in">char</span> *name, size_t extraBytes)</div><div class="line">添加类 superclass 类是父类   name 类的名字  size_t 类占的空间</div><div class="line"></div><div class="line">void objc_disposeClassPair(<span class="keyword">Class</span> cls) 销毁类</div><div class="line"></div><div class="line"></div><div class="line">void objc_registerClassPair(<span class="keyword">Class</span> cls) 注册类</div><div class="line"></div><div class="line"></div><div class="line">objc_duplicateClass</div><div class="line"> Used <span class="keyword">by</span> Foundation<span class="comment">'s Key-Value Observing.官方说法是不让自己调用</span></div><div class="line"><span class="keyword">Do</span> <span class="keyword">not</span> <span class="keyword">call</span> this <span class="keyword">function</span> yourself.</div></pre></td></tr></table></figure>
 <p>具体代码：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (void)allocClass&#123;</div><div class="line">    Class clas = objc_allocateClassPair(NSClassFromString(@<span class="string">"FY"</span>), <span class="string">"FYss"</span>, <span class="number">0</span>)<span class="comment">;</span></div><div class="line">   </div><div class="line">    objc_property_attribute_t type = &#123;<span class="string">"T"</span>, <span class="string">"@\"NSString\""</span>&#125;<span class="comment">;</span></div><div class="line">    objc_property_attribute_t ownership = &#123; <span class="string">"C"</span>, <span class="string">""</span> &#125;<span class="comment">;</span></div><div class="line">    objc_property_attribute_t <span class="keyword">backingivar </span>= &#123; <span class="string">"V"</span>, <span class="string">"_ivar1"</span>&#125;<span class="comment">;</span></div><div class="line">    objc_property_attribute_t attrs[] = &#123;type, ownership, <span class="keyword">backingivar&#125;;</span></div><div class="line"> </div><div class="line"> <span class="keyword">bool </span>success =    class_addProperty(clas, <span class="string">"nameIvar"</span>, attrs, <span class="number">3</span>)<span class="comment">;</span></div><div class="line">    if (success) &#123;</div><div class="line">        NSLog(@<span class="string">"addIvar success"</span>)<span class="comment">;</span></div><div class="line">        if (class_isMetaClass(clas)) &#123;</div><div class="line">            NSLog(@<span class="string">"是一个类"</span>)<span class="comment">;</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">     objc_registerClassPair(clas)<span class="comment">;</span></div><div class="line">    [self printPropreListClass:clas]<span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="u5B9E_u4F8B_u5316_u7C7B"><a href="#u5B9E_u4F8B_u5316_u7C7B" class="headerlink" title="实例化类"></a>实例化类</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建类实例</span></div><div class="line"></div><div class="line"><span class="function">id <span class="title">class_createInstance</span> <span class="params">( Class cls, <span class="keyword">size_t</span> extraBytes )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 在指定位置创建类实例</span></div><div class="line"></div><div class="line"><span class="function">id <span class="title">objc_constructInstance</span> <span class="params">( Class cls, <span class="keyword">void</span> *bytes )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 销毁类实例</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> * <span class="title">objc_destructInstance</span> <span class="params">( id obj )</span></span>;</div></pre></td></tr></table></figure>
-<h3 id="u5B9E_u4F8B"><a href="#u5B9E_u4F8B" class="headerlink" title="实例"></a>实例</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> object_copy(<span class="keyword">id</span> obj, size_t size) <span class="comment">//拷贝obj</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> object_dispose(<span class="keyword">id</span> obj)   <span class="comment">//释放obj</span></div><div class="line"></div><div class="line">Ivar object_setInstanceVariable(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">void</span> *value) <span class="comment">//修改实例的值</span></div><div class="line"></div><div class="line">Ivar object_getInstanceVariable(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">void</span> **outValue) <span class="comment">//获取实例</span></div><div class="line"></div><div class="line">OBJC_EXPORT <span class="keyword">void</span> *object_getIndexedIvars(<span class="keyword">id</span> obj) <span class="comment">//获取obj的index</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> object_getIvar(<span class="keyword">id</span> object, Ivar ivar) <span class="comment">//获取obj的ivar</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> object_setIvar(<span class="keyword">id</span> object, Ivar ivar, <span class="keyword">id</span> value) <span class="comment">//赋值ivar给obj默认值是value</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> *object_getClassName(<span class="keyword">id</span> obj) <span class="comment">//获取类的名字</span></div><div class="line"></div><div class="line">Class object_getClass(<span class="keyword">id</span> object) <span class="comment">//获得 类</span></div><div class="line"></div><div class="line">Class object_setClass(<span class="keyword">id</span> object, Class cls)  <span class="comment">//把obj 改到cls的类下</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> objc_getClassList(Class *buffer, <span class="keyword">int</span> bufferLen) <span class="comment">//获取class列表</span></div><div class="line"></div><div class="line">Class *objc_copyClassList(<span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount) <span class="comment">//拷贝类数组</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_lookUpClass(<span class="keyword">const</span> <span class="keyword">char</span> *name) <span class="comment">// 看看是否 注册了类</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_getClass(<span class="keyword">const</span> <span class="keyword">char</span> *name) <span class="comment">//获取类</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_getRequiredClass(<span class="keyword">const</span> <span class="keyword">char</span> *name) <span class="comment">//要是没有这个类就kill 这个类 </span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * ivar_getName( Ivar ivar) <span class="comment">//获取var的名字</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * ivar_getTypeEncoding( Ivar ivar) <span class="comment">//获取ivar 的 type</span></div><div class="line"></div><div class="line">ptrdiff_t ivar_getOffset( Ivar ivar) <span class="comment">//</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_setAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">void</span> *key, <span class="keyword">id</span> value, objc_AssociationPolicy policy) <span class="comment">//给类别添加 属性</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_getAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">void</span> *key) <span class="comment">//获取属性</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_removeAssociatedObjects(<span class="keyword">id</span> object) <span class="comment">//删除属性</span></div></pre></td></tr></table></figure>
-<h3 id="u53D1_u9001_u6D88_u606F"><a href="#u53D1_u9001_u6D88_u606F" class="headerlink" title="发送消息"></a>发送消息</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> objc_msgSend(<span class="keyword">id</span> <span class="keyword">self</span>, SEL op, ...)<span class="comment">// id 发送消息给SEL op</span></div><div class="line"></div><div class="line"><span class="keyword">double</span> objc_msgSend_fpret(<span class="keyword">id</span> <span class="keyword">self</span>, SEL op, ...)<span class="comment">// 和上边的一样这个用i386平台，PPC和PPC64不能用。</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_msgSend_stret(<span class="keyword">void</span> * stretAddr, <span class="keyword">id</span> theReceiver, SEL theSelector, ...)<span class="comment">// 有返回值的消息  stretAddr 是返回值 theReceiver接收消息的id SEL 是方法名</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_msgSendSuper(<span class="keyword">struct</span> objc_super *<span class="keyword">super</span>, SEL op, ...)<span class="comment">//给父类方法发送消息</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_msgSendSuper_stret(<span class="keyword">struct</span> objc_super *<span class="keyword">super</span>, SEL op, ...)<span class="comment">//给父类添加消息</span></div></pre></td></tr></table></figure>
+<h3 id="实例化类"><a href="#实例化类" class="headerlink" title="实例化类"></a>实例化类</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建类实例</span></div><div class="line"></div><div class="line"><span class="function">id <span class="title">class_createInstance</span> <span class="params">( Class cls, <span class="keyword">size_t</span> extraBytes )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 在指定位置创建类实例</span></div><div class="line"></div><div class="line"><span class="function">id <span class="title">objc_constructInstance</span> <span class="params">( Class cls, <span class="keyword">void</span> *bytes )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 销毁类实例</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> * <span class="title">objc_destructInstance</span> <span class="params">( id obj )</span></span>;</div></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> object_copy(<span class="keyword">id</span> obj, size_t size) <span class="comment">//拷贝obj</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> object_dispose(<span class="keyword">id</span> obj)   <span class="comment">//释放obj</span></div><div class="line"></div><div class="line">Ivar object_setInstanceVariable(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">void</span> *value) <span class="comment">//修改实例的值</span></div><div class="line"></div><div class="line">Ivar object_getInstanceVariable(<span class="keyword">id</span> obj, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">void</span> **outValue) <span class="comment">//获取实例</span></div><div class="line"></div><div class="line">OBJC_EXPORT <span class="keyword">void</span> *object_getIndexedIvars(<span class="keyword">id</span> obj) <span class="comment">//获取obj的index</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> object_getIvar(<span class="keyword">id</span> object, Ivar ivar) <span class="comment">//获取obj的ivar</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> object_setIvar(<span class="keyword">id</span> object, Ivar ivar, <span class="keyword">id</span> value) <span class="comment">//赋值ivar给obj默认值是value</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> *object_getClassName(<span class="keyword">id</span> obj) <span class="comment">//获取类的名字</span></div><div class="line"></div><div class="line">Class object_getClass(<span class="keyword">id</span> object) <span class="comment">//获得 类</span></div><div class="line"></div><div class="line">Class object_setClass(<span class="keyword">id</span> object, Class cls)  <span class="comment">//把obj 改到cls的类下</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> objc_getClassList(Class *buffer, <span class="keyword">int</span> bufferLen) <span class="comment">//获取class列表</span></div><div class="line"></div><div class="line">Class *objc_copyClassList(<span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount) <span class="comment">//拷贝类数组</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_lookUpClass(<span class="keyword">const</span> <span class="keyword">char</span> *name) <span class="comment">// 看看是否 注册了类</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_getClass(<span class="keyword">const</span> <span class="keyword">char</span> *name) <span class="comment">//获取类</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_getRequiredClass(<span class="keyword">const</span> <span class="keyword">char</span> *name) <span class="comment">//要是没有这个类就kill 这个类 </span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * ivar_getName( Ivar ivar) <span class="comment">//获取var的名字</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * ivar_getTypeEncoding( Ivar ivar) <span class="comment">//获取ivar 的 type</span></div><div class="line"></div><div class="line">ptrdiff_t ivar_getOffset( Ivar ivar) <span class="comment">//</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_setAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">void</span> *key, <span class="keyword">id</span> value, objc_AssociationPolicy policy) <span class="comment">//给类别添加 属性</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_getAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">void</span> *key) <span class="comment">//获取属性</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_removeAssociatedObjects(<span class="keyword">id</span> object) <span class="comment">//删除属性</span></div></pre></td></tr></table></figure>
+<h3 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> objc_msgSend(<span class="keyword">id</span> <span class="keyword">self</span>, SEL op, ...)<span class="comment">// id 发送消息给SEL op</span></div><div class="line"></div><div class="line"><span class="keyword">double</span> objc_msgSend_fpret(<span class="keyword">id</span> <span class="keyword">self</span>, SEL op, ...)<span class="comment">// 和上边的一样这个用i386平台，PPC和PPC64不能用。</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_msgSend_stret(<span class="keyword">void</span> * stretAddr, <span class="keyword">id</span> theReceiver, SEL theSelector, ...)<span class="comment">// 有返回值的消息  stretAddr 是返回值 theReceiver接收消息的id SEL 是方法名</span></div><div class="line"></div><div class="line"><span class="keyword">id</span> objc_msgSendSuper(<span class="keyword">struct</span> objc_super *<span class="keyword">super</span>, SEL op, ...)<span class="comment">//给父类方法发送消息</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_msgSendSuper_stret(<span class="keyword">struct</span> objc_super *<span class="keyword">super</span>, SEL op, ...)<span class="comment">//给父类添加消息</span></div></pre></td></tr></table></figure>
 <p>当我们用OC调用方法的时候，其实底层是obj发送消息的过程，就够obj发送消息给SEL，然后objruntime中会在objSELList中寻找，当然不是每次都去遍历所有的方法的，而是在methodCache，它会先去常用的方法cache在中查找，要是cache中没有这个方法，再去遍历所有的方法。参考：<a href="http://www.opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">Runtime源码点这里</a></p>
-<h3 id="u5177_u4F53_u6D4B_u8BD5"><a href="#u5177_u4F53_u6D4B_u8BD5" class="headerlink" title="具体测试"></a>具体测试</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">    <span class="selector-tag">objc_msgSend</span>(self,<span class="variable">@selector</span>(msgTest));</div><div class="line"></div><div class="line"><span class="selector-tag">-</span>(void)<span class="selector-tag">msgTest</span>&#123;</div><div class="line">    <span class="selector-tag">NSLog</span>(@<span class="string">"调用了我 objc_msgSend"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出：<span class="selector-tag">2016-03-23</span> <span class="selector-tag">15</span><span class="selector-pseudo">:06</span><span class="selector-pseudo">:18.011</span> <span class="selector-tag">runTimeObj</span><span class="selector-attr">[46084:3861049]</span> 调用了我 <span class="selector-tag">objc_msgSend</span></div></pre></td></tr></table></figure>
+<h3 id="具体测试"><a href="#具体测试" class="headerlink" title="具体测试"></a>具体测试</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">    <span class="selector-tag">objc_msgSend</span>(self,<span class="variable">@selector</span>(msgTest));</div><div class="line"></div><div class="line"><span class="selector-tag">-</span>(void)<span class="selector-tag">msgTest</span>&#123;</div><div class="line">    <span class="selector-tag">NSLog</span>(@<span class="string">"调用了我 objc_msgSend"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出：<span class="selector-tag">2016-03-23</span> <span class="selector-tag">15</span><span class="selector-pseudo">:06</span><span class="selector-pseudo">:18.011</span> <span class="selector-tag">runTimeObj</span><span class="selector-attr">[46084:3861049]</span> 调用了我 <span class="selector-tag">objc_msgSend</span></div></pre></td></tr></table></figure>
 <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">id method_invoke(id receiver, <span class="function"><span class="keyword">Method</span> <span class="title">m</span>, ...) 调用<span class="title">receiver</span>的方法 <span class="title">id</span> 不能是<span class="title">nil</span></span></div><div class="line"></div><div class="line"><span class="title">void</span> <span class="title">method_invoke_stret</span><span class="params">(id receiver, <span class="keyword">Method</span> m, ...)</span> //<span class="title">Using</span> <span class="title">this</span> <span class="title">function</span> <span class="title">to</span> <span class="title">call</span> <span class="title">the</span> <span class="title">implementation</span> <span class="title">of</span> <span class="title">a</span> <span class="title">method</span> <span class="title">is</span> <span class="title">faster</span> <span class="title">than</span> <span class="title">calling</span> <span class="title">method_getImplementation</span> <span class="title">and</span> <span class="title">method_getName</span>. 官方描述就是比<span class="title">method_getName</span>和<span class="title">method_getImplementation</span>块</div><div class="line"></div><div class="line"><span class="title">IMP</span> <span class="title">method_getImplementation</span><span class="params">( <span class="keyword">Method</span> <span class="keyword">method</span>)</span> //指向<span class="title">IMP</span>的方法指针</div><div class="line"><span class="title">IMP</span>是什么？本质上是一个指针，指向方法的指针，俗名就是函数指针。</div><div class="line"></div><div class="line"><span class="title">const</span> <span class="title">char</span> * <span class="title">method_getTypeEncoding</span><span class="params">( <span class="keyword">Method</span> <span class="keyword">method</span>)</span> //方法<span class="title">type</span> 返回一个<span class="title">c</span>字符串</div><div class="line"></div><div class="line"><span class="title">char</span> * <span class="title">method_copyReturnType</span><span class="params">( <span class="keyword">Method</span> <span class="keyword">method</span>)</span> 方法返回的类型 一个<span class="title">c</span>字符串 用完要<span class="title">free</span><span class="params">(char *)</span>的</div><div class="line"></div><div class="line"><span class="title">unsigned</span> <span class="title">method_getNumberOfArguments</span><span class="params">( <span class="keyword">Method</span> <span class="keyword">method</span>)</span> //方法的元素数量</div><div class="line"></div><div class="line"><span class="title">void</span> <span class="title">method_getArgumentType</span><span class="params">( <span class="keyword">Method</span> <span class="keyword">method</span>, unsigned int <span class="keyword">index</span>, char *dst, size_t dst_len)</span> 获取<span class="title">method</span> 索引是<span class="title">index</span>的参数 值赋给<span class="title">dst</span> 要是<span class="title">dst</span> = <span class="title">nil</span>；系统自动调用<span class="title">strncpy</span><span class="params">(dst, "", dst_len)</span></div><div class="line"></div><div class="line"><span class="title">IMP</span> <span class="title">method_setImplementation</span><span class="params">( <span class="keyword">Method</span> <span class="keyword">method</span>, IMP imp)</span> 把<span class="title">imp</span>赋给<span class="title">method</span> </div><div class="line"></div><div class="line"><span class="title">void</span> <span class="title">method_exchangeImplementations</span><span class="params">( <span class="keyword">Method</span> m1, <span class="keyword">Method</span> m2)</span> 交换两个方法</div><div class="line">例如：<span class="title">IMP</span> <span class="title">imp1</span> = <span class="title">method_getImplementation</span><span class="params">(m1)</span>;</div><div class="line">     IMP imp2 = method_getImplementation(m2);</div><div class="line">         method_setImplementation(m1, imp2);</div><div class="line">         method_setImplementation(m2, imp1);</div><div class="line"><span class="keyword">const</span> char * * objc_copyImageNames(unsigned int *outCount)<span class="comment">//返回所有加载的Objective-C框架和动态库的名字。</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> char *class_getImageName(<span class="keyword">Class</span> cls)<span class="comment">//获取class的动态库的名字</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> char * *objc_copyClassNamesForImage(<span class="keyword">const</span> char *image, unsigned int *outCount) <span class="comment">//拷贝动态库</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> char* sel_getName(SEL aSelector) <span class="comment">//获取SEL的字符串名字</span></div><div class="line"></div><div class="line">SEL sel_registerName(<span class="keyword">const</span> char *str) <span class="comment">//注册SEL 名字是str 返回注册成功的SEL</span></div><div class="line"></div><div class="line">SEL sel_getUid(<span class="keyword">const</span> char *str) <span class="comment">//获取str的方法SEL指针</span></div><div class="line"></div><div class="line">BOOL sel_isEqual(SEL lhs, SEL rhs) <span class="comment">//判断两个SEL是否是同一个SEL</span></div></pre></td></tr></table></figure>
 <p>今天就到这吧，明天吧协议和属性看了。更多文章在www.fgyong.cn</p>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（3）/" title="iOS高级开发runtime那点事实战（3）">http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（3）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -465,7 +470,7 @@
       
 
       
-        
+      
       
 
       
@@ -493,35 +498,20 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（3）/"
-     data-title="iOS高级开发runtime那点事实战（3）"
-     data-content=""
-     data-url="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（3）/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -529,9 +519,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（3）/"
-           data-title="iOS高级开发runtime那点事实战（3）" data-url="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（3）/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -549,6 +537,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -567,7 +556,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -619,7 +608,20 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -634,12 +636,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -661,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6DFB_u52A0_u7C7B"><span class="nav-number">1.</span> <span class="nav-text">添加类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B9E_u4F8B_u5316_u7C7B"><span class="nav-number">2.</span> <span class="nav-text">实例化类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B9E_u4F8B"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u53D1_u9001_u6D88_u606F"><span class="nav-number">4.</span> <span class="nav-text">发送消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5177_u4F53_u6D4B_u8BD5"><span class="nav-number">5.</span> <span class="nav-text">具体测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加类"><span class="nav-number">1.</span> <span class="nav-text">添加类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化类"><span class="nav-number">2.</span> <span class="nav-text">实例化类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送消息"><span class="nav-number">4.</span> <span class="nav-text">发送消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体测试"><span class="nav-number">5.</span> <span class="nav-text">具体测试</span></a></li></ol></div>
             
 
           </div>
@@ -705,21 +707,25 @@
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -732,7 +738,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -752,6 +758,14 @@
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -778,79 +792,80 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -957,24 +972,12 @@
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

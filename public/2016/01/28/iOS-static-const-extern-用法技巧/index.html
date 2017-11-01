@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS," />
@@ -80,29 +97,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="通俗的讲：extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中；
-static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值；
-const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。">
+<meta name="description" content="通俗的讲：extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中； static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值； const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS static const extern 用法技巧">
 <meta property="og:url" content="http://fgyong.cn/2016/01/28/iOS-static-const-extern-用法技巧/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="通俗的讲：extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中；
-static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值；
-const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="通俗的讲：extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中； static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值； const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS static const extern 用法技巧">
-<meta name="twitter:description" content="通俗的讲：extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中；
-static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值；
-const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。">
+<meta name="twitter:description" content="通俗的讲：extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中； static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值； const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。">
 
 
 
@@ -111,12 +124,13 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -136,11 +150,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
 
 
-  <title> iOS static const extern 用法技巧 | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS static const extern 用法技巧 | 兜兜转转的技术博客</title>
   
 
 
@@ -165,23 +175,27 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -283,17 +297,21 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/01/28/iOS-static-const-extern-用法技巧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -301,14 +319,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS static const extern 用法技巧
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">iOS static const extern 用法技巧</h2>
         
 
         <div class="post-meta">
@@ -335,14 +346,15 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/01/28/iOS-static-const-extern-用法技巧/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/28/iOS-static-const-extern-用法技巧/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/01/28/iOS-static-const-extern-用法技巧/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/01/28/iOS-static-const-extern-用法技巧/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -375,17 +387,19 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h2 id="u901A_u4FD7_u7684_u8BB2_uFF1A"><a href="#u901A_u4FD7_u7684_u8BB2_uFF1A" class="headerlink" title="通俗的讲："></a>通俗的讲：</h2><p>extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中；</p>
+        <h2 id="通俗的讲："><a href="#通俗的讲：" class="headerlink" title="通俗的讲："></a>通俗的讲：</h2><p>extern字段使用的时候，声明的变量为全局变量，都可以调用，也有这样一种比较狭义的说法：extern可以扩展一个类中的变量到另一个类中；</p>
 <p>static声明的变量是静态变量，变量值改变过之后，保存这次改变，每次使用的时候都要读取一遍值；</p>
 <p>const声明过得变量值是不可改变的，是readonly的属性，不可以改变变量的值。<a id="more"></a></p>
-<h2 id="u5177_u4F53_u7528_u6CD5_uFF1A"><a href="#u5177_u4F53_u7528_u6CD5_uFF1A" class="headerlink" title="具体用法："></a>具体用法：</h2><p>1.static的用法：static NSString *str = @”哈哈”;</p>
+<h2 id="具体用法："><a href="#具体用法：" class="headerlink" title="具体用法："></a>具体用法：</h2><p>1.static的用法：static NSString *str = @”哈哈”;</p>
 <p>2.const的用法：NSString *const str = @”哈哈”;</p>
 <p>3.extern的用法：在A.h里边声明一个变量extern NSString *str = @”123”;</p>
 <p> 这样就声明了一个全局变量，在B.h里边同样写入代码extern NSString *str；然后再B.m里边直接打印str就可以打印出123来，使用的时候不需要导入A.h文件头，也不区分类是否已经创建等等因素。</p>
@@ -393,48 +407,33 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/01/28/iOS-static-const-extern-用法技巧/" title="iOS static const extern 用法技巧">http://fgyong.cn/2016/01/28/iOS-static-const-extern-用法技巧/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -446,7 +445,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
       
 
       
-        
+      
       
 
       
@@ -474,35 +473,20 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/01/28/iOS-static-const-extern-用法技巧/"
-     data-title="iOS static const extern 用法技巧"
-     data-content=""
-     data-url="http://fgyong.cn/2016/01/28/iOS-static-const-extern-用法技巧/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -510,9 +494,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/28/iOS-static-const-extern-用法技巧/"
-           data-title="iOS static const extern 用法技巧" data-url="http://fgyong.cn/2016/01/28/iOS-static-const-extern-用法技巧/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -530,6 +512,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -548,7 +531,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -600,7 +583,20 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -615,12 +611,12 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -642,7 +638,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u901A_u4FD7_u7684_u8BB2_uFF1A"><span class="nav-number">1.</span> <span class="nav-text">通俗的讲：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5177_u4F53_u7528_u6CD5_uFF1A"><span class="nav-number">2.</span> <span class="nav-text">具体用法：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#通俗的讲："><span class="nav-number">1.</span> <span class="nav-text">通俗的讲：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体用法："><span class="nav-number">2.</span> <span class="nav-text">具体用法：</span></a></li></ol></div>
             
 
           </div>
@@ -686,21 +682,25 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -713,7 +713,7 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
         
       </div>
     
-    
+
   </div>
 
   
@@ -733,6 +733,14 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -759,79 +767,80 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -938,24 +947,12 @@ const声明过得变量值是不可改变的，是readonly的属性，不可以�
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

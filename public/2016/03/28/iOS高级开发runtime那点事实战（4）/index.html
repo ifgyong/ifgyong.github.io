@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS,iOS高级开发," />
@@ -80,7 +97,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -88,11 +105,13 @@
 
 
 <meta name="description" content="CategoryCategory是表示一个指向分类的结构体的指针，其定义如下：12345678910111213141516typedef struct objc_category *Category;struct objc_category &amp;#123;    char *category_name                          OBJC2_UNAVAILABLE; // 分">
+<meta name="keywords" content="iOS,iOS高级开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS高级开发runtime那点事实战（4）">
 <meta property="og:url" content="http://fgyong.cn/2016/03/28/iOS高级开发runtime那点事实战（4）/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
+<meta property="og:site_name" content="兜兜转转的技术博客">
 <meta property="og:description" content="CategoryCategory是表示一个指向分类的结构体的指针，其定义如下：12345678910111213141516typedef struct objc_category *Category;struct objc_category &amp;#123;    char *category_name                          OBJC2_UNAVAILABLE; // 分">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS高级开发runtime那点事实战（4）">
@@ -105,12 +124,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -130,11 +150,7 @@
 
 
 
-  <title> iOS高级开发runtime那点事实战（4） | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS高级开发runtime那点事实战（4） | 兜兜转转的技术博客</title>
   
 
 
@@ -159,23 +175,27 @@
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -277,17 +297,21 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/03/28/iOS高级开发runtime那点事实战（4）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -295,14 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS高级开发runtime那点事实战（4）
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">iOS高级开发runtime那点事实战（4）</h2>
         
 
         <div class="post-meta">
@@ -351,14 +368,15 @@
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/28/iOS高级开发runtime那点事实战（4）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/iOS高级开发runtime那点事实战（4）/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/03/28/iOS高级开发runtime那点事实战（4）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/03/28/iOS高级开发runtime那点事实战（4）/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -391,8 +409,10 @@
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -401,53 +421,38 @@
         <h3 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h3><p>Category是表示一个指向分类的结构体的指针，其定义如下：<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">typedef <span class="class"><span class="keyword">struct</span> <span class="title">objc_category</span></span> *Category;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_category</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="keyword">char</span> *category_name                          OBJC2_UNAVAILABLE; <span class="comment">// 分类名</span></div><div class="line"></div><div class="line">    <span class="keyword">char</span> *class_name                             OBJC2_UNAVAILABLE; <span class="comment">// 分类所属的类名</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_method_list</span></span> *instance_methods    OBJC2_UNAVAILABLE; <span class="comment">// 实例方法列表</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_method_list</span></span> *class_methods       OBJC2_UNAVAILABLE; <span class="comment">// 类方法列表</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">objc_protocol_list</span></span> *protocols         OBJC2_UNAVAILABLE; <span class="comment">// 分类所实现的协议列表</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><p>Protocol定义：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_object Protocol;</div><div class="line"></div><div class="line"><span class="comment">// 返回指定的协议</span></div><div class="line"></div><div class="line"><span class="function">Protocol * <span class="title">objc_getProtocol</span> <span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *name )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 获取运行时所知道的所有协议的数组</span></div><div class="line"></div><div class="line"><span class="function">Protocol ** <span class="title">objc_copyProtocolList</span> <span class="params">( <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 创建新的协议实例</span></div><div class="line"></div><div class="line"><span class="function">Protocol * <span class="title">objc_allocateProtocol</span> <span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *name )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 在运行时中注册新创建的协议</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">objc_registerProtocol</span> <span class="params">( Protocol *proto )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 为协议添加方法</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">protocol_addMethodDescription</span> <span class="params">( Protocol *proto, SEL name, <span class="keyword">const</span> <span class="keyword">char</span> *types, BOOL isRequiredMethod, BOOL isInstanceMethod )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 添加一个已注册的协议到协议中</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">protocol_addProtocol</span> <span class="params">( Protocol *proto, Protocol *addition )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 为协议添加属性</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">protocol_addProperty</span> <span class="params">( Protocol *proto, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> <span class="keyword">objc_property_attribute_t</span> *attributes, <span class="keyword">unsigned</span> <span class="keyword">int</span> attributeCount, BOOL isRequiredProperty, BOOL isInstanceProperty )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 返回协议名</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> * <span class="title">protocol_getName</span> <span class="params">( Protocol *p )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 测试两个协议是否相等</span></div><div class="line"></div><div class="line"><span class="function">BOOL <span class="title">protocol_isEqual</span> <span class="params">( Protocol *proto, Protocol *other )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 获取协议中指定条件的方法的方法描述数组</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> objc_method_description * <span class="title">protocol_copyMethodDescriptionList</span> <span class="params">( Protocol *p, BOOL isRequiredMethod, BOOL isInstanceMethod, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 获取协议中指定方法的方法描述</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> objc_method_description <span class="title">protocol_getMethodDescription</span> <span class="params">( Protocol *p, SEL aSel, BOOL isRequiredMethod, BOOL isInstanceMethod )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 获取协议中的属性列表</span></div><div class="line"></div><div class="line"><span class="keyword">objc_property_t</span> * protocol_copyPropertyList ( Protocol *proto, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount );</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 获取协议的指定属性</span></div><div class="line"></div><div class="line"><span class="keyword">objc_property_t</span> protocol_getProperty ( Protocol *proto, <span class="keyword">const</span> <span class="keyword">char</span> *name, BOOL isRequiredProperty, BOOL isInstanceProperty );</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 获取协议采用的协议</span></div><div class="line"></div><div class="line"><span class="function">Protocol ** <span class="title">protocol_copyProtocolList</span> <span class="params">( Protocol *proto, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount )</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 查看协议是否采用了另一个协议</span></div><div class="line"></div><div class="line"><span class="function">BOOL <span class="title">protocol_conformsToProtocol</span> <span class="params">( Protocol *proto, Protocol *other )</span></span>;</div></pre></td></tr></table></figure>
-<h3 id="u5C5E_u6027"><a href="#u5C5E_u6027" class="headerlink" title="属性"></a>属性</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">const char *property_getName(objc_property_t <span class="keyword">property</span><span class="title"></span>) 获得<span class="keyword">property</span><span class="title"></span>的name</div><div class="line"></div><div class="line">const char *property_getAttributes(objc_property_t <span class="keyword">property</span><span class="title"></span>) //获得<span class="keyword">property</span><span class="title"></span>的atttibutes</div><div class="line"></div><div class="line">char *property_copyAttributeValue(objc_property_t <span class="keyword">property</span><span class="title"></span>, const char *attributeName) 拷贝 <span class="keyword">property</span><span class="title"></span>的attributeName的值</div><div class="line"></div><div class="line">objc_property_attribute_t *property_copyAttributeList(objc_property_t <span class="keyword">property</span><span class="title"></span>, unsigned int*outCount) 拷贝<span class="keyword">property</span><span class="title"></span>的数组 个数是outCount</div></pre></td></tr></table></figure>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">const char *property_getName(objc_property_t <span class="keyword">property</span><span class="title"></span>) 获得<span class="keyword">property</span><span class="title"></span>的name</div><div class="line"></div><div class="line">const char *property_getAttributes(objc_property_t <span class="keyword">property</span><span class="title"></span>) //获得<span class="keyword">property</span><span class="title"></span>的atttibutes</div><div class="line"></div><div class="line">char *property_copyAttributeValue(objc_property_t <span class="keyword">property</span><span class="title"></span>, const char *attributeName) 拷贝 <span class="keyword">property</span><span class="title"></span>的attributeName的值</div><div class="line"></div><div class="line">objc_property_attribute_t *property_copyAttributeList(objc_property_t <span class="keyword">property</span><span class="title"></span>, unsigned int*outCount) 拷贝<span class="keyword">property</span><span class="title"></span>的数组 个数是outCount</div></pre></td></tr></table></figure>
 <p>其实runtime的很多函数在平时我们是用不到的，但是还是要了解一点的，以便于有时候出现的问题，自己却不知道原理，那样解决问题，有时解决了但是还不知道为什么。<a href="http://www.opensource.apple.com/tarballs/objc4/" target="_blank" rel="external">至于runtime的源码在这里</a>,要下载就下载版本最高的，感兴趣的可以看一下。</p>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/03/28/iOS高级开发runtime那点事实战（4）/" title="iOS高级开发runtime那点事实战（4）">http://fgyong.cn/2016/03/28/iOS高级开发runtime那点事实战（4）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -461,7 +466,7 @@
       
 
       
-        
+      
       
 
       
@@ -489,35 +494,20 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/28/iOS高级开发runtime那点事实战（4）/"
-     data-title="iOS高级开发runtime那点事实战（4）"
-     data-content=""
-     data-url="http://fgyong.cn/2016/03/28/iOS高级开发runtime那点事实战（4）/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -525,9 +515,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/28/iOS高级开发runtime那点事实战（4）/"
-           data-title="iOS高级开发runtime那点事实战（4）" data-url="http://fgyong.cn/2016/03/28/iOS高级开发runtime那点事实战（4）/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -545,6 +533,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -563,7 +552,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -615,7 +604,20 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -630,12 +632,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -657,7 +659,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">1.</span> <span class="nav-text">Category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protocol"><span class="nav-number">2.</span> <span class="nav-text">Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5C5E_u6027"><span class="nav-number">3.</span> <span class="nav-text">属性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">1.</span> <span class="nav-text">Category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protocol"><span class="nav-number">2.</span> <span class="nav-text">Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">3.</span> <span class="nav-text">属性</span></a></li></ol></div>
             
 
           </div>
@@ -701,21 +703,25 @@
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -728,7 +734,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -748,6 +754,14 @@
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -774,79 +788,80 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -953,24 +968,12 @@
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

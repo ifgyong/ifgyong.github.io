@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="微信小程序," />
@@ -80,125 +97,28 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="1.swiper的使用这个类似iOS的滚动视图，里边也可以放一下其他的东西。先讲一下属性：
-
-
-
-属性名
-类型
-默认值
-说明
-
-
-
-
-indicator-dots
-Boolean
-false
-是否显示面板指示点
-
-
-autoplay
-Boolean
-false
-是否自动切换
-
-
-current
-Number
-0
-当前所在页面的 index
-
-
-interval
-Number
-5000
-自动切换时间">
+<meta name="description" content="1.swiper的使用这个类似iOS的滚动视图，里边也可以放一下其他的东西。先讲一下属性：    属性名 类型 默认值 说明     indicator-dots Boolean false 是否显示面板指示点   autoplay Boolean false 是否自动切换   current Number 0 当前所在页面的 index   interval Number 5000 自动切换时间">
+<meta name="keywords" content="微信小程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信小程序_2">
 <meta property="og:url" content="http://fgyong.cn/2016/11/05/微信小程序_02/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="1.swiper的使用这个类似iOS的滚动视图，里边也可以放一下其他的东西。先讲一下属性：
-
-
-
-属性名
-类型
-默认值
-说明
-
-
-
-
-indicator-dots
-Boolean
-false
-是否显示面板指示点
-
-
-autoplay
-Boolean
-false
-是否自动切换
-
-
-current
-Number
-0
-当前所在页面的 index
-
-
-interval
-Number
-5000
-自动切换时间">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="1.swiper的使用这个类似iOS的滚动视图，里边也可以放一下其他的东西。先讲一下属性：    属性名 类型 默认值 说明     indicator-dots Boolean false 是否显示面板指示点   autoplay Boolean false 是否自动切换   current Number 0 当前所在页面的 index   interval Number 5000 自动切换时间">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/783986-f75545234a080c18.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/783986-26e5a47de1bf531a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/783986-274e66a04bdd68da.gif?imageMogr2/auto-orient/strip">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信小程序_2">
-<meta name="twitter:description" content="1.swiper的使用这个类似iOS的滚动视图，里边也可以放一下其他的东西。先讲一下属性：
-
-
-
-属性名
-类型
-默认值
-说明
-
-
-
-
-indicator-dots
-Boolean
-false
-是否显示面板指示点
-
-
-autoplay
-Boolean
-false
-是否自动切换
-
-
-current
-Number
-0
-当前所在页面的 index
-
-
-interval
-Number
-5000
-自动切换时间">
+<meta name="twitter:description" content="1.swiper的使用这个类似iOS的滚动视图，里边也可以放一下其他的东西。先讲一下属性：    属性名 类型 默认值 说明     indicator-dots Boolean false 是否显示面板指示点   autoplay Boolean false 是否自动切换   current Number 0 当前所在页面的 index   interval Number 5000 自动切换时间">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/783986-f75545234a080c18.gif?imageMogr2/auto-orient/strip">
 
 
@@ -208,12 +128,13 @@ Number
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -233,11 +154,7 @@ Number
 
 
 
-  <title> 微信小程序_2 | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>微信小程序_2 | 兜兜转转的技术博客</title>
   
 
 
@@ -262,23 +179,27 @@ Number
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -380,17 +301,21 @@ Number
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/11/05/微信小程序_02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -398,14 +323,7 @@ Number
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                微信小程序_2
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">微信小程序_2</h2>
         
 
         <div class="post-meta">
@@ -454,14 +372,15 @@ Number
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/11/05/微信小程序_02/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/05/微信小程序_02/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/11/05/微信小程序_02/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/05/微信小程序_02/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -494,14 +413,16 @@ Number
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h2 id="1-swiper_u7684_u4F7F_u7528"><a href="#1-swiper_u7684_u4F7F_u7528" class="headerlink" title="1.swiper的使用"></a>1.swiper的使用</h2><p>这个类似iOS的滚动视图，里边也可以放一下其他的东西。<br>先讲一下属性：</p>
+        <h2 id="1-swiper的使用"><a href="#1-swiper的使用" class="headerlink" title="1.swiper的使用"></a>1.swiper的使用</h2><p>这个类似iOS的滚动视图，里边也可以放一下其他的东西。<br>先讲一下属性：</p>
 <table>
 <thead>
 <tr>
@@ -550,11 +471,11 @@ Number
 </tr>
 </tbody>
 </table>
-<h3 id="swiper-js_u6587_u4EF6"><a href="#swiper-js_u6587_u4EF6" class="headerlink" title="swiper.js文件"></a>swiper.js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = getApp();</div><div class="line">Page(&#123;</div><div class="line">  <span class="attr">data</span>:&#123;</div><div class="line">    <span class="attr">indicatordos</span>:<span class="literal">true</span>,</div><div class="line">    <span class="attr">autoplay</span>:<span class="literal">true</span>,</div><div class="line"><span class="comment">/*图片数组*/</span></div><div class="line">    imgUrls: [</div><div class="line">      <span class="string">'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'</span>,</div><div class="line">      <span class="string">'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'</span>,</div><div class="line">      <span class="string">'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'</span>,</div><div class="line">      <span class="string">'http://imgsrc.baidu.com/forum/pic/item/1080fc8b87d6277f026c80b428381f30e824fc46.jpg'</span>,</div><div class="line">      <span class="string">'http://imgsrc.baidu.com/forum/pic/item/2eadcbef76094b366ac0bf0da3cc7cd98c109d84.jpg'</span>,</div><div class="line">      <span class="string">'http://img1.tgbusdata.cn/v2/thumb/jpg/MGNlNiw3MzAsNzMwLDQsMSwxLC0xLDAscms1MA==/u/olpic.tgbusdata.cn/uploads/allimg/130124/62-130124160054.jpg'</span></div><div class="line">    ],</div><div class="line">    <span class="attr">vertical</span>:<span class="literal">true</span>,</div><div class="line">  &#125;,</div><div class="line">  </div><div class="line">  <span class="attr">displaychange</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(event.detail.current);<span class="comment">//输出来当前swiper-item的index</span></div><div class="line">   &#125;,</div><div class="line"></div><div class="line">  <span class="attr">changeautodisplay</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">      <span class="attr">autoplay</span>:!<span class="keyword">this</span>.data.autoplay<span class="comment">//设置是否自动播放</span></div><div class="line">  &#125;)</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">changeindicator</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">  <span class="attr">indicatordos</span>:!<span class="keyword">this</span>.data.indicatordos<span class="comment">//隐藏图片那个点</span></div><div class="line">&#125;)</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">changevertical</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;<span class="comment">//设置水平方向</span></div><div class="line">      vertical:!<span class="keyword">this</span>.data.vertical</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h4 id="swiper-xml_u6587_u4EF6"><a href="#swiper-xml_u6587_u4EF6" class="headerlink" title="swiper.xml文件"></a>swiper.xml文件</h4><figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"swiperview"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">swiper</span> <span class="attr">class</span>=<span class="string">"swiperitem"</span> <span class="attr">indicator-dots</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;indicatordos&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">autoplay</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123;autoplay&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span></span></span></div><div class="line">          <span class="attr">bindchange</span>=<span class="string">"displaychange"</span> <span class="attr">duration</span>=<span class="string">"1000"</span> <span class="attr">interval</span>=<span class="string">"2000"</span></div><div class="line">          <span class="attr">vertical</span>=<span class="string">"</span><span class="template-variable">&#123;&#123;vertical&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span></span></span></div><div class="line">        &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;imgUrls&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">swiper-item</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;item&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">block</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">swiper</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">vlass</span>=<span class="string">"bottomview"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"default"</span> <span class="attr">bindtap</span>=<span class="string">"changeautodisplay"</span> <span class="attr">class</span>=<span class="string">"bottomButton"</span>&gt;</span>autodisplay:<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"default"</span> <span class="attr">bindtap</span>=<span class="string">"changeindicator"</span> <span class="attr">class</span>=<span class="string">"bottomButton"</span>&gt;</span>indicatordots:<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"default"</span> <span class="attr">bindtap</span>=<span class="string">"changevertical"</span> <span class="attr">class</span>=<span class="string">"bottomButton"</span>&gt;</span>水平:<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div><div class="line">//这里边用了一个简单的判断语句 :<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span></span></div><div class="line">    &lt;/<span class="built_in">view</span>&gt;</div><div class="line">&lt;/<span class="built_in">view</span>&gt;</div></pre></td></tr></table></figure>
+<h3 id="swiper-js文件"><a href="#swiper-js文件" class="headerlink" title="swiper.js文件"></a>swiper.js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = getApp();</div><div class="line">Page(&#123;</div><div class="line">  <span class="attr">data</span>:&#123;</div><div class="line">    <span class="attr">indicatordos</span>:<span class="literal">true</span>,</div><div class="line">    <span class="attr">autoplay</span>:<span class="literal">true</span>,</div><div class="line"><span class="comment">/*图片数组*/</span></div><div class="line">    imgUrls: [</div><div class="line">      <span class="string">'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'</span>,</div><div class="line">      <span class="string">'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'</span>,</div><div class="line">      <span class="string">'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'</span>,</div><div class="line">      <span class="string">'http://imgsrc.baidu.com/forum/pic/item/1080fc8b87d6277f026c80b428381f30e824fc46.jpg'</span>,</div><div class="line">      <span class="string">'http://imgsrc.baidu.com/forum/pic/item/2eadcbef76094b366ac0bf0da3cc7cd98c109d84.jpg'</span>,</div><div class="line">      <span class="string">'http://img1.tgbusdata.cn/v2/thumb/jpg/MGNlNiw3MzAsNzMwLDQsMSwxLC0xLDAscms1MA==/u/olpic.tgbusdata.cn/uploads/allimg/130124/62-130124160054.jpg'</span></div><div class="line">    ],</div><div class="line">    <span class="attr">vertical</span>:<span class="literal">true</span>,</div><div class="line">  &#125;,</div><div class="line">  </div><div class="line">  <span class="attr">displaychange</span>:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(event.detail.current);<span class="comment">//输出来当前swiper-item的index</span></div><div class="line">   &#125;,</div><div class="line"></div><div class="line">  <span class="attr">changeautodisplay</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">      <span class="attr">autoplay</span>:!<span class="keyword">this</span>.data.autoplay<span class="comment">//设置是否自动播放</span></div><div class="line">  &#125;)</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">changeindicator</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">  <span class="attr">indicatordos</span>:!<span class="keyword">this</span>.data.indicatordos<span class="comment">//隐藏图片那个点</span></div><div class="line">&#125;)</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">changevertical</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;<span class="comment">//设置水平方向</span></div><div class="line">      vertical:!<span class="keyword">this</span>.data.vertical</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h4 id="swiper-xml文件"><a href="#swiper-xml文件" class="headerlink" title="swiper.xml文件"></a>swiper.xml文件</h4><figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"swiperview"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">swiper</span> <span class="attr">class</span>=<span class="string">"swiperitem"</span> <span class="attr">indicator-dots</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;indicatordos&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">autoplay</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123;autoplay&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span></span></span></div><div class="line">          <span class="attr">bindchange</span>=<span class="string">"displaychange"</span> <span class="attr">duration</span>=<span class="string">"1000"</span> <span class="attr">interval</span>=<span class="string">"2000"</span></div><div class="line">          <span class="attr">vertical</span>=<span class="string">"</span><span class="template-variable">&#123;&#123;vertical&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span></span></span></div><div class="line">        &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;imgUrls&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">swiper-item</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;item&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">block</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">swiper</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">vlass</span>=<span class="string">"bottomview"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"default"</span> <span class="attr">bindtap</span>=<span class="string">"changeautodisplay"</span> <span class="attr">class</span>=<span class="string">"bottomButton"</span>&gt;</span>autodisplay:<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"default"</span> <span class="attr">bindtap</span>=<span class="string">"changeindicator"</span> <span class="attr">class</span>=<span class="string">"bottomButton"</span>&gt;</span>indicatordots:<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"default"</span> <span class="attr">bindtap</span>=<span class="string">"changevertical"</span> <span class="attr">class</span>=<span class="string">"bottomButton"</span>&gt;</span>水平:<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></div><div class="line">//这里边用了一个简单的判断语句 :<span class="template-variable">&#123;&#123;autoplay?<span class="string">"YES"</span>:<span class="string">"NO"</span></span></div><div class="line">    &lt;/<span class="built_in">view</span>&gt;</div><div class="line">&lt;/<span class="built_in">view</span>&gt;</div></pre></td></tr></table></figure>
 <p>效果如下:</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/783986-f75545234a080c18.gif?imageMogr2/auto-orient/strip" alt="2016-11-07 17_27_56.gif"></p>
-<h2 id="2-checkbox_u7684_u4F7F_u7528"><a href="#2-checkbox_u7684_u4F7F_u7528" class="headerlink" title="2.checkbox的使用"></a>2.checkbox的使用</h2><p>其实就是复选框：</p>
+<h2 id="2-checkbox的使用"><a href="#2-checkbox的使用" class="headerlink" title="2.checkbox的使用"></a>2.checkbox的使用</h2><p>其实就是复选框：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/783986-26e5a47de1bf531a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E935B5E6-0FC3-4A00-813C-9A259C2582AE.png"><br>下边用了text显示了当前选中的name。<br><strong>js文件</strong><br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">首先要设置data的<span class="function">list</span></div><div class="line"><span class="title">Page</span>(<span class="params">&#123;</span></div><div class="line">  data:&#123;</div><div class="line">     items: [</div><div class="line">      &#123;name: <span class="string">'USA'</span>, <span class="keyword">value</span>: <span class="string">'美国'</span>&#125;,</div><div class="line">      &#123;name: <span class="string">'CHN'</span>, <span class="keyword">value</span>: <span class="string">'中国'</span>, <span class="keyword">checked</span>: <span class="string">'true'</span>&#125;,</div><div class="line">      &#123;name: <span class="string">'BRA'</span>, <span class="keyword">value</span>: <span class="string">'巴西'</span>&#125;,</div><div class="line">      &#123;name: <span class="string">'JPN'</span>, <span class="keyword">value</span>: <span class="string">'日本'</span>&#125;,</div><div class="line">      &#123;name: <span class="string">'ENG'</span>, <span class="keyword">value</span>: <span class="string">'英国'</span>&#125;,</div><div class="line">      &#123;name: <span class="string">'TUR'</span>, <span class="keyword">value</span>: <span class="string">'法国'</span>&#125;,</div><div class="line">    ],</div><div class="line">    text:<span class="string">''</span>,//用来显示选中的box</div><div class="line">  &#125;,</div><div class="line">  </div><div class="line">  onShow:function()&#123;</div><div class="line">    <span class="comment">// 页面显示 第一次进入页面统计选中的box 调用函数。</span></div><div class="line">    <span class="keyword">this</span>.check();</div><div class="line">  &#125;,</div><div class="line">  </div><div class="line">  change:function(e)&#123;</div><div class="line">      console.log(e.detail.<span class="keyword">value</span>);</div><div class="line">      <span class="keyword">var</span> te=<span class="string">"暂时没选中"</span>;</div><div class="line">      <span class="keyword">if</span>(e.detail.<span class="keyword">value</span>.length == <span class="number">0</span>)</div><div class="line">        &#123; </div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">         te = e.detail.<span class="keyword">value</span>;</div><div class="line">        &#125;</div><div class="line">         <span class="keyword">this</span>.setData(&#123;</div><div class="line">        text:te</div><div class="line">      &#125;)</div><div class="line">      </div><div class="line">  &#125;,</div><div class="line">********遍历是否有选中的***********</div><div class="line">  check:function()&#123;</div><div class="line">    <span class="keyword">var</span> te=<span class="string">""</span>;<span class="comment">//遍历是否有选中的</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.data.items.length;i ++)&#123;</div><div class="line">      <span class="keyword">var</span> item = <span class="keyword">this</span>.data.items[i];</div><div class="line">      <span class="keyword">if</span>(item.<span class="keyword">checked</span>)&#123; <span class="comment">//如果选中 加到字符串中</span></div><div class="line">        te += item.<span class="keyword">value</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">      <span class="keyword">if</span>(te.length == <span class="number">0</span>)</div><div class="line">        &#123; </div><div class="line">         te = <span class="string">"暂时没选中"</span> ;</div><div class="line">        &#125;</div><div class="line">         <span class="keyword">this</span>.setData(&#123;</div><div class="line">        text:te</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
 <p><strong>xml文件</strong><br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span> = <span class="string">"contain"</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"bd"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">checkbox-group</span> <span class="attr">bindchange</span>=<span class="string">"change"</span>&gt;</span> //绑定事件</div><div class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"checkbox"</span> <span class="attr">wx:for</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;items&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span>//循环绑定到item</span></div><div class="line">                <span class="tag">&lt;<span class="name">checkbox</span> <span class="attr">value</span>=<span class="string">"</span></span><span class="template-variable">&#123;&#123;item.value&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">checked</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123;item.checked&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span></span></span></div><div class="line">                &gt; </div><div class="line">                <span class="template-variable">&#123;&#123;item.value&#125;&#125;</span><span class="xml"></span></div><div class="line">                <span class="tag">&lt;/<span class="name">checkbox</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">checkbox-group</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"checkfooter"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">text</span> &gt;</span><span class="template-variable">&#123;&#123;text&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">text</span>&gt;</span>//显示选中的数据的name</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p><strong>css文件</strong><br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.bd</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">800</span>rpx;</div><div class="line">    <span class="attribute">height</span>: <span class="number">500</span>rpx;</div><div class="line">    <span class="attribute">margin-left</span>: <span class="number">50</span>rpx;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.checkbox</span>&#123;</div><div class="line">   <span class="attribute">display</span>: block;<span class="comment">//这个要一定写的 暂时没搞懂意思  应该是一种布局方式。</span></div><div class="line">   <span class="attribute">margin</span>: <span class="number">20</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.checklabel</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">500</span>rpx;</div><div class="line">    <span class="attribute">height</span>: <span class="number">200</span>rpx;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.checkfooter</span>&#123;</div><div class="line">    <span class="attribute">margin-left</span>: <span class="number">50</span>rpx;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -564,48 +485,33 @@ Number
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/11/05/微信小程序_02/" title="微信小程序_2">http://fgyong.cn/2016/11/05/微信小程序_02/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -617,7 +523,7 @@ Number
       
 
       
-        
+      
       
 
       
@@ -645,35 +551,20 @@ Number
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/05/微信小程序_02/"
-     data-title="微信小程序_2"
-     data-content=""
-     data-url="http://fgyong.cn/2016/11/05/微信小程序_02/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -681,9 +572,7 @@ Number
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/05/微信小程序_02/"
-           data-title="微信小程序_2" data-url="http://fgyong.cn/2016/11/05/微信小程序_02/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -701,6 +590,7 @@ Number
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -719,7 +609,7 @@ Number
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -771,7 +661,20 @@ Number
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -786,12 +689,12 @@ Number
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -813,7 +716,7 @@ Number
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-swiper_u7684_u4F7F_u7528"><span class="nav-number">1.</span> <span class="nav-text">1.swiper的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swiper-js_u6587_u4EF6"><span class="nav-number">1.1.</span> <span class="nav-text">swiper.js文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swiper-xml_u6587_u4EF6"><span class="nav-number">1.1.1.</span> <span class="nav-text">swiper.xml文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-checkbox_u7684_u4F7F_u7528"><span class="nav-number">2.</span> <span class="nav-text">2.checkbox的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-swiper的使用"><span class="nav-number">1.</span> <span class="nav-text">1.swiper的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swiper-js文件"><span class="nav-number">1.1.</span> <span class="nav-text">swiper.js文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swiper-xml文件"><span class="nav-number">1.1.1.</span> <span class="nav-text">swiper.xml文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-checkbox的使用"><span class="nav-number">2.</span> <span class="nav-text">2.checkbox的使用</span></a></li></ol></div>
             
 
           </div>
@@ -857,21 +760,25 @@ Number
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -884,7 +791,7 @@ Number
         
       </div>
     
-    
+
   </div>
 
   
@@ -904,6 +811,14 @@ Number
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -930,79 +845,80 @@ Number
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -1109,24 +1025,12 @@ Number
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

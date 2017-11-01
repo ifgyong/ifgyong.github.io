@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS,iOS高级," />
@@ -80,26 +97,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="简述：       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。
-在i">
+<meta name="description" content="简述：       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。 在i">
+<meta name="keywords" content="iOS,iOS高级">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS线程之GCD初探">
 <meta property="og:url" content="http://fgyong.cn/2016/03/28/iOS线程之GCD初探/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="简述：       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。
-在i">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="简述：       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。 在i">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS线程之GCD初探">
-<meta name="twitter:description" content="简述：       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。
-在i">
+<meta name="twitter:description" content="简述：       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。 在i">
 
 
 
@@ -108,12 +124,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,11 +150,7 @@
 
 
 
-  <title> iOS线程之GCD初探 | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS线程之GCD初探 | 兜兜转转的技术博客</title>
   
 
 
@@ -162,23 +175,27 @@
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -280,17 +297,21 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/03/28/iOS线程之GCD初探/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -298,14 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS线程之GCD初探
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">iOS线程之GCD初探</h2>
         
 
         <div class="post-meta">
@@ -354,14 +368,15 @@
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/28/iOS线程之GCD初探/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/iOS线程之GCD初探/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/03/28/iOS线程之GCD初探/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/03/28/iOS线程之GCD初探/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -394,8 +409,10 @@
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
@@ -403,59 +420,44 @@
       
         <p>简述：<br>       说道线程，离不开并行和串行，所谓并行，就是100赛跑，每个赛道就是一个线程，每个线程之间互不影响，同时都可以运行事件，就是10个赛道都可以有运动员跑步了，谁跑的慢或者跑的快，都不影响其他的人。串行就不一样了，串行是1个赛道10个运动员再跑接力赛，第一个跑到终点第二个在接着跑，依次类推，前边的不走，后边的也走不了的，所以串行上面的事件是一个一个运行的，同时只能是一个人再跑。</p>
 <p>在iOS或者OS里面，一般用GCD就能吃处理较多的事务，下面就谈一下GCD的用法。</p>
-<h3 id="u4EC0_u4E48_u662FGCD_uFF1F"><a href="#u4EC0_u4E48_u662FGCD_uFF1F" class="headerlink" title="什么是GCD？"></a>什么是GCD？</h3><p>全称是Grand Central Dispatch，可译为“牛逼的中枢调度器”<br>纯C语言，提供了非常多强大的函数</p>
-<h3 id="methodList_info"><a href="#methodList_info" class="headerlink" title="methodList info"></a>methodList info</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//获取主线程 就是更新UI的线程</span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_get_main_queue</span>(<span class="params"><span class="keyword">void</span></span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//获取全局队列</span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_get_global_queue</span>(<span class="params"> <span class="keyword">long</span> identifier, unsigned <span class="keyword">long</span> flags</span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//创建一个队列 名字是label 属性可以写为NULL  </span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_queue_create</span>(<span class="params"> <span class="keyword">const</span> <span class="keyword">char</span> *label dispatch_queue_attr_t attr</span>)</span>;</div><div class="line">dispatch_release(queue)<span class="comment">//释放队列</span></div><div class="line"></div><div class="line"><span class="comment">//获取代码现在运行的queue</span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_get_current_queue</span>(<span class="params"> <span class="keyword">void</span></span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//获取队列的名字</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * dispatch_queue_get_label(dispatch_queue_t queue);</div><div class="line"></div><div class="line"><span class="comment">//异步把代码块block交给queue队列中处理</span></div><div class="line">dispatch_async(dispatch_queue_t queue, dispatch_block_t block);</div><div class="line"></div><div class="line"><span class="comment">// 同步将block加入到queue中并且执行。</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_sync</span>(<span class="params"> dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//block 在指定时间在queue中执行</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_after</span>(<span class="params"> dispatch_time_t when, dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"> </div><div class="line"><span class="comment">//几个调度事件同事加入到queue中去，最好是全局队列才行。</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_apply</span>(<span class="params"> size_t iterations, dispatch_queue_t queue, <span class="keyword">void</span> (^block</span>)(<span class="params"> size_t</span>))</span>;</div><div class="line"></div><div class="line"><span class="comment">// block 是否执行过</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_once</span>(<span class="params"> dispatch_once_t *predicate, dispatch_block_t block</span>)</span>;</div><div class="line"> </div><div class="line"><span class="comment">//在分组group中的queue队列执行block</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_async</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span>, dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//创建线程分组</span></div><div class="line"><span class="function">dispatch_group_t <span class="title">dispatch_group_create</span>(<span class="params"> <span class="keyword">void</span></span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//分组的计数+1</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_enter</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span></span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//分组计数 -1</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_leave</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span></span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">// 当分组中的事务处理完了执行block</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_notify</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span>, dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//等待timeout时间后执行 group中的事务</span></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">dispatch_group_wait</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span>, dispatch_time_t timeout</span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//并行状态下 queue前面的并行事务处理完成了在执行block，然后执行下边的并行代码</span></div><div class="line"><span class="comment">//比如 ABCDEF D事务等到ABC都完成了在执行EF事务的</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_barrier_async</span>(<span class="params"> dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div></pre></td></tr></table></figure>
-<h3 id="u5B9E_u6218_u6F14_u7EC3_u5168_u5C40_u961F_u5217"><a href="#u5B9E_u6218_u6F14_u7EC3_u5168_u5C40_u961F_u5217" class="headerlink" title="实战演练全局队列"></a>实战演练全局队列</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    dispatch_queue_t queue = dispatch_get_global_queue(<span class="name">DISPATCH_QUEUE_PRIORITY_DEFAULT</span>, <span class="number">0</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">dispatch_async(<span class="name">queue</span>, ^&#123;</div><div class="line">        //异步执行</div><div class="line">        dispatch_sync(<span class="name">dispatch_get_main_queue</span>(), ^&#123;</div><div class="line">            //这里面更新UI</div><div class="line">        &#125;)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    dispatch_sync(<span class="name">queue</span>, ^&#123;</div><div class="line">       //同步执行</div><div class="line">    &#125;)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<h3 id="u81EA_u5B9A_u4E49_u961F_u5217"><a href="#u81EA_u5B9A_u4E49_u961F_u5217" class="headerlink" title="自定义队列"></a>自定义队列</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t <span class="attr">queue</span> = dispatch_queue_create(<span class="string">"com.apple.fgyong"</span>, DISPATCH_QUEUE_SERIAL);</div><div class="line">    //</div><div class="line">//<span class="comment">#define DISPATCH_QUEUE_SERIAL   同步队列</span></div><div class="line">//<span class="comment">#define DISPATCH_QUEUE_CONCURRENT 异步队列</span></div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"下载图片1=====%@"</span>,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"下载图片2=====%@"</span>,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"下载图片3=====%@"</span>,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    NSLog(@<span class="string">"main:%@"</span>,[NSThread mainThread]);</div><div class="line">当queue属性为 DISPATCH_QUEUE_CONCURRENT输出：</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347984</span>] ****下载图片****<span class="number">3</span>=====&lt;NSThread: <span class="number">0</span>x7fabda100250&gt;&#123;<span class="attr">number</span> = <span class="number">4</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347982</span>] ****下载图片****<span class="number">2</span>=====&lt;NSThread: <span class="number">0</span>x7fabda2008a0&gt;&#123;<span class="attr">number</span> = <span class="number">3</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347937</span>] main:&lt;NSThread: <span class="number">0</span>x7fabd8c04ee0&gt;&#123;<span class="attr">number</span> = <span class="number">1</span>, <span class="attr">name</span> = main&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347981</span>] ****下载图片****<span class="number">1</span>=====&lt;NSThread: <span class="number">0</span>x7fabd8c0a010&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;** 线程达到了<span class="number">4</span>个</div><div class="line">当queue属性为DISPATCH_QUEUE_SERIAL输出：</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.501</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344348</span>] main:&lt;NSThread: <span class="number">0</span>x7fd379704cf0&gt;&#123;<span class="attr">number</span> = <span class="number">1</span>, <span class="attr">name</span> = main&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.501</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344382</span>] ****下载图片****<span class="number">1</span>=====&lt;NSThread: <span class="number">0</span>x7fd37971bda0&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.502</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344382</span>] ****下载图片****<span class="number">2</span>=====&lt;NSThread: <span class="number">0</span>x7fd37971bda0&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.502</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344382</span>] ****下载图片****<span class="number">3</span>=====&lt;NSThread: <span class="number">0</span>x7fd37971bda0&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">线程只有<span class="number">2</span>个</div></pre></td></tr></table></figure>
-<h3 id="u591A_u4E2A_u5F02_u6B65_u7EBF_u7A0B_u95EE_u9898"><a href="#u591A_u4E2A_u5F02_u6B65_u7EBF_u7A0B_u95EE_u9898" class="headerlink" title="多个异步线程问题"></a>多个异步线程问题</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当ABC 3个异步线程，要求前两个个执行完再去执行后面的三个的时候例子：</span></div><div class="line">     <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_queue_create("com.apple.fgyong", </span><span class="keyword">DISPATCH_QUEUE_CONCURRENT);</span></div><div class="line"></div><div class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"queue1 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"queue1 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"queue2 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"queue2 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_barrier_sync(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"main:%@"</span>,[NSThread mainThread])<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"queue3 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"queue3 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">输出：</div><div class="line"></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">01</span>.<span class="number">319</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue2 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">01</span>.<span class="number">319</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353703</span>] queue1 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">324</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353703</span>] queue1 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">324</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue2 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">325</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353657</span>] main:&lt;NSThread: <span class="number">0x7f97ea604bf0</span>&gt;&#123;number = <span class="number">1</span>, name = main&#125;**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">325</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue3 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">05</span>.<span class="number">330</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue3 end**</div></pre></td></tr></table></figure>
-<h3 id="u7EBF_u7A0B_u5206_u7EC4"><a href="#u7EBF_u7A0B_u5206_u7EC4" class="headerlink" title="线程分组"></a>线程分组</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当多个任务同时进行的时候，也可以用group，ABCD任务进行完成的时候，最后在执行task。</span></div><div class="line"> </div><div class="line"></div><div class="line">  <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_queue_create("com.apple.fgyong", </span><span class="keyword">DISPATCH_QUEUE_CONCURRENT);</span></div><div class="line">    <span class="keyword">dispatch_group_t </span>group = <span class="keyword">dispatch_group_create();</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task1 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task1 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    </div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task2 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task2 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_notify(group, </span>queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"================="</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task3 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task3 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    </div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task4 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task4 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">输出：</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357162</span>] task1 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357164</span>] task4 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357161</span>] task2 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357163</span>] task3 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357162</span>] task1 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357163</span>] task3 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357164</span>] task4 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357161</span>] task2 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">006</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357161</span>] =================**</div><div class="line">一个组内的所有任务都进行完了才会执行task的函数。</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 分组多任务等待 ABCDEF ，ABCD执行5秒，5秒之后就执行EF任务，不管ABCD是否成功。</span></div><div class="line"></div><div class="line">    <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_queue_create("com.apple.fgyong", </span><span class="keyword">DISPATCH_QUEUE_CONCURRENT);</span></div><div class="line">    <span class="keyword">dispatch_group_t </span>group = <span class="keyword">dispatch_group_create();</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task1 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task1 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    </div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task2 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task2 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_notify(group, </span>queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"================="</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task3 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">6</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task3 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_wait(group, </span><span class="keyword">dispatch_time(DISPATCH_TIME_NOW, </span>(int64_t)(<span class="number">5</span>*NSEC_PER_SEC)))<span class="comment">;</span></div><div class="line">    NSLog(@<span class="string">"all end"</span>)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task4 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task4 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">输出：</div><div class="line"><span class="comment"># 代码执行到wait的时候会等待5秒之后再执行wait下边的代码，和sleep有点相似。</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">31</span>.<span class="number">335</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366983</span>] task3 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">31</span>.<span class="number">335</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366978</span>] task1 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">31</span>.<span class="number">335</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task2 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">33</span>.<span class="number">340</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366978</span>] task1 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">33</span>.<span class="number">340</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task2 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">36</span>.<span class="number">336</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366894</span>] all end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">36</span>.<span class="number">336</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task4 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">37</span>.<span class="number">340</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366983</span>] task3 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">38</span>.<span class="number">342</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task4 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">38</span>.<span class="number">342</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366983</span>] =================**</div></pre></td></tr></table></figure>
-<h3 id="u540C_u65F6_u5904_u7406_u591A_u6570_u636E_u4E0D_u7BA1_u987A_u5E8F"><a href="#u540C_u65F6_u5904_u7406_u591A_u6570_u636E_u4E0D_u7BA1_u987A_u5E8F" class="headerlink" title="同时处理多数据不管顺序"></a>同时处理多数据不管顺序</h3><figure class="highlight dns"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">          dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)<span class="comment">;</span></div><div class="line">    </div><div class="line">    </div><div class="line">          /*! dispatch_apply函数说明</div><div class="line">           <span class="number">10</span>      *</div><div class="line">           <span class="number">11</span>      *  @brief  dispatch_apply函数是dispatch_sync函数和Dispatch Group的关联API</div><div class="line">           <span class="number">12</span>      *         该函数按指定的次数将指定的Block追加到指定的Dispatch Queue中,并等到全部的处理执行结束</div><div class="line">           <span class="number">13</span>      *</div><div class="line">           <span class="number">14</span>      *  @param <span class="number">10</span>    指定重复次数  指定<span class="number">10</span>次</div><div class="line">           <span class="number">15</span>      *  @param queue 追加对象的Dispatch Queue</div><div class="line">           <span class="number">16</span>      *  @param index 带有参数的Block, index的作用是为了按执行的顺序区分各个Block</div><div class="line">           <span class="number">17</span>      *</div><div class="line">           <span class="number">18</span>      */</div><div class="line">          dispatch_apply(<span class="number">10</span>, queue, ^(size_t index) &#123;</div><div class="line">                  NSLog(@"%d", index)<span class="comment">;</span></div><div class="line">              </div><div class="line">              &#125;)<span class="comment">;</span></div><div class="line">          NSLog(@"done")<span class="comment">;</span></div><div class="line">输出：</div><div class="line"># 这个和上边讲的分组类似，多事务处理，处理结束后再执行代码。</div><div class="line"># 这个是同步的，代码按顺序执行，分组的是异步执行的block</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372458</span>] <span class="number">1</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372463</span>] <span class="number">5</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372429</span>] <span class="number">4</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372464</span>] <span class="number">6</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372465</span>] <span class="number">7</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372462</span>] <span class="number">2</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372457</span>] <span class="number">0</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372461</span>] <span class="number">3</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.699</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372458</span>] <span class="number">8</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.699</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372429</span>] <span class="number">9</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.699</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372429</span>] done**</div></pre></td></tr></table></figure>
+<h3 id="什么是GCD？"><a href="#什么是GCD？" class="headerlink" title="什么是GCD？"></a>什么是GCD？</h3><p>全称是Grand Central Dispatch，可译为“牛逼的中枢调度器”<br>纯C语言，提供了非常多强大的函数</p>
+<h3 id="methodList-info"><a href="#methodList-info" class="headerlink" title="methodList info"></a>methodList info</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//获取主线程 就是更新UI的线程</span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_get_main_queue</span>(<span class="params"><span class="keyword">void</span></span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//获取全局队列</span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_get_global_queue</span>(<span class="params"> <span class="keyword">long</span> identifier, unsigned <span class="keyword">long</span> flags</span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//创建一个队列 名字是label 属性可以写为NULL  </span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_queue_create</span>(<span class="params"> <span class="keyword">const</span> <span class="keyword">char</span> *label dispatch_queue_attr_t attr</span>)</span>;</div><div class="line">dispatch_release(queue)<span class="comment">//释放队列</span></div><div class="line"></div><div class="line"><span class="comment">//获取代码现在运行的queue</span></div><div class="line"><span class="function">dispatch_queue_t <span class="title">dispatch_get_current_queue</span>(<span class="params"> <span class="keyword">void</span></span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//获取队列的名字</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * dispatch_queue_get_label(dispatch_queue_t queue);</div><div class="line"></div><div class="line"><span class="comment">//异步把代码块block交给queue队列中处理</span></div><div class="line">dispatch_async(dispatch_queue_t queue, dispatch_block_t block);</div><div class="line"></div><div class="line"><span class="comment">// 同步将block加入到queue中并且执行。</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_sync</span>(<span class="params"> dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//block 在指定时间在queue中执行</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_after</span>(<span class="params"> dispatch_time_t when, dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"> </div><div class="line"><span class="comment">//几个调度事件同事加入到queue中去，最好是全局队列才行。</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_apply</span>(<span class="params"> size_t iterations, dispatch_queue_t queue, <span class="keyword">void</span> (^block</span>)(<span class="params"> size_t</span>))</span>;</div><div class="line"></div><div class="line"><span class="comment">// block 是否执行过</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_once</span>(<span class="params"> dispatch_once_t *predicate, dispatch_block_t block</span>)</span>;</div><div class="line"> </div><div class="line"><span class="comment">//在分组group中的queue队列执行block</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_async</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span>, dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//创建线程分组</span></div><div class="line"><span class="function">dispatch_group_t <span class="title">dispatch_group_create</span>(<span class="params"> <span class="keyword">void</span></span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//分组的计数+1</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_enter</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span></span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//分组计数 -1</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_leave</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span></span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">// 当分组中的事务处理完了执行block</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_group_notify</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span>, dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div><div class="line"></div><div class="line"><span class="comment">//等待timeout时间后执行 group中的事务</span></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">dispatch_group_wait</span>(<span class="params"> dispatch_group_t <span class="keyword">group</span>, dispatch_time_t timeout</span>)</span>;</div><div class="line"></div><div class="line"> <span class="comment">//并行状态下 queue前面的并行事务处理完成了在执行block，然后执行下边的并行代码</span></div><div class="line"><span class="comment">//比如 ABCDEF D事务等到ABC都完成了在执行EF事务的</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatch_barrier_async</span>(<span class="params"> dispatch_queue_t queue, dispatch_block_t block</span>)</span>;</div></pre></td></tr></table></figure>
+<h3 id="实战演练全局队列"><a href="#实战演练全局队列" class="headerlink" title="实战演练全局队列"></a>实战演练全局队列</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    dispatch_queue_t queue = dispatch_get_global_queue(<span class="name">DISPATCH_QUEUE_PRIORITY_DEFAULT</span>, <span class="number">0</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">dispatch_async(<span class="name">queue</span>, ^&#123;</div><div class="line">        //异步执行</div><div class="line">        dispatch_sync(<span class="name">dispatch_get_main_queue</span>(), ^&#123;</div><div class="line">            //这里面更新UI</div><div class="line">        &#125;)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    dispatch_sync(<span class="name">queue</span>, ^&#123;</div><div class="line">       //同步执行</div><div class="line">    &#125;)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<h3 id="自定义队列"><a href="#自定义队列" class="headerlink" title="自定义队列"></a>自定义队列</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t <span class="attr">queue</span> = dispatch_queue_create(<span class="string">"com.apple.fgyong"</span>, DISPATCH_QUEUE_SERIAL);</div><div class="line">    //</div><div class="line">//<span class="comment">#define DISPATCH_QUEUE_SERIAL   同步队列</span></div><div class="line">//<span class="comment">#define DISPATCH_QUEUE_CONCURRENT 异步队列</span></div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"下载图片1=====%@"</span>,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"下载图片2=====%@"</span>,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    dispatch_async(queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"下载图片3=====%@"</span>,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">    NSLog(@<span class="string">"main:%@"</span>,[NSThread mainThread]);</div><div class="line">当queue属性为 DISPATCH_QUEUE_CONCURRENT输出：</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347984</span>] ****下载图片****<span class="number">3</span>=====&lt;NSThread: <span class="number">0</span>x7fabda100250&gt;&#123;<span class="attr">number</span> = <span class="number">4</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347982</span>] ****下载图片****<span class="number">2</span>=====&lt;NSThread: <span class="number">0</span>x7fabda2008a0&gt;&#123;<span class="attr">number</span> = <span class="number">3</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347937</span>] main:&lt;NSThread: <span class="number">0</span>x7fabd8c04ee0&gt;&#123;<span class="attr">number</span> = <span class="number">1</span>, <span class="attr">name</span> = main&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">53</span>:<span class="number">25.848</span> GCD_Demo[<span class="number">12338</span>:<span class="number">347981</span>] ****下载图片****<span class="number">1</span>=====&lt;NSThread: <span class="number">0</span>x7fabd8c0a010&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;** 线程达到了<span class="number">4</span>个</div><div class="line">当queue属性为DISPATCH_QUEUE_SERIAL输出：</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.501</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344348</span>] main:&lt;NSThread: <span class="number">0</span>x7fd379704cf0&gt;&#123;<span class="attr">number</span> = <span class="number">1</span>, <span class="attr">name</span> = main&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.501</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344382</span>] ****下载图片****<span class="number">1</span>=====&lt;NSThread: <span class="number">0</span>x7fd37971bda0&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.502</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344382</span>] ****下载图片****<span class="number">2</span>=====&lt;NSThread: <span class="number">0</span>x7fd37971bda0&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">**<span class="number">2016</span>-<span class="number">03</span>-<span class="number">28</span> <span class="number">16</span>:<span class="number">46</span>:<span class="number">54.502</span> GCD_Demo[<span class="number">12272</span>:<span class="number">344382</span>] ****下载图片****<span class="number">3</span>=====&lt;NSThread: <span class="number">0</span>x7fd37971bda0&gt;&#123;<span class="attr">number</span> = <span class="number">2</span>, <span class="attr">name</span> = (<span class="literal">null</span>)&#125;**</div><div class="line">线程只有<span class="number">2</span>个</div></pre></td></tr></table></figure>
+<h3 id="多个异步线程问题"><a href="#多个异步线程问题" class="headerlink" title="多个异步线程问题"></a>多个异步线程问题</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当ABC 3个异步线程，要求前两个个执行完再去执行后面的三个的时候例子：</span></div><div class="line">     <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_queue_create("com.apple.fgyong", </span><span class="keyword">DISPATCH_QUEUE_CONCURRENT);</span></div><div class="line"></div><div class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"queue1 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"queue1 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"queue2 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"queue2 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_barrier_sync(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"main:%@"</span>,[NSThread mainThread])<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_async(queue, </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"queue3 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"queue3 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">输出：</div><div class="line"></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">01</span>.<span class="number">319</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue2 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">01</span>.<span class="number">319</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353703</span>] queue1 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">324</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353703</span>] queue1 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">324</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue2 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">325</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353657</span>] main:&lt;NSThread: <span class="number">0x7f97ea604bf0</span>&gt;&#123;number = <span class="number">1</span>, name = main&#125;**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">03</span>.<span class="number">325</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue3 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">01</span>:<span class="number">05</span>.<span class="number">330</span> GCD_Demo[<span class="number">12463</span>:<span class="number">353702</span>] queue3 end**</div></pre></td></tr></table></figure>
+<h3 id="线程分组"><a href="#线程分组" class="headerlink" title="线程分组"></a>线程分组</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当多个任务同时进行的时候，也可以用group，ABCD任务进行完成的时候，最后在执行task。</span></div><div class="line"> </div><div class="line"></div><div class="line">  <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_queue_create("com.apple.fgyong", </span><span class="keyword">DISPATCH_QUEUE_CONCURRENT);</span></div><div class="line">    <span class="keyword">dispatch_group_t </span>group = <span class="keyword">dispatch_group_create();</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task1 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task1 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    </div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task2 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task2 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_notify(group, </span>queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"================="</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task3 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task3 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    </div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task4 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task4 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">输出：</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357162</span>] task1 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357164</span>] task4 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357161</span>] task2 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">45</span>.<span class="number">002</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357163</span>] task3 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357162</span>] task1 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357163</span>] task3 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357164</span>] task4 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">005</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357161</span>] task2 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">08</span>:<span class="number">47</span>.<span class="number">006</span> GCD_Demo[<span class="number">12557</span>:<span class="number">357161</span>] =================**</div><div class="line">一个组内的所有任务都进行完了才会执行task的函数。</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 分组多任务等待 ABCDEF ，ABCD执行5秒，5秒之后就执行EF任务，不管ABCD是否成功。</span></div><div class="line"></div><div class="line">    <span class="keyword">dispatch_queue_t </span>queue = <span class="keyword">dispatch_queue_create("com.apple.fgyong", </span><span class="keyword">DISPATCH_QUEUE_CONCURRENT);</span></div><div class="line">    <span class="keyword">dispatch_group_t </span>group = <span class="keyword">dispatch_group_create();</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task1 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task1 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    </div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task2 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task2 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_notify(group, </span>queue, ^&#123;</div><div class="line">        NSLog(@<span class="string">"================="</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task3 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">6</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task3 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_wait(group, </span><span class="keyword">dispatch_time(DISPATCH_TIME_NOW, </span>(int64_t)(<span class="number">5</span>*NSEC_PER_SEC)))<span class="comment">;</span></div><div class="line">    NSLog(@<span class="string">"all end"</span>)<span class="comment">;</span></div><div class="line">    <span class="keyword">dispatch_group_async(group, </span>queue, ^&#123;</div><div class="line">        </div><div class="line">        NSLog(@<span class="string">"task4 begin"</span>)<span class="comment">;</span></div><div class="line">        sleep(<span class="number">2</span>)<span class="comment">;</span></div><div class="line">        NSLog(@<span class="string">"task4 end"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div><div class="line">输出：</div><div class="line"><span class="comment"># 代码执行到wait的时候会等待5秒之后再执行wait下边的代码，和sleep有点相似。</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">31</span>.<span class="number">335</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366983</span>] task3 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">31</span>.<span class="number">335</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366978</span>] task1 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">31</span>.<span class="number">335</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task2 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">33</span>.<span class="number">340</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366978</span>] task1 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">33</span>.<span class="number">340</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task2 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">36</span>.<span class="number">336</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366894</span>] all end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">36</span>.<span class="number">336</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task4 <span class="keyword">begin**</span></div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">37</span>.<span class="number">340</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366983</span>] task3 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">38</span>.<span class="number">342</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366979</span>] task4 end**</div><div class="line">**<span class="number">2016</span>-03-28 <span class="number">17</span>:<span class="number">26</span>:<span class="number">38</span>.<span class="number">342</span> GCD_Demo[<span class="number">12745</span>:<span class="number">366983</span>] =================**</div></pre></td></tr></table></figure>
+<h3 id="同时处理多数据不管顺序"><a href="#同时处理多数据不管顺序" class="headerlink" title="同时处理多数据不管顺序"></a>同时处理多数据不管顺序</h3><figure class="highlight dns"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">          dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)<span class="comment">;</span></div><div class="line">    </div><div class="line">    </div><div class="line">          /*! dispatch_apply函数说明</div><div class="line">           <span class="number">10</span>      *</div><div class="line">           <span class="number">11</span>      *  @brief  dispatch_apply函数是dispatch_sync函数和Dispatch Group的关联API</div><div class="line">           <span class="number">12</span>      *         该函数按指定的次数将指定的Block追加到指定的Dispatch Queue中,并等到全部的处理执行结束</div><div class="line">           <span class="number">13</span>      *</div><div class="line">           <span class="number">14</span>      *  @param <span class="number">10</span>    指定重复次数  指定<span class="number">10</span>次</div><div class="line">           <span class="number">15</span>      *  @param queue 追加对象的Dispatch Queue</div><div class="line">           <span class="number">16</span>      *  @param index 带有参数的Block, index的作用是为了按执行的顺序区分各个Block</div><div class="line">           <span class="number">17</span>      *</div><div class="line">           <span class="number">18</span>      */</div><div class="line">          dispatch_apply(<span class="number">10</span>, queue, ^(size_t index) &#123;</div><div class="line">                  NSLog(@"%d", index)<span class="comment">;</span></div><div class="line">              </div><div class="line">              &#125;)<span class="comment">;</span></div><div class="line">          NSLog(@"done")<span class="comment">;</span></div><div class="line">输出：</div><div class="line"># 这个和上边讲的分组类似，多事务处理，处理结束后再执行代码。</div><div class="line"># 这个是同步的，代码按顺序执行，分组的是异步执行的block</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372458</span>] <span class="number">1</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372463</span>] <span class="number">5</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372429</span>] <span class="number">4</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372464</span>] <span class="number">6</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372465</span>] <span class="number">7</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372462</span>] <span class="number">2</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372457</span>] <span class="number">0</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.698</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372461</span>] <span class="number">3</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.699</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372458</span>] <span class="number">8</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.699</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372429</span>] <span class="number">9</span>**</div><div class="line">**<span class="number">2016-03-28</span> <span class="number">17</span>:<span class="number">36:35.699</span> GCD_Demo[<span class="number">12857</span>:<span class="number">372429</span>] done**</div></pre></td></tr></table></figure>
 <p>参考文章：<a href="https://developer.apple.com/library/ios/documentation/Performance/Reference/GCD_libdispatch_Ref/index.html#//apple_ref/c/macro/DISPATCH_QUEUE_CONCURRENT" target="_blank" rel="external">Grand Central Dispatch (GCD) Reference</a><br>GCD提供的接口蛮多的,适用场景还是要熟练掌握，才能运用自如。</p>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/03/28/iOS线程之GCD初探/" title="iOS线程之GCD初探">http://fgyong.cn/2016/03/28/iOS线程之GCD初探/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -469,7 +471,7 @@
       
 
       
-        
+      
       
 
       
@@ -497,35 +499,20 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/28/iOS线程之GCD初探/"
-     data-title="iOS线程之GCD初探"
-     data-content=""
-     data-url="http://fgyong.cn/2016/03/28/iOS线程之GCD初探/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -533,9 +520,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/28/iOS线程之GCD初探/"
-           data-title="iOS线程之GCD初探" data-url="http://fgyong.cn/2016/03/28/iOS线程之GCD初探/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -553,6 +538,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -571,7 +557,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -623,7 +609,20 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -638,12 +637,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -665,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EC0_u4E48_u662FGCD_uFF1F"><span class="nav-number">1.</span> <span class="nav-text">什么是GCD？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#methodList_info"><span class="nav-number">2.</span> <span class="nav-text">methodList info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B9E_u6218_u6F14_u7EC3_u5168_u5C40_u961F_u5217"><span class="nav-number">3.</span> <span class="nav-text">实战演练全局队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u81EA_u5B9A_u4E49_u961F_u5217"><span class="nav-number">4.</span> <span class="nav-text">自定义队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u591A_u4E2A_u5F02_u6B65_u7EBF_u7A0B_u95EE_u9898"><span class="nav-number">5.</span> <span class="nav-text">多个异步线程问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u7A0B_u5206_u7EC4"><span class="nav-number">6.</span> <span class="nav-text">线程分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u540C_u65F6_u5904_u7406_u591A_u6570_u636E_u4E0D_u7BA1_u987A_u5E8F"><span class="nav-number">7.</span> <span class="nav-text">同时处理多数据不管顺序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是GCD？"><span class="nav-number">1.</span> <span class="nav-text">什么是GCD？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#methodList-info"><span class="nav-number">2.</span> <span class="nav-text">methodList info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战演练全局队列"><span class="nav-number">3.</span> <span class="nav-text">实战演练全局队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义队列"><span class="nav-number">4.</span> <span class="nav-text">自定义队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个异步线程问题"><span class="nav-number">5.</span> <span class="nav-text">多个异步线程问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程分组"><span class="nav-number">6.</span> <span class="nav-text">线程分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同时处理多数据不管顺序"><span class="nav-number">7.</span> <span class="nav-text">同时处理多数据不管顺序</span></a></li></ol></div>
             
 
           </div>
@@ -709,21 +708,25 @@
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -736,7 +739,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -756,6 +759,14 @@
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -782,79 +793,80 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -961,24 +973,12 @@
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

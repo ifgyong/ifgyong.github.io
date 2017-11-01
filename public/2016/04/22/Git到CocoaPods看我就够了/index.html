@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Git," />
@@ -80,44 +97,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="看了这篇文章你可能
-学会Git基本使用
-学会在mac上装CocoaPods
-提交代码到CocoaPods
-代码在CocoaPods的版本迭代
-
-git 基本使用在github注册账号,然后新建仓库，12git clone git@github.com:ifgyong/FYAlbum.git//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。
-然后 cd FYAlbum/目录.这">
+<meta name="description" content="看了这篇文章你可能 学会Git基本使用 学会在mac上装CocoaPods 提交代码到CocoaPods 代码在CocoaPods的版本迭代  git 基本使用在github注册账号,然后新建仓库，12git clone git@github.com:ifgyong/FYAlbum.git//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。 然后 cd FYAlbum/目录.这">
+<meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git到CocoaPods看我就够了">
 <meta property="og:url" content="http://fgyong.cn/2016/04/22/Git到CocoaPods看我就够了/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="看了这篇文章你可能
-学会Git基本使用
-学会在mac上装CocoaPods
-提交代码到CocoaPods
-代码在CocoaPods的版本迭代
-
-git 基本使用在github注册账号,然后新建仓库，12git clone git@github.com:ifgyong/FYAlbum.git//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。
-然后 cd FYAlbum/目录.这">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="看了这篇文章你可能 学会Git基本使用 学会在mac上装CocoaPods 提交代码到CocoaPods 代码在CocoaPods的版本迭代  git 基本使用在github注册账号,然后新建仓库，12git clone git@github.com:ifgyong/FYAlbum.git//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。 然后 cd FYAlbum/目录.这">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git到CocoaPods看我就够了">
-<meta name="twitter:description" content="看了这篇文章你可能
-学会Git基本使用
-学会在mac上装CocoaPods
-提交代码到CocoaPods
-代码在CocoaPods的版本迭代
-
-git 基本使用在github注册账号,然后新建仓库，12git clone git@github.com:ifgyong/FYAlbum.git//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。
-然后 cd FYAlbum/目录.这">
+<meta name="twitter:description" content="看了这篇文章你可能 学会Git基本使用 学会在mac上装CocoaPods 提交代码到CocoaPods 代码在CocoaPods的版本迭代  git 基本使用在github注册账号,然后新建仓库，12git clone git@github.com:ifgyong/FYAlbum.git//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。 然后 cd FYAlbum/目录.这">
 
 
 
@@ -126,12 +124,13 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -151,11 +150,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
 
 
-  <title> Git到CocoaPods看我就够了 | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>Git到CocoaPods看我就够了 | 兜兜转转的技术博客</title>
   
 
 
@@ -180,23 +175,27 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -298,17 +297,21 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/04/22/Git到CocoaPods看我就够了/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -316,14 +319,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                Git到CocoaPods看我就够了
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">Git到CocoaPods看我就够了</h2>
         
 
         <div class="post-meta">
@@ -372,14 +368,15 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/04/22/Git到CocoaPods看我就够了/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/22/Git到CocoaPods看我就够了/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/04/22/Git到CocoaPods看我就够了/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/04/22/Git到CocoaPods看我就够了/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -412,23 +409,25 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h3 id="u770B_u4E86_u8FD9_u7BC7_u6587_u7AE0_u4F60_u53EF_u80FD"><a href="#u770B_u4E86_u8FD9_u7BC7_u6587_u7AE0_u4F60_u53EF_u80FD" class="headerlink" title="看了这篇文章你可能"></a>看了这篇文章你可能</h3><ul>
+        <h3 id="看了这篇文章你可能"><a href="#看了这篇文章你可能" class="headerlink" title="看了这篇文章你可能"></a>看了这篇文章你可能</h3><ul>
 <li>学会Git基本使用</li>
 <li>学会在mac上装CocoaPods</li>
 <li>提交代码到CocoaPods</li>
 <li>代码在CocoaPods的版本迭代</li>
 </ul>
-<h3 id="git__u57FA_u672C_u4F7F_u7528"><a href="#git__u57FA_u672C_u4F7F_u7528" class="headerlink" title="git 基本使用"></a>git 基本使用</h3><p>在<a href="https://github.com" target="_blank" rel="external">github</a>注册账号,然后新建仓库，<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone git@github<span class="selector-class">.com</span>:ifgyong/FYAlbum<span class="selector-class">.git</span></div><div class="line"><span class="comment">//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。</span></div></pre></td></tr></table></figure></p>
+<h3 id="git-基本使用"><a href="#git-基本使用" class="headerlink" title="git 基本使用"></a>git 基本使用</h3><p>在<a href="https://github.com" target="_blank" rel="external">github</a>注册账号,然后新建仓库，<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone git@github<span class="selector-class">.com</span>:ifgyong/FYAlbum<span class="selector-class">.git</span></div><div class="line"><span class="comment">//这里git仓库地址分为https和ssh两种，我是用的ssh的地址。</span></div></pre></td></tr></table></figure></p>
 <p>然后 <code>cd FYAlbum/</code>目录.这个目录就是仓库了，连着github的地址的仓库。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">git branch -l <span class="comment">//查看所有分支</span></div><div class="line">git branch <span class="string">'branchName'</span> 新建本地分支</div><div class="line">git status <span class="comment">//查看文件状态，哪个修改的会显示出来的</span></div><div class="line">git add .  <span class="comment">//添加所有文件到缓存</span></div><div class="line">git commit -m <span class="string">'注释'</span> <span class="comment">//把添加到缓存的文件提交到本地 仓库</span></div><div class="line">git push origin master <span class="comment">//提交本地的master到远程仓库。</span></div><div class="line">git tag <span class="string">'tagName'</span> 设置一个tag</div><div class="line">git push --tags <span class="comment">//把本地 的tags推送到远程仓库</span></div><div class="line">git tag  <span class="comment">//tag 列表</span></div><div class="line">git log <span class="comment">//git的日志，每次修改的记录</span></div><div class="line"></div><div class="line">git config --global user<span class="selector-class">.name</span> <span class="string">"YOUR NAME"</span> <span class="comment">//配置全局的name</span></div><div class="line">git config --global user<span class="selector-class">.email</span> <span class="string">"YOUR EMAIL ADDRESS"</span> <span class="comment">//配置全局的email</span></div><div class="line">以后每次提交的时候都是会用这个账号。</div><div class="line">单独为某个仓库配置账号的时候去掉`--glocal`</div><div class="line">就是</div><div class="line">git config   user<span class="selector-class">.name</span> <span class="string">"YOUR NAME"</span> <span class="comment">//配置 name</span></div><div class="line">git config   user<span class="selector-class">.email</span> <span class="string">"YOUR EMAIL ADDRESS"</span> <span class="comment">//配置 email</span></div><div class="line"></div><div class="line">git config -l <span class="comment">//查看配置</span></div><div class="line"></div><div class="line">合并分支：</div><div class="line">git checkout -<span class="selector-tag">b</span> dev </div><div class="line"><span class="comment">//创建并切换到dev分支 相当于 git branch dev gitcheckout dev 两条命令</span></div><div class="line"> git merge dev <span class="comment">//将dev分支合并到当前分支</span></div><div class="line">这种方式叫快速合并。</div><div class="line">git branch -d dev <span class="comment">//删除分支</span></div><div class="line"></div><div class="line">用git log --graph命令可以看到分支合并图。</div><div class="line"></div><div class="line"> git merge dev --no-ff<span class="comment">// 后边加上`--no-ff`是合并的时候有历史记录，比较稳定。</span></div><div class="line">当然在合并的时候有冲突怎么办？</div><div class="line"></div><div class="line">解决冲突：</div><div class="line">git status<span class="comment">//查看文件状态  冲突文件在这里会有显示的</span></div><div class="line"></div><div class="line">git diff 文件一  文件二  <span class="comment">//对比两个文件，哪个有问题修改哪个。</span></div><div class="line"></div><div class="line">修改完成之后就可以合并了。` git merge dev --no-ff`</div><div class="line"></div><div class="line">别人提交的文件更新到本地：</div><div class="line">git pull </div><div class="line"></div><div class="line">在每个操作后边可以加上 `--verbose`可以观看过程，就是日志了。</div><div class="line">暂时一般常用的就这么多了。</div></pre></td></tr></table></figure>
-<h3 id="u5728mac_u4E0A_u88C5CocoaPods"><a href="#u5728mac_u4E0A_u88C5CocoaPods" class="headerlink" title="在mac上装CocoaPods"></a>在mac上装CocoaPods</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem <span class="keyword">install</span> cocoapods</div></pre></td></tr></table></figure>
+<h3 id="在mac上装CocoaPods"><a href="#在mac上装CocoaPods" class="headerlink" title="在mac上装CocoaPods"></a>在mac上装CocoaPods</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem <span class="keyword">install</span> cocoapods</div></pre></td></tr></table></figure>
 <p>搜索第三方库<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">pod search AFNetworking</span></div></pre></td></tr></table></figure></p>
 <p>装好了pod 直接<code>cd /user/工作目录</code>,新建<code>Podfile</code>文件</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">pod init</span></div></pre></td></tr></table></figure>
@@ -436,9 +435,9 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 <p>修改podfile文件内容<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">platform</span> :ios, <span class="string">'8.0'</span></div><div class="line">use_frameworks!</div><div class="line">target <span class="string">'MyApp'</span> <span class="keyword">do</span></div><div class="line">  pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.6'</span></div><div class="line">  pod <span class="string">'ORStackView'</span>, <span class="string">'~&gt; 3.0'</span></div><div class="line">  pod <span class="string">'SwiftyJSON'</span>, <span class="string">'~&gt; 2.3'</span></div><div class="line"><span class="keyword">end</span></div><div class="line">上边的AFNetworking，ORStackView，SwiftyJSON 都是名字，后边是版本号。</div></pre></td></tr></table></figure></p>
 <p>修改完之后保存<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">：<span class="keyword">wq</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pod <span class="built_in">setup</span> <span class="comment">///初始化pod仓库</span></div><div class="line">pod update <span class="comment">//更新仓库</span></div></pre></td></tr></table></figure>
-<h3 id="u63D0_u4EA4_u4EE3_u7801_u5230CocoaPods"><a href="#u63D0_u4EA4_u4EE3_u7801_u5230CocoaPods" class="headerlink" title="提交代码到CocoaPods"></a>提交代码到CocoaPods</h3><h4 id="u6CE8_u518Ctrunk"><a href="#u6CE8_u518Ctrunk" class="headerlink" title="注册trunk"></a>注册trunk</h4><p>具体步骤看<a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html" target="_blank" rel="external">这里：</a><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">pod</span> <span class="selector-tag">trunk</span> <span class="selector-tag">register</span> <span class="selector-tag">fgyong</span>@<span class="keyword">fgyong</span>.<span class="keyword">cn</span> <span class="string">'fgyong'</span> --verbose</div></pre></td></tr></table></figure></p>
+<h3 id="提交代码到CocoaPods"><a href="#提交代码到CocoaPods" class="headerlink" title="提交代码到CocoaPods"></a>提交代码到CocoaPods</h3><h4 id="注册trunk"><a href="#注册trunk" class="headerlink" title="注册trunk"></a>注册trunk</h4><p>具体步骤看<a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html" target="_blank" rel="external">这里：</a><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">pod</span> <span class="selector-tag">trunk</span> <span class="selector-tag">register</span> <span class="selector-tag">fgyong</span>@<span class="keyword">fgyong</span>.<span class="keyword">cn</span> <span class="string">'fgyong'</span> --verbose</div></pre></td></tr></table></figure></p>
 <p>然后检查注册成功了没<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">pod trunk me</div><div class="line">成功应该是这样的：</div><div class="line">-<span class="ruby"> <span class="symbol">Name:</span> fgyong </span></div><div class="line">-<span class="ruby"> <span class="symbol">Email:</span> fgyong@fgyong.cn</span></div><div class="line"> -<span class="ruby"> <span class="symbol">Since:</span> xxxxxxx </span></div><div class="line">-<span class="ruby"> <span class="symbol">Pods:</span>  </span></div><div class="line">-<span class="ruby"> <span class="symbol">Sessions:</span> - xxxxxx</span></div></pre></td></tr></table></figure></p>
-<h4 id="u914D_u7F6EPodspec"><a href="#u914D_u7F6EPodspec" class="headerlink" title="配置Podspec"></a><a href="https://guides.cocoapods.org/syntax/podspec.html" target="_blank" rel="external">配置Podspec</a></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod spec create FYong<span class="comment">//新建podSpec文件</span></div><div class="line"></div><div class="line">vi FYong<span class="selector-class">.podspec</span> <span class="comment">//用vi 打开</span></div></pre></td></tr></table></figure>
+<h4 id="配置Podspec"><a href="#配置Podspec" class="headerlink" title="配置Podspec"></a><a href="https://guides.cocoapods.org/syntax/podspec.html" target="_blank" rel="external">配置Podspec</a></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod spec create FYong<span class="comment">//新建podSpec文件</span></div><div class="line"></div><div class="line">vi FYong<span class="selector-class">.podspec</span> <span class="comment">//用vi 打开</span></div></pre></td></tr></table></figure>
 <p>里面有很多注释，你可以把需要的填写一下或者复制我的修改一下就可以用了。<br>文件里面的必要是属性：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Pod::Spec.new do |s|</div><div class="line"></div><div class="line">  s.<span class="attr">name</span>          = <span class="string">"FYAlbum"</span></div><div class="line">  s.<span class="attr">version</span>       = <span class="string">"1.0.1"</span></div><div class="line">  s.<span class="attr">license</span>       = <span class="string">"MIT"</span></div><div class="line">  s.<span class="attr">summary</span>       = <span class="string">"Fast encryption string used on iOS, which implement by Objective-C."</span></div><div class="line">  s.<span class="attr">homepage</span>      = <span class="string">"https://github.com/ifgyong/FYAlbum"</span></div><div class="line">  s.<span class="attr">author</span>        = &#123; <span class="string">"fgyong"</span> =&gt; <span class="string">"fgyong@yeah.net"</span> &#125; </div><div class="line">  s.<span class="attr">source</span>        = &#123; :<span class="attr">git</span> =&gt; <span class="string">"https://github.com/ifgyong/FYAlbum.git"</span>, :<span class="attr">tag</span> =&gt; s.version &#125;</div><div class="line">  s.<span class="attr">requires_arc</span>  = <span class="literal">true</span>           </div><div class="line">   s.<span class="attr">source_files</span>  = <span class="string">"FYAlbum/*/*"</span></div><div class="line">   s.<span class="attr">platform</span>      = :ios, '<span class="number">8.0</span>'        </div><div class="line">   s.<span class="attr">framework</span>     = 'Foundation', 'UIKit'  </div><div class="line">end</div></pre></td></tr></table></figure></p>
 <p>上边的<code>s.source_files</code>容易出错，这个路径是相对于podspec的文件路径。<code>FYAbul/*</code>代表FYAbul一级目录下所有文件<code>FYAlbum/*/*</code>代表FYAlbum一级和二级目录下所有文件。</p>
 <ul>
@@ -449,7 +448,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 <p>做完这些可以给仓库打上tag 和version了<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">tag</span> <span class="title">1</span>.<span class="number">0.0</span> // 加上<span class="keyword">tag</span></div><div class="line"><span class="title">git</span> push --tags//推到remote</div></pre></td></tr></table></figure></p>
 <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod spec lint --verbose  <span class="comment">//验证是否成功</span></div><div class="line">pod <span class="keyword">lib</span> lint --verbose      <span class="comment">//验证是否成功</span></div><div class="line">git trunk <span class="keyword">push</span> FYong.spec --verbose <span class="comment">//将文件和配置推到trunk上面</span></div></pre></td></tr></table></figure>
 <p>现在验证pod秒就ok了，等到成功了，直接<code>pod search FYong</code>就出现了。大功告成！！！</p>
-<h3 id="u4EE3_u7801_u5728CocoaPods_u7684_u7248_u672C_u8FED_u4EE3"><a href="#u4EE3_u7801_u5728CocoaPods_u7684_u7248_u672C_u8FED_u4EE3" class="headerlink" title="代码在CocoaPods的版本迭代"></a>代码在CocoaPods的版本迭代</h3><p>中间验证的时候，你的工程修改文件了，那么这个tag要修改才可以了，否则即使你修改了文件也报同样的错误！！！具体的要求看<a href="https://guides.cocoapods.org/" target="_blank" rel="external">这里</a><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git tag <span class="number">1.0</span>.<span class="number">1</span></div><div class="line">git push --tags</div><div class="line">修改FYong<span class="selector-class">.spec</span> 文件里边的`s<span class="selector-class">.version</span> = <span class="number">1.0</span>.<span class="number">1</span>`</div><div class="line">git trunk push FYong<span class="selector-class">.spec</span> --verbose <span class="comment">//将文件和配置推到trunk上面</span></div><div class="line">这次就可以成功了！！！</div></pre></td></tr></table></figure></p>
+<h3 id="代码在CocoaPods的版本迭代"><a href="#代码在CocoaPods的版本迭代" class="headerlink" title="代码在CocoaPods的版本迭代"></a>代码在CocoaPods的版本迭代</h3><p>中间验证的时候，你的工程修改文件了，那么这个tag要修改才可以了，否则即使你修改了文件也报同样的错误！！！具体的要求看<a href="https://guides.cocoapods.org/" target="_blank" rel="external">这里</a><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git tag <span class="number">1.0</span>.<span class="number">1</span></div><div class="line">git push --tags</div><div class="line">修改FYong<span class="selector-class">.spec</span> 文件里边的`s<span class="selector-class">.version</span> = <span class="number">1.0</span>.<span class="number">1</span>`</div><div class="line">git trunk push FYong<span class="selector-class">.spec</span> --verbose <span class="comment">//将文件和配置推到trunk上面</span></div><div class="line">这次就可以成功了！！！</div></pre></td></tr></table></figure></p>
 <p>我参考的博文：</p>
 <ul>
 <li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰</a></li>
@@ -460,48 +459,33 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/04/22/Git到CocoaPods看我就够了/" title="Git到CocoaPods看我就够了">http://fgyong.cn/2016/04/22/Git到CocoaPods看我就够了/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -513,7 +497,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
       
 
       
-        
+      
       
 
       
@@ -541,35 +525,20 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/22/Git到CocoaPods看我就够了/"
-     data-title="Git到CocoaPods看我就够了"
-     data-content=""
-     data-url="http://fgyong.cn/2016/04/22/Git到CocoaPods看我就够了/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -577,9 +546,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/22/Git到CocoaPods看我就够了/"
-           data-title="Git到CocoaPods看我就够了" data-url="http://fgyong.cn/2016/04/22/Git到CocoaPods看我就够了/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -597,6 +564,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -615,7 +583,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -667,7 +635,20 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -682,12 +663,12 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -709,7 +690,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u770B_u4E86_u8FD9_u7BC7_u6587_u7AE0_u4F60_u53EF_u80FD"><span class="nav-number">1.</span> <span class="nav-text">看了这篇文章你可能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git__u57FA_u672C_u4F7F_u7528"><span class="nav-number">2.</span> <span class="nav-text">git 基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5728mac_u4E0A_u88C5CocoaPods"><span class="nav-number">3.</span> <span class="nav-text">在mac上装CocoaPods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63D0_u4EA4_u4EE3_u7801_u5230CocoaPods"><span class="nav-number">4.</span> <span class="nav-text">提交代码到CocoaPods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u6CE8_u518Ctrunk"><span class="nav-number">4.1.</span> <span class="nav-text">注册trunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u914D_u7F6EPodspec"><span class="nav-number">4.2.</span> <span class="nav-text">配置Podspec</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EE3_u7801_u5728CocoaPods_u7684_u7248_u672C_u8FED_u4EE3"><span class="nav-number">5.</span> <span class="nav-text">代码在CocoaPods的版本迭代</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#看了这篇文章你可能"><span class="nav-number">1.</span> <span class="nav-text">看了这篇文章你可能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-基本使用"><span class="nav-number">2.</span> <span class="nav-text">git 基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在mac上装CocoaPods"><span class="nav-number">3.</span> <span class="nav-text">在mac上装CocoaPods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交代码到CocoaPods"><span class="nav-number">4.</span> <span class="nav-text">提交代码到CocoaPods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注册trunk"><span class="nav-number">4.1.</span> <span class="nav-text">注册trunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Podspec"><span class="nav-number">4.2.</span> <span class="nav-text">配置Podspec</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码在CocoaPods的版本迭代"><span class="nav-number">5.</span> <span class="nav-text">代码在CocoaPods的版本迭代</span></a></li></ol></div>
             
 
           </div>
@@ -753,21 +734,25 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -780,7 +765,7 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
         
       </div>
     
-    
+
   </div>
 
   
@@ -800,6 +785,14 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -826,79 +819,80 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -1005,24 +999,12 @@ git 基本使用在github注册账号,然后新建仓库，12git clone git@githu
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

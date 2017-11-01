@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="数据结构,排序," />
@@ -80,56 +97,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="排序算法
-冒泡排序
-选择排序
-直接插入排序
-希尔排序
-快速排序
-
-冒泡排序
-冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。
-
-冒泡排序的复杂度是n(n-1)/2,就是o(n²)。
-1234567891011121314/*对顺序列表排序*/-(void)sort:(NSMutableArray *)list&amp;#123;    NSInteger i ,">
+<meta name="description" content="排序算法 冒泡排序 选择排序 直接插入排序 希尔排序 快速排序  冒泡排序 冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。  冒泡排序的复杂度是n(n-1)/2,就是o(n²)。 1234567891011121314/*对顺序列表排序*/-(void)sort:(NSMutableArray *)list&amp;#123;    NSInteger i ,">
+<meta name="keywords" content="数据结构,排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法">
 <meta property="og:url" content="http://fgyong.cn/2017/05/08/排序算法/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="排序算法
-冒泡排序
-选择排序
-直接插入排序
-希尔排序
-快速排序
-
-冒泡排序
-冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。
-
-冒泡排序的复杂度是n(n-1)/2,就是o(n²)。
-1234567891011121314/*对顺序列表排序*/-(void)sort:(NSMutableArray *)list&amp;#123;    NSInteger i ,">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="排序算法 冒泡排序 选择排序 直接插入排序 希尔排序 快速排序  冒泡排序 冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。  冒泡排序的复杂度是n(n-1)/2,就是o(n²)。 1234567891011121314/*对顺序列表排序*/-(void)sort:(NSMutableArray *)list&amp;#123;    NSInteger i ,">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-05-09T02:00:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法">
-<meta name="twitter:description" content="排序算法
-冒泡排序
-选择排序
-直接插入排序
-希尔排序
-快速排序
-
-冒泡排序
-冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。
-
-冒泡排序的复杂度是n(n-1)/2,就是o(n²)。
-1234567891011121314/*对顺序列表排序*/-(void)sort:(NSMutableArray *)list&amp;#123;    NSInteger i ,">
+<meta name="twitter:description" content="排序算法 冒泡排序 选择排序 直接插入排序 希尔排序 快速排序  冒泡排序 冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。  冒泡排序的复杂度是n(n-1)/2,就是o(n²)。 1234567891011121314/*对顺序列表排序*/-(void)sort:(NSMutableArray *)list&amp;#123;    NSInteger i ,">
 
 
 
@@ -138,12 +124,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -163,11 +150,7 @@
 
 
 
-  <title> 排序算法 | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>排序算法 | 兜兜转转的技术博客</title>
   
 
 
@@ -192,23 +175,27 @@
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -310,17 +297,21 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2017/05/08/排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -328,14 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                排序算法
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">排序算法</h2>
         
 
         <div class="post-meta">
@@ -384,14 +368,15 @@
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/08/排序算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/08/排序算法/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2017/05/08/排序算法/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/05/08/排序算法/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -424,26 +409,28 @@
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h2 id="u6392_u5E8F_u7B97_u6CD5"><a href="#u6392_u5E8F_u7B97_u6CD5" class="headerlink" title="排序算法"></a>排序算法</h2><ul>
+        <h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><ul>
 <li>冒泡排序</li>
 <li>选择排序</li>
 <li>直接插入排序</li>
 <li>希尔排序</li>
 <li>快速排序</li>
 </ul>
-<h3 id="u5192_u6CE1_u6392_u5E8F"><a href="#u5192_u6CE1_u6392_u5E8F" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><blockquote>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><blockquote>
 <p>冒泡排序是一种交换排序，基本思想是两两相邻的记录的关键字，如果反序则交换，知道没有反序为止。</p>
 </blockquote>
 <p>冒泡排序的复杂度是n(n-1)/2,就是o(n²)。</p>
 <figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*对顺序列表排序*/</span></div><div class="line">-(void)<span class="built_in">sort</span>:(NSMutableArray *)<span class="built_in">list</span>&#123;</div><div class="line">    NSInteger i , j;</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>.<span class="built_in">count</span>; i ++) &#123;</div><div class="line">        <span class="keyword">for</span> (j = <span class="built_in">list</span>.<span class="built_in">count</span>-<span class="number">1</span>; j&gt;=i; j --) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="built_in">list</span>[j] &gt; <span class="built_in">list</span>[i]) &#123;</div><div class="line">                <span class="comment">/*</span></div><div class="line">                 交换obj</div><div class="line">                 */</div><div class="line">                [<span class="built_in">list</span> exchangeObjectAtIndex:i withObjectAtIndex:j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="u9009_u62E9_u6392_u5E8F"><a href="#u9009_u62E9_u6392_u5E8F" class="headerlink" title="选择排序"></a>选择排序</h3><blockquote>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><blockquote>
 <p>简单选择排序法是通过n-i次关键字间的比较，从n-i+1个记录选出关键字最小的记录，并和第i（1=《i《=n）交换之。</p>
 </blockquote>
 <p>选择排序复杂度是n（n-1）/2,就是o（n²），性能略优于冒泡。</p>
@@ -453,12 +440,12 @@
 <p>直接插入排序的基本操作是将一个记录插入到已经排好的有序表中，从而得到一个新的，记录增加1的有序表。</p>
 </blockquote>
 <p>直接插入排序时间复杂度是（n+4）（n-1）/2，就是o（n²）。<br>性能略优于选择排序。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)sort2:(NSMutableArray *)<span class="built_in">list</span>&#123;</div><div class="line">    NSInteger i , j ;</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="built_in">list</span>.count; i ++) &#123;</div><div class="line">       </div><div class="line">        <span class="keyword">if</span> (<span class="built_in">list</span>[i<span class="number">-1</span>] &lt; <span class="built_in">list</span>[i]) &#123;<span class="comment">// i-1 小于 i</span></div><div class="line">             NSInteger data = [<span class="built_in">list</span>[i] integerValue];<span class="comment">//设置哨兵</span></div><div class="line">            <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span> &amp;&amp; [<span class="built_in">list</span>[j] integerValue] &lt; data  ; j --) &#123;</div><div class="line">                <span class="built_in">list</span>[j+<span class="number">1</span>] = <span class="built_in">list</span>[j];<span class="comment">//向后移动一位</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (data) &#123;</div><div class="line">                 <span class="built_in">list</span>[j+<span class="number">1</span>] =@(data);<span class="comment">//哨兵赋值</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="u5E0C_u5C14_u6392_u5E8F"><a href="#u5E0C_u5C14_u6392_u5E8F" class="headerlink" title="希尔排序"></a>希尔排序</h3><blockquote>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><blockquote>
 <p>希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。</p>
 </blockquote>
 <figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//希尔排序算法</span></div><div class="line">-(void)shellSort:(NSMutableArray *)<span class="built_in">list</span>&#123;</div><div class="line">    NSInteger i , j ;</div><div class="line">    NSInteger inrement = <span class="built_in">list</span>.<span class="built_in">count</span>;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        inrement = inrement/<span class="number">3</span> + <span class="number">1</span>;<span class="comment">//增量序列</span></div><div class="line">        <span class="keyword">for</span> (i = inrement+<span class="number">1</span>; i &lt; <span class="built_in">list</span>.<span class="built_in">count</span>; i ++) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="built_in">list</span>[i]&lt;<span class="built_in">list</span>[i-inrement]) &#123;</div><div class="line">                <span class="comment">//需将list[i] 插入有序增量字表</span></div><div class="line">                NSNumber  * data = <span class="built_in">list</span>[i];</div><div class="line">                <span class="keyword">for</span> (j = i - inrement; j &gt;<span class="number">0</span> &amp;&amp; data &lt; <span class="built_in">list</span>[j]; j-= inrement) &#123;</div><div class="line">                    <span class="built_in">list</span>[j+inrement] = <span class="built_in">list</span>[j];<span class="comment">//记录后移</span></div><div class="line">                &#125;</div><div class="line">                <span class="built_in">list</span>[j+inrement] = data;<span class="comment">//插入</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;<span class="keyword">while</span> (inrement &gt; <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>希尔排序和直接插入排序有异曲同工之妙，都是记录后移，都是插入排序。不过希尔用的条件是步长，步长越来越短，直到是1，而直接插入排序是直接是1，循环次数多。<br>时间复杂度是o(n的二分之三次方)，优于o（n²）。</p>
-<h3 id="u5FEB_u901F_u6392_u5E8F"><a href="#u5FEB_u901F_u6392_u5E8F" class="headerlink" title="快速排序"></a>快速排序</h3><blockquote>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><blockquote>
 <p>基本思想是:通过一趟排序将带排序记录分割成独立的两部分，其中一部分记录的关键字均比另外一部分的关键字小，则可分别对着两部分重新排序，以达到整个序列的有序的目的。</p>
 </blockquote>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 快速排序</span></div><div class="line">-(<span class="keyword">void</span>)<span class="string">quickSort:</span>(NSMutableArray *)list&#123;</div><div class="line">    [self <span class="string">qsort:</span>list <span class="string">low:</span><span class="number">0</span> <span class="string">hight:</span>list.count<span class="number">-1</span>];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)<span class="string">qsort:</span>(NSMutableArray *)list <span class="string">low:</span>(NSInteger)low <span class="string">hight:</span>(NSInteger ) hight&#123;</div><div class="line">    NSInteger pt;</div><div class="line">    <span class="keyword">if</span> (low &lt; hight) &#123;</div><div class="line">        pt =[self <span class="string">partition:</span>list <span class="string">low:</span>low <span class="string">high:</span>hight];<span class="comment">//将整个序列一分为二</span></div><div class="line">        [self <span class="string">qsort:</span>list <span class="string">low:</span>low <span class="string">hight:</span>pt <span class="number">-1</span>];<span class="comment">//对低子表递归排序</span></div><div class="line">        [self <span class="string">qsort:</span>list <span class="string">low:</span>pt + <span class="number">1</span> <span class="string">hight:</span>hight];<span class="comment">//对高字表递归排序</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//返回在他前后记录均不大（小）与他。</span></div><div class="line">-(NSInteger)<span class="string">partition:</span>(NSMutableArray *)list <span class="string">low:</span>(NSInteger)low <span class="string">high:</span>(NSInteger)high&#123;</div><div class="line">    NSNumber * data = list[low];</div><div class="line">    <span class="keyword">while</span> (low &lt; high) &#123;</div><div class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; list[high] &gt;= data)<span class="comment">// 倒叙 找出比data小的 并交换位置</span></div><div class="line">            high --;</div><div class="line">            [list <span class="string">exchangeObjectAtIndex:</span>low <span class="string">withObjectAtIndex:</span>high];</div><div class="line">        </div><div class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; list[low] &lt;= data)<span class="comment">//正序 找出比data大的 并交换位置</span></div><div class="line">            low ++;</div><div class="line">         [list <span class="string">exchangeObjectAtIndex:</span>low <span class="string">withObjectAtIndex:</span>high];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> low;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -468,48 +455,33 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2017/05/08/排序算法/" title="排序算法">http://fgyong.cn/2017/05/08/排序算法/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -523,7 +495,7 @@
       
 
       
-        
+      
       
 
       
@@ -547,35 +519,20 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/05/08/排序算法/"
-     data-title="排序算法"
-     data-content=""
-     data-url="http://fgyong.cn/2017/05/08/排序算法/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -583,9 +540,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/05/08/排序算法/"
-           data-title="排序算法" data-url="http://fgyong.cn/2017/05/08/排序算法/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -603,6 +558,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -621,7 +577,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -673,7 +629,20 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -688,12 +657,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -715,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u6392_u5E8F_u7B97_u6CD5"><span class="nav-number">1.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5192_u6CE1_u6392_u5E8F"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u9009_u62E9_u6392_u5E8F"><span class="nav-number">1.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5E0C_u5C14_u6392_u5E8F"><span class="nav-number">1.3.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5FEB_u901F_u6392_u5E8F"><span class="nav-number">1.4.</span> <span class="nav-text">快速排序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法"><span class="nav-number">1.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">1.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">1.3.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">1.4.</span> <span class="nav-text">快速排序</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -759,21 +728,25 @@
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -786,7 +759,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -806,6 +779,14 @@
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -832,79 +813,80 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -1011,24 +993,12 @@
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS,iOS高级开发," />
@@ -80,26 +97,25 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="runtime 给类别添加属性浅析很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。
-源码1234567 #import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;lt;objc/runtime.h&amp;gt; //千万别忘记添加哦@interfaceNSObject(FY)">
+<meta name="description" content="runtime 给类别添加属性浅析很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。 源码1234567 #import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;lt;objc/runtime.h&amp;gt; //千万别忘记添加哦@interfaceNSObject(FY)">
+<meta name="keywords" content="iOS,iOS高级开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS高级开发runtime那点事实战（1）">
 <meta property="og:url" content="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（1）/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="runtime 给类别添加属性浅析很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。
-源码1234567 #import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;lt;objc/runtime.h&amp;gt; //千万别忘记添加哦@interfaceNSObject(FY)">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="runtime 给类别添加属性浅析很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。 源码1234567 #import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;lt;objc/runtime.h&amp;gt; //千万别忘记添加哦@interfaceNSObject(FY)">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS高级开发runtime那点事实战（1）">
-<meta name="twitter:description" content="runtime 给类别添加属性浅析很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。
-源码1234567 #import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;lt;objc/runtime.h&amp;gt; //千万别忘记添加哦@interfaceNSObject(FY)">
+<meta name="twitter:description" content="runtime 给类别添加属性浅析很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。 源码1234567 #import &amp;lt;Foundation/Foundation.h&amp;gt;#import &amp;lt;objc/runtime.h&amp;gt; //千万别忘记添加哦@interfaceNSObject(FY)">
 
 
 
@@ -108,12 +124,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,11 +150,7 @@
 
 
 
-  <title> iOS高级开发runtime那点事实战（1） | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS高级开发runtime那点事实战（1） | 兜兜转转的技术博客</title>
   
 
 
@@ -162,23 +175,27 @@
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -280,17 +297,21 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（1）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -298,14 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS高级开发runtime那点事实战（1）
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">iOS高级开发runtime那点事实战（1）</h2>
         
 
         <div class="post-meta">
@@ -354,14 +368,15 @@
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/03/24/iOS高级开发runtime那点事实战（1）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（1）/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/03/24/iOS高级开发runtime那点事实战（1）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/03/24/iOS高级开发runtime那点事实战（1）/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -394,15 +409,17 @@
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h2 id="runtime__u7ED9_u7C7B_u522B_u6DFB_u52A0_u5C5E_u6027_u6D45_u6790"><a href="#runtime__u7ED9_u7C7B_u522B_u6DFB_u52A0_u5C5E_u6027_u6D45_u6790" class="headerlink" title="runtime 给类别添加属性浅析"></a>runtime 给类别添加属性浅析</h2><p>很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。</p>
-<h2 id="u6E90_u7801"><a href="#u6E90_u7801" class="headerlink" title="源码"></a>源码</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"></div><div class="line"><span class="objectivec"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span> //千万别忘记添加哦</span></div><div class="line">@interfaceNSObject(FY)</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>)<span class="built_in">NSString</span>* name;<span class="comment">//像平时一样的添加属性</span></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+        <h2 id="runtime-给类别添加属性浅析"><a href="#runtime-给类别添加属性浅析" class="headerlink" title="runtime 给类别添加属性浅析"></a>runtime 给类别添加属性浅析</h2><p>很多时候因为需求想着给一个类添加属性，就是给一个类添加成员变量了，这样子方便了用这个类的时候，有了自己添加的属性，做什么事都是 信手捏来了。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"></div><div class="line"><span class="objectivec"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span> //千万别忘记添加哦</span></div><div class="line">@interfaceNSObject(FY)</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>)<span class="built_in">NSString</span>* name;<span class="comment">//像平时一样的添加属性</span></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
 <p>下面是在.m中实现的<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">staticvoid* FYKeyName = (void*)<span class="string">"FYKeyName"</span>;<span class="regexp">//</span>声明这个变量要存储的key的名字</div><div class="line"><span class="variable">@implementationNSObject</span>(FY)</div><div class="line">- (void)<span class="symbol">setName:</span>(NSString*)name&#123;</div><div class="line">objc_setAssociatedObject(<span class="keyword">self</span>, FYKeyName, name, OBJC_ASSOCIATION_COPY);<span class="regexp">//</span>把这个值存储起来类型是copy，值是name，存储的键值是<span class="string">"FYKeyName"</span>,存储到<span class="keyword">self</span>的属性里面</div><div class="line">&#125;</div><div class="line">- (NSString*)name&#123;</div><div class="line">returnobjc_getAssociatedObject(<span class="keyword">self</span>, FYKeyName);<span class="regexp">//</span>获取<span class="keyword">self</span>的key为FYKeyName的值</div><div class="line">&#125;</div><div class="line"><span class="variable">@end</span></div></pre></td></tr></table></figure></p>
 <p>到此为止这个属性已经添加完成了。<br>其实为毛添加属性啊，我们公司的按钮不能连续点击，是所有按钮。。。没错是all not some。我问Google大神了，搜到了消息是runtime解决问题，但是没找到如何解决。在我努力寻找。。。。一万字。。<br>终于知道runtime是运行时，什么是运行时呢？就是我们写的OC代码会让runtime翻译并且执行，runtime是一套比较底层的纯C语言API, 属于1个C语言库, 包含了很多底层的C语言API。<br>在我们平时编写的OC代码中, 程序运行过程时, 其实最终都是转成了runtime的C语言代码, runtime算是OC的幕后工作者。<br>所以给类添加属性就派上用场了，我解决思路是这样子的，给按钮添加类别就是点击事件间隔，执行点击事件的时候判断一下是否时间到了，如果时间不到，那么拦截点击事件。<br>怎么拦截点击事件呢？<br>其实点击事件在runtime里面是obj发送消息，我们可以把要发送的消息的SEL 和自己写的SEL交换一下，然后在自己写的SEL里面判断是否执行点击事件。【有点绕】<br>代码：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import</span></div><div class="line"><span class="meta">#import</span></div><div class="line">@interfaceUIControl(FY)</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>)<span class="built_in">NSTimeIntervalacceptEventInterval</span>;</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>)BOOLignoreEvent;</div><div class="line"><span class="keyword">@end</span></div><div class="line">@implementationUIControl(FYControl)</div><div class="line">staticconstchar*<span class="built_in">UIControl_acceptEventInterval</span>=<span class="string">"UIControl_acceptEventInterval"</span>;</div><div class="line">staticconstchar*<span class="built_in">UIControl_ignoreEvent</span>=<span class="string">"UIControl_ignoreEvent"</span>;</div><div class="line"><span class="keyword">@end</span></div><div class="line">@implementationUIControl(FY)</div><div class="line">- (<span class="keyword">void</span>)setAcceptEventInterval:(<span class="built_in">NSTimeInterval</span>)acceptEventInterval</div><div class="line">&#123;</div><div class="line">objc_setAssociatedObject(<span class="keyword">self</span>,<span class="built_in">UIControl_acceptEventInterval</span>, @(acceptEventInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">&#125;</div><div class="line">-(<span class="built_in">NSTimeInterval</span>)acceptEventInterval &#123;</div><div class="line"><span class="keyword">return</span>[objc_getAssociatedObject(<span class="keyword">self</span>,<span class="built_in">UIControl_acceptEventInterval</span>) doubleValue];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)setIgnoreEvent:(<span class="built_in">BOOL</span>)ignoreEvent&#123;</div><div class="line">objc_setAssociatedObject(<span class="keyword">self</span>,<span class="built_in">UIControl_ignoreEvent</span>, @(ignoreEvent), OBJC_ASSOCIATION_ASSIGN);</div><div class="line">&#125;</div><div class="line">-(<span class="built_in">BOOL</span>)ignoreEvent&#123;</div><div class="line"><span class="keyword">return</span>[objc_getAssociatedObject(<span class="keyword">self</span>,<span class="built_in">UIControl_ignoreEvent</span>) boolValue];</div><div class="line">&#125;</div><div class="line">+(<span class="keyword">void</span>)load &#123;</div><div class="line">Method a = class_getInstanceMethod(<span class="keyword">self</span>,<span class="keyword">@selector</span>(sendAction:to:forEvent:));</div><div class="line">Method b = class_getInstanceMethod(<span class="keyword">self</span>,<span class="keyword">@selector</span>(_sendAction:to:forEvent:));</div><div class="line">method_exchangeImplementations(a, b);<span class="comment">//交换方法</span></div><div class="line">&#125;</div><div class="line">- (<span class="keyword">void</span>)_sendAction:(SEL)action to:(<span class="keyword">id</span>)target forEvent:(<span class="built_in">UIEvent</span>*)event</div><div class="line">&#123;</div><div class="line"><span class="keyword">if</span>(<span class="keyword">self</span>.ignoreEvent)<span class="keyword">return</span>;</div><div class="line"><span class="keyword">if</span>(<span class="keyword">self</span>.acceptEventInterval&gt;<span class="number">0</span>)</div><div class="line">&#123;</div><div class="line"><span class="keyword">self</span>.ignoreEvent=<span class="literal">YES</span>;</div><div class="line">[selfperformSelector:<span class="keyword">@selector</span>(setIgnoreEventWithNo)  withObject:nilafterDelay:<span class="keyword">self</span>.acceptEventInterval];</div><div class="line">&#125;</div><div class="line">[self_sendAction:action to:target forEvent:event];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)setIgnoreEventWithNo&#123;</div><div class="line"><span class="keyword">self</span>.ignoreEvent=<span class="literal">NO</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
 <p>用的时候很好用的</p>
@@ -411,48 +428,33 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（1）/" title="iOS高级开发runtime那点事实战（1）">http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（1）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -466,7 +468,7 @@
       
 
       
-        
+      
       
 
       
@@ -494,35 +496,20 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（1）/"
-     data-title="iOS高级开发runtime那点事实战（1）"
-     data-content=""
-     data-url="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（1）/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -530,9 +517,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/iOS高级开发runtime那点事实战（1）/"
-           data-title="iOS高级开发runtime那点事实战（1）" data-url="http://fgyong.cn/2016/03/24/iOS高级开发runtime那点事实战（1）/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -550,6 +535,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -568,7 +554,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -620,7 +606,20 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -635,12 +634,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -662,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#runtime__u7ED9_u7C7B_u522B_u6DFB_u52A0_u5C5E_u6027_u6D45_u6790"><span class="nav-number">1.</span> <span class="nav-text">runtime 给类别添加属性浅析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6E90_u7801"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#runtime-给类别添加属性浅析"><span class="nav-number">1.</span> <span class="nav-text">runtime 给类别添加属性浅析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a></li></ol></div>
             
 
           </div>
@@ -706,21 +705,25 @@
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -733,7 +736,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -753,6 +756,14 @@
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -779,79 +790,80 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -958,24 +970,12 @@
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 

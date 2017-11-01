@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 兜兜转转个人博客
+title: 兜兜转转的技术博客
 subtitle: 不忘初心 方得始终
 description: 在学习的路上，不忘初心 方得始终
 author: 兜兜转转
@@ -85,4 +85,4 @@ deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
   branch: master
-  message: add 数据结构
+  message: 主题修正

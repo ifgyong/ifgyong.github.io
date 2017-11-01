@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,17 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -52,13 +63,19 @@
   
 
   
+    
+      
+    
+
+    
+  
 
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -68,7 +85,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="iOS高级开发," />
@@ -80,31 +97,27 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
 
 
 
-<meta name="description" content="先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。
-1.启动mac py 服务首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。1python -m SimpleHTTPServer 8000  启动本地端口8000
-2.查看电脑">
+<meta name="description" content="先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。 1.启动mac py 服务首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。1python -m SimpleHTTPServer 8000  启动本地端口8000 2.查看电脑">
+<meta name="keywords" content="iOS高级开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS之Safari之添加到主屏幕应用">
 <meta property="og:url" content="http://fgyong.cn/2016/11/21/iOS之Safari之添加到主屏幕应用/index.html">
-<meta property="og:site_name" content="兜兜转转个人博客">
-<meta property="og:description" content="先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。
-1.启动mac py 服务首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。1python -m SimpleHTTPServer 8000  启动本地端口8000
-2.查看电脑">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。 1.启动mac py 服务首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。1python -m SimpleHTTPServer 8000  启动本地端口8000 2.查看电脑">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/783986-f559dd371ab3227d.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/783986-bb3c3fadbd9cf618.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:updated_time" content="2017-04-11T06:33:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS之Safari之添加到主屏幕应用">
-<meta name="twitter:description" content="先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。
-1.启动mac py 服务首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。1python -m SimpleHTTPServer 8000  启动本地端口8000
-2.查看电脑">
+<meta name="twitter:description" content="先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。 1.启动mac py 服务首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。1python -m SimpleHTTPServer 8000  启动本地端口8000 2.查看电脑">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/783986-f559dd371ab3227d.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -114,12 +127,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
-      userId: '6226622511841281000',
-      author: '兜兜转转'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -139,11 +153,7 @@
 
 
 
-  <title> iOS之Safari之添加到主屏幕应用 | 兜兜转转个人博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS之Safari之添加到主屏幕应用 | 兜兜转转的技术博客</title>
   
 
 
@@ -168,23 +178,27 @@
 
 
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">兜兜转转个人博客</span>
+        <span class="site-title">兜兜转转的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -286,17 +300,21 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/11/21/iOS之Safari之添加到主屏幕应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg">
+      <meta itemprop="image" content="/0.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="兜兜转转个人博客">
+      <meta itemprop="name" content="兜兜转转的技术博客">
     </span>
 
     
@@ -304,14 +322,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS之Safari之添加到主屏幕应用
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">iOS之Safari之添加到主屏幕应用</h2>
         
 
         <div class="post-meta">
@@ -360,14 +371,15 @@
           
             
               <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/11/21/iOS之Safari之添加到主屏幕应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/21/iOS之Safari之添加到主屏幕应用/" itemprop="commentCount"></span>
-                </a>
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
               </span>
+              
+                <a href="/2016/11/21/iOS之Safari之添加到主屏幕应用/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/21/iOS之Safari之添加到主屏幕应用/" itemprop="commentsCount"></span>
+                </a>
+              
             
           
 
@@ -400,67 +412,54 @@
       </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
         <p>先写好的DemoHtml先需要在手机上试验一下，结果mac上面的文件不能用手机打开，我就想了个办法，直接开一个服务，把mac当成服务器访问服务器上面的文件，这个问题就解决了。</p>
-<h3 id="1-_u542F_u52A8mac_py__u670D_u52A1"><a href="#1-_u542F_u52A8mac_py__u670D_u52A1" class="headerlink" title="1.启动mac py 服务"></a>1.启动mac py 服务</h3><p>首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m SimpleHTTPServer <span class="number">8000</span>  启动本地端口<span class="number">8000</span></div></pre></td></tr></table></figure></p>
-<h3 id="2-_u67E5_u770B_u7535_u8111IP_5B_u5C40_u57DF_u7F51_u7684ip_5D"><a href="#2-_u67E5_u770B_u7535_u8111IP_5B_u5C40_u57DF_u7F51_u7684ip_5D" class="headerlink" title="2.查看电脑IP[局域网的ip]"></a>2.查看电脑IP[局域网的ip]</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">我的是：192<span class="selector-class">.168</span><span class="selector-class">.99</span><span class="selector-class">.1</span></div></pre></td></tr></table></figure>
-<h3 id="3-_u624B_u673ASafari_u6253_u5F00"><a href="#3-_u624B_u673ASafari_u6253_u5F00" class="headerlink" title="3.手机Safari打开"></a>3.手机Safari打开</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">192<span class="selector-class">.168</span><span class="selector-class">.99</span><span class="selector-class">.1</span><span class="selector-pseudo">:8000</span></div></pre></td></tr></table></figure>
+<h3 id="1-启动mac-py-服务"><a href="#1-启动mac-py-服务" class="headerlink" title="1.启动mac py 服务"></a>1.启动mac py 服务</h3><p>首先进入到你要共享的文件夹，直接运行下边的命令，然后就可以再手机浏览器中查看mac上面的电脑了。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m SimpleHTTPServer <span class="number">8000</span>  启动本地端口<span class="number">8000</span></div></pre></td></tr></table></figure></p>
+<h3 id="2-查看电脑IP-局域网的ip"><a href="#2-查看电脑IP-局域网的ip" class="headerlink" title="2.查看电脑IP[局域网的ip]"></a>2.查看电脑IP[局域网的ip]</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">我的是：192<span class="selector-class">.168</span><span class="selector-class">.99</span><span class="selector-class">.1</span></div></pre></td></tr></table></figure>
+<h3 id="3-手机Safari打开"><a href="#3-手机Safari打开" class="headerlink" title="3.手机Safari打开"></a>3.手机Safari打开</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">192<span class="selector-class">.168</span><span class="selector-class">.99</span><span class="selector-class">.1</span><span class="selector-pseudo">:8000</span></div></pre></td></tr></table></figure>
 <p><img src="http://upload-images.jianshu.io/upload_images/783986-f559dd371ab3227d.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMG_0853.PNG"></p>
-<h3 id="4-js_u4EE3_u7801"><a href="#4-js_u4EE3_u7801" class="headerlink" title="4.js代码"></a>4.js代码</h3><p>html代码和正常的布局一样，想要什么样子自己可以随意写，这里只是提供了比较特殊的 js代码。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> alone = <span class="built_in">window</span>.navigator.standalone;<span class="comment">//是否是从桌面启动</span></div><div class="line">   <span class="keyword">var</span> url = <span class="string">"taobao"</span>; <span class="comment">//url可以换成自己的</span></div><div class="line">        <span class="keyword">if</span>(alone)&#123;</div><div class="line">        <span class="built_in">window</span>.open(url+<span class="string">":"</span>,<span class="string">'_self'</span>);<span class="comment">//打开淘宝app url可以换成自己的app scheme</span></div><div class="line">    &#125;     <span class="keyword">else</span> &#123;  </div><div class="line">      <span class="built_in">window</span>.open(url+<span class="string">":"</span>,<span class="string">'_self'</span>);  </div><div class="line">  &#125;<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="4-js代码"><a href="#4-js代码" class="headerlink" title="4.js代码"></a>4.js代码</h3><p>html代码和正常的布局一样，想要什么样子自己可以随意写，这里只是提供了比较特殊的 js代码。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> alone = <span class="built_in">window</span>.navigator.standalone;<span class="comment">//是否是从桌面启动</span></div><div class="line">   <span class="keyword">var</span> url = <span class="string">"taobao"</span>; <span class="comment">//url可以换成自己的</span></div><div class="line">        <span class="keyword">if</span>(alone)&#123;</div><div class="line">        <span class="built_in">window</span>.open(url+<span class="string">":"</span>,<span class="string">'_self'</span>);<span class="comment">//打开淘宝app url可以换成自己的app scheme</span></div><div class="line">    &#125;     <span class="keyword">else</span> &#123;  </div><div class="line">      <span class="built_in">window</span>.open(url+<span class="string">":"</span>,<span class="string">'_self'</span>);  </div><div class="line">  &#125;<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>打开这个html文件点击Safari保存到主屏幕。<br>在此打开之后的效果：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/783986-bb3c3fadbd9cf618.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMG_0854.PNG"></p>
 <p>其实做这个功能就是方面用户直接点击icon启动app并且调用某个功能，省了不少时间。</p>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/wechatpay.png" alt="兜兜转转 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/alipay.png" alt="兜兜转转 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    兜兜转转
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://fgyong.cn/2016/11/21/iOS之Safari之添加到主屏幕应用/" title="iOS之Safari之添加到主屏幕应用">http://fgyong.cn/2016/11/21/iOS之Safari之添加到主屏幕应用/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -472,7 +471,7 @@
       
 
       
-        
+      
       
 
       
@@ -500,35 +499,20 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/21/iOS之Safari之添加到主屏幕应用/"
-     data-title="iOS之Safari之添加到主屏幕应用"
-     data-content=""
-     data-url="http://fgyong.cn/2016/11/21/iOS之Safari之添加到主屏幕应用/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -536,9 +520,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/21/iOS之Safari之添加到主屏幕应用/"
-           data-title="iOS之Safari之添加到主屏幕应用" data-url="http://fgyong.cn/2016/11/21/iOS之Safari之添加到主屏幕应用/">
-      </div>
+      <div id="SOHUCS"></div>
     
   </div>
 
@@ -556,6 +538,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -574,7 +557,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq8ye.com1.z0.glb.clouddn.com/071251378.jpeg"
+               src="/0.jpeg"
                alt="兜兜转转" />
           <p class="site-author-name" itemprop="name">兜兜转转</p>
            
@@ -626,7 +609,20 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/6d1254c1d145" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      简书
+                    
                 </a>
               </span>
             
@@ -641,12 +637,12 @@
           <div class="links-of-blogroll motion-element links-of-blogroll-inline">
             <div class="links-of-blogroll-title">
               <i class="fa  fa-fw fa-globe"></i>
-              
+              友情链接
             </div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://www.mywhblog.cn/" title="梦影雾花个人博客" target="_blank">梦影雾花个人博客</a>
+                  <a href="http://www.mywhblog.cn/" title="梦影雾花" target="_blank">梦影雾花</a>
                 </li>
               
             </ul>
@@ -668,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_u542F_u52A8mac_py__u670D_u52A1"><span class="nav-number">1.</span> <span class="nav-text">1.启动mac py 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_u67E5_u770B_u7535_u8111IP_5B_u5C40_u57DF_u7F51_u7684ip_5D"><span class="nav-number">2.</span> <span class="nav-text">2.查看电脑IP[局域网的ip]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_u624B_u673ASafari_u6253_u5F00"><span class="nav-number">3.</span> <span class="nav-text">3.手机Safari打开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-js_u4EE3_u7801"><span class="nav-number">4.</span> <span class="nav-text">4.js代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-启动mac-py-服务"><span class="nav-number">1.</span> <span class="nav-text">1.启动mac py 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-查看电脑IP-局域网的ip"><span class="nav-number">2.</span> <span class="nav-text">2.查看电脑IP[局域网的ip]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-手机Safari打开"><span class="nav-number">3.</span> <span class="nav-text">3.手机Safari打开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-js代码"><span class="nav-number">4.</span> <span class="nav-text">4.js代码</span></a></li></ol></div>
             
 
           </div>
@@ -712,21 +708,25 @@
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -739,7 +739,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -759,6 +759,14 @@
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -785,79 +793,80 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
-  
-    
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"fgyong"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyti3QqOe';
+      var conf = '40284e9d2463709213da7a1d852b43a6';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
     })();
-  </script>
-
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-    
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-
-  
   
 
   
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("0QWvbsYwzTT5ls8d9uPLfbub-gzGzoHsz", "X9XNHL9HI6z7fQ7vcNW7co8d");</script>
   <script>
     function showTime(Counter) {
@@ -964,24 +973,12 @@
 
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
 
+  
+
+  
 
   
 
