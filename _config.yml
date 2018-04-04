@@ -85,4 +85,4 @@ deploy:
   type: git
   repo: git@github.com:ifgyong/ifgyong.github.io.git
   branch: master
-  message: 主题修正
+  message: 添加备案号
