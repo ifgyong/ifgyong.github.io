@@ -174,7 +174,7 @@ sidebar:
 
   # Scroll percent label in b2t button
   scrollpercent: false
-  
+
   # Enable sidebar on narrow view
   onmobile: false
 
@@ -296,7 +296,7 @@ font:
   logo:
     external: true
     family: http://7xq8ye.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png
-    size: 
+    size:
 
   # Font settings for <code> and code blocks.
   codes:
@@ -355,12 +355,12 @@ changyan:
 #    button | slide
 # Warning: Baidu Share does not support https.
 #baidushare:
-##  type: button
+#  type: button
 
 # Share
-#jiathis:
+jiathis: 2160499
 # Warning: JiaThis does not support https.
-#add_this_id:
+add_this_id: 2160499
 
 # Share
 #duoshuo_share: true

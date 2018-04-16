@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2018/04/16/mac-php5-6+mongdb+Apache%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2018-04-16T07:48:55.145Z</lastmod>
+    <data>
+        <display>
+        <title>PHP5.6+YII+MongoDB环境搭建</title>
+        <pubTime>2018-04-16T07:39:24.000Z</pubTime>
+        
+        <tag>PHP环境配置</tag>
+         
+        <tag>YII</tag>
+         
+        <tag>MongoDB</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据结构" url="http://fgyong.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2017/05/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%844%E7%A7%8D%E9%81%8D%E5%8E%86/</loc>
     <lastmod>2017-05-09T02:01:50.000Z</lastmod>
     <data>
@@ -63,28 +87,6 @@
            
              
               <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2016/01/31/hexo%E6%8D%A2%E4%BA%86%E7%94%B5%E8%84%91%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-04-11T06:33:29.000Z</lastmod>
-    <data>
-        <display>
-        <title>hexo换了电脑处理方法</title>
-        <pubTime>2016-01-31T04:02:22.000Z</pubTime>
-        
-        <tag>建站</tag>
-         
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
           
         </display>
     </data>
@@ -259,21 +261,19 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2016/01/30/Module-version-mismatch/</loc>
+    <loc>http://fgyong.cn/2016/01/28/MAC-%E9%87%8D%E7%BD%AEMySQL-root-%E5%AF%86%E7%A0%81/</loc>
     <lastmod>2017-04-11T06:33:29.000Z</lastmod>
     <data>
         <display>
-        <title>Module version mismatch</title>
-        <pubTime>2016-01-30T12:32:53.000Z</pubTime>
+        <title>MAC 重置MySQL root 密码</title>
+        <pubTime>2016-01-28T03:16:24.000Z</pubTime>
         
-        <tag>建站</tag>
-         
-        <tag>hexo</tag>
+        <tag>iOS</tag>
          
          
            
              
-              <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
           
         </display>
     </data>
@@ -429,19 +429,43 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2016/01/28/MAC-%E9%87%8D%E7%BD%AEMySQL-root-%E5%AF%86%E7%A0%81/</loc>
+    <loc>http://fgyong.cn/2016/01/30/Module-version-mismatch/</loc>
     <lastmod>2017-04-11T06:33:29.000Z</lastmod>
     <data>
         <display>
-        <title>MAC 重置MySQL root 密码</title>
-        <pubTime>2016-01-28T03:16:24.000Z</pubTime>
+        <title>Module version mismatch</title>
+        <pubTime>2016-01-30T12:32:53.000Z</pubTime>
         
-        <tag>iOS</tag>
+        <tag>建站</tag>
+         
+        <tag>hexo</tag>
          
          
            
              
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+              <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fgyong.cn/2016/01/31/hexo%E6%8D%A2%E4%BA%86%E7%94%B5%E8%84%91%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2017-04-11T06:33:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo换了电脑处理方法</title>
+        <pubTime>2016-01-31T04:02:22.000Z</pubTime>
+        
+        <tag>建站</tag>
+         
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
           
         </display>
     </data>
