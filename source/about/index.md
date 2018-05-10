@@ -20,6 +20,8 @@ https://github.com/ifgyong/iOSDataFactory
                12.算法的乐趣
              
 ### Python3 教程
+https://github.com/ifgyong/PYDemo
+https://github.com/ifgyong/t66y
 			1.Python3+Beaufulsoup+urllib 爬虫
 			2.Python3+PyQt5可视化编程
 			3.py打包
