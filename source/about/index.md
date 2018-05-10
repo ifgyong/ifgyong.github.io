@@ -18,4 +18,11 @@ https://github.com/ifgyong/iOSDataFactory
                10.性能优化
                11.相机与滤镜
                12.算法的乐趣
+             
+### Python3 教程
+			1.Python3+Beaufulsoup+urllib 爬虫
+			2.Python3+PyQt5可视化编程
+			3.py打包
+			4.下载BT到本地
 现在用不着，收藏了，以后再用。欢迎Start,你的start就是我更新的动力。
+
