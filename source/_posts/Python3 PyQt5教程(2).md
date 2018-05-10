@@ -7,7 +7,9 @@ categories: Python
 ---
 大家关注的教程2来了。
 第一期是代码布局，现在有更高级的布局方式，那就是Qt5，布局完UI可以用PythonUIC命令转成py文件，添加`import `和
-```if __name__ == '__main__':
+
+```
+if __name__ == '__main__':
     app = QApplication(sys.argv)
     widget = QMainWindow(None)
     Ui_MainWindow().setupUi(widget)
@@ -16,6 +18,7 @@ categories: Python
     pass
 ```
 
+
 1.登陆界面
 2.一个QTproject新建多个视图
 3.在窗体中打开新窗体
@@ -23,7 +26,9 @@ categories: Python
 ### 1.登陆
 
 用QT可视化编程拖出来的界面就是这个样子，用命令`pyuic5 -o target.py fromfile.ui`转化成py文件，代码如下
-![登陆](https://upload-images.jianshu.io/upload_images/783986-6553ca5fa2cacbcc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![登陆](../1.png)
+
+
 ```
 # -*- coding: utf-8 -*-
 
@@ -162,21 +167,19 @@ class Exaple2(QWidget):
 ```
 ### 4.安装QT
 下载QT5.*
-[下载QT5](http://mirrors.ocf.berkeley.edu/qt/archive/qt/5.8/5.8.0/qt-opensource-mac-x64-clang-5.8.0.dmg
-)
+[下载QT5](http://mirrors.ocf.berkeley.edu/qt/archive/qt/5.8/5.8.0/qt-opensource-mac-x64-clang-5.8.0.dmg)
 因为下载的dmg直接点下一步下一步安装完成
 [QT的官方Demo](http://doc.qt.io/archives/qt-4.8/demos.html)
 ### 5.新建工程
 1.第一步
-![第一步](https://upload-images.jianshu.io/upload_images/783986-950368112ca60276.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![第一步](../2.png)
 2.第二步
-![第二步](https://upload-images.jianshu.io/upload_images/783986-55d57d9d31d1f882.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![第二步](../3.png)
 3.第三步
-![image.png](https://upload-images.jianshu.io/upload_images/783986-294164bb23436b16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-4.第四步 拖拽控件
-![image.png](https://upload-images.jianshu.io/upload_images/783986-7ef56e2a41cc5355.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-5.点击运行
-
-![image.png](https://upload-images.jianshu.io/upload_images/783986-0909002dc602459f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![选择Qtwidgets](../4.png)
+4.第四步 打开视图
+![打开视图](../5.png)
+5.拖拽控件
+![拖拽控件](../6.png)
 6.效果图
-![image.png](https://upload-images.jianshu.io/upload_images/783986-d4aacd5f7d15aaec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![运行的效果图](../7.png)
