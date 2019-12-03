@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="底层原理 类的本质复习一下IOS 底层原理 对象的本质–(1)，可以看出来实例对象实际是上结构体，那么这个结构体是有类指针和成员变量组成的。 1234567891011//Person@interface Person : NSObject&amp;#123;	@public	int _age;//4bytes	int _level;//4bytes	int _code;//4bytes&amp;#125;@en">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS底层原理  类的本质 --(2)">
+<meta property="og:url" content="http://fgyong.cn/2019/12/01/iOS底层原理 类的本质--(2)/index.html">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="底层原理 类的本质复习一下IOS 底层原理 对象的本质–(1)，可以看出来实例对象实际是上结构体，那么这个结构体是有类指针和成员变量组成的。 1234567891011//Person@interface Person : NSObject&amp;#123;	@public	int _age;//4bytes	int _level;//4bytes	int _code;//4bytes&amp;#125;@en">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/2-1.png">
+<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/2-2.png">
+<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/2-2.png">
+<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/0.png">
+<meta property="og:updated_time" content="2019-12-03T05:00:43.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS底层原理  类的本质 --(2)">
+<meta name="twitter:description" content="底层原理 类的本质复习一下IOS 底层原理 对象的本质–(1)，可以看出来实例对象实际是上结构体，那么这个结构体是有类指针和成员变量组成的。 1234567891011//Person@interface Person : NSObject&amp;#123;	@public	int _age;//4bytes	int _level;//4bytes	int _code;//4bytes&amp;#125;@en">
+<meta name="twitter:image" content="http://fgyong.cn/2019/12/01/images/2-1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://fgyong.cn/2019/12/01/iOS底层原理 类的本质--(2)/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS底层原理  类的本质 --(2) | 兜兜转转的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">兜兜转转的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">不忘初心 方得始终</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/12/01/iOS底层原理 类的本质--(2)/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="兜兜转转"/>
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兜兜转转的技术博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS底层原理  类的本质 --(2)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-12-01 11:12:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:12:58+08:00">2019-12-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-03 13:00:43" itemprop="dateModified" datetime="2019-12-03T13:00:43+08:00">2019-12-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="底层原理-类的本质"><a href="#底层原理-类的本质" class="headerlink" title="底层原理 类的本质"></a>底层原理 类的本质</h3><p>复习一下<a href="">IOS 底层原理 对象的本质–(1)</a>，可以看出来实例对象实际是上结构体，那么这个结构体是有类指针和成员变量组成的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//Person</div><div class="line">@interface Person : NSObject</div><div class="line">&#123;</div><div class="line">	@public</div><div class="line">	int _age;//4bytes</div><div class="line">	int _level;//4bytes</div><div class="line">	int _code;//4bytes</div><div class="line">&#125;</div><div class="line">@end</div><div class="line">@implementation Person</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>经过<code>xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc main.m -o main64.cpp</code>编译之后其实<code>Person</code>对象是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct Person_IMPL &#123;</div><div class="line">	struct NSObject_IMPL NSObject_IVARS;</div><div class="line">	int _age;</div><div class="line">	int _level;</div><div class="line">	int _code;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><code>NSObject_IMPL</code>结构体：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct NSObject_IMPL &#123;</div><div class="line">	Class isa;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>那么<code>NSObject</code>在内存中包括</p>
+<ul>
+<li><code>isa</code>指针</li>
+<li>其他成员变量</li>
+</ul>
+<p><img src="../images/2-1.png" alt=""></p>
+<p><code>isa</code>地址就是<code>instance</code>的地址，其他成员变量排在后边，也就是<code>instance</code>的地址就是<code>isa</code>的地址。</p>
+<p>那么这个<code>isa</code>指向的到底是什么呢？<br>请往下继续看：<br>先看下这段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSObject *ob1=[[NSObject alloc]init];</div><div class="line">NSObject *ob2=[[NSObject alloc]init];</div><div class="line"></div><div class="line">Class cl1 = object_getClass([ob1 class]);</div><div class="line">Class cl2 = object_getClass([ob2 class]);</div><div class="line"></div><div class="line">Class cl3 = ob1.class;</div><div class="line">Class cl4 = ob2.class;</div><div class="line"></div><div class="line">Class cl5 = NSObject.class;</div><div class="line"></div><div class="line">NSLog(@&quot; %p %p %p %p %p&quot;,cl1,cl2,cl3,cl4,cl5);</div><div class="line">//0x7fff8e3ba0f0 0x7fff8e3ba0f0 </div><div class="line">//0x7fff8e3ba140 0x7fff8e3ba140 0x7fff8e3ba140</div></pre></td></tr></table></figure>
+<p>这代码是输出了几个<code>NSObject</code>的对象的类和<code>NSObject</code>的类对象的地址，可以看到<code>cl1==cl2</code>、<code>cl3==cl4==cl5</code>。</p>
+<h4 id="Class的本质"><a href="#Class的本质" class="headerlink" title="Class的本质"></a>Class的本质</h4><p>我们知道不管是类对象还是元类对象，类型都是Class，class和mete-class的底层都是objc_class结构体的指针，内存中就是结构体。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Class objectClass = [NSObject class];        </div><div class="line">Class objectMetaClass = object_getClass([NSObject class]);</div></pre></td></tr></table></figure>
+<p>点击class来到内部，可以发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure>
+<p><code>class</code>对象其实是指向objc_class的结构体，因此我们可以说类对象或元类对象在内存中其实就是objc_class结构体。</p>
+<p>来到<code>objc_class</code>内部，在源码中经常看到这段源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;//isa</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">    Class _Nullable super_class                    //父类          OBJC2_UNAVAILABLE;</div><div class="line">    const char * _Nonnull name                              //obj名字 OBJC2_UNAVAILABLE;</div><div class="line">    long version                                            //版本 OBJC2_UNAVAILABLE;</div><div class="line">    long info                                               //info OBJC2_UNAVAILABLE;</div><div class="line">    long instance_size                                      // OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_ivar_list * _Nullable ivars             //成员变量链表     OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_method_list * _Nullable * _Nullable methodLists                    OBJC2_UNAVAILABLE;//方法链表</div><div class="line">    struct objc_cache * _Nonnull cache      //缓存链表                 OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_protocol_list * _Nullable protocols         //协议链表 OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div><div class="line">/* Use `Class` instead of `struct objc_class *` */</div></pre></td></tr></table></figure>
+<p>这段代码明显是 已经<code>OBJC2_UNAVAILABLE</code>，说明代码已经不在使用了。那么<code>objc_class</code>结构体内部结构到底是什么呢？通过objc搜寻<code>runtime</code>的内容可以看到<code>objc_class</code>内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">struct objc_class : objc_object &#123;</div><div class="line">    // Class ISA;</div><div class="line">    Class superclass;</div><div class="line">    cache_t cache;             // formerly cache pointer and vtable</div><div class="line">    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags</div><div class="line"></div><div class="line">    class_rw_t *data() &#123; </div><div class="line">        return bits.data();</div><div class="line">    &#125;</div><div class="line">    void setData(class_rw_t *newData) &#123;</div><div class="line">        bits.setData(newData);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    void setInfo(uint32_t set) &#123;</div><div class="line">        assert(isFuture()  ||  isRealized());</div><div class="line">        data()-&gt;setFlags(set);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    void clearInfo(uint32_t clear) &#123;</div><div class="line">        assert(isFuture()  ||  isRealized());</div><div class="line">        data()-&gt;clearFlags(clear);</div><div class="line">    &#125;</div><div class="line">    //**后边省略</div></pre></td></tr></table></figure>
+<p>我们发现这个结构体继承 <code>objc_object</code> 并且结构体内有一些函数，因为这是<code>c++</code>结构体，在c上做了扩展，因此结构体中可以包含函数。我们来到<code>objc_object</code>内，截取部分代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">struct objc_object &#123;</div><div class="line">private:</div><div class="line">    isa_t isa;</div><div class="line"></div><div class="line">public:</div><div class="line"></div><div class="line">    // ISA() assumes this is NOT a tagged pointer object</div><div class="line">    Class ISA();</div><div class="line"></div><div class="line">    // getIsa() allows this to be a tagged pointer object</div><div class="line">    Class getIsa();</div><div class="line"></div><div class="line">    // initIsa() should be used to init the isa of new objects only.</div><div class="line">    // If this object already has an isa, use changeIsa() for correctness.</div><div class="line">    // initInstanceIsa(): objects with no custom RR/AWZ</div><div class="line">    // initClassIsa(): class objects</div><div class="line">    // initProtocolIsa(): protocol objects</div><div class="line">    // initIsa(): other objects</div><div class="line">    void initIsa(Class cls /*nonpointer=false*/);</div><div class="line">    void initClassIsa(Class cls /*nonpointer=maybe*/);</div><div class="line">    void initProtocolIsa(Class cls /*nonpointer=maybe*/);</div><div class="line">    void initInstanceIsa(Class cls, bool hasCxxDtor);</div></pre></td></tr></table></figure>
+<p>那么我们之前了解到的，类中存储的类的成员变量信息，方法列表，协议列表，截取<code>class_rw_t</code>内部实现代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">struct class_rw_t &#123;</div><div class="line">    // Be warned that Symbolication knows the layout of this structure.</div><div class="line">    uint32_t flags;</div><div class="line">    uint32_t version;</div><div class="line"></div><div class="line">    const class_ro_t *ro;</div><div class="line"></div><div class="line">    method_array_t methods;//方法列表</div><div class="line">    property_array_t properties;//属性列表</div><div class="line">    protocol_array_t protocols;//协议列表</div><div class="line"></div><div class="line">    Class firstSubclass;</div><div class="line">    Class nextSiblingClass;</div><div class="line">**</div><div class="line">//后边省略</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而<code>class_rw_t</code>是通过<code>bits.data()</code>获取的，截取<code>bits.data()</code>查看内部实现,而仅仅是<code>bits&amp;FAST_DATA_MASK</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class_rw_t* data() &#123;</div><div class="line">    return (class_rw_t *)(bits &amp; FAST_DATA_MASK);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而成员变量则是存储在<code>class_ro_t</code>内部中的，我们来到<code>class_ro_t</code>内部查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">struct class_ro_t &#123;</div><div class="line">    uint32_t flags;</div><div class="line">    uint32_t instanceStart;</div><div class="line">    uint32_t instanceSize;</div><div class="line">#ifdef __LP64__</div><div class="line">    uint32_t reserved;</div><div class="line">#endif</div><div class="line"></div><div class="line">    const uint8_t * ivarLayout;</div><div class="line">    </div><div class="line">    const char * name;</div><div class="line">    method_list_t * baseMethodList;//方法列表</div><div class="line">    protocol_list_t * baseProtocols;//协议列表</div><div class="line">    const ivar_list_t * ivars;//成员变量列表</div><div class="line"></div><div class="line">    const uint8_t * weakIvarLayout;</div><div class="line">    property_list_t *baseProperties;//属性列表</div><div class="line"></div><div class="line">    method_list_t *baseMethods() const &#123;</div><div class="line">        return baseMethodList;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>最后通过一张图总结一下：</p>
+<p><img src="../images/2-2.png" alt=""></p>
+<p>那么我们来证明一下：<br>我们可以自定义一下一个和系统一样的结构体，那么我们当我们强制转化的时候，他们赋值会一一对应，此时我们就可以拿到结构体的内部的值。<br>下边代码是我们自定义的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Header.h</div><div class="line">//  day02-类的本质1</div><div class="line">//</div><div class="line">//  Created by Charlie on 2019/7/2.</div><div class="line">//  Copyright © 2019 www.fgyong.cn. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#ifndef Header_h</div><div class="line">#define Header_h</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line"># if __arm64__</div><div class="line">#   define ISA_MASK        0x0000000ffffffff8ULL</div><div class="line"># elif __x86_64__</div><div class="line">#   define ISA_MASK        0x00007ffffffffff8ULL</div><div class="line"># endif</div><div class="line"></div><div class="line">#if __LP64__</div><div class="line">typedef uint32_t mask_t;</div><div class="line">#else</div><div class="line">typedef uint16_t mask_t;</div><div class="line">#endif</div><div class="line">typedef uintptr_t cache_key_t;</div><div class="line"></div><div class="line">struct bucket_t &#123;</div><div class="line">	cache_key_t _key;</div><div class="line">	IMP _imp;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct cache_t &#123;</div><div class="line">	bucket_t *_buckets;</div><div class="line">	mask_t _mask;</div><div class="line">	mask_t _occupied;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct entsize_list_tt &#123;</div><div class="line">	uint32_t entsizeAndFlags;</div><div class="line">	uint32_t count;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct method_t &#123;</div><div class="line">	SEL name;</div><div class="line">	const char *types;</div><div class="line">	IMP imp;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct method_list_t : entsize_list_tt &#123;</div><div class="line">	method_t first;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct ivar_t &#123;</div><div class="line">	int32_t *offset;</div><div class="line">	const char *name;</div><div class="line">	const char *type;</div><div class="line">	uint32_t alignment_raw;</div><div class="line">	uint32_t size;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct ivar_list_t : entsize_list_tt &#123;</div><div class="line">	ivar_t first;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct property_t &#123;</div><div class="line">	const char *name;</div><div class="line">	const char *attributes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct property_list_t : entsize_list_tt &#123;</div><div class="line">	property_t first;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct chained_property_list &#123;</div><div class="line">	chained_property_list *next;</div><div class="line">	uint32_t count;</div><div class="line">	property_t list[0];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">typedef uintptr_t protocol_ref_t;</div><div class="line">struct protocol_list_t &#123;</div><div class="line">	uintptr_t count;</div><div class="line">	protocol_ref_t list[0];</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct class_ro_t &#123;</div><div class="line">	uint32_t flags;</div><div class="line">	uint32_t instanceStart;</div><div class="line">	uint32_t instanceSize;  // instance对象占用的内存空间</div><div class="line">#ifdef __LP64__</div><div class="line">	uint32_t reserved;</div><div class="line">#endif</div><div class="line">	const uint8_t * ivarLayout;</div><div class="line">	const char * name;  // 类名</div><div class="line">	method_list_t * baseMethodList;</div><div class="line">	protocol_list_t * baseProtocols;</div><div class="line">	const ivar_list_t * ivars;  // 成员变量列表</div><div class="line">	const uint8_t * weakIvarLayout;</div><div class="line">	property_list_t *baseProperties;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct class_rw_t &#123;</div><div class="line">	uint32_t flags;</div><div class="line">	uint32_t version;</div><div class="line">	const class_ro_t *ro;</div><div class="line">	method_list_t * methods;    // 方法列表</div><div class="line">	property_list_t *properties;    // 属性列表</div><div class="line">	const protocol_list_t * protocols;  // 协议列表</div><div class="line">	Class firstSubclass;</div><div class="line">	Class nextSiblingClass;</div><div class="line">	char *demangledName;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">#define FAST_DATA_MASK          0x00007ffffffffff8UL</div><div class="line">struct class_data_bits_t &#123;</div><div class="line">	uintptr_t bits;</div><div class="line">public:</div><div class="line">	class_rw_t* data() &#123; // 提供data()方法进行 &amp; FAST_DATA_MASK 操作</div><div class="line">		return (class_rw_t *)(bits &amp; FAST_DATA_MASK);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">/* OC对象 */</div><div class="line">struct xx_objc_object &#123;</div><div class="line">	void *isa;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">/* 类对象 */</div><div class="line">struct fy_objc_class : xx_objc_object &#123;</div><div class="line">	Class superclass;</div><div class="line">	cache_t cache;</div><div class="line">	class_data_bits_t bits;</div><div class="line">public:</div><div class="line">	class_rw_t* data() &#123;</div><div class="line">		return bits.data();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	fy_objc_class* metaClass() &#123; // 提供metaClass函数，获取元类对象</div><div class="line">		// 上一篇我们讲解过，isa指针需要经过一次 &amp; ISA_MASK操作之后才得到真正的地址</div><div class="line">		return (fy_objc_class *)((long long)isa &amp; ISA_MASK);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">#endif /* Header_h */</div></pre></td></tr></table></figure>
+<p>这段代码亲测可用，直接复制自己新建<code>.h</code>文件导入’main.m’即可，将<code>main.m</code>改成<code>main.mm</code>或者将其他某一个<code>.m</code>改成<code>.mm</code>运行就可以运行了。</p>
+<p>那么我们再拿出来经典的那张图挨着分析<code>isa</code> 和<code>superclass</code>的指向</p>
+<p><img src="../images/2-2.png" alt=""></p>
+<h4 id="instance-对象验证"><a href="#instance-对象验证" class="headerlink" title="instance 对象验证"></a>instance 对象验证</h4><p>使用 <code>p/x</code>输出<code>obj</code>16进制的地址，然后<strong>isa指针需要经过一次 &amp; ISA_MASK操作之后才得到真正的地址</strong>。实施之后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">//object</div><div class="line"></div><div class="line">Printing description of student:</div><div class="line">&lt;Student: 0x1021729c0&gt;</div><div class="line">(lldb) p/x object-&gt;isa //查看isa指针地址</div><div class="line">(Class) $0 = 0x001dffff8e3ba141 NSObject </div><div class="line">(lldb) p/x objectClass//输出 objectClass的地址</div><div class="line">(fy_objc_class *) $1 = 0x00007fff8e3ba140</div><div class="line">(lldb) p/x 0x001dffff8e3ba141&amp;0x00007ffffffffff8//计算得出object-&gt;isa真正的地址</div><div class="line">(long) $2 = 0x00007fff8e3ba140 //0x00007fff8e3ba140是 objectClass地址和object-&gt;isa地址一样</div><div class="line"></div><div class="line"></div><div class="line">//person</div><div class="line"></div><div class="line">Printing description of person: &lt;Person: 0x102175300&gt;</div><div class="line">(lldb) p/x person-&gt;isa</div><div class="line">(Class) $3 = 0x001d800100002469 Person</div><div class="line">(lldb) p/x 0x001d800100002469&amp;0x00007ffffffffff8</div><div class="line">(long) $4 = 0x0000000100002468</div><div class="line">(lldb) p/x personClass</div><div class="line">(fy_objc_class *) $5 = 0x0000000100002468//isa 和personclass地址都是0x0000000100002468</div><div class="line"></div><div class="line">//student</div><div class="line"></div><div class="line">(lldb) p/x student-&gt;isa</div><div class="line">(Class) $6 = 0x001d8001000024b9 Student</div><div class="line">(lldb) p/x 0x001d8001000024b9&amp;0x00007ffffffffff8</div><div class="line">(long) $7 = 0x00000001000024b8</div><div class="line">(lldb) p/x studentClass</div><div class="line">(fy_objc_class *) $8 = 0x00000001000024b8//studentclass 和isa地址都是0x00000001000024b8</div><div class="line">(lldb)</div></pre></td></tr></table></figure>
+<p>从面的输出结果中我们可以发现instance对象中确实存储了isa指针和其成员变量，同时将instance对象的isa指针经过&amp;运算之后计算出的地址确实是其相应类对象的内存地址。由此我们证明isa，superclass指向图中的1，2，3号线。</p>
+<h4 id="class-对象验证"><a href="#class-对象验证" class="headerlink" title="class 对象验证"></a>class 对象验证</h4><p>接着我们来看<code>class</code>对象，同样通过上一篇文章，我们明确<code>class</code>对象中存储着<code>isa</code>指针，<code>superclass</code>指针，以及类的属性信息，类的成员变量信息，类的对象方法，和类的协议信息，而通过上面对<code>object</code>源码的分析，我们知道这些信息存储在<code>class</code>对象的<code>class_rw_t</code>中，我们通过强制转化来窥探其中的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//objectClass and objectMetaClass</div><div class="line"></div><div class="line">(lldb) p/x objectClass-&gt;isa</div><div class="line">(__NSAtom *) $6 = 0x001dffff8e3ba0f1</div><div class="line">(lldb) p/x 0x001dffff8e3ba0f1&amp;0x00007ffffffffff8</div><div class="line">(long) $7 = 0x00007fff8e3ba0f0</div><div class="line">(lldb) p/x objectMetaClass</div><div class="line">(fy_objc_class *) $8 = 0x00007fff8e3ba0f0</div><div class="line"></div><div class="line">//personClass and personMetaClass</div><div class="line"></div><div class="line">(lldb) p/x personClass-&gt;isa</div><div class="line">(__NSAtom *) $9 = 0x001d800100002441</div><div class="line">(lldb) p/x personMetaClass</div><div class="line">(fy_objc_class *) $10 = 0x0000000100002440</div><div class="line">(lldb) p/x 0x001d800100002441&amp;0x00007ffffffffff8</div><div class="line">(long) $11 = 0x0000000100002440</div><div class="line"></div><div class="line">//sutdentClass and studentMetaClass</div><div class="line"></div><div class="line">(lldb) p/x studentClass-&gt;isa</div><div class="line">(__NSAtom *) $12 = 0x001d800100002491</div><div class="line">(lldb) p/x 0x001d800100002491&amp;0x00007ffffffffff8</div><div class="line">(long) $13 = 0x0000000100002490</div><div class="line">(lldb) p/x studentMetaClass</div><div class="line">(fy_objc_class *) $14 = 0x0000000100002490</div></pre></td></tr></table></figure>
+<p>有此结果得知<code>objectMetaClass==objectClass-&gt;isa==0x00007fff8e3ba0f0</code>,<code>personClass-&gt;isa==personMetaClass==0x0000000100002440</code>,<code>studentClass-&gt;isa==studentMetaClass==0x0000000100002490</code>。<br>由此我们证明isa，superclass指向图中，isa指针的4，5，6号线，以及superclass指针的7,8,9号线。</p>
+<h4 id="meta-class对象验证"><a href="#meta-class对象验证" class="headerlink" title="meta-class对象验证"></a>meta-class对象验证</h4><p>最后我们来看<code>meta-class</code>元类对象，上文提到<code>meta-class</code>中存储着<code>isa</code>指针，<code>superclass</code>指针，以及类的类方法信息。同时我们知道<code>meta-class</code>元类对象与<code>class</code>类对象，具有相同的结构，只不过存储的信息不同，并且元类对象的<code>isa</code>指针指向基类的元类对象，基类的元类对象的<code>isa</code>指针指向自己。元类对象的<code>superclass</code>指针指向其父类的元类对象，基类的元类对象的<code>superclass</code>指针指向其类对象。<br>与<code>class</code>对象相同，我们同样通过模拟对<code>person</code>元类对象调用<code>.data</code>函数，即对<code>bits</code>进行<code>&amp;FAST_DATA_MASK(0x00007ffffffffff8UL)</code>运算，并转化为<code>class_rw_t</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">// objectMetaClass-&gt;superclass = 0x00007fff8e3ba140  NSObject</div><div class="line">//objectMetaClass-&gt;isa =   0x00007fff8e3ba0f0</div><div class="line">//objectMetaClass = 0x00007fff8e3ba0f0</div><div class="line"></div><div class="line">(lldb) p/x objectMetaClass-&gt;superclass</div><div class="line">(Class) $20 = 0x00007fff8e3ba140 NSObject</div><div class="line">(lldb) p/x objectMetaClass-&gt;isa</div><div class="line">(__NSAtom *) $21 = 0x001dffff8e3ba0f1</div><div class="line">(lldb) p/x 0x001dffff8e3ba0f1&amp;0x00007ffffffffff8</div><div class="line">(long) $22 = 0x00007fff8e3ba0f0</div><div class="line">(lldb) p/x objectMetaClass</div><div class="line">(fy_objc_class *) $23 = 0x00007fff8e3ba0f0</div><div class="line"></div><div class="line">// personMetaClass-&gt;superclas=0x00007fff8e3ba0f0</div><div class="line">//personMetaClass-&gt;isa=0x00007fff8e3ba0f0</div><div class="line">//personMetaClass = 0x0000000100002440</div><div class="line"></div><div class="line">(lldb) p/x personMetaClass-&gt;superclass</div><div class="line">(Class) $25 = 0x00007fff8e3ba0f0</div><div class="line">(lldb) p/x personMetaClass-&gt;isa</div><div class="line">(__NSAtom *) $26 = 0x001dffff8e3ba0f1</div><div class="line">(lldb) p/x personMetaClass</div><div class="line">(fy_objc_class *) $30 = 0x0000000100002440</div><div class="line"></div><div class="line">// studentMetaClass-&gt;superclas=0x0000000100002440</div><div class="line">//studentMetaClass-&gt;isa=0x00007fff8e3ba0f0</div><div class="line"></div><div class="line"></div><div class="line">(lldb) p/x studentMetaClass-&gt;superclass</div><div class="line">(Class) $27 = 0x0000000100002440</div><div class="line">(lldb) p/x studentMetaClass-&gt;isa</div><div class="line">(__NSAtom *) $28 = 0x001dffff8e3ba0f1</div><div class="line">(lldb) p/x 0x001dffff8e3ba0f1 &amp; 0x00007ffffffffff8</div><div class="line">(long) $29 = 0x00007fff8e3ba0f0</div></pre></td></tr></table></figure>
+<p>由上面可以看出，<code>studentMetaClass-&gt;isa</code>,<code>personMetaClass-&gt;isa</code>,<code>objectMetaClass-&gt;isa</code>结果<code>mask</code>之后都是<code>0x00007fff8e3ba0f0</code>，与<code>p/x objectMetaClass</code>结果一致，则验证了13，14，15号线，<code>studentMetaClass-&gt;superclass =0x0000000100002440</code>,<code>personMetaClass = 0x0000000100002440</code>验证12号线，<code>personMetaClass-&gt;isa=0x00007fff8e3ba0f0</code>和<code>objectMetaClass = 0x00007fff8e3ba0f0</code>验证了11号线，<code>objectMetaClass-&gt;superclass = 0x00007fff8e3ba140  NSObject</code>验证10号线。</p>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>对象的isa指向哪里？</p>
+<ul>
+<li>instance对象的isa指向class对象</li>
+<li>class对象的isa指向meta-class对象</li>
+<li>meta-class对象的isa指向基类的meta-class对象</li>
+<li>class和meta-class的内存结构一样的，只是值不一样</li>
+</ul>
+<p>OC的类信息存放在哪里？</p>
+<ul>
+<li>对象方法、属性、成员变量、协议信息存放在class对象中</li>
+<li>类方法存放在meta-class对象中</li>
+<li>成员变量具体值存放在instance对象中</li>
+</ul>
+<h4 id="资料下载"><a href="#资料下载" class="headerlink" title="资料下载"></a>资料下载</h4><ul>
+<li><a href="https://github.com/ifgyong/iOSDataFactory" target="_blank" rel="external">学习资料下载</a></li>
+<li><a href="https://github.com/ifgyong/demo/tree/master/OC" target="_blank" rel="external">demo code</a></li>
+</ul>
+<hr>
+<p>最怕一生碌碌无为，还安慰自己平凡可贵。</p>
+<p>本文章之所以图片比较少，我觉得还是跟着代码敲一遍，印象比较深刻。</p>
+<p><img src="../images/0.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/IOS底层原理 对象的本质--(1)/" rel="next" title="iOS底层原理  对象的本质 --(1)">
+                <i class="fa fa-chevron-left"></i> iOS底层原理  对象的本质 --(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/iOS底层原理 KVO和KVC本质与联系 --(3)/" rel="prev" title="iOS底层原理  KVO和KVC本质与联系 --(3)">
+                iOS底层原理  KVO和KVC本质与联系 --(3) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">兜兜转转</p>
+              <div class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#底层原理-类的本质"><span class="nav-number">1.</span> <span class="nav-text">底层原理 类的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Class的本质"><span class="nav-number">1.1.</span> <span class="nav-text">Class的本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instance-对象验证"><span class="nav-number">1.2.</span> <span class="nav-text">instance 对象验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#class-对象验证"><span class="nav-number">1.3.</span> <span class="nav-text">class 对象验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#meta-class对象验证"><span class="nav-number">1.4.</span> <span class="nav-text">meta-class对象验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">1.5.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#资料下载"><span class="nav-number">1.6.</span> <span class="nav-text">资料下载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">兜兜转转</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

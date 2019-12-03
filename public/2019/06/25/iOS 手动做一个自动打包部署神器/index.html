@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="之前使用的fastlane添加pgyer自动打包的，最近发现更新总是有问题，所以产生了自己shell做一个的想法。虽然代码比较少，但是很实用。  打包 导出ipa 上传pgyer  打包自动上传pgyer12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535">
+<meta name="keywords" content="iOS,自动打包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 手动做一个自动打包部署神器">
+<meta property="og:url" content="http://fgyong.cn/2019/06/25/iOS 手动做一个自动打包部署神器/index.html">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="之前使用的fastlane添加pgyer自动打包的，最近发现更新总是有问题，所以产生了自己shell做一个的想法。虽然代码比较少，但是很实用。  打包 导出ipa 上传pgyer  打包自动上传pgyer12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-03T04:48:00.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 手动做一个自动打包部署神器">
+<meta name="twitter:description" content="之前使用的fastlane添加pgyer自动打包的，最近发现更新总是有问题，所以产生了自己shell做一个的想法。虽然代码比较少，但是很实用。  打包 导出ipa 上传pgyer  打包自动上传pgyer12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://fgyong.cn/2019/06/25/iOS 手动做一个自动打包部署神器/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS 手动做一个自动打包部署神器 | 兜兜转转的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">兜兜转转的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">不忘初心 方得始终</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/06/25/iOS 手动做一个自动打包部署神器/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="兜兜转转"/>
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兜兜转转的技术博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 手动做一个自动打包部署神器
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-25 16:39:24" itemprop="dateCreated datePublished" datetime="2019-06-25T16:39:24+08:00">2019-06-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-03 12:48:00" itemprop="dateModified" datetime="2019-12-03T12:48:00+08:00">2019-12-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前使用的fastlane添加pgyer自动打包的，最近发现更新总是有问题，所以产生了自己shell做一个的想法。虽然代码比较少，但是很实用。</p>
+<ul>
+<li>打包</li>
+<li>导出ipa</li>
+<li>上传pgyer</li>
+</ul>
+<h4 id="打包自动上传pgyer"><a href="#打包自动上传pgyer" class="headerlink" title="打包自动上传pgyer"></a>打包自动上传pgyer</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#xcodebuild archive -project &apos;test.xcodeproj&apos; -configuration &apos;Debug&apos; -scheme &apos;BLTSZY&apos; -archivePath &apos;./app.xcarchive&apos; LIBRARY_SEARCH_PATHS=&quot;./Pods/../build/**  ./BLTSZY/**&quot;</div><div class="line">proName=&apos;your project name&apos;</div><div class="line">proURL=&quot;your project path&quot;#like /Users/Jerry/Desktop/ios_afu</div><div class="line">api_key=&apos;&apos;#pgyer api_key</div><div class="line">configuration=&apos;Debug&apos; #Release </div><div class="line">autoPlus()&#123;</div><div class="line">path=$&#123;proURL&#125;/$&#123;proName&#125;/$&#123;proName&#125;/Info.plist</div><div class="line">number=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;$&#123;path&#125;&quot;)</div><div class="line">BundleVersion=$(( $number + 1 ))</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set CFBundleVersion $BundleVersion&quot; &quot;$&#123;path&#125;&quot;</div><div class="line">&#125;</div><div class="line">#打包</div><div class="line">arch()&#123;</div><div class="line">    echo &apos;开始编译Pods&apos;</div><div class="line">    xcodebuild -project Pods/Pods.xcodeproj build</div><div class="line">    echo &apos;开始编译project&apos;</div><div class="line"></div><div class="line">xcodebuild -archivePath &quot;./build/$&#123;proName&#125;.xcarchive&quot; -workspace $proName.xcworkspace -sdk iphoneos -scheme $proName -configuration $configuration archive</div><div class="line">autoPlus</div><div class="line">&#125;</div><div class="line">#导出ipa</div><div class="line">exportIPA()&#123;</div><div class="line">    echo &apos;开始导出ipa&apos;</div><div class="line">    xcodebuild -exportArchive -archivePath &quot;./build/$&#123;proName&#125;.xcarchive&quot; -exportPath &apos;./app&apos; -exportOptionsPlist &apos;./ExportOptions.plist&apos;</div><div class="line">&#125;</div><div class="line">#上传ipa到蒲公英</div><div class="line">upload()&#123;</div><div class="line">if [ -e &quot;$&#123;proURL&#125;/app/$&#123;proName&#125;.ipa&quot; ]</div><div class="line">then</div><div class="line">    echo &apos;开始上传ipa/apk到蒲公英&apos;</div><div class="line">    curl -F &quot;file=@$&#123;proURL&#125;/app/$&#123;proName&#125;.ipa&quot; -F &quot;_api_key=$&#123;api_key&#125;&quot; &apos;http://www.pgyer.com/apiv2/app/upload&apos;</div><div class="line">else</div><div class="line">    echo &quot;在目录：$&#123;proURL&#125;/app/$&#123;proName&#125;.ipa 不存在&quot;</div><div class="line">fi</div><div class="line">&#125;</div><div class="line">startarch()&#123;</div><div class="line">    arch</div><div class="line">    if (($? == 0))</div><div class="line">    then</div><div class="line">        echo &apos;archive success🍺&apos;</div><div class="line">        startExportIPA</div><div class="line">    else</div><div class="line">        echo &apos;archive faild❌&apos;</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line">startExportIPA()&#123;</div><div class="line">    exportIPA</div><div class="line">    if(($? == 0))</div><div class="line">    then</div><div class="line">        echo &apos;exportIPA success🍺🍺&apos;</div><div class="line">        startUPLoadIPA</div><div class="line">    else</div><div class="line">        echo &apos;exportIPA faild ❌&apos;</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line">startUPLoadIPA()&#123;</div><div class="line">    upload</div><div class="line">    if(($? == 0))</div><div class="line">    then</div><div class="line">        echo &apos;uploadIPA success&apos;</div><div class="line">    else</div><div class="line">        echo &apos;uploadIPA faild ❌&apos;</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">if (($# == 0))</div><div class="line">#then</div><div class="line">#    startarch</div><div class="line">#elif (($# == 1))</div><div class="line">then</div><div class="line">        while :</div><div class="line">        do</div><div class="line">        echo &apos;🍺🍺🍺***********************🍺🍺🍺&apos;</div><div class="line">        echo  &quot;输入 1 到 4 之间的数字:&quot;</div><div class="line">        echo  &quot;输入 1:从编译打包开始至结束&quot;</div><div class="line">        echo  &quot;输入 2:从导出IPA开始至结束&quot;</div><div class="line">        echo  &quot;输入 3:从上传ipa开始至结束&quot;</div><div class="line">        echo  &quot;输入 4:退出&quot;</div><div class="line">        read a</div><div class="line">        case $a in</div><div class="line">            1)startarch</div><div class="line">            break;;</div><div class="line">            2)startExportIPA</div><div class="line">            break;;</div><div class="line">            3)startUPLoadIPA</div><div class="line">            break;;</div><div class="line">            4) break;;</div><div class="line">        esac</div><div class="line">        done</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>将该文件和plis拖到project目录下，然后配置<br>plis文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</div><div class="line">&lt;plist version=&quot;1.0&quot;&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">	&lt;key&gt;compileBitcode&lt;/key&gt;</div><div class="line">	&lt;false/&gt;</div><div class="line">	&lt;key&gt;method&lt;/key&gt;</div><div class="line">	&lt;string&gt;ad-hoc&lt;/string&gt;</div><div class="line">	&lt;key&gt;provisioningProfiles&lt;/key&gt;</div><div class="line">	&lt;dict&gt;</div><div class="line">		&lt;key&gt;your bundle id&lt;/key&gt;</div><div class="line">		&lt;string&gt;your .mobileprovsion&lt;/string&gt;</div><div class="line">	&lt;/dict&gt;</div><div class="line">	&lt;key&gt;signingCertificate&lt;/key&gt;</div><div class="line">	&lt;string&gt;iPhone Distribution&lt;/string&gt;</div><div class="line">	&lt;key&gt;signingStyle&lt;/key&gt;</div><div class="line">	&lt;string&gt;manual&lt;/string&gt;</div><div class="line">	&lt;key&gt;stripSwiftSymbols&lt;/key&gt;</div><div class="line">	&lt;true/&gt;</div><div class="line">	&lt;key&gt;teamID&lt;/key&gt;</div><div class="line">	&lt;string&gt;your_team_id&lt;/string&gt;</div><div class="line">	&lt;key&gt;thinning&lt;/key&gt;</div><div class="line">	&lt;string&gt;&amp;lt;none&amp;gt;&lt;/string&gt;</div><div class="line">&lt;/dict&gt;</div><div class="line">&lt;/plist&gt;</div></pre></td></tr></table></figure></p>
+<p>下载<code>setup.sh</code>拖到项目文件夹内，然后<br>运行<code>./setup.sh</code>，即可完成上传到pgyer网站。<br>具体的配置属性见源码下载页面。<br><a href="https://github.com/ifgyong/autoAEU" target="_blank" rel="external">查看源码</a></p>
+<p>```</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/自动打包/" rel="tag"># 自动打包</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/24/iOS 浅析指针、函数、typedef/" rel="next" title="iOS 浅析指针、函数、typedef">
+                <i class="fa fa-chevron-left"></i> iOS 浅析指针、函数、typedef
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/IOS底层原理 对象的本质--(1)/" rel="prev" title="iOS底层原理  对象的本质 --(1)">
+                iOS底层原理  对象的本质 --(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">兜兜转转</p>
+              <div class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#打包自动上传pgyer"><span class="nav-number">1.</span> <span class="nav-text">打包自动上传pgyer</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">兜兜转转</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

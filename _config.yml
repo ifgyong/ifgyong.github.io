@@ -75,7 +75,7 @@ archive_generator:
 tag_generator:
   per_page: 10
 ## Themes: http://hexo.io/themes/
-theme: next-7.6.0
+theme: next
 
 
 

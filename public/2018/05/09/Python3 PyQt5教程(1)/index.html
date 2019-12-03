@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Python的GUI库，新手可以先从PyQt5入手，一周精通。1.HelloWord2.添加button3.菜单栏4.textEdit5.打包 1.helloWord1234567891011121314151617181920212223242526272829303132333435#!/usr/bin/env python# -*- coding: utf-8 -*-# @Time    :">
+<meta name="keywords" content="Python3,建站,开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 PyQt5教程(1)">
+<meta property="og:url" content="http://fgyong.cn/2018/05/09/Python3 PyQt5教程(1)/index.html">
+<meta property="og:site_name" content="兜兜转转的技术博客">
+<meta property="og:description" content="Python的GUI库，新手可以先从PyQt5入手，一周精通。1.HelloWord2.添加button3.菜单栏4.textEdit5.打包 1.helloWord1234567891011121314151617181920212223242526272829303132333435#!/usr/bin/env python# -*- coding: utf-8 -*-# @Time    :">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-03T04:48:00.971Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 PyQt5教程(1)">
+<meta name="twitter:description" content="Python的GUI库，新手可以先从PyQt5入手，一周精通。1.HelloWord2.添加button3.菜单栏4.textEdit5.打包 1.helloWord1234567891011121314151617181920212223242526272829303132333435#!/usr/bin/env python# -*- coding: utf-8 -*-# @Time    :">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://fgyong.cn/2018/05/09/Python3 PyQt5教程(1)/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python3 PyQt5教程(1) | 兜兜转转的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">兜兜转转的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">不忘初心 方得始终</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2018/05/09/Python3 PyQt5教程(1)/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="兜兜转转"/>
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兜兜转转的技术博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python3 PyQt5教程(1)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-09 16:39:24" itemprop="dateCreated datePublished" datetime="2018-05-09T16:39:24+08:00">2018-05-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-03 12:48:00" itemprop="dateModified" datetime="2019-12-03T12:48:00+08:00">2019-12-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python的GUI库，新手可以先从PyQt5入手，一周精通。<br>1.HelloWord<br>2.添加button<br>3.菜单栏<br>4.textEdit<br>5.打包</p>
+<h3 id="1-helloWord"><a href="#1-helloWord" class="headerlink" title="1.helloWord"></a>1.helloWord</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># -*- coding: utf-8 -*-</div><div class="line"># @Time    : 2018/5/9 下午1:36</div><div class="line"># @Author  : fgyong 简书:_兜兜转转_  https://www.jianshu.com/u/6d1254c1d145</div><div class="line"># @Site    : http://fgyong.cn 兜兜转转的技术博客</div><div class="line"># @File    : 12.py</div><div class="line"># @Software: PyCharm</div><div class="line">import sys,time,datetime</div><div class="line">from PyQt5.QtWidgets import (QMainWindow,QMessageBox,QWidget, QToolTip, QPushButton, QApplication, QGestureEvent,QLabel,QDesktopWidget)</div><div class="line">from PyQt5.QtGui import QFont,QIcon</div><div class="line"></div><div class="line"></div><div class="line">class Example(QWidget):</div><div class="line">  #构造函数</div><div class="line">    def __init__(self):</div><div class="line">        super().__init__()</div><div class="line">        self.initGUI();</div><div class="line">#初始化函数</div><div class="line">    def initGUI(self):</div><div class="line">#设置窗体frame</div><div class="line">         self.setGeometry(500, 300, 300, 300)</div><div class="line">#窗体title</div><div class="line">        self.setWindowTitle(&apos;我的第一个程序&apos;)</div><div class="line">#添加label</div><div class="line">        self.lable = QLabel(&apos;helloword!&apos;,self)</div><div class="line">#自动换行</div><div class="line">        self.lable.setWordWrap(True)</div><div class="line">#lable的frame</div><div class="line">        self.lable.setGeometry(50,100,200,150)</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    app = QApplication(sys.argv)</div><div class="line">    ex = Example()</div><div class="line">    ex.show()</div><div class="line">    sys.exit(app.exec_())</div></pre></td></tr></table></figure>
+<h3 id="2-添加按钮"><a href="#2-添加按钮" class="headerlink" title="2.添加按钮"></a>2.添加按钮</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">class Example(QWidget):</div><div class="line">    lable = &apos;&apos;</div><div class="line">    def __init__(self):</div><div class="line">        super().__init__()</div><div class="line">        self.initGUI();</div><div class="line"></div><div class="line">    def initGUI(self):</div><div class="line">        # QToolTip.setFont(&apos;SanSerif&apos;,10)</div><div class="line">#提示文字</div><div class="line">        self.setToolTip(&apos;&lt;b&gt;这是第一个QWidget&lt;/b&gt;&apos;)</div><div class="line">#更新时间的button</div><div class="line">        btn = QPushButton(&apos;更新时间&apos;, self)</div><div class="line">#button的提示文字</div><div class="line">        btn.setToolTip(&apos;这是个btn&apos;)</div><div class="line">#设置默认大小</div><div class="line">        btn.resize(btn.sizeHint())</div><div class="line"></div><div class="line">        btn2 = QPushButton(&apos;alert&apos;, self)</div><div class="line">        btn2.setToolTip(&apos;这是弹出alert的btn&apos;)</div><div class="line">        btn2.resize(btn.sizeHint())</div><div class="line">        btn2.move(0,60)</div><div class="line">        btn2.clicked.connect(self.showMessage)</div><div class="line"></div><div class="line">        size = self.geometry()</div><div class="line">   #绑定button的点击函数   self.showTime是函数名字后边没有（）</div><div class="line">        btn.clicked.connect(self.showTime)</div><div class="line"></div><div class="line">        self.setGeometry(1500, 300, 300, 300)</div><div class="line">        self.setWindowTitle(&apos;我的第一个程序&apos;)</div><div class="line"></div><div class="line">        self.lable = QLabel(&apos;时间：&apos;,self)</div><div class="line">        self.lable.setWordWrap(True)#自动换行</div><div class="line">        self.lable.setGeometry(50,100,200,150)</div><div class="line">        self.lable.setText(&apos;时间:&apos;+datetime.datetime.now().strftime(&apos;%Y-%m-%d %H:%M:%S&apos;))</div><div class="line">        icon = QIcon(&quot;/Users/Jerry/PycharmProjects/Flask_dmeo_1/App/icons/cry.png&quot;)</div><div class="line">        btn.setIcon(icon)</div><div class="line">        self.setWindowIcon(icon)</div><div class="line">    def showTime(self):</div><div class="line">        nowTime=datetime.datetime.now().strftime(&apos;%Y-%m-%d %H:%M:%S&apos;)</div><div class="line">        self.lable.setText(&quot;时间:&quot;+nowTime)</div><div class="line"></div><div class="line">    def showMessage(self):</div><div class="line">        self.showBox(&quot;alert message&quot;)</div><div class="line">    def showBox(self,message):</div><div class="line">        box=QMessageBox.question(self,&apos;温馨提示&apos;,message,QMessageBox.Yes|QMessageBox.No,QMessageBox.No)</div><div class="line">        if box == QMessageBox.Yes:</div><div class="line">            self.lable.setText(self.lable.text()+&apos;YES&apos;)</div><div class="line">        else:</div><div class="line">            self.lable.setText(self.lable.text() + &apos;NO&apos;)</div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    app = QApplication(sys.argv)</div><div class="line">    ex = Example()</div><div class="line">    ex.show()</div><div class="line">    sys.exit(app.exec_())</div></pre></td></tr></table></figure>
+<h3 id="3-菜单栏"><a href="#3-菜单栏" class="headerlink" title="3.菜单栏"></a>3.菜单栏</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">def showMenu(self):</div><div class="line">    # 生成母菜单栏</div><div class="line">    menubar = self.menuBar()</div><div class="line">    #添加菜单</div><div class="line">    p = menubar.addMenu(&apos;p&apos;)</div><div class="line">    #菜单 p2</div><div class="line">    impMenu = QMenu(&apos;p2&apos;, self)</div><div class="line">    # 子菜单 p2 click</div><div class="line">    impAct = QAction(&apos;p2 click&apos;, self)</div><div class="line">    #绑定 action</div><div class="line">    impAct.triggered.connect(self.p2)</div><div class="line">    # 添加菜单 p2 click</div><div class="line">    impMenu.addAction(impAct)</div><div class="line">    # 添加菜单 p2</div><div class="line">    p.addMenu(impMenu)</div><div class="line"></div><div class="line"></div><div class="line">    newAct = QAction(&apos;p1&apos;, self)</div><div class="line">    newAct.triggered.connect(self.p1)</div><div class="line">    p.addAction(newAct)</div><div class="line"></div><div class="line"></div><div class="line">def p1(self):</div><div class="line">    print(&quot;p1&quot;)</div><div class="line"></div><div class="line">def p2(self):</div><div class="line">    print(&quot;p2&quot;)</div></pre></td></tr></table></figure>
+<h3 id="4-文本框-QTextEdit"><a href="#4-文本框-QTextEdit" class="headerlink" title="4.文本框 QTextEdit"></a>4.文本框 QTextEdit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">def showTextView(self):</div><div class="line">    self.b=QTextEdit(self)</div><div class="line">    self.b.setPlaceholderText(&apos;我是默认文字&apos;)</div><div class="line">    self.b.setGeometry(20,150,200,100)</div><div class="line"></div><div class="line">    btn3 = QPushButton(&apos;提交&apos;, self)</div><div class="line">    btn3.resize(btn3.sizeHint())</div><div class="line">    btn3.clicked.connect(self.print)</div><div class="line">    btn3.move(110,260)</div><div class="line">def print(self):</div><div class="line">    #输出来文本框的汉字</div><div class="line">    print(self.b.toPlainText())</div></pre></td></tr></table></figure>
+<h3 id="5-打包成可执行文件"><a href="#5-打包成可执行文件" class="headerlink" title="5.打包成可执行文件"></a>5.打包成可执行文件</h3><p>这里说是打包，不是exe和dmg，而是可执行文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">********************************************************************</div><div class="line">pyinstaller -F path </div><div class="line">编译成可执行文件</div><div class="line">path是想编译文件的路径</div><div class="line"></div><div class="line">会生成 dist文件夹和build文件夹,在dist文件夹下边生成一个可执行文件，</div><div class="line">文件的名字和编译文件的名字一样。双击就可以执行这个程序了。</div><div class="line">********************************************************************</div></pre></td></tr></table></figure></p>
+<p>学习的小伙伴可以下载来看哦<a href="git@github.com:ifgyong/PYDemo.git">仓库地址</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python3/" rel="tag"># Python3</a>
+          
+            <a href="/tags/建站/" rel="tag"># 建站</a>
+          
+            <a href="/tags/开发/" rel="tag"># 开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/16/mac-php5-6+mongdb+Apache环境配置/" rel="next" title="PHP5.6+YII+MongoDB环境搭建">
+                <i class="fa fa-chevron-left"></i> PHP5.6+YII+MongoDB环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/10/Python3 PyQt5教程(2)/" rel="prev" title="Python3 PyQt5教程(2)">
+                Python3 PyQt5教程(2) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">兜兜转转</p>
+              <div class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-helloWord"><span class="nav-number">1.</span> <span class="nav-text">1.helloWord</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加按钮"><span class="nav-number">2.</span> <span class="nav-text">2.添加按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-菜单栏"><span class="nav-number">3.</span> <span class="nav-text">3.菜单栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-文本框-QTextEdit"><span class="nav-number">4.</span> <span class="nav-text">4.文本框 QTextEdit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-打包成可执行文件"><span class="nav-number">5.</span> <span class="nav-text">5.打包成可执行文件</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">兜兜转转</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
