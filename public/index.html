@@ -196,7 +196,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -224,58 +224,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>Tags</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
 
   </li>
         
@@ -292,11 +241,70 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>Schlagwörter</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
 
   </li>
 
       
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>Suche</a>
+        </li>
       
     </ul>
   
@@ -306,6 +314,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -356,7 +391,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -389,14 +424,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-13 11:15:58" itemprop="dateCreated datePublished" datetime="2019-12-13T11:15:58+08:00">2019-12-13</time>
+              <time title="Erstellt: 2019-12-13 11:15:58" itemprop="dateCreated datePublished" datetime="2019-12-13T11:15:58+08:00">2019-12-13</time>
             
 
             
@@ -411,9 +446,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 14:44:16" itemprop="dateModified" datetime="2019-12-03T14:44:16+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 14:44:16" itemprop="dateModified" datetime="2019-12-03T14:44:16+08:00">2019-12-03</time>
               
             
           </span>
@@ -427,7 +462,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -596,7 +631,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -629,14 +664,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:23:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:23:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:23:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:23:58+08:00">2019-12-01</time>
             
 
             
@@ -651,9 +686,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 11:15:52" itemprop="dateModified" datetime="2019-12-03T11:15:52+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 11:15:52" itemprop="dateModified" datetime="2019-12-03T11:15:52+08:00">2019-12-03</time>
               
             
           </span>
@@ -667,7 +702,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -875,7 +910,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -908,14 +943,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:22:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:22:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:22:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:22:58+08:00">2019-12-01</time>
             
 
             
@@ -930,9 +965,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 16:24:31" itemprop="dateModified" datetime="2019-12-03T16:24:31+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 16:24:31" itemprop="dateModified" datetime="2019-12-03T16:24:31+08:00">2019-12-03</time>
               
             
           </span>
@@ -946,7 +981,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -1270,7 +1305,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1303,14 +1338,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:21:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:21:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:21:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:21:58+08:00">2019-12-01</time>
             
 
             
@@ -1325,9 +1360,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:06:56" itemprop="dateModified" datetime="2019-12-03T13:06:56+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:06:56" itemprop="dateModified" datetime="2019-12-03T13:06:56+08:00">2019-12-03</time>
               
             
           </span>
@@ -1341,7 +1376,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -1689,7 +1724,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1722,14 +1757,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:20:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:20:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:20:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:20:58+08:00">2019-12-01</time>
             
 
             
@@ -1744,9 +1779,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:06:41" itemprop="dateModified" datetime="2019-12-03T13:06:41+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:06:41" itemprop="dateModified" datetime="2019-12-03T13:06:41+08:00">2019-12-03</time>
               
             
           </span>
@@ -1760,7 +1795,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -2015,7 +2050,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2048,14 +2083,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:19:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:19:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:19:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:19:58+08:00">2019-12-01</time>
             
 
             
@@ -2070,9 +2105,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:04:59" itemprop="dateModified" datetime="2019-12-03T13:04:59+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:04:59" itemprop="dateModified" datetime="2019-12-03T13:04:59+08:00">2019-12-03</time>
               
             
           </span>
@@ -2086,7 +2121,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -2317,7 +2352,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2350,14 +2385,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:18:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:18:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:18:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:18:58+08:00">2019-12-01</time>
             
 
             
@@ -2372,9 +2407,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:03:32" itemprop="dateModified" datetime="2019-12-03T13:03:32+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:03:32" itemprop="dateModified" datetime="2019-12-03T13:03:32+08:00">2019-12-03</time>
               
             
           </span>
@@ -2388,7 +2423,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -2700,7 +2735,7 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2733,14 +2768,14 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:17:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:17:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:17:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:17:58+08:00">2019-12-01</time>
             
 
             
@@ -2755,9 +2790,9 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:03:16" itemprop="dateModified" datetime="2019-12-03T13:03:16+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:03:16" itemprop="dateModified" datetime="2019-12-03T13:03:16+08:00">2019-12-03</time>
               
             
           </span>
@@ -2771,7 +2806,7 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -2962,7 +2997,7 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2995,14 +3030,14 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:16:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:16:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:16:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:16:58+08:00">2019-12-01</time>
             
 
             
@@ -3017,9 +3052,9 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:02:33" itemprop="dateModified" datetime="2019-12-03T13:02:33+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:02:33" itemprop="dateModified" datetime="2019-12-03T13:02:33+08:00">2019-12-03</time>
               
             
           </span>
@@ -3033,7 +3068,7 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -3399,7 +3434,7 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兜兜转转"/>
       <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
-      <meta itemprop="image" content="/0.jpeg#/images/avatar.gif"/>
+      <meta itemprop="image" content="/0.jpeg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -3432,14 +3467,14 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-12-01 11:15:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:15:58+08:00">2019-12-01</time>
+              <time title="Erstellt: 2019-12-01 11:15:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:15:58+08:00">2019-12-01</time>
             
 
             
@@ -3454,9 +3489,9 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-12-03 13:02:14" itemprop="dateModified" datetime="2019-12-03T13:02:14+08:00">2019-12-03</time>
+                <time title="Geändert am: 2019-12-03 13:02:14" itemprop="dateModified" datetime="2019-12-03T13:02:14+08:00">2019-12-03</time>
               
             
           </span>
@@ -3470,7 +3505,7 @@ objc_msgSendSuper(void /* struct objc_super *super, SEL op, ... */ )</code><br> 
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
@@ -3827,7 +3862,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Nächste Seite"></i></a>
   </nav>
 
 
@@ -3859,7 +3894,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/0.jpeg#/images/avatar.gif"
+                src="/0.jpeg"
                 alt="兜兜转转"/>
             
               <p class="site-author-name" itemprop="name">兜兜转转</p>
@@ -3874,7 +3909,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">42</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -3905,7 +3940,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
                       
                     
                     <span class="site-state-item-count">7</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -3966,7 +4001,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
                       
                     
                     <span class="site-state-item-count">22</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">schlagwörter</span>
                   </a>
                 </div>
               
@@ -3989,6 +4024,17 @@ dispatch_async(dispatch_get_main_queue(), ^{
                     
                   
                   <a href="https://github.com/ifgyong" title="GitHub &rarr; https://github.com/ifgyong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://juejin.im/user/5693a77b60b2c2974cdd7f7f/posts" title="Juejin &rarr; https://juejin.im/user/5693a77b60b2c2974cdd7f7f/posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-掘金"></i>Juejin</a>
                 </span>
               
             </div>
@@ -4034,7 +4080,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.0</div>
 
 
 
@@ -4042,7 +4088,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.0</div>
 
 
 
@@ -4155,6 +4201,19 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
   
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css"/>
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.0"></script>
 
 
 
