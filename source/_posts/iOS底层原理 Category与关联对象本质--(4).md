@@ -1,9 +1,10 @@
- title: iOS底层原理 Category与关联对象本质--(4)
+title: iOS底层原理 Category与关联对象本质--(4)
 date: 2019-12-1 11:14:58
 tags:
 - iOS
 categories: iOS
 ---
+
  今天我们再看一下`Category`的底层原理。
  先看一下`Category`的简单使用，首先新增一个类的`Category`，然后添加需要的函数，然后在使用的文件中导入就可以直接使用了。代码如下:
  
