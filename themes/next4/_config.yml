@@ -135,7 +135,7 @@ menu:
  categories: /categories
  tags: /tags
  about: /about
- 
+
 # Enable / Disable menu icons / item badges.
 menu_settings:
   icons: true
@@ -174,7 +174,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: /0.jpeg#/images/avatar.gif
+  url: /0.jpeg #/images/avatar.gif
   # If true, the avatar will be dispalyed in circle.
   rounded: false
   # If true, the avatar will be rotated with the cursor.
@@ -188,7 +188,8 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  #GitHub: https://github.com/yourname || github
+  GitHub: https://github.com/ifgyong || github
+  掘金: https://juejin.im/user/5693a77b60b2c2974cdd7f7f/posts || 掘金
   #E-Mail: mailto:yourname@gmail.com || envelope
   #Weibo: https://weibo.com/yourname || weibo
   #Google: https://plus.google.com/yourname || google
@@ -198,9 +199,9 @@ social:
   #YouTube: https://youtube.com/yourname || youtube
   #Instagram: https://instagram.com/yourname || instagram
   #Skype: skype:yourname?call|chat || skype
-  GitHub: https://github.com/ifgyong || GitHub
-  掘金: https://juejin.im/user/5693a77b60b2c2974cdd7f7f || 掘金
-  RSS: /atom.xml || rss
+  # GitHub: https://github.com/ifgyong || GitHub
+  # 掘金: https://juejin.im/user/5693a77b60b2c2974cdd7f7f || 掘金
+  # RSS: /atom.xml || rss
 
 social_icons:
   enable: true
@@ -651,16 +652,16 @@ livere_uid: # <your_uid>
 # For more information: https://gitalk.github.io, https://github.com/gitalk/gitalk
 gitalk:
   enable: true
-  github_id: ifgyong# GitHub repo owner
-  repo: ifgyong.github.io# Repository name to store issues
-  client_id: a7800c37057fc3ce83df# GitHub Application Client ID
-  client_secret: 0de240e28197f071e10fcb67d4337fd8afe8a9c3# GitHub Application Client Secret
-  admin_user: ifgyong# GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  github_id: ifgyong # GitHub repo owner
+  repo: ifgyong.github.io # Repository name to store issues
+  client_id: a7800c37057fc3ce83df # GitHub Application Client ID
+  client_secret: 0de240e28197f071e10fcb67d4337fd8afe8a9c3 # GitHub Application Client Secret
+  admin_user: ifgyong # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
   distraction_free_mode: true # Facebook-like distraction free mode
   # Gitalk's display language depends on user's browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
-  language:
+  language: zh-CN
 
 
 # ---------------------------------------------------------------
