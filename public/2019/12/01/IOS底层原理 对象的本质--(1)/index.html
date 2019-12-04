@@ -96,28 +96,28 @@
 
 
 
-  <meta name="description" content="对象的本质探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC对象的内存布局和内存分配机制。 使用的代码下载要用的工具:  Xcode 10.2 gotoShell linux-glibc-2.29源码 libmalloc源码  首先我们使用最基本的代码验证对象是什么? 12345678int mai">
+  <meta name="description" content="对象的本质探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC/对象的内存布局和内存分配机制。 使用的代码下载要用的工具:  Xcode 10.2 gotoShell linux-glibc-2.29源码 libmalloc源码  首先我们使用最基本的代码验证对象是什么? 12345678int ma">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS底层原理  对象的本质 --(1)">
 <meta property="og:url" content="http://fgyong.cn/2019/12/01/IOS底层原理 对象的本质--(1)/index.html">
 <meta property="og:site_name" content="fgyong的技术博客">
-<meta property="og:description" content="对象的本质探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC对象的内存布局和内存分配机制。 使用的代码下载要用的工具:  Xcode 10.2 gotoShell linux-glibc-2.29源码 libmalloc源码  首先我们使用最基本的代码验证对象是什么? 12345678int mai">
+<meta property="og:description" content="对象的本质探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC/对象的内存布局和内存分配机制。 使用的代码下载要用的工具:  Xcode 10.2 gotoShell linux-glibc-2.29源码 libmalloc源码  首先我们使用最基本的代码验证对象是什么? 12345678int ma">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-1.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-2.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-3.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-4.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-5.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-6.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-7.png">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/1-8.png">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/8/8/16c71b57f7f1624a?w=655&h=268&f=jpeg&s=27083">
-<meta property="og:updated_time" content="2019-12-03T04:56:17.289Z">
+<meta property="og:image" content="http://fgyong.cn/images/1-1.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-2.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-3.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-4.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-5.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-6.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-7.png">
+<meta property="og:image" content="http://fgyong.cn/images/1-8.png">
+<meta property="og:image" content="http://fgyong.cn/images/0.png">
+<meta property="og:updated_time" content="2019-12-04T04:29:50.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS底层原理  对象的本质 --(1)">
-<meta name="twitter:description" content="对象的本质探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC对象的内存布局和内存分配机制。 使用的代码下载要用的工具:  Xcode 10.2 gotoShell linux-glibc-2.29源码 libmalloc源码  首先我们使用最基本的代码验证对象是什么? 12345678int mai">
-<meta name="twitter:image" content="http://fgyong.cn/2019/12/01/images/1-1.png">
+<meta name="twitter:description" content="对象的本质探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC/对象的内存布局和内存分配机制。 使用的代码下载要用的工具:  Xcode 10.2 gotoShell linux-glibc-2.29源码 libmalloc源码  首先我们使用最基本的代码验证对象是什么? 12345678int ma">
+<meta name="twitter:image" content="http://fgyong.cn/images/1-1.png">
 
 
 
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-12-03 12:56:17" itemprop="dateModified" datetime="2019-12-03T12:56:17+08:00">2019-12-03</time>
+                <time title="修改时间：2019-12-04 12:29:50" itemprop="dateModified" datetime="2019-12-04T12:29:50+08:00">2019-12-04</time>
               
             
           </span>
@@ -476,7 +476,7 @@
       
 
       
-        <h3 id="对象的本质"><a href="#对象的本质" class="headerlink" title="对象的本质"></a>对象的本质</h3><p>探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。<br>那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC对象的内存布局和内存分配机制。</p>
+        <h3 id="对象的本质"><a href="#对象的本质" class="headerlink" title="对象的本质"></a>对象的本质</h3><p>探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。<br>那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC/对象的内存布局和内存分配机制。</p>
 <p>使用的<a href="https://github.com/ifgyong/demo/tree/master/OC" target="_blank" rel="external">代码下载</a><br>要用的工具:</p>
 <ul>
 <li><a href="https://developer.apple.com/cn/support/xcode/" target="_blank" rel="external">Xcode 10.2</a></li>
@@ -491,7 +491,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line"> /* @autoreleasepool */ &#123; __AtAutoreleasePool __autoreleasepool; </div><div class="line"></div><div class="line">  NSObject *obj=((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)((NSObject *(*)(id, SEL))(void *)objc_msgSend)((id)objc_getClass(&quot;NSObject&quot;), sel_registerName(&quot;alloc&quot;)), sel_registerName(&quot;init&quot;));</div><div class="line"></div><div class="line">     NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_c0_7nm4_r7s4xd0mbs67ljb_b8m0000gn_T_main_1b47c1_mi_0);</div><div class="line"> &#125;</div><div class="line"> return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后搜索</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct NSObject_IMPL &#123;</div><div class="line">	Class isa;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>那么这个结构体是什么呢？<br>其实我们<code>Object-C</code>编译之后对象会编译成结构体，如图所示：<br><img src="../images/1-1.png" alt=""><br>那么<code>isa</code>是什么吗？通过查看源码得知：</p>
+<p>那么这个结构体是什么呢？<br>其实我们<code>Object-C</code>编译之后对象会编译成结构体，如图所示：<br><img src="/images/1-1.png" alt=""><br>那么<code>isa</code>是什么吗？通过查看源码得知：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_class *Class;</div></pre></td></tr></table></figure>
 <p><code>class</code>其实是一个指向结构体的指针，然后<code>com+点击class</code>得到：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">    Class _Nullable super_class                              OBJC2_UNAVAILABLE;</div><div class="line">    const char * _Nonnull name                               OBJC2_UNAVAILABLE;</div><div class="line">    long version                                             OBJC2_UNAVAILABLE;</div><div class="line">    long info                                                OBJC2_UNAVAILABLE;</div><div class="line">    long instance_size                                       OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_ivar_list * _Nullable ivars                  OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_method_list * _Nullable * _Nullable methodLists                    OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_cache * _Nonnull cache                       OBJC2_UNAVAILABLE;</div><div class="line">    struct objc_protocol_list * _Nullable protocols          OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure>
@@ -510,10 +510,10 @@
 <p><code>class_getInstanceSize</code>函数的内部执行顺序是<code>class_getInstanceSize-&gt;cls-&gt;alignedInstanceSize()</code><br>查阅源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//成员变量大小 8bytes</div><div class="line">    uint32_t alignedInstanceSize() &#123;</div><div class="line">        return word_align(unalignedInstanceSize());</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>所以最终结论是：<strong>对象指针实际大小为8bytes，内存分配为16bytes，其实是空出了8bytes</strong>。</p>
 <p>验证：<br>在刚才 的代码打断点和设置<code>Debug-&gt;Debug Workflow-&gt;View Memory</code>,然后运行程序，</p>
-<p><img src="../images/1-2.png" alt=""></p>
-<p><img src="../images/1-3.png" alt=""><br>点击<code>obj-&gt;view *objc</code>得到上图所示的内存布局，从<code>address</code>看出和<code>obj</code>内存一样，左上角是16字节，8个字节有数据，8个字节是空的，默认是0.</p>
-<p>使用lldb命令<code>memory read 0x100601f30</code>输出内存布局，如下图：<br><img src="../images/1-4.png" alt=""><br>或者使用<code>x/4xg 0x100601f30</code>输出：</p>
-<p><img src="../images/1-5.png" alt=""><br><code>x/4xg 0x100601f30</code>中<code>4</code>是输出<code>4</code>个数据,<code>x</code> 是16进制,后边<code>g</code>是8字节为单位。可以验证刚才的出的结论。</p>
+<p><img src="/images/1-2.png" alt=""></p>
+<p><img src="/images/1-3.png" alt=""><br>点击<code>obj-&gt;view *objc</code>得到上图所示的内存布局，从<code>address</code>看出和<code>obj</code>内存一样，左上角是16字节，8个字节有数据，8个字节是空的，默认是0.</p>
+<p>使用lldb命令<code>memory read 0x100601f30</code>输出内存布局，如下图：<br><img src="/images/1-4.png" alt=""><br>或者使用<code>x/4xg 0x100601f30</code>输出：</p>
+<p><img src="/images/1-5.png" alt=""><br><code>x/4xg 0x100601f30</code>中<code>4</code>是输出<code>4</code>个数据,<code>x</code> 是16进制,后边<code>g</code>是8字节为单位。可以验证刚才的出的结论。</p>
 <p>那么我们再使用复杂的一个对象来验证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@interface Person : NSObject</div><div class="line">&#123;</div><div class="line">	int _age;</div><div class="line">	int _no;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p>使用<code>xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc main.m -o main64.cpp</code>编译之后对应的源码是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">struct NSObject_IMPL &#123;</div><div class="line"> Class isa;</div><div class="line">&#125;;</div><div class="line">struct Person_IMPL &#123;</div><div class="line">	struct NSObject_IMPL NSObject_IVARS;// 8 bytes</div><div class="line">	int _age;//4 bytes</div><div class="line">	int _no;//4 bytes</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
@@ -522,9 +522,9 @@
 <p>使用代码验证：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Person *obj=[[Person alloc]init];</div><div class="line">obj-&gt;_age = 15;</div><div class="line">obj-&gt;_no = 14;</div><div class="line"></div><div class="line">struct Person_IMPL *p =(__bridge struct Person_IMPL*)obj;</div><div class="line">NSLog(@&quot;age:%d no:%d&quot;,p-&gt;_age,p-&gt;_no);</div><div class="line"></div><div class="line">//age:15 no:14</div></pre></td></tr></table></figure>
 <p>使用内存布局验证：</p>
-<p><img src="../images/1-6.png" alt=""><br>以十进制输出每个4字节<br><img src="../images/1-7.png" alt=""><br>使用内存布局查看数据验证，<code>Person</code>占用16 bytes。</p>
+<p><img src="/images/1-6.png" alt=""><br>以十进制输出每个4字节<br><img src="/images/1-7.png" alt=""><br>使用内存布局查看数据验证，<code>Person</code>占用16 bytes。</p>
 <p>下边是一个直观的内存布局图：</p>
-<p><img src="../images/1-8.png" alt=""></p>
+<p><img src="/images/1-8.png" alt=""></p>
 <h4 id="再看一下更复杂的继承关系的内存布局："><a href="#再看一下更复杂的继承关系的内存布局：" class="headerlink" title="再看一下更复杂的继承关系的内存布局："></a>再看一下更复杂的继承关系的内存布局：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@interface Person : NSObject</div><div class="line">&#123;</div><div class="line">	@public</div><div class="line">	int _age;//4bytes </div><div class="line">&#125;</div><div class="line">@end</div><div class="line">@implementation Person</div><div class="line">@end</div><div class="line"></div><div class="line">//Student</div><div class="line">@interface Student : Person</div><div class="line">&#123;</div><div class="line">@public</div><div class="line">	int _no;//4bytes</div><div class="line">&#125;</div><div class="line">@end</div><div class="line">@implementation Student</div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>那小伙伴可能要说这一定是32字节，因为<code>Person</code>上边已经证明是16字节，<code>Student</code>又多了个成员变量<code>_no</code>，由于内存对齐，一定是16的整倍数，那就是16+16=32字节。<br>其实不然，<code>Person</code>是内存分配16字节，其实占用了8+4=12字节，剩余4字节位子空着而已，<code>Student</code>是一个对象，不可能在成员变量和指针中间有内存对齐的，参数和指针是对象指针+偏移量得出来的，多个不同的对象才会存在内存对齐。所以<code>Student</code>是占用了16字节。</p>
 <p>那么我们来证明一下：</p>
@@ -558,7 +558,7 @@
 </ul>
 <hr>
 <p>广告时间</p>
-<p><img src="https://user-gold-cdn.xitu.io/2019/8/8/16c71b57f7f1624a?w=655&amp;h=268&amp;f=jpeg&amp;s=27083" alt=""></p>
+<p><img src="/images/0.png" alt=""></p>
 
       
     </div>

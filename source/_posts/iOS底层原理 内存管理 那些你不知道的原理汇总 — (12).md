@@ -12,7 +12,7 @@ categories: iOS
 > 4. weak指针原理和释放时机
 > 5. 引用计数原理
 
-
+/
 ### DisplayLink
 `CADisplayLink`是将任务添加到`runloop`中，`loop`每次循环便会调用`target`的`selector`，使用这个也能监测卡顿问题。首先介绍下`API`
 
@@ -1331,4 +1331,4 @@ void test(){
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)

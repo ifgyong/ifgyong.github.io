@@ -9,7 +9,7 @@ categories: iOS
 
 ### block本质
 
-前几篇文章讲过了，`class`是对象，元类也是对象，本质是结构体，那么block是否也是如此呢？`block`具有这几个特点：
+前几篇文章讲过了，`class`是对象，元类也是对象，本质是结构体，那么block是否也是如此呢？`block`具有这几个特点：/
 
 - block本质上也是一个OC对象，它内部也有isa指针
 - block是封装了函数调用以及函数调用环境的oc对象
@@ -1034,6 +1034,6 @@ person 死了
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)
 
 

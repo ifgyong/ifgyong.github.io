@@ -201,7 +201,7 @@ __NSSetSizeValueAndNotify
 ```
 //开始记录日志
 instrumentObjcMessageSends(YES);
-    // Do stuff...
+    // Do stuff.
 instrumentObjcMessageSends(NO);//结束记录日志
 ```
 
@@ -347,7 +347,7 @@ FYPerson - setAge: age
 
  通过上述代码我们发现NSKVONotifyin_Person中有4个对象方法。分别为setAge: class dealloc _isKVOA，那么至此我们可以画出NSKVONotifyin_Person的内存结构以及方法调用顺序。
  
-![](../images/3-1.png)
+![](/images/3-1.png)
 
 这里NSKVONotifyin_Person重写class方法是为了隐藏NSKVONotifyin_Person。不被外界所看到。我们在p1添加过KVO监听之后，分别打印p1和p2对象的class可以发现他们都返回Person。
 
@@ -533,6 +533,6 @@ KVC其实本质是执行4个set方法和4个get方法，当使用`setValue:forKe
  
  广告时间
 
-![](../images/0.png)
+![](/images/0.png)
  
  

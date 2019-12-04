@@ -1011,4 +1011,4 @@ for (NSInteger i = 0; i < 5; i ++) {
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)

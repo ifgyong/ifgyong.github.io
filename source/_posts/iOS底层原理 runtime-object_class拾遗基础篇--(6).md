@@ -924,7 +924,7 @@ for (int i = 0; i <= cache._mask; i ++) {
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)
 
 
 

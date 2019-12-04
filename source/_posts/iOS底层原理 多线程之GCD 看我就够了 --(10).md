@@ -35,13 +35,13 @@ GCD有哪些优点
 按照**FIFO**(First In First Out先进先出)原则，先添加的任务在队首，后添加的任务在队尾，执行任务的时候按照队列的从首到尾一个挨着一个执行，一次只能执行一个任务，不具备开辟新线程的能力。
 
 
-![](../images/10-1.png)
+![](/images/10-1.png)
 #####  并发队列（Concurrent Dispatch Queue）：
 按照**FIFO**(First In First Out先进先出)原则，先添加的任务在队首，后添加的任务在队尾，执行任务的时候按照队列的从首到若干个，执行到队尾，一次可以执行多个任务，具备开辟新线程的能力。
 
 
 
-![](../images/10-2.png)
+![](/images/10-2.png)
 
 ### GCD使用步骤
 GCD的使用非常简单，创建队列或者在全局队列中新加任务就可以了。
@@ -880,4 +880,4 @@ NSThread *thread=[[NSThread alloc]initWithBlock:^{
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)

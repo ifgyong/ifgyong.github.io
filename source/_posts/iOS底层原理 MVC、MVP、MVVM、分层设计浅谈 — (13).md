@@ -22,7 +22,7 @@ categories: iOS
 
 - 缺点：`Controller`的代码过于臃肿
 
-![](https://user-gold-cdn.xitu.io/2019/8/6/16c65c373454277a?w=801&h=274&f=png&s=17358)
+![](/images/13-1.png)
 
 代码：
 
@@ -81,7 +81,7 @@ categories: iOS
 
 
 
-![](https://user-gold-cdn.xitu.io/2019/8/6/16c65cb8ad888abf?w=735&h=364&f=png&s=25874)
+![](/images/13-2.png)
 
 代码实现
 
@@ -181,7 +181,7 @@ categories: iOS
 
 `MVP`和`MVC`很像，只是将`VC`换成了`Presenter`，`vc`和`Present`做的事情基本一致，将`view`和`Model`通信改到了都和`Presenter`通信。
 
-![](https://user-gold-cdn.xitu.io/2019/8/6/16c65f39c348e3e9?w=610&h=215&f=png&s=12793)
+![](/images/13-3.png)
 代码
 
 ```
@@ -231,7 +231,7 @@ categories: iOS
 
 ###  MVVM
 `MVVM`是将`FYNewsPresenter`都搬到了`FYNewsViewModel`中，然后对`FYNewsViewModel`和`View`进行了一个双向绑定，双向绑定可以使用代理，`block`或者`KVO`实现。
-![](https://user-gold-cdn.xitu.io/2019/8/6/16c6603450d271bb?w=642&h=237&f=png&s=13181)
+![](/images/13-4.png)
 代码实现
 
 ```
@@ -382,15 +382,15 @@ categories: iOS
 
 分层之后，得到了一个三层架构或四层架构
 
-![三层架构](https://user-gold-cdn.xitu.io/2019/8/6/16c6623d82034790?w=536&h=281&f=png&s=23627)
+![三层架构](/images/13-5.png)
 
 数据层也可以分为两层，分为网络请求和db层。
 
-![四层架构](https://user-gold-cdn.xitu.io/2019/8/6/16c6624a552bd892?w=568&h=370&f=png&s=29291)
+![四层架构](/images/13-6.png)
 
 具体在工程中我们通常这样体现
 
-![](https://user-gold-cdn.xitu.io/2019/8/6/16c66313fbdd90a3?w=270&h=432&f=png&s=24528)
+![](/images/13-7.png)
 
 在`vc`中获取数据
 
@@ -529,4 +529,4 @@ typedef void(^succcessCallback)(NSArray *);
 
 广告时间
 
-![](https://user-gold-cdn.xitu.io/2019/8/8/16c71b57f7f1624a?w=655&h=268&f=jpeg&s=27083)
+![](/images/0.png)

@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%20%E9%82%A3%E4%BA%9B%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E5%8E%9F%E7%90%86%E6%B1%87%E6%80%BB%20%E2%80%94%20(12)/</loc>
-    <lastmod>2019-12-03T08:24:31.205Z</lastmod>
+    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%20block%E6%9C%AC%E8%B4%A8%20--(5)/</loc>
+    <lastmod>2019-12-04T04:30:00.652Z</lastmod>
     <data>
         <display>
-        <title>iOS底层原理  内存管理 那些你不知道的原理汇总 --(12)</title>
-        <pubTime>2019-12-01T03:22:58.000Z</pubTime>
+        <title>iOS底层原理  block本质 --(5)</title>
+        <pubTime>2019-12-01T03:15:58.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -24,32 +24,12 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2019/12/13/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/</loc>
-    <lastmod>2019-12-03T06:44:16.859Z</lastmod>
+    <loc>http://fgyong.cn/2019/12/01/IOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9C%AC%E8%B4%A8--(1)/</loc>
+    <lastmod>2019-12-04T04:29:50.123Z</lastmod>
     <data>
         <display>
-        <title>iOS图片优化</title>
-        <pubTime>2019-12-13T03:15:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20Category%E4%B8%8E%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E6%9C%AC%E8%B4%A8--(4)/</loc>
-    <lastmod>2019-12-03T06:30:32.675Z</lastmod>
-    <data>
-        <display>
-        <title>iOS底层原理 Category与关联对象本质--(4)</title>
-        <pubTime>2019-12-01T03:14:58.000Z</pubTime>
+        <title>iOS底层原理  对象的本质 --(1)</title>
+        <pubTime>2019-12-01T03:11:58.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -65,7 +45,7 @@
     
   <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E5%AE%89%E5%85%A8%E9%94%81%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%BB%E5%86%99%E9%94%81%20--(11)/</loc>
-    <lastmod>2019-12-03T05:06:56.937Z</lastmod>
+    <lastmod>2019-12-04T04:29:36.277Z</lastmod>
     <data>
         <display>
         <title>iOS底层原理  多线程之安全锁以及常用的读写锁 --(11)</title>
@@ -85,7 +65,7 @@
     
   <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BGCD%20%E7%9C%8B%E6%88%91%E5%B0%B1%E5%A4%9F%E4%BA%86%20--(10)/</loc>
-    <lastmod>2019-12-03T05:06:41.848Z</lastmod>
+    <lastmod>2019-12-04T04:29:25.730Z</lastmod>
     <data>
         <display>
         <title>iOS底层原理  多线程之GCD看我就够了 --(10)</title>
@@ -104,8 +84,108 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E7%B1%BB%E7%9A%84%E6%9C%AC%E8%B4%A8--(2)/</loc>
+    <lastmod>2019-12-04T04:29:10.613Z</lastmod>
+    <data>
+        <display>
+        <title>iOS底层原理  类的本质 --(2)</title>
+        <pubTime>2019-12-01T03:12:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%20%E9%82%A3%E4%BA%9B%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E5%8E%9F%E7%90%86%E6%B1%87%E6%80%BB%20%E2%80%94%20(12)/</loc>
+    <lastmod>2019-12-04T04:29:00.439Z</lastmod>
+    <data>
+        <display>
+        <title>iOS底层原理  内存管理 那些你不知道的原理汇总 --(12)</title>
+        <pubTime>2019-12-01T03:22:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20Category%E4%B8%8E%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E6%9C%AC%E8%B4%A8--(4)/</loc>
+    <lastmod>2019-12-04T04:28:47.852Z</lastmod>
+    <data>
+        <display>
+        <title>iOS底层原理 Category与关联对象本质--(4)</title>
+        <pubTime>2019-12-01T03:14:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20KVO%E5%92%8CKVC%E6%9C%AC%E8%B4%A8%E4%B8%8E%E8%81%94%E7%B3%BB%20--(3)/</loc>
+    <lastmod>2019-12-04T04:28:31.298Z</lastmod>
+    <data>
+        <display>
+        <title>iOS底层原理  KVO和KVC本质与联系 --(3)</title>
+        <pubTime>2019-12-01T03:13:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1%E6%B5%85%E8%B0%88%20%E2%80%94%20(13)/</loc>
+    <lastmod>2019-12-04T04:28:11.168Z</lastmod>
+    <data>
+        <display>
+        <title>MVC、MVP、MVVM、分层设计浅谈 — (13)</title>
+        <pubTime>2019-12-01T03:23:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20RunLoop%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%92%8C%E9%9A%8F%E5%BF%83%E6%89%80%E6%AC%B2%E6%8E%8C%E6%8F%A1%E5%AD%90%E7%BA%BF%E7%A8%8BRunLoop%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%20--(9)/</loc>
-    <lastmod>2019-12-03T05:04:59.281Z</lastmod>
+    <lastmod>2019-12-04T04:27:20.298Z</lastmod>
     <data>
         <display>
         <title>iOS底层原理  RunLoop基础总结和随心所欲掌握子线程RunLoop生命周期 --(9)</title>
@@ -125,7 +205,7 @@
     
   <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20runtime%20-%20super%E3%80%81hook%E3%80%81%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8--(8)/</loc>
-    <lastmod>2019-12-03T05:03:32.253Z</lastmod>
+    <lastmod>2019-12-04T04:26:58.635Z</lastmod>
     <data>
         <display>
         <title>iOS底层原理 runtime - super、hook、以及简单应用--(8)</title>
@@ -145,7 +225,7 @@
     
   <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20runtime-%20objc_msgSend%E6%8B%BE%E9%81%97%E5%9F%BA%E7%A1%80%E7%AF%87--(7)/</loc>
-    <lastmod>2019-12-03T05:03:16.790Z</lastmod>
+    <lastmod>2019-12-04T04:26:46.982Z</lastmod>
     <data>
         <display>
         <title>iOS底层原理 runtime- objc_msgSend拾遗基础篇--(7)</title>
@@ -165,7 +245,7 @@
     
   <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20runtime-object_class%E6%8B%BE%E9%81%97%E5%9F%BA%E7%A1%80%E7%AF%87--(6)/</loc>
-    <lastmod>2019-12-03T05:02:33.456Z</lastmod>
+    <lastmod>2019-12-04T04:26:29.726Z</lastmod>
     <data>
         <display>
         <title>iOS底层原理 runtime-object_class拾遗基础篇--(6)</title>
@@ -184,72 +264,12 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%20block%E6%9C%AC%E8%B4%A8%20--(5)/</loc>
-    <lastmod>2019-12-03T05:02:14.641Z</lastmod>
+    <loc>http://fgyong.cn/2019/12/13/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/</loc>
+    <lastmod>2019-12-04T04:26:13.577Z</lastmod>
     <data>
         <display>
-        <title>iOS底层原理  block本质 --(5)</title>
-        <pubTime>2019-12-01T03:15:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20KVO%E5%92%8CKVC%E6%9C%AC%E8%B4%A8%E4%B8%8E%E8%81%94%E7%B3%BB%20--(3)/</loc>
-    <lastmod>2019-12-03T05:01:39.835Z</lastmod>
-    <data>
-        <display>
-        <title>iOS底层原理  KVO和KVC本质与联系 --(3)</title>
-        <pubTime>2019-12-01T03:13:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E7%B1%BB%E7%9A%84%E6%9C%AC%E8%B4%A8--(2)/</loc>
-    <lastmod>2019-12-03T05:00:43.294Z</lastmod>
-    <data>
-        <display>
-        <title>iOS底层原理  类的本质 --(2)</title>
-        <pubTime>2019-12-01T03:12:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2019/12/01/IOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9C%AC%E8%B4%A8--(1)/</loc>
-    <lastmod>2019-12-03T04:56:17.289Z</lastmod>
-    <data>
-        <display>
-        <title>iOS底层原理  对象的本质 --(1)</title>
-        <pubTime>2019-12-01T03:11:58.000Z</pubTime>
+        <title>iOS图片优化</title>
+        <pubTime>2019-12-13T03:15:58.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -353,6 +373,28 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2016/03/28/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%884%EF%BC%89/</loc>
+    <lastmod>2019-12-03T04:48:00.975Z</lastmod>
+    <data>
+        <display>
+        <title>iOS高级开发runtime那点事实战（4）</title>
+        <pubTime>2016-03-28T06:19:20.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>iOS高级开发</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2018/04/16/mac-php5-6+mongdb+Apache%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2019-12-03T04:48:00.975Z</lastmod>
     <data>
@@ -370,28 +412,6 @@
            
              
               <breadCrumb title="数据结构" url="http://fgyong.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2016/03/28/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%884%EF%BC%89/</loc>
-    <lastmod>2019-12-03T04:48:00.975Z</lastmod>
-    <data>
-        <display>
-        <title>iOS高级开发runtime那点事实战（4）</title>
-        <pubTime>2016-03-28T06:19:20.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-        <tag>iOS高级开发</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
           
         </display>
     </data>
@@ -553,6 +573,28 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2019/06/24/iOS%20%E6%B5%85%E6%9E%90%E6%8C%87%E9%92%88%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81typedef/</loc>
+    <lastmod>2019-12-03T04:48:00.973Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 浅析指针、函数、typedef</title>
+        <pubTime>2019-06-24T08:39:24.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>指针</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2016/01/28/iOS-WebView%E8%AE%BE%E7%BD%AEcookie/</loc>
     <lastmod>2019-12-03T04:48:00.973Z</lastmod>
     <data>
@@ -598,28 +640,6 @@
         <pubTime>2016-11-21T08:39:24.000Z</pubTime>
         
         <tag>iOS高级开发</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2019/06/24/iOS%20%E6%B5%85%E6%9E%90%E6%8C%87%E9%92%88%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81typedef/</loc>
-    <lastmod>2019-12-03T04:48:00.973Z</lastmod>
-    <data>
-        <display>
-        <title>iOS 浅析指针、函数、typedef</title>
-        <pubTime>2019-06-24T08:39:24.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-        <tag>指针</tag>
          
          
            
@@ -740,6 +760,26 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2016/01/28/MAC-%E9%87%8D%E7%BD%AEMySQL-root-%E5%AF%86%E7%A0%81/</loc>
+    <lastmod>2019-12-03T04:48:00.971Z</lastmod>
+    <data>
+        <display>
+        <title>MAC 重置MySQL root 密码</title>
+        <pubTime>2016-01-28T03:16:24.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2016/01/30/Module-version-mismatch/</loc>
     <lastmod>2019-12-03T04:48:00.971Z</lastmod>
     <data>
@@ -755,26 +795,6 @@
            
              
               <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2016/01/28/MAC-%E9%87%8D%E7%BD%AEMySQL-root-%E5%AF%86%E7%A0%81/</loc>
-    <lastmod>2019-12-03T04:48:00.971Z</lastmod>
-    <data>
-        <display>
-        <title>MAC 重置MySQL root 密码</title>
-        <pubTime>2016-01-28T03:16:24.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
           
         </display>
     </data>
@@ -863,26 +883,6 @@
            
              
               <breadCrumb title="Git" url="http://fgyong.cn/categories/Git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1%E6%B5%85%E8%B0%88%20%E2%80%94%20(13)/</loc>
-    <lastmod>2019-12-03T03:15:52.907Z</lastmod>
-    <data>
-        <display>
-        <title>MVC、MVP、MVVM、分层设计浅谈 — (13)</title>
-        <pubTime>2019-12-01T03:23:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
           
         </display>
     </data>

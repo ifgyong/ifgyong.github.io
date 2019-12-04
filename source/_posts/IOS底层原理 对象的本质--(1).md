@@ -8,7 +8,7 @@ categories: iOS
 
 ### 对象的本质
 探寻OC对象的本质，我们平时编写的Objective-C代码，底层实现其实都是C\C++代码。
-那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC对象的内存布局和内存分配机制。
+那么一个OC对象占用多少内存呢？看完这篇文章你将了解OC/对象的内存布局和内存分配机制。
 
 使用的[代码下载](https://github.com/ifgyong/demo/tree/master/OC)
 要用的工具:
@@ -68,7 +68,7 @@ struct NSObject_IMPL {
 
 那么这个结构体是什么呢？
 其实我们`Object-C`编译之后对象会编译成结构体，如图所示：
-![](../images/1-1.png)
+![](/images/1-1.png)
 那么`isa`是什么吗？通过查看源码得知：
 
 ```
@@ -180,16 +180,16 @@ _class_createInstanceFromZone(Class cls, size_t extraBytes, void *zone,
 验证：
 在刚才 的代码打断点和设置`Debug->Debug Workflow->View Memory`,然后运行程序，
 
-![](../images/1-2.png)
+![](/images/1-2.png)
 
-![](../images/1-3.png)
+![](/images/1-3.png)
 点击`obj->view *objc`得到上图所示的内存布局，从`address`看出和`obj`内存一样，左上角是16字节，8个字节有数据，8个字节是空的，默认是0.
 
 使用lldb命令`memory read 0x100601f30`输出内存布局，如下图：
-![](../images/1-4.png)
+![](/images/1-4.png)
 或者使用`x/4xg 0x100601f30`输出：
 
-![](../images/1-5.png)
+![](/images/1-5.png)
 `x/4xg 0x100601f30`中`4`是输出`4`个数据,`x` 是16进制,后边`g`是8字节为单位。可以验证刚才的出的结论。
 
 那么我们再使用复杂的一个对象来验证：
@@ -236,14 +236,14 @@ Person *obj=[[Person alloc]init];
 ```
 使用内存布局验证：
 
-![](../images/1-6.png)
+![](/images/1-6.png)
 以十进制输出每个4字节
-![](../images/1-7.png)
+![](/images/1-7.png)
 使用内存布局查看数据验证，`Person`占用16 bytes。
 
 下边是一个直观的内存布局图：
 
-![](../images/1-8.png)
+![](/images/1-8.png)
 
 #### 再看一下更复杂的继承关系的内存布局：
 
@@ -464,7 +464,7 @@ define NANO_MAX_SIZE			256 /* Buckets sized {16, 32, 48, 64, 80, 96, 112, ...} *
 ---
 广告时间
 
-![](https://user-gold-cdn.xitu.io/2019/8/8/16c71b57f7f1624a?w=655&h=268&f=jpeg&s=27083)
+![](/images/0.png)
 
 
 

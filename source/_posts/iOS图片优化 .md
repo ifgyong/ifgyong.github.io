@@ -84,7 +84,7 @@ image占内存：18.5M
 为什么呢？
 > 内存大小不是取决于`view`的`size`，而是原始文件**image size**。
 
-![](https://user-gold-cdn.xitu.io/2019/11/29/16eb5cff5d35a254?w=1016&h=542&f=png&s=54318)
+![](/images/14-1.png)
 ### 渲染格式
 #### SRGB
 每个像素4字节，包含红黄蓝和透明度，每个通道是1字节8位。
@@ -399,6 +399,6 @@ override func viewWillDisappear(_ animated: Bool) {
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)
 
 

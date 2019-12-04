@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="看完本文章你将了解到   DisplayLink和timer的使用和原理 内存分配和内存管理 自动释放池原理 weak指针原理和释放时机 引用计数原理   DisplayLinkCADisplayLink是将任务添加到runloop中，loop每次循环便会调用target的selector，使用这个也能监测卡顿问题。首先介绍下API 1234567+ (CADisplayLink *)displa">
+  <meta name="description" content="看完本文章你将了解到   DisplayLink和timer的使用和原理 内存分配和内存管理 自动释放池原理 weak指针原理和释放时机 引用计数原理   / DisplayLinkCADisplayLink是将任务添加到runloop中，loop每次循环便会调用target的selector，使用这个也能监测卡顿问题。首先介绍下API 1234567+ (CADisplayLink *)disp">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS底层原理  内存管理 那些你不知道的原理汇总 --(12)">
 <meta property="og:url" content="http://fgyong.cn/2019/12/01/iOS底层原理 内存管理 那些你不知道的原理汇总 — (12)/index.html">
 <meta property="og:site_name" content="fgyong的技术博客">
-<meta property="og:description" content="看完本文章你将了解到   DisplayLink和timer的使用和原理 内存分配和内存管理 自动释放池原理 weak指针原理和释放时机 引用计数原理   DisplayLinkCADisplayLink是将任务添加到runloop中，loop每次循环便会调用target的selector，使用这个也能监测卡顿问题。首先介绍下API 1234567+ (CADisplayLink *)displa">
+<meta property="og:description" content="看完本文章你将了解到   DisplayLink和timer的使用和原理 内存分配和内存管理 自动释放池原理 weak指针原理和释放时机 引用计数原理   / DisplayLinkCADisplayLink是将任务添加到runloop中，loop每次循环便会调用target的selector，使用这个也能监测卡顿问题。首先介绍下API 1234567+ (CADisplayLink *)disp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://fgyong.cn/2019/12/01/images/0.png">
-<meta property="og:updated_time" content="2019-12-03T08:24:31.205Z">
+<meta property="og:image" content="http://fgyong.cn/images/0.png">
+<meta property="og:updated_time" content="2019-12-04T04:29:00.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS底层原理  内存管理 那些你不知道的原理汇总 --(12)">
-<meta name="twitter:description" content="看完本文章你将了解到   DisplayLink和timer的使用和原理 内存分配和内存管理 自动释放池原理 weak指针原理和释放时机 引用计数原理   DisplayLinkCADisplayLink是将任务添加到runloop中，loop每次循环便会调用target的selector，使用这个也能监测卡顿问题。首先介绍下API 1234567+ (CADisplayLink *)displa">
-<meta name="twitter:image" content="http://fgyong.cn/2019/12/01/images/0.png">
+<meta name="twitter:description" content="看完本文章你将了解到   DisplayLink和timer的使用和原理 内存分配和内存管理 自动释放池原理 weak指针原理和释放时机 引用计数原理   / DisplayLinkCADisplayLink是将任务添加到runloop中，loop每次循环便会调用target的selector，使用这个也能监测卡顿问题。首先介绍下API 1234567+ (CADisplayLink *)disp">
+<meta name="twitter:image" content="http://fgyong.cn/images/0.png">
 
 
 
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-12-03 16:24:31" itemprop="dateModified" datetime="2019-12-03T16:24:31+08:00">2019-12-03</time>
+                <time title="修改时间：2019-12-04 12:29:00" itemprop="dateModified" datetime="2019-12-04T12:29:00+08:00">2019-12-04</time>
               
             
           </span>
@@ -478,6 +478,7 @@
 <li>引用计数原理</li>
 </ol>
 </blockquote>
+<p>/</p>
 <h3 id="DisplayLink"><a href="#DisplayLink" class="headerlink" title="DisplayLink"></a>DisplayLink</h3><p><code>CADisplayLink</code>是将任务添加到<code>runloop</code>中，<code>loop</code>每次循环便会调用<code>target</code>的<code>selector</code>，使用这个也能监测卡顿问题。首先介绍下<code>API</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+ (CADisplayLink *)displayLinkWithTarget:(id)target selector:(SEL)sel;</div><div class="line">//runloop没循环一圈都会调用</div><div class="line">- (void)addToRunLoop:(NSRunLoop *)runloop forMode:(NSRunLoopMode)mode;</div><div class="line">//从runloop中删除</div><div class="line">- (void)removeFromRunLoop:(NSRunLoop *)runloop forMode:(NSRunLoopMode)mode;</div><div class="line">//取消</div><div class="line">- (void)invalidate;</div></pre></td></tr></table></figure>
 <p>我们在一个需要<code>push</code>的<code>VC</code>中运行来观察声明周期</p>
@@ -690,7 +691,7 @@
 <hr>
 <p>最怕一生碌碌无为，还安慰自己平凡可贵。</p>
 <p>广告时间</p>
-<p><img src="../images/0.png" alt=""></p>
+<p><img src="/images/0.png" alt=""></p>
 
       
     </div>

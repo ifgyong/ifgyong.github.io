@@ -134,7 +134,7 @@ struct __CFRunLoopMode {
 一个`mode`可以有多个`timer`、`souces0`、`souces1`、`observers`、`timers`
 那么使用图更直观的来表示：
 
-![](../images/9-1.png)
+![](/images/9-1.png)
 
 一个`runloop`包含多个`mode`，但是同时只能运行一个`mode`，这点和大家开车的驾驶模式类似，运动模式和环保模式同时只能开一个模式，不能又运动又环保，明显相悖。多个`mode`被隔离开有点是处理事情更专一，不会因为多个同时处理事情造成卡顿或者资源竞争导致的一系列问题。
 #### souces0
@@ -373,7 +373,7 @@ CFRunLoopRef CFRunLoopGetCurrent(void) {
 
 首先看官方给的图：
 
-![](../images/9-2.png)
+![](/images/9-2.png)
 那我又整理了一个表格来更直观的了解状态运转
 |步骤|任务|
 |:-:|:-:|
@@ -1069,4 +1069,4 @@ while (__weakSelf.shouldKeepRunning  ){
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)

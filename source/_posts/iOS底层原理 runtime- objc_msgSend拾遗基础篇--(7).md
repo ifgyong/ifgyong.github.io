@@ -374,7 +374,7 @@ IMP lookUpImpOrForward(Class cls, SEL sel, id inst,
 借用网上找一个图， 可以更直观的看出流程运转。
 
 
-![](../images/7-1.png)
+![](/images/7-1.png)
 
 
 #### realizeClass()解析
@@ -1206,4 +1206,4 @@ test3:test
 
 广告时间
 
-![](../images/0.png)
+![](/images/0.png)
