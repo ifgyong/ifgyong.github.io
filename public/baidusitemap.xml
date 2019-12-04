@@ -309,6 +309,28 @@
     
     
   <url>
+    <loc>http://fgyong.cn/2016/03/28/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%884%EF%BC%89/</loc>
+    <lastmod>2019-12-03T04:48:00.975Z</lastmod>
+    <data>
+        <display>
+        <title>iOS高级开发runtime那点事实战（4）</title>
+        <pubTime>2016-03-28T06:19:20.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>iOS高级开发</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2016/03/24/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%882%EF%BC%89/</loc>
     <lastmod>2019-12-03T04:48:00.975Z</lastmod>
     <data>
@@ -331,43 +353,19 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2016/03/24/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%883%EF%BC%89/</loc>
+    <loc>http://fgyong.cn/2016/11/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_01/</loc>
     <lastmod>2019-12-03T04:48:00.975Z</lastmod>
     <data>
         <display>
-        <title>iOS高级开发runtime那点事实战（3）</title>
-        <pubTime>2016-03-24T03:15:48.000Z</pubTime>
+        <title>微信小程序_1</title>
+        <pubTime>2016-11-04T08:39:24.000Z</pubTime>
         
-        <tag>iOS</tag>
-         
-        <tag>iOS高级开发</tag>
+        <tag>微信小程序</tag>
          
          
            
              
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2016/03/28/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%884%EF%BC%89/</loc>
-    <lastmod>2019-12-03T04:48:00.975Z</lastmod>
-    <data>
-        <display>
-        <title>iOS高级开发runtime那点事实战（4）</title>
-        <pubTime>2016-03-28T06:19:20.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-        <tag>iOS高级开发</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+              <breadCrumb title="微信小程序" url="http://fgyong.cn/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
           
         </display>
     </data>
@@ -421,19 +419,21 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2016/11/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F_01/</loc>
+    <loc>http://fgyong.cn/2016/03/24/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%883%EF%BC%89/</loc>
     <lastmod>2019-12-03T04:48:00.975Z</lastmod>
     <data>
         <display>
-        <title>微信小程序_1</title>
-        <pubTime>2016-11-04T08:39:24.000Z</pubTime>
+        <title>iOS高级开发runtime那点事实战（3）</title>
+        <pubTime>2016-03-24T03:15:48.000Z</pubTime>
         
-        <tag>微信小程序</tag>
+        <tag>iOS</tag>
+         
+        <tag>iOS高级开发</tag>
          
          
            
              
-              <breadCrumb title="微信小程序" url="http://fgyong.cn/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+              <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
           
         </display>
     </data>
@@ -553,6 +553,23 @@
 
     
   <url>
+    <loc>http://fgyong.cn/2016/01/28/iOS-static-const-extern-%E7%94%A8%E6%B3%95%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2019-12-03T04:48:00.973Z</lastmod>
+    <data>
+        <display>
+        <title>iOS static const extern 用法技巧</title>
+        <pubTime>2016-01-28T03:07:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fgyong.cn/2019/06/24/iOS%20%E6%B5%85%E6%9E%90%E6%8C%87%E9%92%88%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81typedef/</loc>
     <lastmod>2019-12-03T04:48:00.973Z</lastmod>
     <data>
@@ -589,23 +606,6 @@
              
               <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fgyong.cn/2016/01/28/iOS-static-const-extern-%E7%94%A8%E6%B3%95%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2019-12-03T04:48:00.973Z</lastmod>
-    <data>
-        <display>
-        <title>iOS static const extern 用法技巧</title>
-        <pubTime>2016-01-28T03:07:58.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
         </display>
     </data>
     </url>
@@ -676,26 +676,6 @@
 
     
   <url>
-    <loc>http://fgyong.cn/2016/01/28/hexo%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/</loc>
-    <lastmod>2019-12-03T04:48:00.972Z</lastmod>
-    <data>
-        <display>
-        <title>hexo自定义域名</title>
-        <pubTime>2016-01-28T03:44:52.000Z</pubTime>
-        
-        <tag>建站</tag>
-         
-         
-           
-             
-              <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fgyong.cn/2016/01/31/hexo%E6%8D%A2%E4%BA%86%E7%94%B5%E8%84%91%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2019-12-03T04:48:00.972Z</lastmod>
     <data>
@@ -733,6 +713,26 @@
            
              
               <breadCrumb title="iOS" url="http://fgyong.cn/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fgyong.cn/2016/01/28/hexo%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/</loc>
+    <lastmod>2019-12-03T04:48:00.972Z</lastmod>
+    <data>
+        <display>
+        <title>hexo自定义域名</title>
+        <pubTime>2016-01-28T03:44:52.000Z</pubTime>
+        
+        <tag>建站</tag>
+         
+         
+           
+             
+              <breadCrumb title="建站" url="http://fgyong.cn/categories/%E5%BB%BA%E7%AB%99/"/>
           
         </display>
     </data>
