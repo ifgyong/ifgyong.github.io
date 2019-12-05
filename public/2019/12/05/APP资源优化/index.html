@@ -96,18 +96,28 @@
 
 
 
-  <meta name="description" content="重置MySQL root 密码：当忘记密码，或者想要强行重置 MySQL 密码的时候，可以像下面这样： 1.停止 MySQL 服务12sudo /usr/local/mysql/support-files/mysql.server stop//当停止失败 见下边 如何用mac 活动指示器停止服务。 2.进入安全模式 1sudo mysqld_safe --skip-grant-tables 这个地">
-<meta name="keywords" content="iOS">
+  <meta name="description" content="在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。 资源大部分是图片，说到图片必须讲一下位图和矢量图 位图 位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成">
+<meta name="keywords" content="iOS优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MAC 重置MySQL root 密码">
-<meta property="og:url" content="http://fgyong.cn/2016/01/28/MAC-重置MySQL-root-密码/index.html">
+<meta property="og:title" content="APP 资源管理优化">
+<meta property="og:url" content="http://fgyong.cn/2019/12/05/APP资源优化/index.html">
 <meta property="og:site_name" content="fgyong的技术博客">
-<meta property="og:description" content="重置MySQL root 密码：当忘记密码，或者想要强行重置 MySQL 密码的时候，可以像下面这样： 1.停止 MySQL 服务12sudo /usr/local/mysql/support-files/mysql.server stop//当停止失败 见下边 如何用mac 活动指示器停止服务。 2.进入安全模式 1sudo mysqld_safe --skip-grant-tables 这个地">
+<meta property="og:description" content="在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。 资源大部分是图片，说到图片必须讲一下位图和矢量图 位图 位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-03T04:48:00.971Z">
+<meta property="og:image" content="http://blog.fgyong.cn/FhF6-GTsthDXMlsX9ezQ1PaXalIa.png-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FpZhgVvqS711QZZnYYptKr40Pc9U-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FrtLZrygVGyJAqlV6Q412foMQgRk-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FvHCZgiiwONF_5Y01HOVP_-d9d3_-a">
+<meta property="og:image" content="http://blog.fgyong.cn/Fh6BK-44VNuB2PDdQUjaA-2iOF_J-a">
+<meta property="og:image" content="http://blog.fgyong.cn/1.mp4">
+<meta property="og:image" content="http://blog.fgyong.cn/FqvcOJHbjHBdE04jl78PlT3pAA4l-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FgJGgpqcA-K_kSKY6e9LDZapOiYT-a">
+<meta property="og:image" content="http://blog.fgyong.cn/Fld0tbjb_RgbF9QWnzTXUYrZJzhG-a">
+<meta property="og:updated_time" content="2019-12-05T07:32:07.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MAC 重置MySQL root 密码">
-<meta name="twitter:description" content="重置MySQL root 密码：当忘记密码，或者想要强行重置 MySQL 密码的时候，可以像下面这样： 1.停止 MySQL 服务12sudo /usr/local/mysql/support-files/mysql.server stop//当停止失败 见下边 如何用mac 活动指示器停止服务。 2.进入安全模式 1sudo mysqld_safe --skip-grant-tables 这个地">
+<meta name="twitter:title" content="APP 资源管理优化">
+<meta name="twitter:description" content="在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。 资源大部分是图片，说到图片必须讲一下位图和矢量图 位图 位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成">
+<meta name="twitter:image" content="http://blog.fgyong.cn/FhF6-GTsthDXMlsX9ezQ1PaXalIa.png-a">
 
 
 
@@ -117,7 +127,7 @@
 
   
   
-  <link rel="canonical" href="http://fgyong.cn/2016/01/28/MAC-重置MySQL-root-密码/"/>
+  <link rel="canonical" href="http://fgyong.cn/2019/12/05/APP资源优化/"/>
 
 
 
@@ -127,7 +137,7 @@
   };
 </script>
 
-  <title>MAC 重置MySQL root 密码 | fgyong的技术博客</title>
+  <title>APP 资源管理优化 | fgyong的技术博客</title>
   
 
 
@@ -354,7 +364,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/01/28/MAC-重置MySQL-root-密码/"/>
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/12/05/APP资源优化/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fgyong"/>
@@ -371,7 +381,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">MAC 重置MySQL root 密码
+          <h2 class="post-title" itemprop="name headline">APP 资源管理优化
 
               
             
@@ -397,24 +407,12 @@
                 
               
 
-              <time title="创建时间：2016-01-28 11:16:24" itemprop="dateCreated datePublished" datetime="2016-01-28T11:16:24+08:00">2016-01-28</time>
+              <time title="创建时间：2019-12-05 11:15:58 / 修改时间：15:32:07" itemprop="dateCreated datePublished" datetime="2019-12-05T11:15:58+08:00">2019-12-05</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-12-03 12:48:00" itemprop="dateModified" datetime="2019-12-03T12:48:00+08:00">2019-12-03</time>
               
             
           </span>
@@ -466,23 +464,59 @@
       
 
       
-        <p>重置MySQL root 密码：<br>当忘记密码，或者想要强行重置 MySQL 密码的时候，可以像下面这样：</p>
-<p>1.停止 MySQL 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /usr/local/mysql/support-files/mysql.server stop</div><div class="line">//当停止失败 见下边 如何用mac 活动指示器停止服务。</div></pre></td></tr></table></figure></p>
-<p>2.进入安全模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysqld_safe --skip-grant-tables</div></pre></td></tr></table></figure>
-<p>这个地方，如果你 alias 了 mysqlld_safe 这个命令，那么可以直接复制粘贴；如果没有，则需要加上正确的路径。在 Linux/OS X 系统下，默认路径是 /usr/local/mysql/bin/mysqld/usafe。</p>
-<p>说是安全模式，其实是超级危险模式！如果你是在本地修改，那没问题；如果是在服务器上，那你得保证这个时候没有任何人登录到系统。因为一旦进入了安全模式，任何人都可以使用任何密码通过 root 用户登录入到 MySQL ，可以执行任何想执行的操作。</p>
-<p>这也是为什么，当我们密码忘记了的时候，我们可以这样来修改密码。凡事有利有弊，你可以用这种方式来做好事；而同样，可以用来做坏事。</p>
-<p>3.新打开一个终端，进入 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-u root -p</div></pre></td></tr></table></figure></p>
-<p>这里也和 mysqld_safe 一样。如果你是 OS X 上新装的 MySQL ，那么很有可能并不能直接使用 mysql 这个命令。而是要使用它的绝对路径： <code>/usr/local/mysql/bin/mysql -u root -p</code></p>
-<p>然后输入任意密码就可以进入 MySQL 了。</p>
-<p>修改密码<br>进入了之后先不要急着使用 update 命令修改密码，先看看表中的字段名。不同版本密码的字段名可能不一样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MySQL 的用户信息是存在 mysql.user 这个表里面的。于是可以先选择 mysql 这个数据库，再看数据库中 user 表中的字段名称。</div><div class="line">use mysql; //切换数据库</div><div class="line">describe user; //查看user表的字段</div></pre></td></tr></table></figure></p>
-<p> 然后确定密码字段的名称，一般可能是 Password。然而在 OS X 的 MySQL 5.7 这个版本中，密码字段名称是 authentication_string 。记住这个字段名。</p>
-<p> 然后修改密码啊：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE mysql.user SET authentication_string=PASSWORD(‘123456’) where User=’root’; //将root用户密码改成 123456</div></pre></td></tr></table></figure></p>
-<p>  5.刷新权限，使配置生效<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flush privileges;</div></pre></td></tr></table></figure></p>
-<p>   最后再启动 MySQL<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /usr/local/mysql/support-files/mysql.server start</div></pre></td></tr></table></figure></p>
-<p>   当启动失败的话，可以直接用mac工具活动监视器：<br>   搜索mysql 进程名称列表有mysql的话，直接双击出现：这里写图片描述<br>   点击退出即可。</p>
-<p>   修改完之后记得刷新权限 和重新启动mysql服务才行。</p>
+        <p>在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。</p>
+<p>资源大部分是图片，说到图片必须讲一下位图和矢量图</p>
+<h3 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h3><blockquote>
+<p>位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成整个图像的无数单个方块。扩大位图尺寸的效果是增大单个像素，从而使线条和形状显得参差不齐。</p>
+</blockquote>
+<h3 id="矢量图"><a href="#矢量图" class="headerlink" title="矢量图"></a>矢量图</h3><blockquote>
+<p>矢量图，也称为面向对象的图像或绘图图像，在数学上定义为一系列由线连接的点。矢量文件中的图形元素称为对象。每个对象都是一个自成一体的实体，它具有颜色、形状、轮廓、大小和屏幕位置等属性。<br>矢量图是根据几何特性来绘制图形，矢量可以是一个点或一条线，矢量图只能靠软件生成，文件占用内在空间较小，因为这种类型的图像文件包含独立的分离图像，可以自由无限制的重新组合。</p>
+</blockquote>
+<h3 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h3><blockquote>
+<p>位图就是无数个点组成的图片，基本元素是像素；矢量图有多个图形组成的，基本元素是图像。当相同尺寸的位图和矢量图绘制在大屏幕上，位图的弊端出现了，图像看着像素颗粒很大，而矢量图基本效果还是很好的。</p>
+</blockquote>
+<p>矢量图在绘制到不同的屏幕上有着天然的优势。</p>
+<h2 id="开始使用矢量图"><a href="#开始使用矢量图" class="headerlink" title="开始使用矢量图"></a>开始使用矢量图</h2><p>在Xcdoe 9、iOS11 中已经开始支持了矢量图，只需要设置打钩<code>Preserve Cector Dadta</code>。<br><img src="http://blog.fgyong.cn/FhF6-GTsthDXMlsX9ezQ1PaXalIa.png-a" alt=""></p>
+<p><strong>前提图片格式是矢量图哦</strong></p>
+<p>矢量图在资源大小中相比和一倍、两倍、三倍图总和，大小下降<strong>60%</strong>，这算是不错的提升了。</p>
+<h2 id="Stretchable-Images"><a href="#Stretchable-Images" class="headerlink" title="Stretchable Images"></a>Stretchable Images</h2><p>从iOS11、Xcode 9就开始支持了该工具，该工具可实现在<code>building</code>中将图片元数据格栅化，儿不是在运行时处理，降低图片在显示时候的CPU压力。<br>当渲染的尺寸大于当前的尺寸的时候才会重新渲染，否则使用优化过的预渲染位图。<br>效果是这样子的</p>
+<p><img src="http://blog.fgyong.cn/FpZhgVvqS711QZZnYYptKr40Pc9U-a" alt=""></p>
+<h4 id="Slicing"><a href="#Slicing" class="headerlink" title="Slicing"></a>Slicing</h4><h5 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h5><ul>
+<li>None 无</li>
+<li>Horizontal 水平</li>
+<li>Vertical 竖直</li>
+<li>Horizontal and Vertical 水平和竖直 </li>
+</ul>
+<h5 id="Center"><a href="#Center" class="headerlink" title="Center"></a>Center</h5><ul>
+<li>Tiles 平铺</li>
+<li>Streches 拉伸</li>
+</ul>
+<p>使用这两组参数可以达到绝大部分需求了</p>
+<p><img src="http://blog.fgyong.cn/FrtLZrygVGyJAqlV6Q412foMQgRk-a" alt=""></p>
+<p>当我们使用下图这种图片，提前和UI讲清楚，作出一个小图，在设备上使用<code>Stretchable Images</code>功能，可以达到大图的效果。</p>
+<p><img src="http://blog.fgyong.cn/FvHCZgiiwONF_5Y01HOVP_-d9d3_-a" alt=""><br>白色部分表示可拉伸和舍弃的<br><img src="http://blog.fgyong.cn/Fh6BK-44VNuB2PDdQUjaA-2iOF_J-a" alt=""></p>
+<p>最终效果是这样的</p>
+<p><img src="http://blog.fgyong.cn/1.mp4" alt=""></p>
+<p>👏👏👏👏</p>
+<p>更多用法可以参考<a href="https://developer.apple.com/videos/play/wwdc2018/227" target="_blank" rel="external">WWDC2018/227</a></p>
+<h2 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h2><p>大项目可能会有很多框架，当多个框架使用的图片名字发生重复时，使用<code>Bundle</code>是不错的选择，<code>Bundle</code>相当于文件夹，相同<code>Bundle</code>下边没有重复的文件即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// Get the app&apos;s main bundle</div><div class="line">let mainBundle = Bundle.main</div><div class="line"></div><div class="line">//获取本地Bundle 图片</div><div class="line">let me = Bundle.init(identifier: &quot;me&quot;)</div><div class="line">let path = me?.path(forResource: &quot;fgyong.cn 技术博客&quot;, ofType: &quot;png&quot;)</div></pre></td></tr></table></figure>
+<h2 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h2><p>当APP有50个类似的功能，但是每个功能都用类似的图片，那么他们名字也一致，我们使用<code>Namespace</code>来解决这个问题。<br><img src="http://blog.fgyong.cn/FqvcOJHbjHBdE04jl78PlT3pAA4l-a" alt=""></p>
+<p>使用起来也是很简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let image = UIImage(named: &quot;me/4.png&quot;)</div></pre></td></tr></table></figure>
+<h2 id="APP-Thining"><a href="#APP-Thining" class="headerlink" title="APP Thining"></a>APP Thining</h2><h3 id="Memory-Classes-amp-amp-Graphics-Classes"><a href="#Memory-Classes-amp-amp-Graphics-Classes" class="headerlink" title="Memory Classes &amp;&amp; Graphics Classes"></a>Memory Classes &amp;&amp; Graphics Classes</h3><p>使用内存和Metal来适配不同机型，达到最优性能。</p>
+<p><img src="http://blog.fgyong.cn/FgJGgpqcA-K_kSKY6e9LDZapOiYT-a" alt=""></p>
+<p>首先机型先去找4GB的资源，4GB没找到，则向下寻找3GB，一直寻找到1GB对应的资源。</p>
+<p>内存和GPU相比，内存有着更高的优先级，我们确定内存是表现设备整体性能的标准。</p>
+<h2 id="NSSData-set"><a href="#NSSData-set" class="headerlink" title="NSSData set"></a>NSSData set</h2><p><code>Data set</code>容器可以放任何东西。<br>可以是<code>plist</code>文件，可以是<code>video</code>、可以是<code>mp3</code>，可以是其他任何格式的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open class func preloadTextureAtlasesNamed(_ atlasNames: [String], withCompletionHandler completionHandler: @escaping (Error?, [SKTextureAtlas]) -&gt; Void)</div></pre></td></tr></table></figure>
+<p>使用该函数立刻调用大量I/O和内存来解码或读入数据，预先放在内存中，你需要在紧急需要的时候调用该函数。不要随意调用该API，以为它会按照你说的<strong>立马</strong>去做！⚠️⚠️⚠️当你调用该函数，请确保立即使用资源，否则API会消耗大量的I/O和内存来加载所有这些图像。</p>
+<p><code>Sprite Atlases</code>强大之处是会根据不同设备和屏幕来渲染不同的图像，并传送到正确的设备。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://blog.fgyong.cn/Fld0tbjb_RgbF9QWnzTXUYrZJzhG-a" alt=""></p>
+<ul>
+<li>在iOS12上采用最新的算法，这些图像资源会减少10%-20%的空间，</li>
+<li>使用Xcode的资源目录是不错的选择</li>
+</ul>
 
       
     </div>
@@ -506,7 +540,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
+            <a href="/tags/iOS优化/" rel="tag"># iOS优化</a>
           
         </div>
       
@@ -519,8 +553,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/28/iOS-WebView设置cookie/" rel="next" title="iOS WebView设置cookie">
-                <i class="fa fa-chevron-left"></i> iOS WebView设置cookie
+              <a href="/2019/12/03/iOS图片优化 /" rel="next" title="iOS图片优化">
+                <i class="fa fa-chevron-left"></i> iOS图片优化
               </a>
             
           </div>
@@ -528,10 +562,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/28/hexo自定义域名/" rel="prev" title="hexo自定义域名">
-                hexo自定义域名 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,8 +609,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -749,6 +788,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#位图"><span class="nav-number">1.</span> <span class="nav-text">位图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矢量图"><span class="nav-number">2.</span> <span class="nav-text">矢量图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说人话"><span class="nav-number">3.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用矢量图"><span class="nav-number"></span> <span class="nav-text">开始使用矢量图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stretchable-Images"><span class="nav-number"></span> <span class="nav-text">Stretchable Images</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Slicing"><span class="nav-number">0.1.</span> <span class="nav-text">Slicing</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Slices"><span class="nav-number">0.1.1.</span> <span class="nav-text">Slices</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Center"><span class="nav-number">0.1.2.</span> <span class="nav-text">Center</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bundle"><span class="nav-number"></span> <span class="nav-text">Bundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespace"><span class="nav-number"></span> <span class="nav-text">Namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APP-Thining"><span class="nav-number"></span> <span class="nav-text">APP Thining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Classes-amp-amp-Graphics-Classes"><span class="nav-number">1.</span> <span class="nav-text">Memory Classes && Graphics Classes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSSData-set"><span class="nav-number"></span> <span class="nav-text">NSSData set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

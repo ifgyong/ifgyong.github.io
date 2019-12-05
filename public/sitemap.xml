@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://fgyong.cn/2019/12/03/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/</loc>
+    
+    <lastmod>2019-12-05T07:38:20.439Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://fgyong.cn/2019/12/05/APP%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2019-12-05T07:32:07.950Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%20block%E6%9C%AC%E8%B4%A8%20--(5)/</loc>
     
     <lastmod>2019-12-04T04:30:00.652Z</lastmod>
@@ -93,13 +107,6 @@
   </url>
   
   <url>
-    <loc>http://fgyong.cn/2019/12/13/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/</loc>
-    
-    <lastmod>2019-12-04T04:26:13.577Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://fgyong.cn/tags/index.html</loc>
     
     <lastmod>2019-12-03T04:48:00.978Z</lastmod>
@@ -142,7 +149,7 @@
   </url>
   
   <url>
-    <loc>http://fgyong.cn/2016/03/24/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%883%EF%BC%89/</loc>
+    <loc>http://fgyong.cn/2017/05/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%844%E7%A7%8D%E9%81%8D%E5%8E%86/</loc>
     
     <lastmod>2019-12-03T04:48:00.975Z</lastmod>
     
@@ -163,7 +170,7 @@
   </url>
   
   <url>
-    <loc>http://fgyong.cn/2017/05/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%844%E7%A7%8D%E9%81%8D%E5%8E%86/</loc>
+    <loc>http://fgyong.cn/2016/03/24/iOS%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91runtime%E9%82%A3%E7%82%B9%E4%BA%8B%E5%AE%9E%E6%88%98%EF%BC%883%EF%BC%89/</loc>
     
     <lastmod>2019-12-03T04:48:00.975Z</lastmod>
     
@@ -184,14 +191,14 @@
   </url>
   
   <url>
-    <loc>http://fgyong.cn/2016/04/13/iOS%E7%BA%BF%E7%A8%8B%E4%B9%8BNSThread/</loc>
+    <loc>http://fgyong.cn/2016/01/28/iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%E7%AC%AC%E4%B8%80%E6%AD%A5/</loc>
     
     <lastmod>2019-12-03T04:48:00.974Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://fgyong.cn/2016/01/28/iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%E7%AC%AC%E4%B8%80%E6%AD%A5/</loc>
+    <loc>http://fgyong.cn/2016/04/13/iOS%E7%BA%BF%E7%A8%8B%E4%B9%8BNSThread/</loc>
     
     <lastmod>2019-12-03T04:48:00.974Z</lastmod>
     
