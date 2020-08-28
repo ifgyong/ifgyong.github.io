@@ -83,6 +83,6 @@ theme: next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:ifgyong/ifgyong.github.io.git
-  branch: master
+  repo: https://github.com/ifgyong/ifgyong.github.io 
+  branch: gh-pages
   message: 添加备案号
