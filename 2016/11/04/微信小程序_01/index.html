@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/0.jpeg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/0.jpeg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/0.jpeg?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/0.jpeg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.下载微信小程序编辑器：下载微信小程序编辑器 2.创建小程序应用：打开刚才下载的dmg，用微信扫面二维码登陆。点击本地小程序项目，就可以开始开发了。 3.先介绍下目录结构： pages文件夹中放的都是页面，app.js相当于iOS的appdelegate,app.json就是app的配置,app.wxss就是css样式文件。每一个页面都单独有一个js，json，wxss文件。4.app.json">
+<meta name="keywords" content="微信小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序_1">
+<meta property="og:url" content="http://fgyong.cn/2016/11/04/微信小程序_01/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="1.下载微信小程序编辑器：下载微信小程序编辑器 2.创建小程序应用：打开刚才下载的dmg，用微信扫面二维码登陆。点击本地小程序项目，就可以开始开发了。 3.先介绍下目录结构： pages文件夹中放的都是页面，app.js相当于iOS的appdelegate,app.json就是app的配置,app.wxss就是css样式文件。每一个页面都单独有一个js，json，wxss文件。4.app.json">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/783986-d6c985cf217cfe83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-12-03T04:48:00.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序_1">
+<meta name="twitter:description" content="1.下载微信小程序编辑器：下载微信小程序编辑器 2.创建小程序应用：打开刚才下载的dmg，用微信扫面二维码登陆。点击本地小程序项目，就可以开始开发了。 3.先介绍下目录结构： pages文件夹中放的都是页面，app.js相当于iOS的appdelegate,app.json就是app的配置,app.wxss就是css样式文件。每一个页面都单独有一个js，json，wxss文件。4.app.json">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/783986-d6c985cf217cfe83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml"/>
+
+
+
+  
+  
+  <link rel="canonical" href="http://fgyong.cn/2016/11/04/微信小程序_01/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>微信小程序_1 | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+
+    
+      
+    
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section">归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section">标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section">分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/ifgyong" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/11/04/微信小程序_01/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong"/>
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终"/>
+      <meta itemprop="image" content="/0.jpeg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">微信小程序_1
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-04 16:39:24" itemprop="dateCreated datePublished" datetime="2016-11-04T16:39:24+08:00">2016-11-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-03 12:48:00" itemprop="dateModified" datetime="2019-12-03T12:48:00+08:00">2019-12-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微信小程序/" itemprop="url" rel="index"><span itemprop="name">微信小程序</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.下载微信小程序编辑器：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html?t=20161102" target="_blank" rel="external">下载微信小程序编辑器</a></p>
+<p>2.创建小程序应用：打开刚才下载的dmg，用微信扫面二维码登陆。点击本地小程序项目，就可以开始开发了。</p>
+<p>3.先介绍下目录结构：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/783986-d6c985cf217cfe83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F6B51227-E9DB-433B-86E3-336916B6E88B.png"><br>pages文件夹中放的都是页面，app.js相当于iOS的appdelegate,app.json就是app的配置,app.wxss就是css样式文件。<br>每一个页面都单独有一个js，json，wxss文件。<br>4.app.json文件分析<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;//所有的页面都在这里列出来</div><div class="line">  &quot;pages&quot;:[</div><div class="line">    &quot;pages/index/index&quot;,</div><div class="line">    &quot;pages/logs/logs&quot;,</div><div class="line">    &quot;pages/button/button&quot;</div><div class="line">  ],</div><div class="line">  &quot;window&quot;:&#123; //app的样式</div><div class="line">    &quot;backgroundTextStyle&quot;:&quot;light&quot;,</div><div class="line">    &quot;navigationBarBackgroundColor&quot;: &quot;#fff&quot;,</div><div class="line">    &quot;navigationBarTitleText&quot;: &quot;WeChat&quot;,</div><div class="line">    &quot;navigationBarTextStyle&quot;:&quot;black&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>5.先做一个小demo(js，json，wxml，wxss都是新建的)<br>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">//获取应用实例</div><div class="line">var app = getApp()</div><div class="line">Page(&#123;</div><div class="line">  data:&#123;</div><div class="line">    count:0,</div><div class="line">    text: &apos;加载了了0次&apos;,</div><div class="line">    loadingstatus: false,</div><div class="line">  &#125;,</div><div class="line">  onLoad:function(options)&#123;</div><div class="line">    // 页面初始化 options为页面跳转所带来的参数</div><div class="line">    console.log(&quot;onLoad&quot;);</div><div class="line">    </div><div class="line">  &#125;,</div><div class="line">  onReady:function()&#123;</div><div class="line">    // 页面渲染完成</div><div class="line">    console.log(&quot;onReady&quot;);</div><div class="line">  &#125;,</div><div class="line">  onShow:function()&#123;</div><div class="line">    // 页面显示</div><div class="line">    console.log(&quot;onShow&quot;);</div><div class="line">  &#125;,</div><div class="line">  onHide:function()&#123;</div><div class="line">    // 页面隐藏</div><div class="line">    console.log(&quot;onHide&quot;);</div><div class="line">  &#125;,</div><div class="line">  onUnload:function()&#123;</div><div class="line">    // 页面关闭</div><div class="line">    console.log(&quot;onUnload&quot;);</div><div class="line">  &#125;,</div><div class="line">  button1click: function()&#123;</div><div class="line">   var that = this;</div><div class="line">   that.data.count++;</div><div class="line">   that.setData(&#123; //更改属性的值</div><div class="line">       text:&apos;加载了&apos;+that.data.count+&apos;次&apos;,</div><div class="line">       loadingstatus:that.data.count%2 == 0 ? true:false,</div><div class="line">   &#125;)</div><div class="line">  &#125;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">//这里的data就是页面的数据和函数，</div><div class="line">onShow,onHide,onReady,onUnload都是生命周期函数，</div><div class="line">button1Click是button的click函数</div><div class="line">这框架是data和页面的绑定起来的，只要改变data的值，页面就会随着变化，这点和iOS有点不同。</div><div class="line"></div><div class="line">button.json 文件</div><div class="line">&#123;</div><div class="line">     &quot;navigationBarTitleText&quot;: &quot;ButtonDemo&quot; 这是页面的title</div><div class="line">&#125;</div><div class="line"></div><div class="line">button.wxml文件</div><div class="line"></div><div class="line">&lt;view class=&quot;container&quot;&gt; </div><div class="line">    &lt;view class=&quot;button-wrapper&quot;&gt;</div><div class="line">    &lt;button type=&quot;default&quot; bindtap=&quot;button1click&quot;  size=&quot;default&quot;  </div><div class="line">    loading=&quot;&#123;&#123;loadingstatus&#125;&#125;&quot; &gt; 点我</div><div class="line">    &lt;/button&gt;</div><div class="line">     &lt;/view&gt;</div><div class="line">&lt;text class=&quot;countClick&quot; id=&quot;text1&quot;&gt;&#123;&#123;text&#125;&#125;</div><div class="line">&lt;/text&gt;</div><div class="line">&lt;/view&gt;</div><div class="line"></div><div class="line">button.wxss</div><div class="line"></div><div class="line">.countClick&#123;</div><div class="line">    margin-top: 100rpx;</div><div class="line">    width: 200rpx;</div><div class="line">    height: 50rpx;</div><div class="line">    text-align: center;</div><div class="line">    font-size: 1em;</div><div class="line">    background-color: cadetblue;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> bindtap=&quot;button1click&quot;  绑定点击事件到buttonclick函数</div><div class="line">&#123;&#123;text&#125;&#125;   &#123;&#123;data中的属性&#125;&#125;</div></pre></td></tr></table></figure></p>
+<p>今天还看到一段比较好玩的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; types.length; ++i) &#123;</div><div class="line">  (function(type) &#123;</div><div class="line">    pageObject[type] = function(e) &#123;</div><div class="line">      var key = type + &apos;Size&apos;</div><div class="line">      var changedData = &#123;&#125;</div><div class="line">      changedData[key] =</div><div class="line">        this.data[key] === &apos;default&apos; ? &apos;mini&apos; : &apos;default&apos;</div><div class="line">      this.setData(changedData)</div><div class="line">    &#125;</div><div class="line">  &#125;)(types[i])</div></pre></td></tr></table></figure></p>
+<p>可能做iOS的没看过js的人这点看不太懂，我也是新手，哪里说的不对，欢迎前端大神指正。<br>大概意思是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; types.length; ++i) &#123; 循环数组</div><div class="line">  (function(type) &#123; //写法js(function)(item)</div><div class="line">    pageObject[type] = function(e) &#123; //添加属性函数 就是增加了几个函数。</div><div class="line">      var key = type + &apos;Size&apos; //拼接字符串</div><div class="line">      var changedData = &#123;&#125; //字典</div><div class="line">      changedData[key] = //字典赋值</div><div class="line">        this.data[key] === &apos;default&apos; ? &apos;mini&apos; : &apos;default&apos;</div><div class="line">      this.setData(changedData) //相当于iOS的kvo用hash值的方式给自己的属性赋值</div><div class="line">    &#125;</div><div class="line">  &#125;)(types[i]) //执行函数</div></pre></td></tr></table></figure></p>
+<p>这一个系列的Demo都会在这个仓库哦，欢迎大神吐槽。<br><strong><a href="https://github.com/ifgyong/WeChatDemo" target="_blank" rel="external">demo地址</a></strong></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微信小程序/" rel="tag"># 微信小程序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/22/Git到CocoaPods看我就够了/" rel="next" title="Git到CocoaPods看我就够了">
+                <i class="fa fa-chevron-left"></i> Git到CocoaPods看我就够了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/05/微信小程序_02/" rel="prev" title="微信小程序_2">
+                微信小程序_2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/0.jpeg"
+                alt="fgyong"/>
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <div class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                  <a href="https://github.com/ifgyong" title="GitHub &rarr; https://github.com/ifgyong" rel="noopener" target="_blank">GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                  <a href="https://juejin.im/user/5693a77b60b2c2974cdd7f7f/posts" title="掘金 &rarr; https://juejin.im/user/5693a77b60b2c2974cdd7f7f/posts" rel="noopener" target="_blank">掘金</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">豫ICP备17045226号-1 </a>&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.4.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+  <script src="/js/js.cookie.js?v=7.1.0"></script>
+  <script src="/js/scroll-cookie.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css"/>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'a7800c37057fc3ce83df',
+    clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+    repo: 'ifgyong.github.io',
+    owner: 'ifgyong',
+    admin: ['ifgyong'],
+    id: md5(location.pathname),
+    
+      language: 'zh-CN',
+    
+    distractionFreeMode: 'false'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
