@@ -7,10 +7,13 @@ install:
   - npm install hexo-cli -g
   - npm install hexo --save
   - npm install
+  - git git@github.com:theme-next/hexo-theme-next.git theme/next
+  - cd theme/next && git checkout v6.6.0 &&cd ..
 branches:
   only:
     - hexo # build master branch only
 script:
+  - hexo clean
   - hexo generate # generate static files
 deploy:
   provider: pages
