@@ -7,8 +7,7 @@ install:
   - npm install hexo-cli -g
   - npm install hexo --save
   - npm install
-  - git git@github.com:theme-next/hexo-theme-next.git theme/next
-  - cd theme/next && git checkout v6.6.0 &&cd ..
+  - git -b v6.6.0 git@github.com:theme-next/hexo-theme-next.git theme/next
   - cp _next_config.yml themes/next/_config.yml
 branches:
   only:
