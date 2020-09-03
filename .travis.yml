@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 language: node_js
 node_js:
   - 13.3.0 # use nodejs v10 LTS
