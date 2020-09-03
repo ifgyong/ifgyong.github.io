@@ -375,6 +375,7 @@ CFRunLoopRef CFRunLoopGetCurrent(void) {
 
 ![](/images/9-2.png)
 那我又整理了一个表格来更直观的了解状态运转
+
 |步骤|任务|
 |:-:|:-:|
 |1|通知Observers:进入Loop|
