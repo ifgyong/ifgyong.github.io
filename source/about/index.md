@@ -18,6 +18,11 @@ https://github.com/ifgyong/iOSDataFactory
                10.性能优化
                11.相机与滤镜
                12.算法的乐趣
+               
+### Flutter
+
+- [Flutter_easyHub 很酷炫的加载动画库 2020.9.1](https://github.com/ifgyong/flutter_easyHub)
+ 
              
 ### Python3 教程
 https://github.com/ifgyong/PYDemo
@@ -26,5 +31,7 @@ https://github.com/ifgyong/t66y
 			2.Python3+PyQt5可视化编程
 			3.py打包
 			4.下载BT到本地
-现在用不着，收藏了，以后再用。欢迎Start,你的start就是我更新的动力。
+			
+			
+> 现在用不着，收藏了，以后再用。欢迎Start,你的start就是我更新的动力。
 
