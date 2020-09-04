@@ -10,6 +10,8 @@ branches:
   only:
     - hexo # build master branch only
 script:
+  - git clone -b v6.6.0 git@github.com:theme-next/hexo-theme-next.git themes/next
+  - cp _next_config.yml themes/next/_config.yml
   - hexo clean
   - hexo generate # generate static files
 deploy:
