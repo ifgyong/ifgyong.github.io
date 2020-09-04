@@ -4,8 +4,6 @@ node_js:
   - 14.9.0 # use nodejs v10 LTS
 cache: npm
 install:
-  - npm install hexo-cli -g
-  - npm install hexo --save
   - rm package-lock.json
   - npm install
   - git clone -b v6.6.0 git@github.com:theme-next/hexo-theme-next.git themes/next
