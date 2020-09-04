@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="指针函数和函数指针顾名思义，指针函数即返回指针的函数。其一般定义形式如下： 1类型名 *函数名(函数参数表列); 其中，后缀运算符括号“()”表示这是一个函数，其前缀运算符星号“*”表示此函数为指针型函数，其函数值为指针，即它带回来的值的类型为指针，当调用这个函数后，将得到一个“指向返回值为…的指针（地址），“类型名”表示函数返回的指针指向的类型”。 “(函数参数表列)”中的括号为函数调用运算符，">
+<meta name="keywords" content="iOS,指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 浅析指针、函数、typedef">
+<meta property="og:url" content="http://fgyong.cn/2019/06/24/iOS 浅析指针、函数、typedef/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="指针函数和函数指针顾名思义，指针函数即返回指针的函数。其一般定义形式如下： 1类型名 *函数名(函数参数表列); 其中，后缀运算符括号“()”表示这是一个函数，其前缀运算符星号“*”表示此函数为指针型函数，其函数值为指针，即它带回来的值的类型为指针，当调用这个函数后，将得到一个“指向返回值为…的指针（地址），“类型名”表示函数返回的指针指向的类型”。 “(函数参数表列)”中的括号为函数调用运算符，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-03T08:24:13.606Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 浅析指针、函数、typedef">
+<meta name="twitter:description" content="指针函数和函数指针顾名思义，指针函数即返回指针的函数。其一般定义形式如下： 1类型名 *函数名(函数参数表列); 其中，后缀运算符括号“()”表示这是一个函数，其前缀运算符星号“*”表示此函数为指针型函数，其函数值为指针，即它带回来的值的类型为指针，当调用这个函数后，将得到一个“指向返回值为…的指针（地址），“类型名”表示函数返回的指针指向的类型”。 “(函数参数表列)”中的括号为函数调用运算符，">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2019/06/24/iOS 浅析指针、函数、typedef/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS 浅析指针、函数、typedef | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">不忘初心 方得始终</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/06/24/iOS 浅析指针、函数、typedef/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 浅析指针、函数、typedef
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-24 16:39:24" itemprop="dateCreated datePublished" datetime="2019-06-24T16:39:24+08:00">2019-06-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-03 16:24:13" itemprop="dateModified" datetime="2020-09-03T16:24:13+08:00">2020-09-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="指针函数和函数指针"><a href="#指针函数和函数指针" class="headerlink" title="指针函数和函数指针"></a>指针函数和函数指针</h4><p>顾名思义，指针函数即返回指针的函数。其一般定义形式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类型名 *函数名(函数参数表列);</span><br></pre></td></tr></table></figure>
+<p>其中，后缀运算符括号<code>“()”</code>表示这是一个函数，其前缀运算符星号<code>“*”</code>表示此函数为指针型函数，其函数值为指针，即它带回来的值的类型为指针，当调用这个函数后，将得到一个“指向返回值为…的指针（地址），“类型名”表示函数返回的指针指向的类型”。</p>
+<p><code>“(函数参数表列)”</code>中的括号为函数调用运算符，在调用语句中，即使函数不带参数，其参数表的一对括号也不能省略。其示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int *pfun(int, int);</span><br></pre></td></tr></table></figure>
+<p>由于<code>“*”</code>的优先级低于<code>“()”</code>的优先级，因而pfun首先和后面的<code>“()”</code>结合，也就意味着，pfun是一个函数。即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int *(pfun(int, int));</span><br></pre></td></tr></table></figure>
+<p>接着再和前面的<code>“*”</code>结合，说明这个函数的返回值是一个指针。由于前面还有一个int，也就是说，pfun是一个返回值为整型指针的函数。<br>我们不妨来再看一看，指针函数与函数指针有什么区别？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int (*pfun)(int, int);</span><br></pre></td></tr></table></figure>
+<p>通过括号强行将pfun首先与<code>“*”</code>结合，也就意味着，pfun是一个指针，接着与后面的<code>“()”</code>结合，说明该指针指向的是一个函数，然后再与前面的int结合，也就是说，该函数的返回值是int。由此可见，pfun是一个指向返回值为int的函数的指针。</p>
+<p>虽然它们只有一个括号的差别，但是表示的意义却截然不同。函数指针的本身是一个指针，指针指向的是一个函数。指针函数的本身是一个函数，其函数的返回值是一个指针。</p>
+<p>用函数指针作为指针函数的返回值<br>在上面提到的指针函数里面，有这样一类函数，它们也返回指针型数据（地址），但是这个指针不是指向int、char之类的基本类型，而是指向函数。对于初学者，别说写出这样的函数声明，就是看到这样的写法也是一头雾水。比如,下面的语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int (*ff(int))(int *, int);</span><br></pre></td></tr></table></figure>
+<p>我们用上面介绍的方法分析一下，ff首先与后面的<code>“()”</code>结合，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int (*(ff(int)))(int *, int);</span><br></pre></td></tr></table></figure>
+<p>用括号将<code>ff(int)</code>再括起来也就意味着，<code>ff</code>是一个函数。<br>接着与前面的<code>“*”</code>结合，说明<code>ff</code>函数的返回值是一个指针。然后再与后面的<code>“()”</code>结合，也就是说，该指针指向的是一个函数。</p>
+<p>这种写法确实让人非常难懂，以至于一些初学者产生误解，认为写出别人看不懂的代码才能显示自己水平高。而事实上恰好相反，能否写出通俗易懂的代码是衡量程序员是否优秀的标准。一般来说，用typedef关键字会使该声明更简单易懂。在前面我们已经见过：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int (*PF)(int *, int);</span><br></pre></td></tr></table></figure>
+<p>也就是说，PF是一个函数指针“变量”。当使用typedef声明后，则PF就成为了一个函数指针<code>“类型”</code>，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef int (*PF)(int *, int);</span><br></pre></td></tr></table></figure>
+<p>这样就定义了返回值的类型。然后，再用PF作为返回值来声明函数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PF ff(int);</span><br></pre></td></tr></table></figure>
+<h4 id="深入理解-typedef"><a href="#深入理解-typedef" class="headerlink" title="深入理解 typedef"></a>深入理解 typedef</h4><p>平时我们在OC中的使用写法，但是对<code>typedef</code>困惑。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typedef &lt;#returnType#&gt;(^&lt;#name#&gt;)(&lt;#arguments#&gt;);//typedefBlock Code Snippets</span><br><span class="line"></span><br><span class="line">typedef void (^RWAlertViewCompletionBlock)(UIAlertView *alertView, NSInteger buttonIndex);</span><br></pre></td></tr></table></figure></p>
+<p>然后可以通过<code>RWAlertViewCompletionBlock</code>当成block类型直接使用了。<br>然后看下<code>libffi</code>的用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef enum &#123;</span><br><span class="line">  FFI_OK = 0,</span><br><span class="line">  FFI_BAD_TYPEDEF,</span><br><span class="line">  FFI_BAD_ABI</span><br><span class="line">&#125; ffi_status;</span><br><span class="line">typedef int INT64;//INT64 其实是int</span><br></pre></td></tr></table></figure></p>
+<p>使用起来的话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffi_status status;//声明一个类型是ffi_status的参数</span><br><span class="line">INT64 age;//声明一个age 类型是INT64</span><br></pre></td></tr></table></figure></p>
+<p>现在block也可以是函数指针了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int (*PF)(int *, int);</span><br><span class="line">//也就是说，PF是一个函数指针“变量”。当使用typedef声明后，则PF就成为了一个函数指针“类型”，即：</span><br><span class="line">typedef int (*PF)(int *, int);</span><br></pre></td></tr></table></figure></p>
+<p><strong>typedef的语法规则其实很简单，一句话来说就是定义对象的语法前加关键字typedef，剩下的不变，原本定义的对象标识符换成类型标识符，对应语义从定义一个对象改成定义一个类型别名。typedef看起来复杂根本原因是对象定义的语法比较复杂，例如分隔符*和[]的用法。</strong><br>针对经典的const来个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef char * pStr;</span><br><span class="line">char string[4] = &quot;abc&quot;;</span><br><span class="line">const char *p1 = string;</span><br><span class="line">const pStr p2 = string;</span><br><span class="line">p1++;</span><br><span class="line">p2++;//error</span><br></pre></td></tr></table></figure></p>
+<p>那么为什么<code>p2++</code>为什么会报错呢？<br>我们来分析一下，<code>const char *p1 = string;</code>是声明了一个<code>const char</code>的指针，不可变的是<code>char</code>,相当于<code>(const char)*p=string</code>,所以<code>p1++</code>不会报错。<code>p2++</code>报错根本原因是<code>p2</code>是不可变的，<code>const pStr p2 = string</code>相当于<code>const (char *) p2 = string</code>,<code>const</code>修饰的是<code>char *</code>，所以<code>p2</code>不可改变。<code>p1</code>是数组，<code>p2</code>是固定的值。</p>
+<h4 id="typedef如何使用呢？"><a href="#typedef如何使用呢？" class="headerlink" title="typedef如何使用呢？"></a><code>typedef</code>如何使用呢？</h4><p>我们具体看几个案例分析一下。</p>
+<p>案例1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int (*b) (void (*)());</span><br></pre></td></tr></table></figure></p>
+<p>简化一下是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef  void (*func)()</span><br><span class="line">typedef  int (*ifunc)(func)</span><br></pre></td></tr></table></figure></p>
+<p>最终简化成<code>ifunc b;</code>。可以理解成<code>(void (*)())</code>是一个<code>func</code>,然后替换<code>func</code>成了最终的形参是<code>func</code>，返回值是<code>int</code>。</p>
+<p>案例2分析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int (*func)(int *p);</span><br></pre></td></tr></table></figure></p>
+<p>首先找到<code>func</code>，<code>func</code>左边是<code>*</code>，说明<code>func</code>是个指针，然后跳出这个圆括号，先看右边，又遇到圆括号，这说明<code>(*func)</code>是一个函数，所以<br>func是一个指向这类函数的指针，即函数指针，这类函数具有<code>int*</code>类型的形参，返回值类型是<code>int</code>。</p>
+<p>综合案例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SEL didload = @selector(viewDidLoad);</span><br><span class="line">Method md = class_getInstanceMethod(aclass, didload);</span><br><span class="line">IMP load = method_getImplementation(md);</span><br><span class="line">void(*loadFunc)(id,SEL) = (void *)load;</span><br></pre></td></tr></table></figure></p>
+<p>这是将SEL获取了Method之后将IMP转化成<code>void(*loadFunc)(id,SEL)</code>，调用的时候可以直接调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//执行ViewDidLoad IMP</span><br><span class="line"> loadFunc(aclass,NULL);</span><br></pre></td></tr></table></figure></p>
+<p>Method可以这样使用，block同样也可以这样使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void (^block)(id _self) = ^(id _self)&#123;</span><br><span class="line">    //code here</span><br><span class="line">&#125;;</span><br><span class="line">void(*func)(id,SEL) = (void*)imp_implementationWithBlock(block);</span><br><span class="line">class_replaceMethod(aclass, didload, (IMP)func, method_getTypeEncoding(md));</span><br></pre></td></tr></table></figure></p>
+<p>这可以直接使用<code>runtime/message.h</code>函数<code>imp_implementationWithBlock</code>将<code>block</code>转化成<code>IMP</code>,使用<code>class_replaceMethod</code>替换某个函数的<code>IMP</code>。那么再调用该函数的时候，则是调用的<code>block</code>的<code>IMP</code>。获取<code>method</code>和<code>block</code>参数后续再分析。</p>
+<p>资料参考：</p>
+<p><a href="http://yulingtianxia.com/blog/2014/04/17/han-shu-zhi-zhen-yu-zhi-zhen-han-shu/" target="_blank" rel="noopener">玉令天下博客地址</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/指针/" rel="tag"># 指针</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/28/Python3 Flask bootstrap教程(2)/" rel="next" title="Python3 Flask bootstrap教程(2)">
+                <i class="fa fa-chevron-left"></i> Python3 Flask bootstrap教程(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/25/iOS 手动做一个自动打包部署神器/" rel="prev" title="iOS 手动做一个自动打包部署神器">
+                iOS 手动做一个自动打包部署神器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#指针函数和函数指针"><span class="nav-number">1.</span> <span class="nav-text">指针函数和函数指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入理解-typedef"><span class="nav-number">2.</span> <span class="nav-text">深入理解 typedef</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typedef如何使用呢？"><span class="nav-number">3.</span> <span class="nav-text">typedef如何使用呢？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
