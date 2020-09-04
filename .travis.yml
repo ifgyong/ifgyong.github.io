@@ -8,7 +8,7 @@ install:
   - npm install
 branches:
   only:
-    - hexo # build master branch only
+    - hexo
 script:
   - hexo clean
   - hexo generate 
