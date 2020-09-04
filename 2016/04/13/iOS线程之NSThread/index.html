@@ -1,25 +1,1004 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前两篇文章已经将了现在主流的GCD和NSOperationQueue,现在我们在聊一下NSThread。 创建NSThread方法一 类方法1+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;方法二 实例方法 1- (instancetype)init">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS线程之NSThread">
+<meta property="og:url" content="http://fgyong.cn/2016/04/13/iOS%E7%BA%BF%E7%A8%8B%E4%B9%8BNSThread/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="前两篇文章已经将了现在主流的GCD和NSOperationQueue,现在我们在聊一下NSThread。 创建NSThread方法一 类方法1+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;方法二 实例方法 1- (instancetype)init">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-04-13T03:23:40.000Z">
+<meta property="article:modified_time" content="2020-09-04T04:40:21.662Z">
+<meta property="article:author" content="fgyong">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="iOS高级">
+<meta name="twitter:card" content="summary">
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2016/04/13/iOS线程之NSThread/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS线程之NSThread | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2016/04/13/iOS%E7%BA%BF%E7%A8%8B%E4%B9%8BNSThread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/favicon.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS线程之NSThread
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-04-13 11:23:40" itemprop="dateCreated datePublished" datetime="2016-04-13T11:23:40+08:00">2016-04-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-04 12:40:21" itemprop="dateModified" datetime="2020-09-04T12:40:21+08:00">2020-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前两篇文章已经将了现在主流的GCD和NSOperationQueue,现在我们在聊一下NSThread。</p>
+<h3 id="创建NSThread"><a href="#创建NSThread" class="headerlink" title="创建NSThread"></a>创建NSThread</h3><p>方法一 类方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;</span><br></pre></td></tr></table></figure><br>方法二 实例方法<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithTarget:(id)target selector:(SEL)selector object:(nullable id)argument NS_AVAILABLE(10_5, 2_0);</span><br></pre></td></tr></table></figure><br>这两者的区别是 类方法是创建新的线程并且立即启动，而第二个方法是创建线程，但是没有启动，启动需要<code>[thread start]</code>。</p>
+<h3 id="获取线程的状态"><a href="#获取线程的状态" class="headerlink" title="获取线程的状态"></a>获取线程的状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">正在执行</span><br><span class="line">@property (readonly, getter&#x3D;isExecuting) BOOL executing NS_AVAILABLE(10_5, 2_0);</span><br><span class="line">完成</span><br><span class="line">@property (readonly, getter&#x3D;isFinished) BOOL finished NS_AVAILABLE(10_5, 2_0);</span><br><span class="line">取消</span><br><span class="line">@property (readonly, getter&#x3D;isCancelled) BOOL cancelled NS_AVAILABLE(10_5, 2_0);</span><br></pre></td></tr></table></figure>
+<h3 id="更改线程状态"><a href="#更改线程状态" class="headerlink" title="更改线程状态"></a>更改线程状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">取消</span><br><span class="line">- (void)cancel NS_AVAILABLE(10_5, 2_0);</span><br><span class="line">开始</span><br><span class="line">- (void)start NS_AVAILABLE(10_5, 2_0);</span><br><span class="line">线程的主函数</span><br><span class="line">- (void)main NS_AVAILABLE(10_5, 2_0);</span><br></pre></td></tr></table></figure>
+<p>在子线程中想要更新UI怎么办，这里官方直接提供了在子线程执行方法的函数，很实用的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&lt;NSString *&gt; *)array;</span><br><span class="line">在主线程执行</span><br><span class="line">- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait;</span><br><span class="line"></span><br><span class="line"> &#x2F;&#x2F; equivalent to the first method with kCFRunLoopCommonModes</span><br><span class="line">- (void)performSelector:(SEL)aSelector </span><br><span class="line">                        onThread:(NSThread *)thr </span><br><span class="line">                      withObject:(nullable id)arg </span><br><span class="line">                waitUntilDone:(BOOL)wait </span><br><span class="line">                              modes:(nullable NSArray&lt;NSString *&gt; *)array NS_AVAILABLE(10_5, 2_0);</span><br><span class="line">- (void)performSelector:(SEL)aSelector </span><br><span class="line">                          onThread:(NSThread *)thr</span><br><span class="line">                       withObject:(nullable id)arg </span><br><span class="line">                waitUntilDone:(BOOL)wait NS_AVAILABLE(10_5, 2_0);</span><br><span class="line"> &#x2F;&#x2F; equivalent to the first method with kCFRunLoopCommonModes</span><br><span class="line">- (void)performSelectorInBackground:(SEL)aSelector</span><br><span class="line">                                                  withObject:(nullable id)arg NS_AVAILABLE(10_5, 2_0);</span><br></pre></td></tr></table></figure></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (void)test6&#123;</span><br><span class="line">    NSThread * thread &#x3D; [[NSThread alloc]initWithTarget:self selector:@selector(op1) object:nil];</span><br><span class="line">    thread.name &#x3D; @&quot;test6&quot;;</span><br><span class="line">    [thread start];</span><br><span class="line">    [self performSelectorInBackground:@selector(print) withObject:nil];</span><br><span class="line">&#125;</span><br><span class="line">- (void)print&#123;</span><br><span class="line">    NSLog(@&quot;线程info : %@&quot;,[NSThread currentThread]);</span><br><span class="line">&#125;</span><br><span class="line">- (void)op1&#123;</span><br><span class="line">    </span><br><span class="line">     NSLog(@&quot;op1 开始运行了&quot;);</span><br><span class="line">     sleep(3);</span><br><span class="line"></span><br><span class="line">     NSLog(@&quot;op1 结束&quot;);</span><br><span class="line">&#125;</span><br><span class="line">输出：</span><br><span class="line">**2016-04-13 10:34:23.515 GCD_Demo[33904:647479] op1 ****开始运行了**</span><br><span class="line">**2016-04-13 10:34:23.515 GCD_Demo[33904:647480] ****线程****info : &lt;NSThread: 0x7fcc81a1abe0&gt;&#123;number &#x3D; 3, name &#x3D; (null)&#125;**</span><br><span class="line">**2016-04-13 10:34:26.521 GCD_Demo[33904:647479] op1 ****结束**</span><br></pre></td></tr></table></figure>
+<p>从输出结果看出来<code>[self performSelectorInBackground:@selector(print) withObject:nil];</code>又自动生成了子线程并且在子线程执行<code>print</code>函数。</p>
+<p>把test6函数改成下面的情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;当waitUntilDone 是yes的时候，是同步执行</span><br><span class="line"> [self performSelectorOnMainThread:@selector(print) withObject:nil waitUntilDone:NO];</span><br><span class="line">    _thread &#x3D; [[NSThread alloc]initWithTarget:self selector:@selector(op1) object:nil];</span><br><span class="line">    _thread.name &#x3D; @&quot;test6&quot;;</span><br><span class="line">    [_thread start];</span><br><span class="line">    [self performSelectorInBackground:@selector(print) withObject:nil];</span><br></pre></td></tr></table></figure><br>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**2016-04-13 10:41:32.534 GCD_Demo[34026:652753] test6 ****开始运行了**</span><br><span class="line">**2016-04-13 10:41:32.534 GCD_Demo[34026:652754] ****线程****info : &lt;NSThread: 0x7fb7320a1bf0&gt;&#123;number &#x3D; 3, name &#x3D; (null)&#125;**</span><br><span class="line">**2016-04-13 10:41:32.537 GCD_Demo[34026:652708] ****线程****info : &lt;NSThread: 0x7fb730c05a20&gt;&#123;number &#x3D; 1, name &#x3D; main&#125;**</span><br><span class="line">**2016-04-13 10:41:35.539 GCD_Demo[34026:652753] test6 ****结束**</span><br></pre></td></tr></table></figure><br><code>[self performSelectorOnMainThread:@selector(print) 
+                                                withObject:nil
+                                         waitUntilDone:NO];</code><br>waitUntilDone为YES的时候是同步执行代码，为NO的时候异步执行代码。<br><code>[self performSelectorInBackground:@selector(print) withObject:nil];</code>开启子线程执行print函数。</p>
+<h3 id="cancel-thread"><a href="#cancel-thread" class="headerlink" title="cancel thread"></a>cancel thread</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)test6&#123;</span><br><span class="line">    _thread &#x3D; [[NSThread alloc]initWithTarget:self selector:@selector(op1) object:nil];</span><br><span class="line">    _thread.name &#x3D; @&quot;test6&quot;;</span><br><span class="line">    [_thread start];</span><br><span class="line">    sleep(2);</span><br><span class="line">    [_thread cancel];</span><br><span class="line">    if (_thread.cancelled) &#123;</span><br><span class="line">        NSLog(@&quot;%@ canceld&quot;,_thread.name);</span><br><span class="line">    &#125; else if(_thread.executing)&#123;</span><br><span class="line">        NSLog(@&quot;%@ execuitng&quot;,_thread.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**2016-04-13 10:50:46.685 GCD_Demo[34128:657263] test6 ****开始运行了**</span><br><span class="line">**2016-04-13 10:50:48.686 GCD_Demo[34128:657214] test6 canceld**</span><br><span class="line">**2016-04-13 10:50:48.692 GCD_Demo[34128:657214] ****线程****info : &lt;NSThread: 0x7ffb34004fb0&gt;&#123;number &#x3D; 1, name &#x3D; main&#125;**</span><br><span class="line">**2016-04-13 10:51:16.689 GCD_Demo[34128:657263] test6 ****结束**</span><br></pre></td></tr></table></figure><br>其实thread取消也是在执行中的线程是没办法直接取消的，<code>[thread cancel]</code>紧紧是改了状态，却没有终止线程。和<code>[NSOperation cancel]</code>类似，当你cancel之后，如果线程在执行，那么他会执行完毕，如果线程还没执行，那么他会终止执行。</p>
+<p>关于thread的通知<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;将要变成多线程 在有新的线程启动的时候会发送此通知</span><br><span class="line">FOUNDATION_EXPORT NSString * const NSWillBecomeMultiThreadedNotification;</span><br><span class="line">&#x2F;&#x2F;将要变成单独线程  官方标注: Not implemented.【没有实现】</span><br><span class="line">FOUNDATION_EXPORT NSString * const NSDidBecomeSingleThreadedNotification;</span><br><span class="line">&#x2F;&#x2F;线程退出</span><br><span class="line">FOUNDATION_EXPORT NSString * const NSThreadWillExitNotification;</span><br><span class="line"></span><br><span class="line">通过这三个通知可以监测线程的启动和现成的退出。</span><br><span class="line">&#x2F;&#x2F;监测线程启动，启动的线程是未知的所以object是nil</span><br><span class="line">    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeMultiNsthread) name:NSWillBecomeMultiThreadedNotification object:nil];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;监测线程退出</span><br><span class="line">    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exit:) name:NSThreadWillExitNotification object:nil];</span><br></pre></td></tr></table></figure><br>线程的讨论暂时就这么多，有问题我们一起讨论，欢迎留言。。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS%E9%AB%98%E7%BA%A7/" rel="tag"># iOS高级</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/31/iOS%E7%BA%BF%E7%A8%8B%E4%B9%8BNSOperation/" rel="next" title="iOS线程之NSOperation">
+                <i class="fa fa-chevron-left"></i> iOS线程之NSOperation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/22/Git%E5%88%B0CocoaPods%E7%9C%8B%E6%88%91%E5%B0%B1%E5%A4%9F%E4%BA%86/" rel="prev" title="Git到CocoaPods看我就够了">
+                Git到CocoaPods看我就够了 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.ico"
+                alt="fgyong" />
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmc=" title="GitHub &rarr; https://github.com/ifgyong"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vdXNlci8xNzUwMDc4MjM5MjkwOTA5" title="掘金 &rarr; https://juejin.im/user/1750078239290909"><i class="fa fa-fw fa-掘金"></i>掘金</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建NSThread"><span class="nav-number">1.</span> <span class="nav-text">创建NSThread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取线程的状态"><span class="nav-number">2.</span> <span class="nav-text">获取线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改线程状态"><span class="nav-number">3.</span> <span class="nav-text">更改线程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cancel-thread"><span class="nav-number">5.</span> <span class="nav-text">cancel thread</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备17045226号 </span>&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Mist</span> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'a7800c37057fc3ce83df',
+          clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+          repo: 'ifgyong.github.io',
+          owner: 'ifgyong',
+          admin: ['ifgyong'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,25 +1,1054 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="基于现在iOS11新生成的图片都是HEIF，该图片使用[UIImage image:name]已不在那么优雅，图片大小为1.8m大小的，读进手机内存，直接飙升了45M，这是我们不想看到的结果，一个页面有多个这样子的图的话，恐怕就是灾难了。 既然原图不能读入，那么如何可以用更少的内存和CPU来解决呢? 这就要先了解该图片的编码了。 HEIC HEIF 带有元数据的HEIF的另一种形式。HEIC文件包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS图片优化">
+<meta property="og:url" content="http://fgyong.cn/2019/12/03/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="基于现在iOS11新生成的图片都是HEIF，该图片使用[UIImage image:name]已不在那么优雅，图片大小为1.8m大小的，读进手机内存，直接飙升了45M，这是我们不想看到的结果，一个页面有多个这样子的图的话，恐怕就是灾难了。 既然原图不能读入，那么如何可以用更少的内存和CPU来解决呢? 这就要先了解该图片的编码了。 HEIC HEIF 带有元数据的HEIF的另一种形式。HEIC文件包">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fgyong.cn/images/14-1.png">
+<meta property="og:image" content="http://fgyong.cn/images/0.png">
+<meta property="article:published_time" content="2019-12-03T03:15:58.000Z">
+<meta property="article:modified_time" content="2020-09-04T04:40:21.656Z">
+<meta property="article:author" content="fgyong">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fgyong.cn/images/14-1.png">
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2019/12/03/iOS图片优化 /"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS图片优化 | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/12/03/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/favicon.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS图片优化
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-03 11:15:58" itemprop="dateCreated datePublished" datetime="2019-12-03T11:15:58+08:00">2019-12-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-04 12:40:21" itemprop="dateModified" datetime="2020-09-04T12:40:21+08:00">2020-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>基于现在iOS11新生成的图片都是<code>HEIF</code>，该图片使用<code>[UIImage image:name]</code>已不在那么优雅，图片大小为1.8m大小的，读进手机内存，直接飙升了45M，这是我们不想看到的结果，一个页面有多个这样子的图的话，恐怕就是灾难了。</p>
+<p>既然原图不能读入，那么如何可以用更少的内存和CPU来解决呢?</p>
+<p>这就要先了解该图片的编码了。</p>
+<h2 id="HEIC-HEIF"><a href="#HEIC-HEIF" class="headerlink" title="HEIC HEIF"></a>HEIC HEIF</h2><blockquote>
+<p>带有元数据的HEIF的另一种形式。HEIC文件包含一个或多个以“高效图像格式”（HEIF）保存的图像，该格式通常用于在移动设备上存储照片。它可能包含单个图像或图像序列以及描述每个图像的元数据。最常使用文件扩展名“ .heic”，但HEIC文件也可能显示为.HEIF文件</p>
+</blockquote>
+<p><code>heic</code>和<code>heif</code>是广色域图片的格式，广色域比<code>sRGB</code>表示范围大25%，在广色域设备中能显示更广的色彩，<code>sRGB 8bit/dept</code>，广色域达到<code>16bit/dept</code>。广色域只是在硬件支持的情况下才能显示的。<br>其实就是苹果搞的一个更高效体积更小效率更高的压缩方式。</p>
+<h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><p>加载<code>image</code>，只是把<strong>文件信息</strong>加载到内存中，下一步就是解码。在代码中体现就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let image &#x3D; UIImage(contentsOfFile: url.path)</span><br><span class="line">或 加载图片到内存 会常驻内存</span><br><span class="line">let image &#x3D; UIImage(named: name)!</span><br></pre></td></tr></table></figure></p>
+<h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><p>其实是发生在添加到要显示的view上面才会解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let imageV &#x3D; UIImageView.init(image: image)</span><br><span class="line">imageV.frame &#x3D; CGRect(x: 50, y: (250 * i) + 100, width: 200, height: 200)</span><br><span class="line">self.view.addSubview(imageV)</span><br></pre></td></tr></table></figure><br>最后一行不写，则不会解码。</p>
+<h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><p>当<code>view</code>显示出来则是渲染。过程是解码的<code>data buffer</code> 复制到<code>frame buffer</code>,硬件从帧缓冲区读取数据显示到屏幕上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.view.addSubview(imageV)</span><br></pre></td></tr></table></figure></p>
+<h2 id="内存暴涨原因"><a href="#内存暴涨原因" class="headerlink" title="内存暴涨原因"></a>内存暴涨原因</h2><p>一部分图片加载到内存，在解码过程中出现了内存暴涨问题，今天探究一下原因和解决方案。</p>
+<p>首先有请我们准备的素材和设备(6s 64g版本)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A:jpg</span><br><span class="line">20M 12000*12000</span><br><span class="line"></span><br><span class="line">B:jpg</span><br><span class="line">2.8M 3024*4032</span><br><span class="line"></span><br><span class="line">C:HEIC</span><br><span class="line">1.8M 3024*4032</span><br></pre></td></tr></table></figure><br>素材A<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">APP运行内存：13.8M</span><br><span class="line">加载Image: 240.3M之后稳定到220M</span><br><span class="line">CPU：峰值5%，随后降低到0%</span><br><span class="line">image占内存：226.5M</span><br></pre></td></tr></table></figure></p>
+<p>素材B<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">APP运行内存：13.7M</span><br><span class="line">加载Image: 31.5</span><br><span class="line">CPU：峰值5%，随后降低到0%</span><br><span class="line">image占内存：17.8M</span><br></pre></td></tr></table></figure></p>
+<p>素材C<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">APP运行内存：13.8M</span><br><span class="line">加载Image: 32.3</span><br><span class="line">CPU：峰值4%，随后降低到0%</span><br><span class="line">image占内存：18.5M</span><br></pre></td></tr></table></figure></p>
+<p>我们猜测是否是<code>imageView</code>的大小影响内存的呢？<br><code>size</code>改为原来的1/10结果运行内存还是和以前一样。</p>
+<p>为什么呢？</p>
+<blockquote>
+<p>内存大小不是取决于<code>view</code>的<code>size</code>，而是原始文件<strong>image size</strong>。</p>
+</blockquote>
+<p><img src="/images/14-1.png" alt></p>
+<h3 id="渲染格式"><a href="#渲染格式" class="headerlink" title="渲染格式"></a>渲染格式</h3><h4 id="SRGB"><a href="#SRGB" class="headerlink" title="SRGB"></a>SRGB</h4><p>每个像素4字节，包含红黄蓝和透明度，每个通道是1字节8位。</p>
+<h4 id="display-p3-宽色域"><a href="#display-p3-宽色域" class="headerlink" title="display p3 宽色域"></a>display p3 宽色域</h4><p>每个像素8字节，包含红黄蓝和透明度，每个通道是2字节16位。使用机型iphone7 、iphone8、iphone X及以后的设备，不支持该格式的机型无法显示该效果。</p>
+<h4 id="亮度和透明度"><a href="#亮度和透明度" class="headerlink" title="亮度和透明度"></a>亮度和透明度</h4><p>每个像素2字节，单一的色调和透明度，只能来显示白色和黑色之间的色值，没有其他颜色。</p>
+<h4 id="Alpha-8-Format"><a href="#Alpha-8-Format" class="headerlink" title="Alpha 8 Format"></a>Alpha 8 Format</h4><p>每个像素1字节，用来表示透明度，一般用作蒙版和文字。<br>相比sRGB容量小了75%，详细 宽色域 容量小了87.5%</p>
+<h3 id="渲染图片大小计算"><a href="#渲染图片大小计算" class="headerlink" title="渲染图片大小计算"></a>渲染图片大小计算</h3><p>图片大小 = 图片格式容量 <em> 像素个数<br>当我们把大小是20\</em>20使用<code>Alpha 8 format</code>渲染到20*20的view上面，和40*40的image使用<code>p3</code>渲染到20*20的view中，后着占用内存是前者的8倍。</p>
+<p>使用sRGB色域进行渲染所占用的大小为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imageWidth*imageHeight*4 字节</span><br></pre></td></tr></table></figure><br>每个像素占用了4字节，每个字节8位，</p>
+<p>使用<code>display p3</code>则每个通道占用16位，那么占用内存大小是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imageWidth*imageHeight*8 字节</span><br></pre></td></tr></table></figure></p>
+<h3 id="如何选择正确的图片格式"><a href="#如何选择正确的图片格式" class="headerlink" title="如何选择正确的图片格式"></a>如何选择正确的图片格式</h3><blockquote>
+<p>不要主动选择图片格式，让格式选择你。</p>
+</blockquote>
+<p>不要再使用<code>UIGraphicsBeginImageContextWithOptions</code>,该方法总是使用sRGB格式，你想节约内存是不行的，在支持<code>p3</code>的设备上想绘制出来<code>p3</code>色域的图片也是不行的。那么使用<code>UIGraphicsImageRenderer</code>系统可以自动为你选择格式，如果绘制<code>image</code>，自己再添加单色蒙版，是不需要另外单独分配内存的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">if let im &#x3D; imageV &#123;</span><br><span class="line">&#x2F;&#x2F;第二次添加蒙版</span><br><span class="line">	im.tintColor &#x3D; UIColor.black</span><br><span class="line">&#125;else&#123;</span><br><span class="line">&#x2F;&#x2F;绘制一个红色矩形</span><br><span class="line">	let bounds &#x3D; CGRect(x: 0, y: 0, width: width, height: height)</span><br><span class="line">	let renderer &#x3D; UIGraphicsImageRenderer(bounds: bounds)</span><br><span class="line">	 let image &#x3D; renderer.image &#123; (coxt) in</span><br><span class="line">		UIColor.red.setFill()</span><br><span class="line">		let path &#x3D; UIBezierPath(roundedRect: bounds,</span><br><span class="line">								cornerRadius: 20)</span><br><span class="line">		path.addClip()</span><br><span class="line">		UIRectFill(bounds)</span><br><span class="line">	&#125;</span><br><span class="line">	imageV &#x3D; UIImageView(image: image)</span><br><span class="line">	imageV?.frame &#x3D; bounds</span><br><span class="line">	self.view.addSubview(imageV!)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>UIImage</code> 直接读出来需要将所有<code>UIImage</code>的<code>data</code>全部解码到内存，很耗费内存和性能。为了节省内存和降低CPU使用率，可以采用<strong>下采样</strong>。</p>
+<h3 id="下采样"><a href="#下采样" class="headerlink" title="下采样"></a>下采样</h3><p>当<code>image</code>素材大小是<code>1000*1000</code>，但是在手机上显示出来只有<code>200*200</code>，我们其实是没必要将<code>1000*1000</code>的数据都解码的，只需要缩小成<code>200*200</code>的大小即可，这样子节省了内存和CPU，用户感官也没有任何影响。<br>在<code>UIKit</code>中使用<code>UIGraphicsImageRenderer</code>会有瞬间很高的内存和CPU峰值，那么</p>
+<h4 id="1-UIKit-UIGraphicsImageRenderer"><a href="#1-UIKit-UIGraphicsImageRenderer" class="headerlink" title="1.UIKit  UIGraphicsImageRenderer"></a>1.UIKit  UIGraphicsImageRenderer</h4><p>使用素材A下采样技术，使用<code>UIKit</code>中的<code>UIGraphicsImageRenderer</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Memory </span><br><span class="line">High:16.4M</span><br><span class="line">normal:14.8M</span><br><span class="line">CPU:</span><br><span class="line">Hight:29%</span><br><span class="line">normal:0%</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">func resizedImage(at url: URL, for size: CGSize) -&gt; UIImage? &#123;</span><br><span class="line">	guard let image &#x3D; UIImage(contentsOfFile: url.path) else &#123;</span><br><span class="line">		return nil</span><br><span class="line">	&#125;</span><br><span class="line">	if #available(iOS 10.0, *) &#123;</span><br><span class="line">		let renderer &#x3D; UIGraphicsImageRenderer(size: size)</span><br><span class="line">	</span><br><span class="line">		return renderer.image &#123; (context) in</span><br><span class="line">			image.draw(in: CGRect(origin: .zero, size: size))</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		UIGraphicsBeginImageContext(size)</span><br><span class="line">		image.draw(in: CGRect(origin: .zero, size: size))</span><br><span class="line">		let image &#x3D; UIGraphicsGetImageFromCurrentImageContext()</span><br><span class="line">		UIGraphicsEndImageContext()</span><br><span class="line">		return image</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用子线程绘制，会出现CPU略微升高，当<code>image size</code>大很多的时候会出现内存飙升然后慢慢恢复到<code>normal</code>。</p>
+<h4 id="2-CoreGraphics-CGContext上下文绘制缩略图"><a href="#2-CoreGraphics-CGContext上下文绘制缩略图" class="headerlink" title="2.CoreGraphics CGContext上下文绘制缩略图"></a>2.CoreGraphics CGContext上下文绘制缩略图</h4><p>使用上下文绘制 <code>cpu</code> 和内存变化如下,<code>CPU</code>和内存没有大的变动解决了该问题，也做到省电、顺滑。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Memory </span><br><span class="line">High:42.3M</span><br><span class="line">normal:14.1M</span><br><span class="line">CPU:</span><br><span class="line">Hight:6%</span><br><span class="line">normal:0%</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">func resizedImage2(at url: URL, for size: CGSize) -&gt; UIImage?&#123;</span><br><span class="line">	guard let imageSource &#x3D; CGImageSourceCreateWithURL(url as NSURL, nil),</span><br><span class="line">		let image &#x3D; CGImageSourceCreateImageAtIndex(imageSource, 0, nil)</span><br><span class="line">	else&#123;</span><br><span class="line">		return nil;</span><br><span class="line">	&#125;</span><br><span class="line">	let cxt &#x3D; CGContext(data: nil,</span><br><span class="line">						width: Int(size.width),</span><br><span class="line">						height: Int(size.height),</span><br><span class="line">						bitsPerComponent: image.bitsPerComponent,</span><br><span class="line">						bytesPerRow: image.bytesPerRow,</span><br><span class="line">						space: image.colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!</span><br><span class="line">		,</span><br><span class="line">						bitmapInfo: image.bitmapInfo.rawValue)</span><br><span class="line">	cxt?.interpolationQuality &#x3D; .high</span><br><span class="line">	cxt?.draw(image, in: CGRect(origin: .zero, size: size))</span><br><span class="line">	guard let scaledImage &#x3D; cxt?.makeImage() else &#123;</span><br><span class="line">		return nil</span><br><span class="line">	&#125;</span><br><span class="line">	let ima &#x3D; UIImage(cgImage: scaledImage)</span><br><span class="line">	return ima</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-ImageIO-创建缩略图"><a href="#3-ImageIO-创建缩略图" class="headerlink" title="3.ImageIO 创建缩略图"></a>3.ImageIO 创建缩略图</h4><p>使用<code>ImageIO</code> 中创建图像，CPU和内存记录反而更高了，内存也居高不下，时间上基本2s才将图像绘制出来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Memory </span><br><span class="line">High:320M</span><br><span class="line">normal:221M</span><br><span class="line">CPU:</span><br><span class="line">Hight:73%</span><br><span class="line">normal:0%</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">func resizedImage3(at url: URL, for size: CGSize) -&gt; UIImage?&#123;</span><br><span class="line">	</span><br><span class="line">	let ops:[CFString:Any] &#x3D; [kCGImageSourceCreateThumbnailFromImageIfAbsent:true,</span><br><span class="line">							  kCGImageSourceCreateThumbnailWithTransform:true,</span><br><span class="line">							  kCGImageSourceShouldCacheImmediately:true,</span><br><span class="line">							  kCGImageSourceThumbnailMaxPixelSize:max(size.width, size.height)]</span><br><span class="line">	guard let imageSource &#x3D; CGImageSourceCreateWithURL(url as NSURL, nil),</span><br><span class="line">		let image &#x3D; CGImageSourceCreateImageAtIndex(imageSource, 0, ops as CFDictionary) else &#123;</span><br><span class="line">			return nil;</span><br><span class="line">	&#125;</span><br><span class="line">	let ima &#x3D; UIImage(cgImage: image)</span><br><span class="line">	printImageCost(image: ima)</span><br><span class="line">	return ima</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-CoreImage-滤镜"><a href="#4-CoreImage-滤镜" class="headerlink" title="4.CoreImage 滤镜"></a>4.CoreImage 滤镜</h4><p>使用滤镜处理反而有点麻烦，在iOS不是专业处理图像的APP中略微臃肿，而且性能不是很好。在重复删除添加操作，第二次出现了APP闪退问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Memory </span><br><span class="line">High:1.04G</span><br><span class="line">normal:566M</span><br><span class="line">CPU:</span><br><span class="line">Hight:73%</span><br><span class="line">normal:0%</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">func resizedImage4(at url: URL, for size: CGSize) -&gt; UIImage?&#123;</span><br><span class="line">	let shareContext &#x3D; CIContext(options: [.useSoftwareRenderer:false])</span><br><span class="line">	</span><br><span class="line">	 guard let image &#x3D; CIImage(contentsOf: url) else &#123; return nil &#125;</span><br><span class="line">	let fillter &#x3D; CIFilter(name: &quot;CILanczosScaleTransform&quot;)</span><br><span class="line">	fillter?.setValue(image, forKey: kCIInputImageKey)</span><br><span class="line">	fillter?.setValue(1, forKey: kCIInputScaleKey)</span><br><span class="line">	guard let outPutCIImage &#x3D; fillter?.outputImage,let outputCGImage &#x3D; shareContext.createCGImage(outPutCIImage, from: outPutCIImage.extent) else &#123; return nil &#125;</span><br><span class="line">	</span><br><span class="line">	return UIImage(cgImage: outputCGImage)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-使用-vImage-优化图片渲染"><a href="#5-使用-vImage-优化图片渲染" class="headerlink" title="5.使用 vImage 优化图片渲染"></a>5.使用 vImage 优化图片渲染</h4><p>使用<code>vImage</code>创建图像性能略低，内存使用较多，步骤麻烦，是我们该舍弃的。在内存只有1G的手机上恐怕要<code>crash</code>了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Memory </span><br><span class="line">High:998.7M</span><br><span class="line">normal:566M</span><br><span class="line">CPU:</span><br><span class="line">Hight:78%</span><br><span class="line">normal:0%</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">func resizedImage5(at url: URL, for size: CGSize) -&gt; UIImage? &#123;</span><br><span class="line">    &#x2F;&#x2F; 解码源图像</span><br><span class="line">    guard let imageSource &#x3D; CGImageSourceCreateWithURL(url as NSURL, nil),</span><br><span class="line">        let image &#x3D; CGImageSourceCreateImageAtIndex(imageSource, 0, nil),</span><br><span class="line">        let properties &#x3D; CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],</span><br><span class="line">        let imageWidth &#x3D; properties[kCGImagePropertyPixelWidth] as? vImagePixelCount,</span><br><span class="line">        let imageHeight &#x3D; properties[kCGImagePropertyPixelHeight] as? vImagePixelCount</span><br><span class="line">    else &#123;</span><br><span class="line">        return nil</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 定义图像格式</span><br><span class="line">    var format &#x3D; vImage_CGImageFormat(bitsPerComponent: 8,</span><br><span class="line">                                      bitsPerPixel: 32,</span><br><span class="line">                                      colorSpace: nil,</span><br><span class="line">                                      bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue),</span><br><span class="line">                                      version: 0,</span><br><span class="line">                                      decode: nil,</span><br><span class="line">                                      renderingIntent: .defaultIntent)</span><br><span class="line"></span><br><span class="line">    var error: vImage_Error</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 创建并初始化源缓冲区</span><br><span class="line">    var sourceBuffer &#x3D; vImage_Buffer()</span><br><span class="line">    defer &#123; sourceBuffer.data.deallocate() &#125;</span><br><span class="line">    error &#x3D; vImageBuffer_InitWithCGImage(&amp;sourceBuffer,</span><br><span class="line">                                         &amp;format,</span><br><span class="line">                                         nil,</span><br><span class="line">                                         image,</span><br><span class="line">                                         vImage_Flags(kvImageNoFlags))</span><br><span class="line">    guard error &#x3D;&#x3D; kvImageNoError else &#123; return nil &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 创建并初始化目标缓冲区</span><br><span class="line">    var destinationBuffer &#x3D; vImage_Buffer()</span><br><span class="line">    error &#x3D; vImageBuffer_Init(&amp;destinationBuffer,</span><br><span class="line">                              vImagePixelCount(size.height),</span><br><span class="line">                              vImagePixelCount(size.width),</span><br><span class="line">                              format.bitsPerPixel,</span><br><span class="line">                              vImage_Flags(kvImageNoFlags))</span><br><span class="line">    guard error &#x3D;&#x3D; kvImageNoError else &#123; return nil &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 优化缩放图像</span><br><span class="line">    error &#x3D; vImageScale_ARGB8888(&amp;sourceBuffer,</span><br><span class="line">                                 &amp;destinationBuffer,</span><br><span class="line">                                 nil,</span><br><span class="line">                                 vImage_Flags(kvImageHighQualityResampling))</span><br><span class="line">    guard error &#x3D;&#x3D; kvImageNoError else &#123; return nil &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 从目标缓冲区创建一个 CGImage 对象</span><br><span class="line">    guard let resizedImage &#x3D;</span><br><span class="line">        vImageCreateCGImageFromBuffer(&amp;destinationBuffer,</span><br><span class="line">                                      &amp;format,</span><br><span class="line">                                      nil,</span><br><span class="line">                                      nil,</span><br><span class="line">                                      vImage_Flags(kvImageNoAllocate),</span><br><span class="line">                                      &amp;error)?.takeRetainedValue(),</span><br><span class="line">        error &#x3D;&#x3D; kvImageNoError</span><br><span class="line">    else &#123;</span><br><span class="line">        return nil</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return UIImage(cgImage: resizedImage)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h3><p>图片解码后加载在内存中的数据需要在恰当的时机删除掉，在合适的时机添加上，也是保持低内存使用率的手段。</p>
+<p>在用户拨打电话或者进入到其他APP中可以先删除掉大图片，等回来的时候再次添加也是不错的选择。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 1</span><br><span class="line">NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification,</span><br><span class="line">									   object: nil,</span><br><span class="line">									   queue: .main)</span><br><span class="line">&#123;[weak self] (note) in</span><br><span class="line">	self?.unloadImage()</span><br><span class="line">&#125;</span><br><span class="line">NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification,</span><br><span class="line">									   object: nil,</span><br><span class="line">									   queue: .main)</span><br><span class="line">&#123;[weak self] (note) in</span><br><span class="line">	self?.loadImage()</span><br><span class="line">&#125;</span><br><span class="line"># 2</span><br><span class="line"></span><br><span class="line">override func viewWillAppear(_ animated: Bool) &#123;</span><br><span class="line">	super.viewWillAppear(animated)</span><br><span class="line">	self.loadImage()</span><br><span class="line">&#125;</span><br><span class="line">override func viewWillDisappear(_ animated: Bool) &#123;</span><br><span class="line">	super.viewWillDisappear(animated)</span><br><span class="line">	self.unloadImage()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>基于性能综合考虑方法1是最简单最合适的</li>
+<li>使用滤镜和<code>vImage</code>略微复杂点，平时开发过程中可以不用考虑了。</li>
+<li>图片解码缓存和图片大小有关，适当的下采样是不错的选择。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL3ZpZGVvcy9wbGF5L3d3ZGMyMDE4LzQxNg==" title="https://developer.apple.com/videos/play/wwdc2018/416">session 2018 416 iOS Memory Deep Dive<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL3ZpZGVvcy9wbGF5L3d3ZGMyMDE4LzIxOQ==" title="https://developer.apple.com/videos/play/wwdc2018/219">219_image_and_graphics_best_practices<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvaU9TRGF0YUZhY3Rvcnk=" title="https://github.com/ifgyong/iOSDataFactory">WWDC 中文字幕下载<i class="fa fa-external-link"></i></span></li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZGFhZjhiM2YyNjVkYTViNmYwNzRjOTgjaGVhZGluZy0x" title="https://juejin.im/post/5daaf8b3f265da5b6f074c98#heading-1">swift gg 图像优化<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvaU9TRGF0YUZhY3Rvcnk=" title="https://github.com/ifgyong/iOSDataFactory">学习资料下载git<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvZGVtby90cmVlL21hc3Rlcg==" title="https://github.com/ifgyong/demo/tree/master">demo code git<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h2 id="唯有实践才是检验真理的唯一标准"><a href="#唯有实践才是检验真理的唯一标准" class="headerlink" title="唯有实践才是检验真理的唯一标准"></a><strong>唯有实践才是检验真理的唯一标准</strong></h2><p>最怕一生碌碌无为，还安慰自己平凡可贵。</p>
+<p>广告时间</p>
+<p><img src="/images/0.png" alt></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20MVC%E3%80%81MVP%E3%80%81MVVM%E3%80%81%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1%E6%B5%85%E8%B0%88%20%E2%80%94%20(13)/" rel="next" title="MVC、MVP、MVVM、分层设计浅谈 — (13)">
+                <i class="fa fa-chevron-left"></i> MVC、MVP、MVVM、分层设计浅谈 — (13)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/05/APP%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96/" rel="prev" title="APP 资源管理优化">
+                APP 资源管理优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.ico"
+                alt="fgyong" />
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmc=" title="GitHub &rarr; https://github.com/ifgyong"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vdXNlci8xNzUwMDc4MjM5MjkwOTA5" title="掘金 &rarr; https://juejin.im/user/1750078239290909"><i class="fa fa-fw fa-掘金"></i>掘金</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HEIC-HEIF"><span class="nav-number">1.</span> <span class="nav-text">HEIC HEIF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载"><span class="nav-number">2.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解码"><span class="nav-number">3.</span> <span class="nav-text">解码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染"><span class="nav-number">4.</span> <span class="nav-text">渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存暴涨原因"><span class="nav-number">5.</span> <span class="nav-text">内存暴涨原因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染格式"><span class="nav-number">5.1.</span> <span class="nav-text">渲染格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SRGB"><span class="nav-number">5.1.1.</span> <span class="nav-text">SRGB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#display-p3-宽色域"><span class="nav-number">5.1.2.</span> <span class="nav-text">display p3 宽色域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#亮度和透明度"><span class="nav-number">5.1.3.</span> <span class="nav-text">亮度和透明度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-8-Format"><span class="nav-number">5.1.4.</span> <span class="nav-text">Alpha 8 Format</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染图片大小计算"><span class="nav-number">5.2.</span> <span class="nav-text">渲染图片大小计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何选择正确的图片格式"><span class="nav-number">5.3.</span> <span class="nav-text">如何选择正确的图片格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下采样"><span class="nav-number">5.4.</span> <span class="nav-text">下采样</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-UIKit-UIGraphicsImageRenderer"><span class="nav-number">5.4.1.</span> <span class="nav-text">1.UIKit  UIGraphicsImageRenderer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-CoreGraphics-CGContext上下文绘制缩略图"><span class="nav-number">5.4.2.</span> <span class="nav-text">2.CoreGraphics CGContext上下文绘制缩略图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ImageIO-创建缩略图"><span class="nav-number">5.4.3.</span> <span class="nav-text">3.ImageIO 创建缩略图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-CoreImage-滤镜"><span class="nav-number">5.4.4.</span> <span class="nav-text">4.CoreImage 滤镜</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-使用-vImage-优化图片渲染"><span class="nav-number">5.4.5.</span> <span class="nav-text">5.使用 vImage 优化图片渲染</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存优化"><span class="nav-number">5.5.</span> <span class="nav-text">内存优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.7.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯有实践才是检验真理的唯一标准"><span class="nav-number">6.</span> <span class="nav-text">唯有实践才是检验真理的唯一标准</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备17045226号 </span>&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Mist</span> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'a7800c37057fc3ce83df',
+          clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+          repo: 'ifgyong.github.io',
+          owner: 'ifgyong',
+          admin: ['ifgyong'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
