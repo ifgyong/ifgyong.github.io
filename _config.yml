@@ -85,4 +85,4 @@ deploy:
   type: git
   repo: https://github.com/ifgyong/ifgyong.github.io 
   branch: gh-pages
-  message: 添加备案号
+  message: 部署
