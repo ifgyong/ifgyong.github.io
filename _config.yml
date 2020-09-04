@@ -9,6 +9,7 @@ description: 在学习的路上，不忘初心 方得始终
 author: fgyong
 language: zh-CN
 timezone:
+encoding: UTF-8
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
