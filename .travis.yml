@@ -1,7 +1,7 @@
 sudo: true
 language: node_js
 node_js:
-  - 14.9.0 # use nodejs v10 LTS
+  - 13.3.0 # use nodejs v10 LTS
 cache: npm
 install:
   - rm package-lock.json
