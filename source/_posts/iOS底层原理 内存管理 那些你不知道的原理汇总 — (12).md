@@ -1,8 +1,10 @@
+---
 title: iOS底层原理  内存管理 那些你不知道的原理汇总 --(12)
-date: 2019-12-1 11:22:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: 4fd9184d
+date: 2019-12-01 11:22:58
 ---
 
 看完本文章你将了解到

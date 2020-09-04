@@ -1,7 +1,9 @@
+---
 title: Git到CocoaPods看我就够了
-date: 2016-04-22 16:39:24
 tags: Git
 categories: Git
+abbrlink: a4360ec
+date: 2016-04-22 16:39:24
 ---
 ### 看了这篇文章你可能
 + 学会Git基本使用

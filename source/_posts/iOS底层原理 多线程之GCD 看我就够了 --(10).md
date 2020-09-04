@@ -1,8 +1,10 @@
+---
 title: iOS底层原理  多线程之GCD看我就够了 --(10)
-date: 2019-12-1 11:20:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: ed1e3ed4
+date: 2019-12-01 11:20:58
 ---
 
 `RunLoop`和线程的关系，以及`Thread`如何保活和控制生命周期，今天我们再探究下另外的一个线程`GCD`，揭开蒙娜丽莎的面纱。

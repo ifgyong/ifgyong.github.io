@@ -1,9 +1,11 @@
+---
 title: iOS高级开发runtime那点事实战（1）
-date: 2016-03-24 10:36:14
 tags:
-- iOS
-- iOS高级开发
+  - iOS
+  - iOS高级开发
 categories: iOS
+abbrlink: '28e85353'
+date: 2016-03-24 10:36:14
 ---
 
 ## runtime 给类别添加属性浅析

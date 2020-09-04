@@ -1,8 +1,10 @@
+---
 title: iOS底层原理  block本质 --(5)
-date: 2019-12-1 11:15:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: 56eded6e
+date: 2019-12-01 11:15:58
 ---
 
 本章讲解block的用法和底层数据结构，以及使用过程中需要注意的点。

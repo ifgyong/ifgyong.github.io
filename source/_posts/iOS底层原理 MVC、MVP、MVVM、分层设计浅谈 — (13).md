@@ -1,9 +1,10 @@
- 
+---
 title: MVC、MVP、MVVM、分层设计浅谈 — (13)
-date: 2019-12-1 11:23:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: d4993be8
+date: 2019-12-01 11:23:58
 ---
 
 这篇文章主要讲解关于架构的一些思考，通过这篇文章你将了解到

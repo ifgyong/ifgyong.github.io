@@ -1,8 +1,10 @@
+---
 title: iOS底层原理 runtime-object_class拾遗基础篇--(6)
-date: 2019-12-1 11:16:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: 87e5f745
+date: 2019-12-01 11:16:58
 ---
 
 ### runtime 基础知识

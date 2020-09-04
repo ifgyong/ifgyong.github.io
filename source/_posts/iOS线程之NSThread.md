@@ -1,9 +1,11 @@
+---
 title: iOS线程之NSThread
-date: 2016-04-13 11:23:40
 tags:
-- iOS
-- iOS高级
+  - iOS
+  - iOS高级
 categories: iOS
+abbrlink: 541df434
+date: 2016-04-13 11:23:40
 ---
 前两篇文章已经将了现在主流的GCD和NSOperationQueue,现在我们在聊一下NSThread。
 ### 创建NSThread 

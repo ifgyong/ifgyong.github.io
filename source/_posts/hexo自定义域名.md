@@ -1,8 +1,10 @@
+---
 title: hexo自定义域名
-date: 2016-01-28 11:44:52
 tags:
-- 建站
+  - 建站
 categories: 建站
+abbrlink: 291a5b1a
+date: 2016-01-28 11:44:52
 ---
 ## 注册购买域名
 就像买淘宝的宝贝一样简单，[阿里云域名购买](http://wanwang.aliyun.com/domain/?spm=5176.200001.n2.13.iyigkk)

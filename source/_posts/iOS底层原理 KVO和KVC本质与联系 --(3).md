@@ -1,8 +1,10 @@
+---
 title: iOS底层原理  KVO和KVC本质与联系 --(3)
-date: 2019-12-1 11:13:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: de45badd
+date: 2019-12-01 11:13:58
 ---
 我们知道实例实际是存储了成员变量的值和指向类的`isa`指针，`class`对象和`meta-class`对象包含 `isa`、`superclass`和`class_rw_t`这几种结构体，只是数据不一样，`isa`需要`ISA_MASK`&之后才是真正的值。那么今天我们在看一下Key-Value Observing的本质。
  

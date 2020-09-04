@@ -1,8 +1,10 @@
+---
 title: iOS WebView设置cookie
-date: 2016-01-28 11:13:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: b428b79f
+date: 2016-01-28 11:13:58
 ---
 
 ## 添加cookie的时候必须先设置可以接受cookie

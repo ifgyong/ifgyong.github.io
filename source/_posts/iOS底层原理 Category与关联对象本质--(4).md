@@ -1,8 +1,10 @@
+---
 title: iOS底层原理 Category与关联对象本质--(4)
-date: 2019-12-1 11:14:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: eb9027b0
+date: 2019-12-01 11:14:58
 ---
 
  今天我们再看一下`Category`的底层原理。

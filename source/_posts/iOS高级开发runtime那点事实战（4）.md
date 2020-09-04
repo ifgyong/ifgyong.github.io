@@ -1,9 +1,11 @@
+---
 title: iOS高级开发runtime那点事实战（4）
-date: 2016-03-28 14:19:20
 tags:
-- iOS
-- iOS高级开发
+  - iOS
+  - iOS高级开发
 categories: iOS
+abbrlink: 1f36a361
+date: 2016-03-28 14:19:20
 ---
 ### Category
 Category是表示一个指向分类的结构体的指针，其定义如下：

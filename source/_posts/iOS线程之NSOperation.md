@@ -1,9 +1,11 @@
+---
 title: iOS线程之NSOperation
-date: 2016-03-31 14:47:47
 tags:
-- iOS
-- iOS高级
+  - iOS
+  - iOS高级
 categories: iOS
+abbrlink: ade4263c
+date: 2016-03-31 14:47:47
 ---
 
 前篇文章已经讲了GCD了，那么这两者有什么区别？

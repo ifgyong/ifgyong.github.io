@@ -1,9 +1,11 @@
+---
 title: iOS 手动做一个自动打包部署神器
-date: 2019-6-25 16:39:24
-tags: 
-- iOS 
-- 自动打包
+tags:
+  - iOS
+  - 自动打包
 categories: iOS
+abbrlink: 2cf48cc7
+date: 2019-06-25 16:39:24
 ---
 之前使用的fastlane添加pgyer自动打包的，最近发现更新总是有问题，所以产生了自己shell做一个的想法。虽然代码比较少，但是很实用。
 - 打包

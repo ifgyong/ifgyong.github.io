@@ -1,9 +1,11 @@
+---
 title: iOS线程之GCD初探
-date: 2016-03-28 17:47:47
 tags:
-- iOS
-- iOS高级
+  - iOS
+  - iOS高级
 categories: iOS
+abbrlink: df6fb867
+date: 2016-03-28 17:47:47
 ---
 
 简述：

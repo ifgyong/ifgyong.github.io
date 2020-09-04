@@ -1,8 +1,10 @@
+---
 title: iOS底层原理  RunLoop基础总结和随心所欲掌握子线程RunLoop生命周期 --(9)
-date: 2019-12-1 11:19:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: 53c2ebb0
+date: 2019-12-01 11:19:58
 ---
 
 使用钩子实现了对字典和数组的赋值的校验，顺便随手撸了一个简单的`jsonToModel`,`iOS`除了`runtime`还有一个东西的叫做`runloop`，各位看官老爷一定都有了解，那么今天这篇文章初识一下`runloop`。

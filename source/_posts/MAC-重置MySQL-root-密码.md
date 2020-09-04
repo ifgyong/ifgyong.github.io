@@ -1,8 +1,10 @@
+---
 title: MAC 重置MySQL root 密码
-date: 2016-01-28 11:16:24
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: 8728226c
+date: 2016-01-28 11:16:24
 ---
 
 

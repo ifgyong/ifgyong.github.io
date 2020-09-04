@@ -1,9 +1,11 @@
+---
 title: Python3 Flask bootstrap教程(2)
-date: 2018-05-28 12:02:22
 tags:
-- Flask
-- Python3
+  - Flask
+  - Python3
 categories: Python3
+abbrlink: f2195580
+date: 2018-05-28 12:02:22
 ---
 
 1.蓝图

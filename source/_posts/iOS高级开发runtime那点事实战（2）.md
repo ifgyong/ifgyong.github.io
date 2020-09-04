@@ -1,9 +1,11 @@
+---
 title: iOS高级开发runtime那点事实战（2）
-date: 2016-03-24 11:01:56
 tags:
-- iOS
-- iOS高级开发
+  - iOS
+  - iOS高级开发
 categories: iOS
+abbrlink: 3a5dfcbd
+date: 2016-03-24 11:01:56
 ---
 ### 获取class的property属性List
 ```

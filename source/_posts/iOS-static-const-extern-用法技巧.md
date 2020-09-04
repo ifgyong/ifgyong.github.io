@@ -1,7 +1,9 @@
+---
 title: iOS static const extern 用法技巧
-date: 2016-01-28 11:07:58
 tags:
-- iOS
+  - iOS
+abbrlink: f8f40b5c
+date: 2016-01-28 11:07:58
 ---
 ## 通俗的讲：
 

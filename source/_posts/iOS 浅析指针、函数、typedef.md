@@ -1,9 +1,11 @@
+---
 title: iOS 浅析指针、函数、typedef
-date: 2019-6-24 16:39:24
-tags: 
-- 指针 
-- iOS
+tags:
+  - 指针
+  - iOS
 categories: iOS
+abbrlink: 66f667ef
+date: 2019-06-24 16:39:24
 ---
 #### 指针函数和函数指针
 

@@ -1,9 +1,11 @@
+---
 title: Module version mismatch
-date: 2016-01-30 20:32:53
 tags:
-- 建站
-- hexo
-categories: 建站 
+  - 建站
+  - hexo
+categories: 建站
+abbrlink: ef8e5fe9
+date: 2016-01-30 20:32:53
 ---
 # Module version mismatch
 就是模块 版本不匹配了，我这个电脑是很久没用了`npm -v //2.*.*`，我在官网查了一下 npm 都已经3.*了，就索性把npm更新了一下`sudo npm i -g npm //更新npm`。然后在执行 `hexo s` 竟然还报错，错误如下

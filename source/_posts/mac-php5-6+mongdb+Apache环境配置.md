@@ -1,10 +1,12 @@
+---
 title: PHP5.6+YII+MongoDB环境搭建
-date: 2018-4-16 15:39:24
-tags:  
-- PHP环境配置
-- YII
-- MongoDB
-categories: 数据结构 
+tags:
+  - PHP环境配置
+  - YII
+  - MongoDB
+categories: 数据结构
+abbrlink: e7f52113
+date: 2018-04-16 15:39:24
 ---
 ### 1.安装php5.6
 ##### 1.先安装brew，要是不确定是否已经安装了brew，可以先运行`brew -v`查看版本，有版本号的话直接下一步，报错的话安装brew。

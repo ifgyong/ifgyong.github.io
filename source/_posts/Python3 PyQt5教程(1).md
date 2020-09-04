@@ -1,10 +1,12 @@
+---
 title: Python3 PyQt5教程(1)
-date: 2018-5-9 16:39:24
-tags: 
-- Python3 
-- 开发
-- 建站
+tags:
+  - Python3
+  - 开发
+  - 建站
 categories: Python3
+abbrlink: 2361e7e9
+date: 2018-05-09 16:39:24
 ---
 
 

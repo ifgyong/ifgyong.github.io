@@ -1,9 +1,11 @@
+---
 title: hexo换了电脑处理方法
-date: 2016-01-31 12:02:22
 tags:
-- 建站
-- hexo
+  - 建站
+  - hexo
 categories: 建站
+abbrlink: 8d37be4f
+date: 2016-01-31 12:02:22
 ---
 
 ## hexo换了电脑处理方法

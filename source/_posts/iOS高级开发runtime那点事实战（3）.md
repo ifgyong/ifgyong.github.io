@@ -1,9 +1,11 @@
+---
 title: iOS高级开发runtime那点事实战（3）
-date: 2016-03-24 11:15:48
 tags:
-- iOS
-- iOS高级开发
+  - iOS
+  - iOS高级开发
 categories: iOS
+abbrlink: 82e19bd8
+date: 2016-03-24 11:15:48
 ---
 ###  添加类
 ```

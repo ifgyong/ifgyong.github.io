@@ -1,8 +1,10 @@
+---
 title: iOS底层原理 runtime- objc_msgSend拾遗基础篇--(7)
-date: 2019-12-1 11:17:58
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: e64bf1f
+date: 2019-12-01 11:17:58
 ---
 
 arm64之后isa是使用联合体使用更少的空间存储更多的数据，以及如何自定义和使用联合体，`objc_class->cache_t cache`是一个是缓存最近调用`class`的方法，当缓存剩余空间小余1/4则进行扩容，扩容为原来的两倍，扩容之后，已存储的`method_t`扩容之后之后被清空。今天我们在了解runtime的消息转发机制。

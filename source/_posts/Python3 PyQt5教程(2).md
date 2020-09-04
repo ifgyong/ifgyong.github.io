@@ -1,9 +1,11 @@
+---
 title: Python3 PyQt5教程(2)
-date: 2018-5-10 16:39:24
-tags: 
-- Python3 
-- PyQt5
-categories: Python 
+tags:
+  - Python3
+  - PyQt5
+categories: Python
+abbrlink: 84cb42a
+date: 2018-05-10 16:39:24
 ---
 大家关注的教程2来了。
 第一期是代码布局，现在有更高级的布局方式，那就是Qt5，布局完UI可以用PythonUIC命令转成py文件，添加`import `和

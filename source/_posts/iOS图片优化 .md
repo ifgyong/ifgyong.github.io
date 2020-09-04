@@ -1,8 +1,10 @@
-title: iOS图片优化 
-date: 2019-12-3 11:15:58
+---
+title: iOS图片优化
 tags:
-- iOS
+  - iOS
 categories: iOS
+abbrlink: a43ad0a9
+date: 2019-12-03 11:15:58
 ---
 
 基于现在iOS11新生成的图片都是`HEIF`，该图片使用`[UIImage image:name]`已不在那么优雅，图片大小为1.8m大小的，读进手机内存，直接飙升了45M，这是我们不想看到的结果，一个页面有多个这样子的图的话，恐怕就是灾难了。
