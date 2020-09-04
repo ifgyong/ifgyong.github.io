@@ -84,6 +84,6 @@ theme: next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/ifgyong/ifgyong.github.io 
+  repo: git@github.com:ifgyong/ifgyong.github.io.git 
   branch: gh-pages
   message: 部署
