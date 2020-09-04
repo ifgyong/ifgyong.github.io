@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。 资源大部分是图片，说到图片必须讲一下位图和矢量图 位图 位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APP 资源管理优化">
+<meta property="og:url" content="http://fgyong.cn/2019/12/05/APP%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。 资源大部分是图片，说到图片必须讲一下位图和矢量图 位图 位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.fgyong.cn/FhF6-GTsthDXMlsX9ezQ1PaXalIa.png-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FpZhgVvqS711QZZnYYptKr40Pc9U-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FrtLZrygVGyJAqlV6Q412foMQgRk-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FvHCZgiiwONF_5Y01HOVP_-d9d3_-a">
+<meta property="og:image" content="http://blog.fgyong.cn/Fh6BK-44VNuB2PDdQUjaA-2iOF_J-a">
+<meta property="og:image" content="http://blog.fgyong.cn/1.mp4">
+<meta property="og:image" content="http://blog.fgyong.cn/FqvcOJHbjHBdE04jl78PlT3pAA4l-a">
+<meta property="og:image" content="http://blog.fgyong.cn/FgJGgpqcA-K_kSKY6e9LDZapOiYT-a">
+<meta property="og:image" content="http://blog.fgyong.cn/Fld0tbjb_RgbF9QWnzTXUYrZJzhG-a">
+<meta property="article:published_time" content="2019-12-05T03:15:58.000Z">
+<meta property="article:modified_time" content="2020-09-04T04:40:21.650Z">
+<meta property="article:author" content="fgyong">
+<meta property="article:tag" content="iOS优化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.fgyong.cn/FhF6-GTsthDXMlsX9ezQ1PaXalIa.png-a">
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2019/12/05/APP资源优化/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>APP 资源管理优化 | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/12/05/APP%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/favicon.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">APP 资源管理优化
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-05 11:15:58" itemprop="dateCreated datePublished" datetime="2019-12-05T11:15:58+08:00">2019-12-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-04 12:40:21" itemprop="dateModified" datetime="2020-09-04T12:40:21+08:00">2020-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在APP中，使用 X1、X2、X3已经是司空见惯的事情了，网上出了清空不再使用的图片和类，是不是做完这些不能再进一步优化了，答案是否定的，当然可以的，今天再探究一下资源管理优化。</p>
+<p>资源大部分是图片，说到图片必须讲一下位图和矢量图</p>
+<h3 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h3><blockquote>
+<p>位图图像（bitmap），亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成整个图像的无数单个方块。扩大位图尺寸的效果是增大单个像素，从而使线条和形状显得参差不齐。</p>
+</blockquote>
+<h3 id="矢量图"><a href="#矢量图" class="headerlink" title="矢量图"></a>矢量图</h3><blockquote>
+<p>矢量图，也称为面向对象的图像或绘图图像，在数学上定义为一系列由线连接的点。矢量文件中的图形元素称为对象。每个对象都是一个自成一体的实体，它具有颜色、形状、轮廓、大小和屏幕位置等属性。<br>矢量图是根据几何特性来绘制图形，矢量可以是一个点或一条线，矢量图只能靠软件生成，文件占用内在空间较小，因为这种类型的图像文件包含独立的分离图像，可以自由无限制的重新组合。</p>
+</blockquote>
+<h3 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h3><blockquote>
+<p>位图就是无数个点组成的图片，基本元素是像素；矢量图有多个图形组成的，基本元素是图像。当相同尺寸的位图和矢量图绘制在大屏幕上，位图的弊端出现了，图像看着像素颗粒很大，而矢量图基本效果还是很好的。</p>
+</blockquote>
+<p>矢量图在绘制到不同的屏幕上有着天然的优势。</p>
+<h2 id="开始使用矢量图"><a href="#开始使用矢量图" class="headerlink" title="开始使用矢量图"></a>开始使用矢量图</h2><p>在Xcdoe 9、iOS11 中已经开始支持了矢量图，只需要设置打钩<code>Preserve Cector Dadta</code>。<br><img src="http://blog.fgyong.cn/FhF6-GTsthDXMlsX9ezQ1PaXalIa.png-a" alt></p>
+<p><strong>前提图片格式是矢量图哦</strong></p>
+<p>矢量图在资源大小中相比和一倍、两倍、三倍图总和，大小下降<strong>60%</strong>，这算是不错的提升了。</p>
+<h2 id="Stretchable-Images"><a href="#Stretchable-Images" class="headerlink" title="Stretchable Images"></a>Stretchable Images</h2><p>从iOS11、Xcode 9就开始支持了该工具，该工具可实现在<code>building</code>中将图片元数据格栅化，儿不是在运行时处理，降低图片在显示时候的CPU压力。<br>当渲染的尺寸大于当前的尺寸的时候才会重新渲染，否则使用优化过的预渲染位图。<br>效果是这样子的</p>
+<p><img src="http://blog.fgyong.cn/FpZhgVvqS711QZZnYYptKr40Pc9U-a" alt></p>
+<h4 id="Slicing"><a href="#Slicing" class="headerlink" title="Slicing"></a>Slicing</h4><h5 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h5><ul>
+<li>None 无</li>
+<li>Horizontal 水平</li>
+<li>Vertical 竖直</li>
+<li>Horizontal and Vertical 水平和竖直 </li>
+</ul>
+<h5 id="Center"><a href="#Center" class="headerlink" title="Center"></a>Center</h5><ul>
+<li>Tiles 平铺</li>
+<li>Streches 拉伸</li>
+</ul>
+<p>使用这两组参数可以达到绝大部分需求了</p>
+<p><img src="http://blog.fgyong.cn/FrtLZrygVGyJAqlV6Q412foMQgRk-a" alt></p>
+<p>当我们使用下图这种图片，提前和UI讲清楚，作出一个小图，在设备上使用<code>Stretchable Images</code>功能，可以达到大图的效果。</p>
+<p><img src="http://blog.fgyong.cn/FvHCZgiiwONF_5Y01HOVP_-d9d3_-a" alt><br>白色部分表示可拉伸和舍弃的<br><img src="http://blog.fgyong.cn/Fh6BK-44VNuB2PDdQUjaA-2iOF_J-a" alt></p>
+<p>最终效果是这样的</p>
+<p><img src="http://blog.fgyong.cn/1.mp4" alt></p>
+<p>👏👏👏👏</p>
+<p>更多用法可以参考<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYXBwbGUuY29tL3ZpZGVvcy9wbGF5L3d3ZGMyMDE4LzIyNw==" title="https://developer.apple.com/videos/play/wwdc2018/227">WWDC2018/227<i class="fa fa-external-link"></i></span></p>
+<h2 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h2><p>大项目可能会有很多框架，当多个框架使用的图片名字发生重复时，使用<code>Bundle</code>是不错的选择，<code>Bundle</code>相当于文件夹，相同<code>Bundle</code>下边没有重复的文件即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Get the app&#39;s main bundle</span><br><span class="line">let mainBundle &#x3D; Bundle.main</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获取本地Bundle 图片</span><br><span class="line">let me &#x3D; Bundle.init(identifier: &quot;me&quot;)</span><br><span class="line">let path &#x3D; me?.path(forResource: &quot;fgyong.cn 技术博客&quot;, ofType: &quot;png&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h2><p>当APP有50个类似的功能，但是每个功能都用类似的图片，那么他们名字也一致，我们使用<code>Namespace</code>来解决这个问题。<br><img src="http://blog.fgyong.cn/FqvcOJHbjHBdE04jl78PlT3pAA4l-a" alt></p>
+<p>使用起来也是很简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let image &#x3D; UIImage(named: &quot;me&#x2F;4.png&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="APP-Thining"><a href="#APP-Thining" class="headerlink" title="APP Thining"></a>APP Thining</h2><h3 id="Memory-Classes-amp-amp-Graphics-Classes"><a href="#Memory-Classes-amp-amp-Graphics-Classes" class="headerlink" title="Memory Classes &amp;&amp; Graphics Classes"></a>Memory Classes &amp;&amp; Graphics Classes</h3><p>使用内存和Metal来适配不同机型，达到最优性能。</p>
+<p><img src="http://blog.fgyong.cn/FgJGgpqcA-K_kSKY6e9LDZapOiYT-a" alt></p>
+<p>首先机型先去找4GB的资源，4GB没找到，则向下寻找3GB，一直寻找到1GB对应的资源。</p>
+<p>内存和GPU相比，内存有着更高的优先级，我们确定内存是表现设备整体性能的标准。</p>
+<h2 id="NSSData-set"><a href="#NSSData-set" class="headerlink" title="NSSData set"></a>NSSData set</h2><p><code>Data set</code>容器可以放任何东西。<br>可以是<code>plist</code>文件，可以是<code>video</code>、可以是<code>mp3</code>，可以是其他任何格式的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open class func preloadTextureAtlasesNamed(_ atlasNames: [String], withCompletionHandler completionHandler: @escaping (Error?, [SKTextureAtlas]) -&gt; Void)</span><br></pre></td></tr></table></figure>
+<p>使用该函数立刻调用大量I/O和内存来解码或读入数据，预先放在内存中，你需要在紧急需要的时候调用该函数。不要随意调用该API，以为它会按照你说的<strong>立马</strong>去做！⚠️⚠️⚠️当你调用该函数，请确保立即使用资源，否则API会消耗大量的I/O和内存来加载所有这些图像。</p>
+<p><code>Sprite Atlases</code>强大之处是会根据不同设备和屏幕来渲染不同的图像，并传送到正确的设备。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://blog.fgyong.cn/Fld0tbjb_RgbF9QWnzTXUYrZJzhG-a" alt></p>
+<ul>
+<li>在iOS12上采用最新的算法，这些图像资源会减少10%-20%的空间，</li>
+<li>使用Xcode的资源目录是不错的选择</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS%E4%BC%98%E5%8C%96/" rel="tag"># iOS优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/03/iOS%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%20/" rel="next" title="iOS图片优化">
+                <i class="fa fa-chevron-left"></i> iOS图片优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/24/macOS%20AUY%E4%B8%80%E6%AC%BE%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E6%9F%90%E7%A6%8F%E5%88%A9%E7%9A%84APP/" rel="prev" title="macOS 一款自动上传图床的APP">
+                macOS 一款自动上传图床的APP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.ico"
+                alt="fgyong" />
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmc=" title="GitHub &rarr; https://github.com/ifgyong"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vdXNlci8xNzUwMDc4MjM5MjkwOTA5" title="掘金 &rarr; https://juejin.im/user/1750078239290909"><i class="fa fa-fw fa-掘金"></i>掘金</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#位图"><span class="nav-number">1.</span> <span class="nav-text">位图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矢量图"><span class="nav-number">2.</span> <span class="nav-text">矢量图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说人话"><span class="nav-number">3.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用矢量图"><span class="nav-number"></span> <span class="nav-text">开始使用矢量图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stretchable-Images"><span class="nav-number"></span> <span class="nav-text">Stretchable Images</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Slicing"><span class="nav-number">0.1.</span> <span class="nav-text">Slicing</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Slices"><span class="nav-number">0.1.1.</span> <span class="nav-text">Slices</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Center"><span class="nav-number">0.1.2.</span> <span class="nav-text">Center</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bundle"><span class="nav-number"></span> <span class="nav-text">Bundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespace"><span class="nav-number"></span> <span class="nav-text">Namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APP-Thining"><span class="nav-number"></span> <span class="nav-text">APP Thining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Classes-amp-amp-Graphics-Classes"><span class="nav-number">1.</span> <span class="nav-text">Memory Classes &amp;&amp; Graphics Classes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSSData-set"><span class="nav-number"></span> <span class="nav-text">NSSData set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备17045226号 </span>&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Mist</span> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'a7800c37057fc3ce83df',
+          clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+          repo: 'ifgyong.github.io',
+          owner: 'ifgyong',
+          admin: ['ifgyong'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

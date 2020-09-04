@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我们知道实例实际是存储了成员变量的值和指向类的isa指针，class对象和meta-class对象包含 isa、superclass和class_rw_t这几种结构体，只是数据不一样，isa需要ISA_MASK&amp;之后才是真正的值。那么今天我们在看一下Key-Value Observing的本质。 KVO本质 首先需要了解KVO基本使用，KVO的全称 Key-Value Observing，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS底层原理  KVO和KVC本质与联系 --(3)">
+<meta property="og:url" content="http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20KVO%E5%92%8CKVC%E6%9C%AC%E8%B4%A8%E4%B8%8E%E8%81%94%E7%B3%BB%20--(3)/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="我们知道实例实际是存储了成员变量的值和指向类的isa指针，class对象和meta-class对象包含 isa、superclass和class_rw_t这几种结构体，只是数据不一样，isa需要ISA_MASK&amp;之后才是真正的值。那么今天我们在看一下Key-Value Observing的本质。 KVO本质 首先需要了解KVO基本使用，KVO的全称 Key-Value Observing，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fgyong.cn/images/3-1.png">
+<meta property="og:image" content="http://fgyong.cn/images/0.png">
+<meta property="article:published_time" content="2019-12-01T03:13:58.000Z">
+<meta property="article:modified_time" content="2020-09-04T04:40:21.657Z">
+<meta property="article:author" content="fgyong">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fgyong.cn/images/3-1.png">
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2019/12/01/iOS底层原理 KVO和KVC本质与联系 --(3)/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS底层原理  KVO和KVC本质与联系 --(3) | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20KVO%E5%92%8CKVC%E6%9C%AC%E8%B4%A8%E4%B8%8E%E8%81%94%E7%B3%BB%20--(3)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/favicon.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS底层原理  KVO和KVC本质与联系 --(3)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-01 11:13:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:13:58+08:00">2019-12-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-04 12:40:21" itemprop="dateModified" datetime="2020-09-04T12:40:21+08:00">2020-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们知道实例实际是存储了成员变量的值和指向类的<code>isa</code>指针，<code>class</code>对象和<code>meta-class</code>对象包含 <code>isa</code>、<code>superclass</code>和<code>class_rw_t</code>这几种结构体，只是数据不一样，<code>isa</code>需要<code>ISA_MASK</code>&amp;之后才是真正的值。那么今天我们在看一下Key-Value Observing的本质。</p>
+<h3 id="KVO本质"><a href="#KVO本质" class="headerlink" title="KVO本质"></a>KVO本质</h3><p> 首先需要了解KVO基本使用，KVO的全称 Key-Value Observing，俗称“键值监听”，可以用于监听某个对象属性值的改变。下面我们展示一下KVO的基本使用。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> #import &lt;Foundation&#x2F;Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface FYPerson : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic,assign) NSInteger age;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br><span class="line"></span><br><span class="line">#import &quot;ViewController.h&quot;</span><br><span class="line">#import &quot;FYPerson.h&quot;</span><br><span class="line"></span><br><span class="line">@interface ViewController ()</span><br><span class="line">@property (nonatomic,strong)FYPerson *person;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">	[super viewDidLoad];</span><br><span class="line">	&#x2F;&#x2F; Do any additional setup after loading the view.</span><br><span class="line">	self.person&#x3D;[FYPerson new];</span><br><span class="line">	self.person.age &#x3D; 10;</span><br><span class="line">	[self.person addObserver:self</span><br><span class="line">    			  forKeyPath:@&quot;age&quot;</span><br><span class="line">    				 options:NSKeyValueObservingOptionNew</span><br><span class="line">    				 context:nil];</span><br><span class="line">&#125;</span><br><span class="line">- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event&#123;</span><br><span class="line">	self.person.age +&#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context&#123;</span><br><span class="line">	NSLog(@&quot;监听到了age变化： %@&quot;,change);</span><br><span class="line">&#125;</span><br><span class="line">-(void)dealloc&#123;</span><br><span class="line">	[self.person removeObserver:self forKeyPath:@&quot;age&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;下边是输出结果</span><br><span class="line">监听到了age变化： &#123;</span><br><span class="line">    kind &#x3D; 1;</span><br><span class="line">    new &#x3D; 12;</span><br><span class="line">    old &#x3D; 11;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 从上述代码可以看出，添加监听之后，当值改变时，会触发函数<code>observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context</code>。</p>
+<h4 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h4> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> - (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event&#123;</span><br><span class="line">&#x2F;&#x2F;	self.person.age +&#x3D; 1;</span><br><span class="line">	[self.person willChangeValueForKey:@&quot;age&quot;];</span><br><span class="line">	[self.person didChangeValueForKey:@&quot;age&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 当把<code>age</code>具体值的改变，变成手动调用<code>willChangeValueForKey</code>和<code>didChangeValueForKey</code>的时候，结果如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  监听到了age变化： &#123;</span><br><span class="line">    kind &#x3D; 1;</span><br><span class="line">    new &#x3D; 10;</span><br><span class="line">    old &#x3D; 10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <code>new</code>和<code>old</code>的值竟然一样，经测试只有同时先后调用<code>willChangeValueForKey</code>和<code>didChangeValueForKey</code>，会触发回调函数<code>observeValueForKeyPath</code>，由此可知触发条件是<code>willChangeValueForKey</code>和<code>didChangeValueForKey</code>配合使用。</p>
+<h4 id="探寻KVO底层实现原理"><a href="#探寻KVO底层实现原理" class="headerlink" title="探寻KVO底层实现原理"></a>探寻KVO底层实现原理</h4><p>通过上述代码我们发现，一旦age属性的值发生改变时，就会通知到监听者，并且我们知道赋值操作都是调用 set方法，我们可以来到Person类中重写age的set方法，观察是否是KVO在set方法内部做了一些操作来通知监听者。<br>我们发现即使重写了set方法，p1对象和p2对象调用同样的set方法，但是我们发现p1除了调用set方法之外还会另外执行监听器的observeValueForKeyPath方法。<br>说明KVO在运行时获取对p1对象做了一些改变。相当于在程序运行过程中，对p1对象做了一些变化，使得p1对象在调用setage方法的时候可能做了一些额外的操作，所以问题出在对象身上，两个对象在内存中肯定不一样，两个对象可能本质上并不一样。接下来来探索KVO内部是怎么实现的。<br>KVO底层实现分析<br>首先我们对上述代码中添加监听的地方打断点，看观察一下，addObserver方法对p1对象做了什么处理？也就是说p1对象在经过addObserver方法之后发生了什么改变，我们通过打印isa指针：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@interface ViewController ()</span><br><span class="line">@property (nonatomic,strong)FYPerson *person;</span><br><span class="line">@property (nonatomic,strong)FYPerson *person2;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">	[super viewDidLoad];</span><br><span class="line">	&#x2F;&#x2F; Do any additional setup after loading the view.</span><br><span class="line">	self.person&#x3D;[FYPerson new];</span><br><span class="line">	self.person2 &#x3D;[FYPerson new];</span><br><span class="line">	self.person.age &#x3D; 10;</span><br><span class="line">	[self.person addObserver:self</span><br><span class="line">					  forKeyPath:@&quot;age&quot;</span><br><span class="line">						 options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld</span><br><span class="line">						 context:nil];</span><br><span class="line"> Class superclass &#x3D; NSStringFromClass( class_getSuperclass(NSClassFromString(@&quot;NSKVONotifying_FYPerson&quot;)));</span><br><span class="line">Class NSKVONotifying_FYPerson &#x3D; objc_getClass(&quot;NSKVONotifying_FYPerson&quot;);</span><br><span class="line">    fy_objc_class* NSKVONotifying_FYPerson_class &#x3D; (__bridge fy_objc_class *)NSKVONotifying_FYPerson;</span><br><span class="line">						 &#x2F;&#x2F;此处打断点</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;p 命令输出isa指针 </span><br><span class="line">(lldb) p self.person2-&gt;isa</span><br><span class="line">(Class) $0 &#x3D; FYPerson</span><br><span class="line">(lldb) p self.person-&gt;isa</span><br><span class="line">(Class) $1 &#x3D; NSKVONotifying_FYPerson</span><br><span class="line"></span><br><span class="line">(lldb) p superclass</span><br><span class="line">(Class) $0 &#x3D; FYPerson</span><br><span class="line"></span><br><span class="line">(lldb) p NSKVONotifying_FYPerson_class-&gt;superclass</span><br><span class="line">(Class) $4 &#x3D; FYPerson</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从输出的isa指针看来，经过<code>【person addObserver】</code>之后，<code>person</code>的<code>isa</code>指针指向了<code>NSKVONotifying_FYPerson</code>,而<code>person2</code>的<code>isa</code>是<code>FYPerson</code>，可以看出系统是对<code>instance</code>对象的<code>isa</code>进行了赋值操作。通过<code>p NSKVONotifying_FYPerson_class-&gt;superclass==FYPerson</code>可以看出isa是指向了子类，那么子类<code>NSKVONotifying_FYPerson</code>到底做了那些事情呢？</p>
+<p>看下边代码查看函数isa改变过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">	self.person&#x3D;[FYPerson new];</span><br><span class="line">	self.person2 &#x3D;[FYPerson new];</span><br><span class="line">	self.person.age &#x3D; 10;</span><br><span class="line">&#x2F;&#x2F;打断点 输出 po [_person methodForSelector:@selector(setAge:)]</span><br><span class="line">	[self.person addObserver:self</span><br><span class="line">					  forKeyPath:@&quot;age&quot;</span><br><span class="line">						 options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld</span><br><span class="line">						 context:nil];</span><br><span class="line">&#x2F;&#x2F;打断点 输出 po [_person methodForSelector:@selector(setAge:)]</span><br><span class="line"></span><br><span class="line">(lldb) po [_person methodForSelector:@selector(setAge:)]</span><br><span class="line">0x000000010666b720</span><br><span class="line"></span><br><span class="line">(lldb) po [_person methodForSelector:@selector(setAge:)]</span><br><span class="line">0x00000001069c63d2</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;查看IMP指针对应地址和内容</span><br><span class="line">(lldb) p (IMP)0x000000010666b720</span><br><span class="line">(IMP) $2 &#x3D; 0x000000010666b720 (day03-KVO本质&#96;::-[FYPerson setAge:](int) at FYPerson.h:14)</span><br><span class="line">(lldb) p (IMP)0x00000001069c63d2</span><br><span class="line">(IMP) $3 &#x3D; 0x00000001069c63d2 (Foundation&#96;_NSSetIntValueAndNotify)</span><br></pre></td></tr></table></figure>
+<p>可以看出来两次的函数地址不一致，添加KVO之前是<code>[FYPerson setAge:]</code>,添加之后是<code>(Foundation_NSSetIntValueAndNotify)</code>。我们将<code>age</code>的类型改成<code>double</code>，再看一下结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(lldb) po [_person methodForSelector:@selector(setAge:)]</span><br><span class="line">0x00000001080c4710</span><br><span class="line"></span><br><span class="line">(lldb) po [_person methodForSelector:@selector(setAge:)]</span><br><span class="line">0x000000010841f18c</span><br><span class="line"></span><br><span class="line">(lldb) p (IMP)0x00000001080c4710</span><br><span class="line">(IMP) $2 &#x3D; 0x00000001080c4710 (day03-KVO本质&#96;::-[FYPerson setAge:](double) at FYPerson.h:14)</span><br><span class="line">(lldb) p (IMP)0x000000010841f18c</span><br><span class="line">(IMP) $3 &#x3D; 0x000000010841f18c (Foundation&#96;_NSSetDoubleValueAndNotify)</span><br></pre></td></tr></table></figure>
+<p><code>age</code>是<code>int</code>的时候添加之后是<code>Foundation _NSSetIntValueAndNotify</code>,改成<code>double</code>之后，是<code>Foundation _NSSetDoubleValueAndNotify</code>。那么我们可以推测<code>Foundation</code>框架中还有很多例如<code>_NSSetBoolValueAndNotify、_NSSetCharValueAndNotify、_NSSetFloatValueAndNotify、_NSSetLongValueAndNotify</code>等等函数。<br>运行<code>nm Foundation | grep ValueAndNotify</code>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">nm Foundation  | grep ValueAndNotify</span><br><span class="line">__NSSetBoolValueAndNotify</span><br><span class="line">__NSSetCharValueAndNotify</span><br><span class="line">__NSSetDoubleValueAndNotify</span><br><span class="line">__NSSetFloatValueAndNotify</span><br><span class="line">__NSSetIntValueAndNotify</span><br><span class="line">__NSSetLongLongValueAndNotify</span><br><span class="line">__NSSetLongValueAndNotify</span><br><span class="line">__NSSetObjectValueAndNotify</span><br><span class="line">__NSSetPointValueAndNotify</span><br><span class="line">__NSSetRangeValueAndNotify</span><br><span class="line">__NSSetRectValueAndNotify</span><br><span class="line">__NSSetShortValueAndNotify</span><br><span class="line">__NSSetSizeValueAndNotify</span><br></pre></td></tr></table></figure>
+<h4 id="另外一种验证方法"><a href="#另外一种验证方法" class="headerlink" title="另外一种验证方法"></a>另外一种验证方法</h4><p>在macOS中可以使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;开始记录日志</span><br><span class="line">instrumentObjcMessageSends(YES);</span><br><span class="line">    &#x2F;&#x2F; Do stuff.</span><br><span class="line">instrumentObjcMessageSends(NO);&#x2F;&#x2F;结束记录日志</span><br></pre></td></tr></table></figure>
+<p>如果将<code>NSObjCMessageLoggingEnabled</code>环境变量设置为<code>YES</code>，则<code>Objective-C</code>运行时会将所有已分派的<code>Objective-C</code>消息记录到名为<code>/tmp/msgSends-&lt;pid&gt;</code>的文件中。每一次运行会生成一个文件，我们进入到该文件内部：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;初始化</span><br><span class="line">+ FYPerson NSObject initialize</span><br><span class="line">+ FYPerson NSObject new</span><br><span class="line">- FYPerson NSObject init</span><br><span class="line">- FYPerson NSObject addObserver:forKeyPath:options:context:</span><br><span class="line">- FYPerson NSObject _isKVOA</span><br><span class="line"></span><br><span class="line">****</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;子类设置age [NSKVONotifying_FYPerson setAge:]</span><br><span class="line"></span><br><span class="line">- NSKVONotifying_FYPerson NSKVONotifying_FYPerson setAge:</span><br><span class="line">- NSKVONotifying_FYPerson NSObject _changeValueForKey:key:key:usingBlock:</span><br><span class="line">- NSKVONotifying_FYPerson NSObject _changeValueForKeys:count:maybeOldValuesDict:maybeNewValuesDict:usingBlock:</span><br><span class="line"></span><br><span class="line">- NSKeyValueUnnestedProperty NSKeyValueUnnestedProperty keyPathIfAffectedByValueForKey:exactMatch:</span><br><span class="line">- NSKeyValueUnnestedProperty NSKeyValueUnnestedProperty _keyPathIfAffectedByValueForKey:exactMatch:</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;will changeValueForKey</span><br><span class="line">- NSKeyValueUnnestedProperty NSKeyValueUnnestedProperty object:withObservance:willChangeValueForKeyOrKeys:recurse:forwardingValues:</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;FYPerson 设置age</span><br><span class="line">- FYPerson FYPerson setAge:</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; didChangeValueForKeyOrKeys</span><br><span class="line">- NSKeyValueUnnestedProperty NSKeyValueUnnestedProperty object:withObservance:didChangeValueForKeyOrKeys:recurse:forwardingValues:</span><br><span class="line">- NSKeyValueUnnestedProperty NSKeyValueProperty keyPath</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;找到key 发送 具体的key对应的value 到observe</span><br><span class="line"></span><br><span class="line">- NSKVONotifying_FYPerson NSObject valueForKeyPath:</span><br><span class="line"></span><br><span class="line">- NSKVONotifying_FYPerson NSObject valueForKey:</span><br><span class="line">+ NSKVONotifying_FYPerson NSObject _createValueGetterWithContainerClassID:key:</span><br><span class="line">-</span><br><span class="line">+ NSKVONotifying_FYPerson NSObject resolveInstanceMethod:</span><br><span class="line">+ NSKVONotifying_FYPerson NSObject resolveInstanceMethod:</span><br><span class="line">- NSKVONotifying_FYPerson FYPerson age</span><br><span class="line">+ NSKeyValueMethodGetter NSObject alloc</span><br><span class="line">- NSKeyValueMethodGetter NSKeyValueMethodGetter initWithContainerClassID:key:method:</span><br><span class="line">- NSKeyValueGetter NSKeyValueAccessor initWithContainerClassID:key:implementation:selector:extraArguments:count:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- NSKVONotifying_FYPerson NSObject respondsToSelector:</span><br><span class="line">- NSKVONotifying_FYPerson NSKVONotifying_FYPerson class</span><br><span class="line">- NSKVONotifying_FYPerson NSKVONotifying_FYPerson _isKVOA</span><br><span class="line">+ FYPerson NSObject class</span><br><span class="line">+ FYPerson NSObject resolveInstanceMethod:</span><br><span class="line">+ FYPerson NSObject resolveInstanceMethod:</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;数据字典</span><br><span class="line">+ NSDictionary NSObject self</span><br><span class="line">+ NSMutableDictionary NSObject self</span><br><span class="line">- NSKeyValueChangeDictionary NSKeyValueChangeDictionary initWithDetailsNoCopy:originalObservable:isPriorNotification:</span><br><span class="line">- NSDictionary NSObject init</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 执行观察者回调函数</span><br><span class="line">- NSKVONotifying_FYPerson FYPerson observeValueForKeyPath:ofObject:change:context:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+ Student NSObject alloc</span><br><span class="line">- Student NSObject init</span><br><span class="line">- Student NSObject dealloc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">***&#x2F;&#x2F;省略一部分代码</span><br><span class="line"> NSKVONotifying_FYPerson NSObject release</span><br><span class="line">- NSKeyValueChangeDictionary NSObject release</span><br><span class="line">- NSKeyValueChangeDictionary NSKeyValueChangeDictionary dealloc</span><br><span class="line">- NSDictionary NSObject dealloc</span><br><span class="line">- NSKeyValueObservationInfo NSObject release</span><br><span class="line">- NSKVONotifying_FYPerson NSObject release</span><br></pre></td></tr></table></figure>
+<p>经过仔细把重要的函数过滤出来，我们可以了解到<code>person.age = 12</code>的执行过程是<code>NSKVONotifying_FYPerson setAge:</code>-&gt;<code>NSKeyValueUnnestedProperty object:withObservance:willChangeValueForKeyOrKeys:recurse:forwardingValues</code>-&gt;<code>FYPerson FYPerson setAge:</code>-&gt;<code>NSKeyValueUnnestedProperty NSKeyValueUnnestedProperty object:withObservance:didChangeValueForKeyOrKeys:recurse:forwardingValues:</code>-&gt;<code>NSKVONotifying_FYPerson NSObject valueForKeyPath:</code>-&gt;<code>NSMutableDictionary NSObject self</code>-&gt;<code>- NSKVONotifying_FYPerson FYPerson observeValueForKeyPath:ofObject:change:context:</code>，我们来用伪代码实现一遍：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;person.age &#x3D; 12</span><br><span class="line">[NSKVONotifying_FYPerson setAge:12];</span><br><span class="line">willChangeValueForKey@&quot;age&quot;;</span><br><span class="line">[FYPerson setAge:12];</span><br><span class="line">didChangeValueForKey@&quot;age&quot;;</span><br><span class="line">[[NSMutableDictionary alloc] init];</span><br><span class="line">[NSKVONotifying_FYPerson observeValueForKeyPath:ofObject:change:context];</span><br></pre></td></tr></table></figure>
+<p>NSKVONotifyin_Person内部结构是怎样的？<br>首先我们知道，NSKVONotifyin_Person作为Person的子类，其superclass指针指向Person类，并且NSKVONotifyin_Person内部一定对setAge方法做了单独的实现，那么NSKVONotifyin_Person同Person类的差别可能就在于其内存储的对象方法及实现不同。<br>我们通过runtime分别打印Person类对象和NSKVONotifyin_Person类对象内存储的对象方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">    Person *p1 &#x3D; [[Person alloc] init];</span><br><span class="line">    p1.age &#x3D; 1.0;</span><br><span class="line">    Person *p2 &#x3D; [[Person alloc] init];</span><br><span class="line">    p1.age &#x3D; 2.0;</span><br><span class="line">    &#x2F;&#x2F; self 监听 p1的 age属性</span><br><span class="line">    NSKeyValueObservingOptions options &#x3D; NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;</span><br><span class="line">    [p1 addObserver:self forKeyPath:@&quot;age&quot; options:options context:nil];</span><br><span class="line"></span><br><span class="line">    [self printMethods: object_getClass(p2)];</span><br><span class="line">    [self printMethods: object_getClass(p1)];</span><br><span class="line"></span><br><span class="line">    [p1 removeObserver:self forKeyPath:@&quot;age&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) printMethods:(Class)cls</span><br><span class="line">&#123;</span><br><span class="line">    unsigned int count ;</span><br><span class="line">    Method *methods &#x3D; class_copyMethodList(cls, &amp;count);</span><br><span class="line">    NSMutableString *methodNames &#x3D; [NSMutableString string];</span><br><span class="line">    [methodNames appendFormat:@&quot;%@ - &quot;, cls];</span><br><span class="line">    </span><br><span class="line">    for (int i &#x3D; 0 ; i &lt; count; i++) &#123;</span><br><span class="line">        Method method &#x3D; methods[i];</span><br><span class="line">        NSString *methodName  &#x3D; NSStringFromSelector(method_getName(method));</span><br><span class="line">        </span><br><span class="line">        [methodNames appendString: methodName];</span><br><span class="line">        [methodNames appendString:@&quot; &quot;];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;%@&quot;,methodNames);</span><br><span class="line">    free(methods);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;结果如下：</span><br><span class="line">NSKVONotifying_FYPerson - setAge: class dealloc _isKVOA</span><br><span class="line">FYPerson - setAge: age</span><br></pre></td></tr></table></figure>
+<p> 通过上述代码我们发现NSKVONotifyin_Person中有4个对象方法。分别为setAge: class dealloc _isKVOA，那么至此我们可以画出NSKVONotifyin_Person的内存结构以及方法调用顺序。</p>
+<p><img src="/images/3-1.png" alt></p>
+<p>这里NSKVONotifyin_Person重写class方法是为了隐藏NSKVONotifyin_Person。不被外界所看到。我们在p1添加过KVO监听之后，分别打印p1和p2对象的class可以发现他们都返回Person。</p>
+<p>如果NSKVONotifyin_Person不重写class方法，那么当对象要调用class对象方法的时候就会一直向上找来到nsobject，而nsobect的class的实现大致为返回自己isa指向的类，返回p1的isa指向的类那么打印出来的类就是NSKVONotifyin_Person，但是apple不希望将NSKVONotifyin_Person类暴露出来，并且不希望我们知道NSKVONotifyin_Person内部实现，所以在内部重写了class类，直接返回Person类，所以外界在调用p1的class对象方法时，是Person类。这样p1给外界的感觉p1还是Person类，并不知道NSKVONotifyin_Person子类的存在。</p>
+<p>那么我们可以猜测NSKVONotifyin_Person内重写的class内部实现大致为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (Class) class &#123;</span><br><span class="line">     &#x2F;&#x2F; 得到类对象，在找到类对象父类</span><br><span class="line">     return class_getSuperclass(object_getClass(self));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后自己写代码验证一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@implementation FYPerson</span><br><span class="line">-(void)willChangeValueForKey:(NSString *)key&#123;</span><br><span class="line">	NSLog(@&quot;%s 开始&quot;,__func__);</span><br><span class="line">	[super didChangeValueForKey:key];</span><br><span class="line">	NSLog(@&quot;%s 结束&quot;,__func__);</span><br><span class="line">&#125;</span><br><span class="line">- (void)didChangeValueForKey:(NSString *)key&#123;</span><br><span class="line">	NSLog(@&quot;%s 开始&quot;,__func__);</span><br><span class="line">	[super didChangeValueForKey:key];</span><br><span class="line">	NSLog(@&quot;%s 结束&quot;,__func__);</span><br><span class="line">&#125;</span><br><span class="line">- (void)setAge:(double)age&#123;</span><br><span class="line">	_age &#x3D; age;</span><br><span class="line">	NSLog(@&quot;%s&quot;,__func__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>执行之后结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-[FYPerson willChangeValueForKey:] 开始</span><br><span class="line">-[FYPerson willChangeValueForKey:] 结束</span><br><span class="line">-[FYPerson setAge:]</span><br><span class="line">-[FYPerson didChangeValueForKey:] 开始</span><br><span class="line"> 监听到了age变化： &#123;</span><br><span class="line">    kind &#x3D; 1;</span><br><span class="line">    new &#x3D; 11;</span><br><span class="line">    old &#x3D; 10;</span><br><span class="line">&#125;</span><br><span class="line">-[FYPerson didChangeValueForKey:] 结束</span><br></pre></td></tr></table></figure>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>KVO其实是一个通过runtime注册建立子类，通过修改instance的isa指针，指向新的子类，重写instace的class方法来掩盖，子类拥有自己的set方法，调用顺序是willChangeValueForKey方法、原来的setter方法实现、didChangeValueForKey方法，而didChangeValueForKey方法内部又会调用监听器的observeValueForKeyPath:ofObject:change:context:监听方法。</p>
+<h3 id="KVC的本质"><a href="#KVC的本质" class="headerlink" title="KVC的本质"></a>KVC的本质</h3><p>KVC的全称是Key-Value Coding，俗称“键值编码”，可以通过一个key来访问某个属性。<br>常用的API有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;</span><br><span class="line">- (void)setValue:(id)value forKey:(NSString *)key;</span><br><span class="line">- (id)valueForKeyPath:(NSString *)keyPath;</span><br><span class="line">- (id)valueForKey:(NSString *)key;</span><br></pre></td></tr></table></figure>
+<p>其实当Obj调用<code>(void)setValue:(id)value forKey:(NSString *)key</code>的时候，<code>obj</code>会主动寻找方法<code>setKey</code>和<code>_setKey</code>两个方法，没有找到这两个方法会再去寻找<code>accessInstanceVariablesDirectly</code>，返回值为<code>NO</code>则抛出异常，返回<code>YES</code>则去按照<code>_key</code>、<code>_isKey</code>、<code>key</code>、<code>isKey</code>的查找优先级查找成员变量，找到之后直接复制，否则抛出异常。<br>我们使用这段代码来验证：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@interface FYPerson()&#123;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line">@implementation FYPerson</span><br><span class="line">&#x2F;&#x2F;code1</span><br><span class="line">- (void)setAge:(NSInteger)age&#123;</span><br><span class="line">	NSLog(@&quot;%s %ld&quot;,__func__,(long)age);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;code2</span><br><span class="line">- (void)_setAge:(NSInteger)age&#123;</span><br><span class="line">	NSLog(@&quot;%s %ld&quot;,__func__,(long)age);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FYPerson *p&#x3D;[[FYPerson alloc]init];</span><br><span class="line">[p setValue:@(2) forKey:@&quot;age&quot;];</span><br></pre></td></tr></table></figure>
+<p>当执行<code>code1</code>和<code>code2</code>都有的时候，输出<code>-[FYPerson setAge:] 2</code>，当<code>code1</code>注释掉，输出<code>-[FYPerson _setAge:] 2</code>，可以看出执行顺序是<code>setAge</code>，没有<code>setAge</code>的时候再去执行<code>_setAge</code>。</p>
+<p>现在新增<code>FYPerson</code>4个成员变量，依次注释掉他们来测试寻找成员变量的顺序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@interface FYPerson : NSObject</span><br><span class="line">&#123;</span><br><span class="line">@public</span><br><span class="line">	NSInteger _age;</span><br><span class="line">	NSInteger _isAge;</span><br><span class="line">	NSInteger age;</span><br><span class="line">	NSInteger isAge;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FYPerson *p&#x3D;[[FYPerson alloc]init];</span><br><span class="line">[p setValue:@(2) forKey:@&quot;age&quot;];</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;age:%d _age:%d isAge:%d _isAge:%d&quot;,(int)p-&gt;age,(int)p-&gt;_age,(int)p-&gt;isAge,(int)p-&gt;_isAge);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>没注释输出 <code>age:0 _age:2 isAge:0 _isAge:0</code></li>
+<li>注释<code>_age</code>输出 <code>age:0 isAge:0 _isAge:2</code></li>
+<li>注释<code>_isAge</code>输出 <code>age:2 isAge:0</code></li>
+<li>注释<code>age</code>输出 <code>isAge:2</code></li>
+</ul>
+<h4 id="KVC和KVO联系"><a href="#KVC和KVO联系" class="headerlink" title="KVC和KVO联系"></a>KVC和KVO联系</h4><p>我们知道KVC本质也是调用setter方法，那么会出发KVO吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FYPerson *p&#x3D;[[FYPerson alloc]init];</span><br><span class="line">[p addObserver:p</span><br><span class="line">	forKeyPath:@&quot;age&quot;</span><br><span class="line">	   options:NSKeyValueChangeNewKey</span><br><span class="line">	   context:nil];</span><br><span class="line">[p setValue:@2 forKey:@&quot;age&quot;];</span><br><span class="line">[p removeObserver:p forKeyPath:@&quot;age&quot;];</span><br><span class="line"></span><br><span class="line">@interface FYPerson()&#123;</span><br><span class="line">	@public</span><br><span class="line">	NSInteger _age;</span><br><span class="line">	NSInteger _isAge;</span><br><span class="line">	NSInteger age;</span><br><span class="line">	NSInteger isAge;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line">@implementation FYPerson</span><br><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context&#123;</span><br><span class="line">	NSLog(@&quot;%@&quot;,change);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;结果</span><br><span class="line">&#123;</span><br><span class="line">    kind &#x3D; 1;</span><br><span class="line">    new &#x3D; 2;</span><br><span class="line">    old &#x3D; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过测试，可以看出KVC能触发KVO的。那么<code>valueForKey:key</code>底层是怎么运行的呢？其实底层是按照顺序查找四个方法<code>_age</code>-&gt;<code>_isAge</code>-&gt;<code>age</code>-&gt;<code>isAge</code>。我们测试一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FYPerson *p&#x3D;[[FYPerson alloc]init];</span><br><span class="line">p-&gt;_age &#x3D; 1;</span><br><span class="line">p-&gt;_isAge &#x3D; 2;</span><br><span class="line">p-&gt;age &#x3D; 3;</span><br><span class="line">p-&gt;isAge &#x3D; 4;</span><br><span class="line">NSLog(@&quot;value:%@&quot;,[p valueForKey:@&quot;age&quot;]);</span><br><span class="line">&#x2F;&#x2F;依次注释1,2,3，依次输出是1-&gt;2-&gt;3-&gt;4</span><br></pre></td></tr></table></figure>
+<h4 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h4><p>KVC其实本质是执行4个set方法和4个get方法，当使用<code>setValue:forKey:key</code>会触发KVO，找不到4个方法的时候会抛出异常。</p>
+<h4 id="资料下载"><a href="#资料下载" class="headerlink" title="资料下载"></a>资料下载</h4><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvaU9TRGF0YUZhY3Rvcnk=" title="https://github.com/ifgyong/iOSDataFactory">学习资料下载<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvZGVtby90cmVlL21hc3Rlci9PQw==" title="https://github.com/ifgyong/demo/tree/master/OC">demo code<i class="fa fa-external-link"></i></span></li>
+</ul>
+<p>之前看的没有手动去试验一下，然后再写出来，现在总结一下，参考了很多文章，还有macOS中日志记录是无意搜索出来了一个老外的blog，大家可以了解下，以后会有用，后边会讲如何<code>hook objc_msgsend</code>,感觉这个挺好玩的。</p>
+<p>本文章之所以图片比较少，我觉得还是跟着代码敲一遍，印象比较深刻。</p>
+<hr>
+<p>最怕一生碌碌无为，还安慰自己平凡可贵。</p>
+<p> 广告时间</p>
+<p><img src="/images/0.png" alt></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%E7%B1%BB%E7%9A%84%E6%9C%AC%E8%B4%A8--(2)/" rel="next" title="iOS底层原理  类的本质 --(2)">
+                <i class="fa fa-chevron-left"></i> iOS底层原理  类的本质 --(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20Category%E4%B8%8E%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E6%9C%AC%E8%B4%A8--(4)/" rel="prev" title="iOS底层原理 Category与关联对象本质--(4)">
+                iOS底层原理 Category与关联对象本质--(4) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.ico"
+                alt="fgyong" />
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmc=" title="GitHub &rarr; https://github.com/ifgyong"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vdXNlci8xNzUwMDc4MjM5MjkwOTA5" title="掘金 &rarr; https://juejin.im/user/1750078239290909"><i class="fa fa-fw fa-掘金"></i>掘金</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO本质"><span class="nav-number">1.</span> <span class="nav-text">KVO本质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#触发条件"><span class="nav-number">1.1.</span> <span class="nav-text">触发条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#探寻KVO底层实现原理"><span class="nav-number">1.2.</span> <span class="nav-text">探寻KVO底层实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#另外一种验证方法"><span class="nav-number">1.3.</span> <span class="nav-text">另外一种验证方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">1.4.</span> <span class="nav-text">总结：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVC的本质"><span class="nav-number">2.</span> <span class="nav-text">KVC的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KVC和KVO联系"><span class="nav-number">2.1.</span> <span class="nav-text">KVC和KVO联系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结：-1"><span class="nav-number">2.2.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#资料下载"><span class="nav-number">2.3.</span> <span class="nav-text">资料下载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备17045226号 </span>&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Mist</span> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'a7800c37057fc3ce83df',
+          clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+          repo: 'ifgyong.github.io',
+          owner: 'ifgyong',
+          admin: ['ifgyong'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

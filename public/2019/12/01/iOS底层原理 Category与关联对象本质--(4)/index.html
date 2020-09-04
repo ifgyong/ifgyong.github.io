@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="今天我们再看一下Category的底层原理。 先看一下Category的简单使用，首先新增一个类的Category，然后添加需要的函数，然后在使用的文件中导入就可以直接使用了。代码如下: 1234567891011121314151617181920212223242526272829@interface FYPerson : NSObject- (void)run;@end@implement">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS底层原理 Category与关联对象本质--(4)">
+<meta property="og:url" content="http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20Category%E4%B8%8E%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E6%9C%AC%E8%B4%A8--(4)/index.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="今天我们再看一下Category的底层原理。 先看一下Category的简单使用，首先新增一个类的Category，然后添加需要的函数，然后在使用的文件中导入就可以直接使用了。代码如下: 1234567891011121314151617181920212223242526272829@interface FYPerson : NSObject- (void)run;@end@implement">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fgyong.cn/images/0.png">
+<meta property="article:published_time" content="2019-12-01T03:14:58.000Z">
+<meta property="article:modified_time" content="2020-09-04T04:40:21.656Z">
+<meta property="article:author" content="fgyong">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fgyong.cn/images/0.png">
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2019/12/01/iOS底层原理 Category与关联对象本质--(4)/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS底层原理 Category与关联对象本质--(4) | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20Category%E4%B8%8E%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E6%9C%AC%E8%B4%A8--(4)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/favicon.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS底层原理 Category与关联对象本质--(4)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-01 11:14:58" itemprop="dateCreated datePublished" datetime="2019-12-01T11:14:58+08:00">2019-12-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-04 12:40:21" itemprop="dateModified" datetime="2020-09-04T12:40:21+08:00">2020-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> 今天我们再看一下<code>Category</code>的底层原理。<br> 先看一下<code>Category</code>的简单使用，首先新增一个类的<code>Category</code>，然后添加需要的函数，然后在使用的文件中导入就可以直接使用了。代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@interface FYPerson : NSObject</span><br><span class="line">- (void)run;</span><br><span class="line">@end</span><br><span class="line">@implementation FYPerson</span><br><span class="line">-(void)run&#123;</span><br><span class="line">	NSLog(@&quot;run is run&quot;);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;类别</span><br><span class="line">@interface FYPerson (test)</span><br><span class="line">- (void)test;</span><br><span class="line">@end</span><br><span class="line">@implementation FYPerson (test)</span><br><span class="line">- (void)test&#123;</span><br><span class="line">	NSLog(@&quot;test is run&quot;);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用</span><br><span class="line">#import &quot;FYPerson.h&quot;</span><br><span class="line">#import &quot;FYPerson+test.h&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FYPerson *person&#x3D;[[FYPerson alloc]init];</span><br><span class="line">[person test];</span><br><span class="line">[person run];</span><br></pre></td></tr></table></figure>
+<p>  类别使用就是这么简单。<br>  那么类别的本质是什么呢？类的方法是存储在什么地方呢？<br>  第一篇<span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZDE1ODg3ZWU1MWQ0NTEwODEyNmQyOGQ=" title="https://juejin.im/post/5d15887ee51d45108126d28d">类的本质<i class="fa fa-external-link"></i></span>已经讲过了，运行时中，类对象是有一份，方法都存储在类对象结构体<code>fy_objc_class</code>中的<code>class_data_bits_t-&gt;data()-&gt;method_list_t</code>中的，那么类别方法也是存储在<code>method_list_t</code>和取元类对象的<code>method_list_t</code>中的。编译的时候类别编译成结构体<code>_category_t</code>,然后<code>runtime</code>在运行时动态将方法添加到<code>method_list_t</code>中。运行<code>xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc FYPerson+test.m -o FYPerson+test.cpp</code>进入到<code>FYPerson+test.cpp</code>内部查看编译之后的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">  struct _category_t &#123;</span><br><span class="line">	const char *name; &#x2F;&#x2F;&quot;FYPerson&quot;</span><br><span class="line">	struct _class_t *cls;</span><br><span class="line">	const struct _method_list_t *instance_methods;</span><br><span class="line">	const struct _method_list_t *class_methods;</span><br><span class="line">	const struct _protocol_list_t *protocols;</span><br><span class="line">	const struct _prop_list_t *properties;</span><br><span class="line">&#125;;</span><br><span class="line">&#x2F;&#x2F;存储 test方法</span><br><span class="line">static struct &#x2F;*_method_list_t*&#x2F; &#123;</span><br><span class="line">	unsigned int entsize;  &#x2F;&#x2F; sizeof(struct _objc_method)</span><br><span class="line">	unsigned int method_count;</span><br><span class="line">	struct _objc_method method_list[1];</span><br><span class="line">&#125; _OBJC_$_CATEGORY_INSTANCE_METHODS_FYPerson_$_test __attribute__ ((used, section (&quot;__DATA,__objc_const&quot;))) &#x3D; &#123;</span><br><span class="line">	sizeof(_objc_method),</span><br><span class="line">	1,</span><br><span class="line">	&#123;&#123;(struct objc_selector *)&quot;test&quot;, &quot;v16@0:8&quot;, (void *)_I_FYPerson_test_test&#125;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot; __declspec(dllimport) struct _class_t OBJC_CLASS_$_FYPerson;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;_category_t 存储FYPerson的分类的数据</span><br><span class="line">static struct _category_t _OBJC_$_CATEGORY_FYPerson_$_test __attribute__ ((used, section (&quot;__DATA,__objc_const&quot;))) &#x3D; </span><br><span class="line">&#123;</span><br><span class="line">	&quot;FYPerson&quot;,</span><br><span class="line">	0, &#x2F;&#x2F; &amp;OBJC_CLASS_$_FYPerson,</span><br><span class="line">	(const struct _method_list_t *)&amp;_OBJC_$_CATEGORY_INSTANCE_METHODS_FYPerson_$_test,&#x2F;&#x2F;instace方法</span><br><span class="line">	0,&#x2F;&#x2F;类方法</span><br><span class="line">	0,&#x2F;&#x2F;协议方法</span><br><span class="line">	0,&#x2F;&#x2F;属性</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>存储在<code>_category_t</code>中的数据是什么时间加载到<code>FYPerson</code>的<code>class_data_bits_t.data</code>呢？我们探究一下，打开<span class="exturl" data-url="aHR0cHM6Ly9vcGVuc291cmNlLmFwcGxlLmNvbS90YXJiYWxscy9vYmpjNC8=" title="https://opensource.apple.com/tarballs/objc4/">源码<i class="fa fa-external-link"></i></span>下载打开工程阅读源码找到<code>objc-os.mm</code>,通过查找函数运行顺序得到<code>_objec_init-&gt;map_images-&gt;map_images_noljock-&gt;_read_images-&gt;remethodizeClass(cls)-&gt;attachCategories(cls, cats, true /*flush caches*/)</code>，最终进入到<code>attachCategories</code>关键函数内部：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">  &#x2F;&#x2F; Attach method lists and properties and protocols from categories to a class.</span><br><span class="line">&#x2F;&#x2F; Assumes the categories in cats are all loaded and sorted by load order, </span><br><span class="line">&#x2F;&#x2F; oldest categories first.</span><br><span class="line">static void </span><br><span class="line">attachCategories(Class cls, category_list *cats, bool flush_caches)</span><br><span class="line">&#123;</span><br><span class="line">    if (!cats) return;</span><br><span class="line">    if (PrintReplacedMethods) printReplacements(cls, cats);</span><br><span class="line"></span><br><span class="line">    bool isMeta &#x3D; cls-&gt;isMetaClass();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; fixme rearrange to remove these intermediate allocations</span><br><span class="line">	&#x2F;&#x2F;方法数组[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">    method_list_t **mlists &#x3D; (method_list_t **)</span><br><span class="line">        malloc(cats-&gt;count * sizeof(*mlists));</span><br><span class="line">	&#x2F;&#x2F;属性数组</span><br><span class="line">    property_list_t **proplists &#x3D; (property_list_t **)</span><br><span class="line">        malloc(cats-&gt;count * sizeof(*proplists));</span><br><span class="line">	&#x2F;&#x2F;协议数组</span><br><span class="line">    protocol_list_t **protolists &#x3D; (protocol_list_t **)</span><br><span class="line">        malloc(cats-&gt;count * sizeof(*protolists));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Count backwards through cats to get newest categories first</span><br><span class="line">    int mcount &#x3D; 0;</span><br><span class="line">    int propcount &#x3D; 0;</span><br><span class="line">    int protocount &#x3D; 0;</span><br><span class="line">    int i &#x3D; cats-&gt;count;</span><br><span class="line">    bool fromBundle &#x3D; NO;</span><br><span class="line">    &#x2F;&#x2F;最后的编译文件放到最前边</span><br><span class="line">    while (i--) &#123;</span><br><span class="line">		&#x2F;&#x2F;取出某个分类</span><br><span class="line">        auto&amp; entry &#x3D; cats-&gt;list[i];</span><br><span class="line">&#x2F;&#x2F;取出分类 的 instance方法或者class方法</span><br><span class="line">        method_list_t *mlist &#x3D; entry.cat-&gt;methodsForMeta(isMeta);</span><br><span class="line">        if (mlist) &#123;</span><br><span class="line">            mlists[mcount++] &#x3D; mlist; &#x2F;&#x2F;mlists 接受所有分类方法</span><br><span class="line">            fromBundle |&#x3D; entry.hi-&gt;isBundle();</span><br><span class="line">        &#125;</span><br><span class="line">&#x2F;&#x2F;proplist 接受所有分类属性</span><br><span class="line">        property_list_t *proplist &#x3D; </span><br><span class="line">            entry.cat-&gt;propertiesForMeta(isMeta, entry.hi);</span><br><span class="line">        if (proplist) &#123;</span><br><span class="line">            proplists[propcount++] &#x3D; proplist;</span><br><span class="line">        &#125;</span><br><span class="line">&#x2F;&#x2F;proplist 接受所有协议方法</span><br><span class="line">        protocol_list_t *protolist &#x3D; entry.cat-&gt;protocols;</span><br><span class="line">        if (protolist) &#123;</span><br><span class="line">            protolists[protocount++] &#x3D; protolist;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#x2F;&#x2F;收集了所有协议 分类方法</span><br><span class="line">    auto rw &#x3D; cls-&gt;data();</span><br><span class="line"></span><br><span class="line">    prepareMethodLists(cls, mlists, mcount, NO, fromBundle);</span><br><span class="line">	&#x2F;&#x2F;追加所有分类方法</span><br><span class="line">    rw-&gt;methods.attachLists(mlists, mcount);</span><br><span class="line">	&#x2F;&#x2F;释放数组</span><br><span class="line">    free(mlists);</span><br><span class="line">	&#x2F;&#x2F;刷新该类的缓存</span><br><span class="line">    if (flush_caches  &amp;&amp;  mcount &gt; 0) flushCaches(cls);</span><br><span class="line">&#x2F;&#x2F;追加所有分类属性</span><br><span class="line">    rw-&gt;properties.attachLists(proplists, propcount);</span><br><span class="line">    free(proplists);&#x2F;&#x2F;释放数组</span><br><span class="line">&#x2F;&#x2F;追加所有分类协议</span><br><span class="line">    rw-&gt;protocols.attachLists(protolists, protocount);</span><br><span class="line">    free(protolists);&#x2F;&#x2F;释放数组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>attachCategories</code>是将所有的分类方法和协议，属性倒序添加到类中，具体添加的优先级是怎么操作的？进入到<code>rw-&gt;protocols.attachLists</code>内部：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">void attachLists(List* const * addedLists, uint32_t addedCount) &#123;</span><br><span class="line">        if (addedCount &#x3D;&#x3D; 0) return;</span><br><span class="line">        if (hasArray()) &#123;</span><br><span class="line">            &#x2F;&#x2F; many lists -&gt; many lists</span><br><span class="line">            uint32_t oldCount &#x3D; array()-&gt;count;</span><br><span class="line">			&#x2F;&#x2F;一共需要的数量</span><br><span class="line">            uint32_t newCount &#x3D; oldCount + addedCount;</span><br><span class="line">			&#x2F;&#x2F;分配内存 内存不够用了，需要扩容</span><br><span class="line">            setArray((array_t *)realloc(array(), array_t::byteSize(newCount)));</span><br><span class="line">			&#x2F;&#x2F;赋值count</span><br><span class="line">            array()-&gt;count &#x3D; newCount;</span><br><span class="line">			&#x2F;&#x2F; array()-&gt;lists：原来的方法列表向后移动 oldCount * sizeof(array()-&gt;lists[0]个长度</span><br><span class="line">            memmove(array()-&gt;lists + addedCount&#x2F;*指针移动到数组末尾*&#x2F;, array()-&gt;lists&#x2F;*数组*&#x2F;,</span><br><span class="line">                    oldCount * sizeof(array()-&gt;lists[0])&#x2F;*移动数据的大小*&#x2F;);</span><br><span class="line">			&#x2F;&#x2F;空出来的 内存使用addedLists拷贝过去 大小是:addedCount * sizeof(array()-&gt;lists[0])</span><br><span class="line">            memcpy(array()-&gt;lists, addedLists, </span><br><span class="line">                   addedCount * sizeof(array()-&gt;lists[0]));</span><br><span class="line">			&#x2F;*</span><br><span class="line">			图示讲解：</span><br><span class="line">			array()-&gt;lists:A-&gt;B-&gt;C-&gt;D-&gt;E</span><br><span class="line">		addedCount:3</span><br><span class="line">		addedLists:P-&gt;L-&gt;V</span><br><span class="line">			memmove之后：nil-&gt;nil-&gt;nil-&gt;A-&gt;B-&gt;C-&gt;D-&gt;E</span><br><span class="line">			然后再讲addedLists插入到数组前边,最终array()-&gt;lists的值是：</span><br><span class="line">			P-&gt;L-&gt;V-&gt;A-&gt;B-&gt;C-&gt;D-&gt;E</span><br><span class="line">			 *&#x2F;</span><br><span class="line">        &#125;</span><br><span class="line">        else if (!list  &amp;&amp;  addedCount &#x3D;&#x3D; 1) &#123;</span><br><span class="line">            &#x2F;&#x2F; 0 lists -&gt; 1 list</span><br><span class="line">            list &#x3D; addedLists[0];</span><br><span class="line">        &#125; </span><br><span class="line">        else &#123;</span><br><span class="line">            &#x2F;&#x2F; 1 list -&gt; many lists</span><br><span class="line">            List* oldList &#x3D; list;</span><br><span class="line">            uint32_t oldCount &#x3D; oldList ? 1 : 0;</span><br><span class="line">            uint32_t newCount &#x3D; oldCount + addedCount;</span><br><span class="line">            setArray((array_t *)malloc(array_t::byteSize(newCount)));</span><br><span class="line">            array()-&gt;count &#x3D; newCount;</span><br><span class="line">            if (oldList) array()-&gt;lists[addedCount] &#x3D; oldList;</span><br><span class="line">            memcpy(array()-&gt;lists, addedLists, </span><br><span class="line">                   addedCount * sizeof(array()-&gt;lists[0]));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出来：</p>
+<ol>
+<li>首先通过<code>runtime</code>加载某个类的所有Category数据</li>
+<li>把所有Category的方法，属性，协议数据合并到一个大数组中，后面参与编译的数组会出现在数组前边</li>
+<li>将合并后的分类数组(方法，属性，协议)插入到类原来的数据的前面。</li>
+</ol>
+<p>具体的编译顺序是project文件中-&gt;Build Phases-&gt;Complile Sources的顺序。</p>
+<h3 id="调用顺序"><a href="#调用顺序" class="headerlink" title="调用顺序"></a>调用顺序</h3><h4 id="load加载顺序"><a href="#load加载顺序" class="headerlink" title="+load加载顺序"></a>+load加载顺序</h4><p>每个类和分类都会加载的时候调用<code>+load</code>方法，具体是怎么调用呢？我们查看源码<code>_objc_init-&gt;load_images-&gt;call_load_methods</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">void call_load_methods(void)</span><br><span class="line">&#123;</span><br><span class="line">    static bool loading &#x3D; NO;</span><br><span class="line">    bool more_categories;</span><br><span class="line"></span><br><span class="line">    loadMethodLock.assertLocked();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Re-entrant calls do nothing; the outermost call will finish the job.</span><br><span class="line">    if (loading) return;</span><br><span class="line">    loading &#x3D; YES;</span><br><span class="line"></span><br><span class="line">    void *pool &#x3D; objc_autoreleasePoolPush();</span><br><span class="line"></span><br><span class="line">    do &#123;</span><br><span class="line">        &#x2F;&#x2F; 1. Repeatedly call class +loads until there aren&#39;t any more</span><br><span class="line">        &#x2F;&#x2F;执行class+load直到完成</span><br><span class="line">        while (loadable_classes_used &gt; 0) &#123;</span><br><span class="line">            call_class_loads();</span><br><span class="line">        &#125;</span><br><span class="line">&#x2F;&#x2F;执行Category +load 一次</span><br><span class="line">        &#x2F;&#x2F; 2. Call category +loads ONCE</span><br><span class="line">        more_categories &#x3D; call_category_loads();</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 3. Run more +loads if there are classes OR more untried categories</span><br><span class="line">    &#125; while (loadable_classes_used &gt; 0  ||  more_categories);</span><br><span class="line"></span><br><span class="line">    objc_autoreleasePoolPop(pool);</span><br><span class="line"></span><br><span class="line">    loading &#x3D; NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类<code>+load</code>在<code>Category+load</code>前边执行，当类的<code>+load</code>执行完毕然后再去执行<code>Category+load</code>,而且只有一次。<br>当class有子类的时候加载顺序呢？其实所有类都是基于<code>NSObject</code>，那么我们假设按照编译顺序加载<code>Class+load</code>，就有一个问题是父类+load执行的操作岂不是在子类执行的时候还没有执行吗？这个假设明显不对，基类<code>+load</code>中的操作是第一个执行的，其他子类是按照<code>superclass-&gt;class-&gt;sonclass</code>的顺序执行的。<br>查看源码<code>_objc_init-&gt;load_images-&gt;prepare_load_methods((const headerType *)mh)-&gt;schedule_class_load</code>在<code>objc-runtime-new.mm</code>2856行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;***********************************************************************</span><br><span class="line">* Schedule +load for classes in this image, any un-+load-ed </span><br><span class="line">* superclasses in other images, and any categories in this image.</span><br><span class="line">**********************************************************************&#x2F;</span><br><span class="line">&#x2F;&#x2F; Recursively schedule +load for cls and any un-+load-ed superclasses.</span><br><span class="line">&#x2F;&#x2F; cls must already be connected.</span><br><span class="line">static void schedule_class_load(Class cls)</span><br><span class="line">&#123;</span><br><span class="line">    if (!cls) return;</span><br><span class="line">    assert(cls-&gt;isRealized());  &#x2F;&#x2F; _read_images should realize</span><br><span class="line"></span><br><span class="line">    if (cls-&gt;data()-&gt;flags &amp; RW_LOADED) return;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Ensure superclass-first ordering</span><br><span class="line">    &#x2F;&#x2F;递归调用自己直到调用clas-&gt;self</span><br><span class="line">    schedule_class_load(cls-&gt;superclass);</span><br><span class="line">&#x2F;&#x2F;添加class</span><br><span class="line">    add_class_to_loadable_list(cls);</span><br><span class="line">    cls-&gt;setInfo(RW_LOADED); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以了解到该函数递归调用自己，直到<code>+load</code>方法已经调用过为止，所以不管编译顺序是高低，<code>+load</code>的加载顺序始终是<code>NSObject-&gt;FYPrson-&gt;FYStudent</code>。多个类平行关系的话，按照编译顺序加载。<br>下边是稍微复杂点的类关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NSObject</span><br><span class="line">    Person</span><br><span class="line">        Student</span><br><span class="line">NSObjet</span><br><span class="line">    Car</span><br><span class="line">        BigCar</span><br><span class="line">            BigOrSmallCar</span><br></pre></td></tr></table></figure>
+<p>编译顺序是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person</span><br><span class="line">Student</span><br><span class="line">Car</span><br><span class="line">BigOrSmallCar</span><br></pre></td></tr></table></figure>
+<p>那么他们<code>+load</code>的加载顺序是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NSobject-&gt;Person-&gt;Student-&gt;Car-&gt;BigCar-&gt;BigOrSmallCar</span><br></pre></td></tr></table></figure>
+<p>看着不是很明白的 可以再看一下刚才的<code>schedule_class_load</code>函数。<br>加载成功之后，是按照<code>objc_msgsend()</code>流程发送的吗？我们进入到<code>call_class_loads</code>内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">static void call_class_loads(void)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; Detach current loadable list.</span><br><span class="line">    struct loadable_class *classes &#x3D; loadable_classes;</span><br><span class="line">    int used &#x3D; loadable_classes_used;</span><br><span class="line">    loadable_classes &#x3D; nil;</span><br><span class="line">    loadable_classes_allocated &#x3D; 0;</span><br><span class="line">    loadable_classes_used &#x3D; 0;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; Call all +loads for the detached list.</span><br><span class="line">    for (i &#x3D; 0; i &lt; used; i++) &#123;</span><br><span class="line">        Class cls &#x3D; classes[i].cls;</span><br><span class="line">        load_method_t load_method &#x3D; (load_method_t)classes[i].method;</span><br><span class="line">        if (!cls) continue; </span><br><span class="line"></span><br><span class="line">        if (PrintLoading) &#123;</span><br><span class="line">            _objc_inform(&quot;LOAD: +[%s load]\n&quot;, cls-&gt;nameForLogging());</span><br><span class="line">        &#125;</span><br><span class="line">        (*load_method)(cls, SEL_load);</span><br><span class="line">    &#125;</span><br><span class="line">    if (classes) free(classes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以找到<code>(*load_method)(cls, SEL_load);</code>该函数，该函数是直接使用<code>IMP</code>执行的，<code>IMP</code>就是函数地址，可以直接访问函数而不用消息的转发流程。</p>
+<h4 id="initialize调用"><a href="#initialize调用" class="headerlink" title="+initialize调用"></a>+initialize调用</h4><ul>
+<li>+initialize方法会在类第一次接收到消息时调用</li>
+<li>先调用父类的+initialize，再调用子类的+initialize</li>
+<li>先初始化父类，再初始化子类，每个类只会初始化1次</li>
+</ul>
+<p><code>objc</code>源码解读过程<code>objc-msg-arm64.x-&gt;objc_msgSend-&gt;objc-&gt;runtime-new-&gt;class_getinstanceMethod-&gt;lookUpImpOrNil-&gt;lookUpImpOrForward-&gt;_clas_initialize-&gt;callInitialize-&gt;objc_msgSend(cls,SEL_Initialize)</code><br>在<code>runtime-new.h</code>4819行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Method class_getInstanceMethod(Class cls, SEL sel)</span><br><span class="line">&#123;</span><br><span class="line">    if (!cls  ||  !sel) return nil;</span><br><span class="line"></span><br><span class="line">    lookUpImpOrNil(cls, sel, nil, </span><br><span class="line">                   NO&#x2F;*initialize*&#x2F;, NO&#x2F;*cache*&#x2F;, YES&#x2F;*resolver*&#x2F;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    return _class_getMethod(cls, sel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据<code>lookUpImpOrNil</code>查看4916行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">IMP lookUpImpOrForward(Class cls, SEL sel, id inst, </span><br><span class="line">                       bool initialize, bool cache, bool resolver)</span><br><span class="line">&#123;</span><br><span class="line">    IMP imp &#x3D; nil;</span><br><span class="line">    bool triedResolver &#x3D; NO;</span><br><span class="line"></span><br><span class="line">    runtimeLock.assertUnlocked();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Optimistic cache lookup</span><br><span class="line">    if (cache) &#123;</span><br><span class="line">        imp &#x3D; cache_getImp(cls, sel);</span><br><span class="line">        if (imp) return imp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    runtimeLock.lock();</span><br><span class="line">    checkIsKnownClass(cls);</span><br><span class="line"></span><br><span class="line">    if (!cls-&gt;isRealized()) &#123;</span><br><span class="line">        realizeClass(cls);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (initialize  &amp;&amp;  !cls-&gt;isInitialized()) &#123;</span><br><span class="line">        runtimeLock.unlock();</span><br><span class="line">        _class_initialize (_class_getNonMetaClass(cls, inst));</span><br><span class="line">        runtimeLock.lock();</span><br><span class="line">      &#x2F;&#x2F;当第一次收到消息，cls没有初始化，则调用_class_initialize进行初始化</span><br><span class="line">      &#125;</span><br><span class="line"> retry:    </span><br><span class="line">    runtimeLock.assertLocked();</span><br><span class="line">    imp &#x3D; cache_getImp(cls, sel);</span><br><span class="line">    if (imp) goto done;</span><br><span class="line">   &#x2F;&#x2F; Try this class&#39;s method lists.</span><br><span class="line">    &#x2F;&#x2F;在本类中查找method</span><br><span class="line">    &#123;</span><br><span class="line">        Method meth &#x3D; getMethodNoSuper_nolock(cls, sel);</span><br><span class="line">        if (meth) &#123;</span><br><span class="line">            log_and_fill_cache(cls, meth-&gt;imp, sel, inst, cls);</span><br><span class="line">            imp &#x3D; meth-&gt;imp;</span><br><span class="line">            goto done;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Try superclass caches and method lists.</span><br><span class="line">    &#123;</span><br><span class="line">        unsigned attempts &#x3D; unreasonableClassCount();</span><br><span class="line">        for (Class curClass &#x3D; cls-&gt;superclass;</span><br><span class="line">             curClass !&#x3D; nil;</span><br><span class="line">             curClass &#x3D; curClass-&gt;superclass)</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F; Halt if there is a cycle in the superclass chain.</span><br><span class="line">            if (--attempts &#x3D;&#x3D; 0) &#123;</span><br><span class="line">                _objc_fatal(&quot;Memory corruption in class list.&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; Superclass cache.</span><br><span class="line">            imp &#x3D; cache_getImp(curClass, sel);</span><br><span class="line">            if (imp) &#123;</span><br><span class="line">                if (imp !&#x3D; (IMP)_objc_msgForward_impcache) &#123;</span><br><span class="line">                    &#x2F;&#x2F; Found the method in a superclass. Cache it in this class.</span><br><span class="line">                    log_and_fill_cache(cls, imp, sel, inst, curClass);</span><br><span class="line">                    goto done;</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    &#x2F;&#x2F; Found a forward:: entry in a superclass.</span><br><span class="line">                    &#x2F;&#x2F; Stop searching, but don&#39;t cache yet; call method </span><br><span class="line">                    &#x2F;&#x2F; resolver for this class first.</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; Superclass method list.</span><br><span class="line">            Method meth &#x3D; getMethodNoSuper_nolock(curClass, sel);</span><br><span class="line">            if (meth) &#123;</span><br><span class="line">                log_and_fill_cache(cls, meth-&gt;imp, sel, inst, curClass);</span><br><span class="line">                imp &#x3D; meth-&gt;imp;</span><br><span class="line">                goto done;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; No implementation found. Try method resolver once.</span><br><span class="line"></span><br><span class="line">    if (resolver  &amp;&amp;  !triedResolver) &#123;</span><br><span class="line">        runtimeLock.unlock();</span><br><span class="line">        _class_resolveMethod(cls, sel, inst);</span><br><span class="line">        runtimeLock.lock();</span><br><span class="line">        &#x2F;&#x2F; Don&#39;t cache the result; we don&#39;t hold the lock so it may have </span><br><span class="line">        &#x2F;&#x2F; changed already. Re-do the search from scratch instead.</span><br><span class="line">        triedResolver &#x3D; YES;</span><br><span class="line">        goto retry;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; No implementation found, and method resolver didn&#39;t help. </span><br><span class="line">    &#x2F;&#x2F; Use forwarding.</span><br><span class="line"></span><br><span class="line">    imp &#x3D; (IMP)_objc_msgForward_impcache;</span><br><span class="line">    cache_fill(cls, sel, imp, inst);</span><br><span class="line"></span><br><span class="line"> done:</span><br><span class="line">    runtimeLock.unlock();</span><br><span class="line"></span><br><span class="line">    return imp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当第一次收到消息，cls没有初始化，则调用<code>_class_initialize</code>进行初始化<br>我们进入到<code>_class_initialize</code>内部<code>objc-initialize.mm</code>484行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">void _class_initialize(Class cls)</span><br><span class="line">&#123;</span><br><span class="line">    assert(!cls-&gt;isMetaClass());</span><br><span class="line"></span><br><span class="line">    Class supercls;</span><br><span class="line">    bool reallyInitialize &#x3D; NO;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Make sure super is done initializing BEFORE beginning to initialize cls.</span><br><span class="line">    &#x2F;&#x2F; See note about deadlock above.</span><br><span class="line">    &#x2F;&#x2F;递归调用父类是否有初始化和是否有父类</span><br><span class="line">    supercls &#x3D; cls-&gt;superclass;</span><br><span class="line">    if (supercls  &amp;&amp;  !supercls-&gt;isInitialized()) &#123;</span><br><span class="line">        _class_initialize(supercls);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; Try to atomically set CLS_INITIALIZING.</span><br><span class="line">    &#123;</span><br><span class="line">        monitor_locker_t lock(classInitLock);</span><br><span class="line">        if (!cls-&gt;isInitialized() &amp;&amp; !cls-&gt;isInitializing()) &#123;</span><br><span class="line">            cls-&gt;setInitializing();</span><br><span class="line">            reallyInitialize &#x3D; YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (reallyInitialize) &#123;</span><br><span class="line">        &#x2F;&#x2F; We successfully set the CLS_INITIALIZING bit. Initialize the class.</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Record that we&#39;re initializing this class so we can message it.</span><br><span class="line">        _setThisThreadIsInitializingClass(cls);</span><br><span class="line"></span><br><span class="line">        if (MultithreadedForkChild) &#123;</span><br><span class="line">            &#x2F;&#x2F; LOL JK we don&#39;t really call +initialize methods after fork().</span><br><span class="line">            performForkChildInitialize(cls, supercls);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Send the +initialize message.</span><br><span class="line">        &#x2F;&#x2F; Note that +initialize is sent to the superclass (again) if </span><br><span class="line">        &#x2F;&#x2F; this class doesn&#39;t implement +initialize. 2157218</span><br><span class="line">        if (PrintInitializing) &#123;</span><br><span class="line">            _objc_inform(&quot;INITIALIZE: thread %p: calling +[%s initialize]&quot;,</span><br><span class="line">                         pthread_self(), cls-&gt;nameForLogging());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Exceptions: A +initialize call that throws an exception </span><br><span class="line">        &#x2F;&#x2F; is deemed to be a complete and successful +initialize.</span><br><span class="line">        &#x2F;&#x2F;</span><br><span class="line">        &#x2F;&#x2F; Only __OBJC2__ adds these handlers. !__OBJC2__ has a</span><br><span class="line">        &#x2F;&#x2F; bootstrapping problem of this versus CF&#39;s call to</span><br><span class="line">        &#x2F;&#x2F; objc_exception_set_functions().</span><br><span class="line">#if __OBJC2__</span><br><span class="line">        @try</span><br><span class="line">#endif</span><br><span class="line">        &#123;</span><br><span class="line">            callInitialize(cls);</span><br><span class="line"></span><br><span class="line">            if (PrintInitializing) &#123;</span><br><span class="line">                _objc_inform(&quot;INITIALIZE: thread %p: finished +[%s initialize]&quot;,</span><br><span class="line">                             pthread_self(), cls-&gt;nameForLogging());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">#if __OBJC2__</span><br><span class="line">        @catch (...) &#123;</span><br><span class="line">            if (PrintInitializing) &#123;</span><br><span class="line">                _objc_inform(&quot;INITIALIZE: thread %p: +[%s initialize] &quot;</span><br><span class="line">                             &quot;threw an exception&quot;,</span><br><span class="line">                             pthread_self(), cls-&gt;nameForLogging());</span><br><span class="line">            &#125;</span><br><span class="line">            @throw;</span><br><span class="line">        &#125;</span><br><span class="line">        @finally</span><br><span class="line">#endif</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F; Done initializing.</span><br><span class="line">            lockAndFinishInitializing(cls, supercls);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    else if (cls-&gt;isInitializing()) &#123;</span><br><span class="line">        &#x2F;&#x2F; We couldn&#39;t set INITIALIZING because INITIALIZING was already set.</span><br><span class="line">        &#x2F;&#x2F; If this thread set it earlier, continue normally.</span><br><span class="line">        &#x2F;&#x2F; If some other thread set it, block until initialize is done.</span><br><span class="line">        &#x2F;&#x2F; It&#39;s ok if INITIALIZING changes to INITIALIZED while we&#39;re here, </span><br><span class="line">        &#x2F;&#x2F;   because we safely check for INITIALIZED inside the lock </span><br><span class="line">        &#x2F;&#x2F;   before blocking.</span><br><span class="line">        if (_thisThreadIsInitializingClass(cls)) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125; else if (!MultithreadedForkChild) &#123;</span><br><span class="line">            waitForInitializeToComplete(cls);</span><br><span class="line">            return;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; We&#39;re on the child side of fork(), facing a class that</span><br><span class="line">            &#x2F;&#x2F; was initializing by some other thread when fork() was called.</span><br><span class="line">            _setThisThreadIsInitializingClass(cls);</span><br><span class="line">            performForkChildInitialize(cls, supercls);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    else if (cls-&gt;isInitialized()) &#123;</span><br><span class="line">        &#x2F;&#x2F; Set CLS_INITIALIZING failed because someone else already </span><br><span class="line">        &#x2F;&#x2F;   initialized the class. Continue normally.</span><br><span class="line">        &#x2F;&#x2F; NOTE this check must come AFTER the ISINITIALIZING case.</span><br><span class="line">        &#x2F;&#x2F; Otherwise: Another thread is initializing this class. ISINITIALIZED </span><br><span class="line">        &#x2F;&#x2F;   is false. Skip this clause. Then the other thread finishes </span><br><span class="line">        &#x2F;&#x2F;   initialization and sets INITIALIZING&#x3D;no and INITIALIZED&#x3D;yes. </span><br><span class="line">        &#x2F;&#x2F;   Skip the ISINITIALIZING clause. Die horribly.</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    else &#123;</span><br><span class="line">        &#x2F;&#x2F; We shouldn&#39;t be here. </span><br><span class="line">        _objc_fatal(&quot;thread-safe class init in objc runtime is buggy!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出来，和<code>+load</code>方法一样，先父类后子类。然后赋值<code>reallyInitialize = YES;</code>，后边使用<code>try</code>主动调用<code>callInitialize(cls);</code>，来到<code>callInitialize(cls);</code>内部：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void callInitialize(Class cls)</span><br><span class="line">&#123;</span><br><span class="line">    ((void(*)(Class, SEL))objc_msgSend)(cls, SEL_initialize);</span><br><span class="line">    asm(&quot;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到最终还是使用<code>((void(*)(Class, SEL))objc_msgSend)(cls, SEL_initialize)</code>主动调用了该函数。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p><code>+initialize</code>和<code>+load</code>的很大区别是，<code>+initialize</code>是通过<code>objc_msgSend</code>进行调用的，所以有以下特点<br>如果子类没有实现<code>+initialize</code>，会调用父类的<code>+initialize</code>（所以父类的<code>+initialize</code>可能会被调用多次）<br>如果分类实现了<code>+initialize</code>，就覆盖类本身的<code>+initialize</code>调用</p>
+<p>用伪代码实现以下思路：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(class 没有初始化)&#123;</span><br><span class="line">    父类初始化</span><br><span class="line">    子类初始化</span><br><span class="line">    调用initialize</span><br><span class="line">&#125;</span><br><span class="line">如果子类没有实现initialize，则去调用父类initialize。</span><br></pre></td></tr></table></figure>
+<p>至于子类没有实现的话是直接调用父类的<code>initialize</code>，是使用<code>objc-msgsend</code>的原因。</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@interface FYPerson : NSObject</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line">+(void)initialize&#123;</span><br><span class="line">	printf(&quot;\n%s&quot;,__func__);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">+(void)load&#123;</span><br><span class="line">	printf(&quot;\n%s&quot;,__func__);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">@interface FYPerson (test1)</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">+(void)initialize&#123;</span><br><span class="line">	printf(&quot;\n%s&quot;,__func__);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">+(void)load&#123;</span><br><span class="line">	printf(&quot;\n%s&quot;,__func__);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;输出</span><br><span class="line">+[FYPerson load]</span><br><span class="line">+[FYPerson(test2) load]</span><br><span class="line">+[FYPerson(test1) load]</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><code>+load</code>是根据函数地址直接调用，<code>initialize</code>是通过<code>objc_msgSend</code>调用</li>
+<li><code>+load</code>是runtime加载类、分类时候调用（只会调用一次）</li>
+<li><code>initialize</code>是第一次接受消息的时候调用，每个类只会调用一次（子类没实现，父类可能被调用多次）</li>
+<li><code>+load</code>调用优先于<code>initialize</code>,子类调用<code>+load</code>之前会调用父类的<code>+load</code>，再调用分类的<code>+load</code>,分类之间先编译，先调用。</li>
+<li><code>initialize</code>先初始化父类，再初始化子类（可能最终调用父类的<code>initialize</code>）</li>
+</ul>
+<h3 id="关联对象本质"><a href="#关联对象本质" class="headerlink" title="关联对象本质"></a>关联对象本质</h3><h4 id="关联对象的本质-结构体"><a href="#关联对象的本质-结构体" class="headerlink" title="关联对象的本质-结构体"></a>关联对象的本质-结构体</h4><p>继承<code>NSObject</code>是可以可以直接使用<code>@property (nonatomic,assign) int age;</code>，但是在<code>Category</code>中会报错，那么怎么实现和继承基类一样的效果呢？<br>我们查看<code>Category</code>结构体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  struct _category_t &#123;</span><br><span class="line">	const char *name; &#x2F;&#x2F;&quot;FYPerson&quot;</span><br><span class="line">	struct _class_t *cls;</span><br><span class="line">	const struct _method_list_t *instance_methods;</span><br><span class="line">	const struct _method_list_t *class_methods;</span><br><span class="line">	const struct _protocol_list_t *protocols;</span><br><span class="line">	const struct _prop_list_t *properties;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中<code>const struct _prop_list_t *properties;</code>是存储属性的，但是缺少成员变量，而我们也不能主动在<code>_category_t</code>插入<code>ivar</code>，那么我们可以使用<code>objc_setAssociatedObject</code>将属性的值存储全局的<code>AssociationsHashMap</code>中，使用的时候<code>objc_getAssociatedObject(id object, const void *key)</code>,不使用的时候删除使用<code>objc_removeAssociatedObjects</code>删除。</p>
+<p>我们进入到<code>objc_setAssociatedObject</code>内部,<code>objc-references.mm</code>275行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">void _object_set_associative_reference(id object, void *key, id value, uintptr_t policy) &#123;</span><br><span class="line">    &#x2F;&#x2F; retain the new value (if any) outside the lock.</span><br><span class="line">    ObjcAssociation old_association(0, nil);</span><br><span class="line">	&#x2F;&#x2F;根据key value 处理</span><br><span class="line">    id new_value &#x3D; value ? acquireValue(value, policy) : nil;</span><br><span class="line">    &#123;</span><br><span class="line">        AssociationsManager manager;</span><br><span class="line">		&#x2F;&#x2F;生成一个全局的 HashMap</span><br><span class="line">        AssociationsHashMap &amp;associations(manager.associations());</span><br><span class="line">        disguised_ptr_t disguised_object &#x3D; DISGUISE(object);</span><br><span class="line">		&#x2F;&#x2F;有value 就处理</span><br><span class="line">        if (new_value) &#123;</span><br><span class="line">            &#x2F;&#x2F; break any existing association.</span><br><span class="line">&#x2F;&#x2F;			遍历 hashMap是否有该obj</span><br><span class="line">            AssociationsHashMap::iterator i &#x3D; associations.find(disguised_object);</span><br><span class="line">            if (i !&#x3D; associations.end()) &#123;</span><br><span class="line">                &#x2F;&#x2F; secondary table exists</span><br><span class="line">				&#x2F;&#x2F;有的话 更新其 value</span><br><span class="line">                ObjectAssociationMap *refs &#x3D; i-&gt;second;</span><br><span class="line">                ObjectAssociationMap::iterator j &#x3D; refs-&gt;find(key);</span><br><span class="line">                if (j !&#x3D; refs-&gt;end()) &#123;</span><br><span class="line">                    old_association &#x3D; j-&gt;second;</span><br><span class="line">                    j-&gt;second &#x3D; ObjcAssociation(policy, new_value);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    (*refs)[key] &#x3D; ObjcAssociation(policy, new_value);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F; create the new association (first time).</span><br><span class="line">				&#x2F;&#x2F;没有的话 赋值给 refs</span><br><span class="line">                ObjectAssociationMap *refs &#x3D; new ObjectAssociationMap;</span><br><span class="line">                associations[disguised_object] &#x3D; refs;</span><br><span class="line">                (*refs)[key] &#x3D; ObjcAssociation(policy, new_value);</span><br><span class="line">                object-&gt;setHasAssociatedObjects();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; setting the association to nil breaks the association.</span><br><span class="line">            AssociationsHashMap::iterator i &#x3D; associations.find(disguised_object);</span><br><span class="line">            if (i !&#x3D;  associations.end()) &#123;</span><br><span class="line">                ObjectAssociationMap *refs &#x3D; i-&gt;second;</span><br><span class="line">                ObjectAssociationMap::iterator j &#x3D; refs-&gt;find(key);</span><br><span class="line">                if (j !&#x3D; refs-&gt;end()) &#123;</span><br><span class="line">                    old_association &#x3D; j-&gt;second;</span><br><span class="line">                    &#x2F;&#x2F;删除refs </span><br><span class="line">                    refs-&gt;erase(j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; release the old value (outside of the lock).</span><br><span class="line">    if (old_association.hasValue()) ReleaseValue()(old_association);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过该函数我们了解到</p>
+<ul>
+<li>关联对象并不是存储在关联对象的本身内存中</li>
+<li>关联对象是存储在全局统一的<code>AssociationsManager</code>管理的<code>AssociationsHashMap</code>中</li>
+<li>传入value =nil，会移除该关联对线<br><code>AssociationsManager</code>其实是管理了已<code>key为id object</code>对应的<code>AssociationsHashMap</code>，<code>AssociationsHashMap</code>存储了<code>key</code>对应的<code>ObjcAssociation</code>，<code>ObjcAssociation</code>是存储了<code>value</code> 和<code>policy</code>，<code>ObjcAssociation</code>的数据结构如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class ObjcAssociation &#123;</span><br><span class="line">        uintptr_t _policy;</span><br><span class="line">        id _value;</span><br><span class="line">        *****</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>具体抽象关系见下图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AssociationsManager --&gt; AssociationsHashMap --&gt; ObjectAssociationMap</span><br><span class="line">--&gt;void * ObjectAssociation --&gt;uintprt_t _policy ,id _value;</span><br></pre></td></tr></table></figure>
+<p>简单来讲就是一个全局变量保存了以<code>class</code>为<code>key</code>对应的<code>AssociationsHashMap</code>，这个<code>AssociationsHashMap</code>存储了一个<code>key</code>对应的<code>ObjectAssociation</code>，<code>ObjectAssociation</code>包含了<code>value</code>和<code>_policy</code>。通过2层map保存了数据。</p>
+<h4 id="关联对象的使用"><a href="#关联对象的使用" class="headerlink" title="关联对象的使用"></a>关联对象的使用</h4><table>
+<thead>
+<tr>
+<th>objc_setAssociatedObject</th>
+<th>obj,key,value,policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>objc_getAssociatedObject</td>
+<td>根据 obj 和 key获取值</td>
+</tr>
+<tr>
+<td>void objc_removeAssociatedObjects(id object)</td>
+<td>根据obj 删除关联函数</td>
+</tr>
+</tbody>
+</table>
+<p><code>objc_AssociationPolicy</code>的类型：</p>
+<table>
+<thead>
+<tr>
+<th>OBJC_ASSOCIATION_ASSIGN</th>
+<th>weak 引用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OBJC_ASSOCIATION_RETAIN_NONATOMIC</td>
+<td>非原子强引用</td>
+</tr>
+<tr>
+<td>OBJC_ASSOCIATION_COPY_NONATOMIC</td>
+<td>非原子相当于copy</td>
+</tr>
+<tr>
+<td>OBJC_ASSOCIATION_RETAIN</td>
+<td>强引用</td>
+</tr>
+<tr>
+<td>OBJC_ASSOCIATION_COPY</td>
+<td>原子操作，相当于copy</td>
+</tr>
+</tbody>
+</table>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@interface NSObject (test)</span><br><span class="line">@property (nonatomic,assign) NSString * name;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">#import &quot;NSObject+test.h&quot;</span><br><span class="line">#import &quot;objc&#x2F;runtime.h&quot;</span><br><span class="line">@implementation NSObject (test)</span><br><span class="line">-(void)setName:(NSString *)name&#123;</span><br><span class="line">	objc_setAssociatedObject(self, @selector(name), name, OBJC_ASSOCIATION_COPY);</span><br><span class="line">&#125;</span><br><span class="line">- (NSString *)name&#123;</span><br><span class="line">	return  objc_getAssociatedObject(self, @selector(name));</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">NSObject *obj &#x3D;[[NSObject alloc]init];</span><br><span class="line">obj.name &#x3D; @&quot;老弟来了&quot;;</span><br><span class="line">printf(&quot;%s&quot;,obj.name.UTF8String);</span><br><span class="line">&#x2F;&#x2F;老弟来了</span><br></pre></td></tr></table></figure>
+<p>这段代码我们实现了给基类添加一个成员变量<code>name</code>，然后又成功取出了值，标示我们做新增的保存成员变量的值是对的。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>Category <code>+load</code>在冷启动时候执行，执行顺序和编译顺序成弱相关，先父类，后子类，而且每个类执行一次，执行是直接调用函数地址。</li>
+<li>Category <code>+initialize</code>在第一次接受消息执行，先父类，后子类，子类没实现，会调用父类，利用<code>objc-msgsend</code>机制调用。</li>
+<li>Category 可以利用<code>Associative</code>添加和读取属性的值</li>
+</ul>
+<h4 id="资料下载"><a href="#资料下载" class="headerlink" title="资料下载"></a>资料下载</h4><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvaU9TRGF0YUZhY3Rvcnk=" title="https://github.com/ifgyong/iOSDataFactory">学习资料下载<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvZGVtby90cmVlL21hc3Rlci9PQw==" title="https://github.com/ifgyong/demo/tree/master/OC">demo code<i class="fa fa-external-link"></i></span></li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmcvZGVtby90cmVlL21hc3Rlci9PQy9vYmpjNC03NTA=" title="https://github.com/ifgyong/demo/tree/master/OC/objc4-750">runtime可运行的源码<i class="fa fa-external-link"></i></span></p>
+<p>本文章之所以图片比较少，我觉得还是跟着代码敲一遍，印象比较深刻。</p>
+<hr>
+<p>最怕一生碌碌无为，还安慰自己平凡可贵。</p>
+<p>广告时间</p>
+</li>
+</ul>
+<p><img src="/images/0.png" alt></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20KVO%E5%92%8CKVC%E6%9C%AC%E8%B4%A8%E4%B8%8E%E8%81%94%E7%B3%BB%20--(3)/" rel="next" title="iOS底层原理  KVO和KVC本质与联系 --(3)">
+                <i class="fa fa-chevron-left"></i> iOS底层原理  KVO和KVC本质与联系 --(3)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/iOS%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%20%20block%E6%9C%AC%E8%B4%A8%20--(5)/" rel="prev" title="iOS底层原理  block本质 --(5)">
+                iOS底层原理  block本质 --(5) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.ico"
+                alt="fgyong" />
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmc=" title="GitHub &rarr; https://github.com/ifgyong"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vdXNlci8xNzUwMDc4MjM5MjkwOTA5" title="掘金 &rarr; https://juejin.im/user/1750078239290909"><i class="fa fa-fw fa-掘金"></i>掘金</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#调用顺序"><span class="nav-number">1.</span> <span class="nav-text">调用顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#load加载顺序"><span class="nav-number">1.1.</span> <span class="nav-text">+load加载顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#initialize调用"><span class="nav-number">1.2.</span> <span class="nav-text">+initialize调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">2.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">3.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联对象本质"><span class="nav-number">5.</span> <span class="nav-text">关联对象本质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联对象的本质-结构体"><span class="nav-number">5.1.</span> <span class="nav-text">关联对象的本质-结构体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联对象的使用"><span class="nav-number">5.2.</span> <span class="nav-text">关联对象的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码示例"><span class="nav-number">5.3.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#资料下载"><span class="nav-number">6.1.</span> <span class="nav-text">资料下载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备17045226号 </span>&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Mist</span> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'a7800c37057fc3ce83df',
+          clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+          repo: 'ifgyong.github.io',
+          owner: 'ifgyong',
+          admin: ['ifgyong'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

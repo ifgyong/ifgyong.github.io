@@ -141,8 +141,8 @@ menu:
   categories: /categories/ || th
   tags: /tags/ || tags
   about: /about/ || user
-  #schedule: /schedule/ || calendar
-  #sitemap: /sitemap.xml || sitemap
+  # schedule: /schedule/ || calendar # 日程表
+  #sitemap: /sitemap.xml || sitemap # 站点地图
   #commonweal: /404/ || heartbeat
 
 # Enable/Disable menu icons / item badges.
@@ -166,7 +166,7 @@ scheme: Mist
 # ---------------------------------------------------------------
 
 # Posts / Categories / Tags in sidebar.
-site_state: true
+site_state: false
 
 # Social Links.
 # Usage: `Key: permalink || icon`
@@ -379,7 +379,7 @@ custom_logo:
 highlight_theme: normal
 
 # Enable "cheers" for archive page.
-cheers_enabled: true
+cheers_enabled: false
 
 
 # ---------------------------------------------------------------
