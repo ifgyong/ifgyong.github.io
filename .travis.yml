@@ -6,6 +6,7 @@ cache: npm
 install:
   - rm package-lock.json
   - npm install
+  - cp _next_config.yml themes/next/_config.yml
 branches:
   only:
     - hexo
