@@ -45,8 +45,8 @@ cache:
 # For example, you put your favicons into `hexo-site/source/images` directory.
 # Then need to rename & redefine they on any other names, otherwise icons from Next will rewrite your custom icons in Hexo.
 favicon:
-  small: favicon.ico
-  medium: favicon.ico
+  small: /images/favicon.ico
+  medium: /images/favicon.ico
   apple_touch_icon: /images/favicon.ico
   safari_pinned_tab: /images/favicon.ico
   #android_manifest: /images/manifest.json
@@ -116,14 +116,14 @@ creative_commons:
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
-index_with_subtitle: false
+index_with_subtitle: true
 
 # Automatically add external URL with BASE64 encrypt & decrypt.
-exturl: false
+exturl: true
 
 
 # ---------------------------------------------------------------
@@ -155,9 +155,9 @@ menu_settings:
 # ---------------------------------------------------------------
 
 # Schemes
-#scheme: Muse
-#scheme: Mist
-scheme: Pisces
+# scheme: Muse
+scheme: Mist
+#scheme: Pisces
 #scheme: Gemini
 
 
@@ -211,13 +211,13 @@ avatar:
   # in theme directory(source/images): /images/avatar.gif
   # in site  directory(source/uploads): /uploads/avatar.gif
   # You can also use other linking images.
-  url: #/images/avatar.gif
+  url: /images/favicon.ico #/images/avatar.gif
   # If true, the avatar would be dispalyed in circle.
   rounded: false
   # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.
   opacity: 1
   # If true, the avatar would be rotated with the cursor.
-  rotated: false
+  rotated: true
 
 # Table Of Contents in the Sidebar
 toc:
@@ -371,7 +371,7 @@ android_chrome_color: "#222"
 #   image: url-of-image   - Images's url
 custom_logo:
   enabled: true
-  image: favicon.ico
+  image: /images/favicon.ico
 
 # Code Highlight theme
 # Available values: normal | night | night eighties | night blue | night bright
