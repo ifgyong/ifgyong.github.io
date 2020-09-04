@@ -18,5 +18,6 @@ deploy:
   skip-cleanup: false
   github-token: $GH_TOKEN
   keep-history: false
+  target_branch: gh-pages
   on:
     branch: hexo
