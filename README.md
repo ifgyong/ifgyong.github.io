@@ -1,4 +1,4 @@
-# fgyong的技术博客
+## fgyong的技术博客
 
 
 ![travis build](https://travis-ci.com/ifgyong/ifgyong.github.io.svg?branch=hexo)
