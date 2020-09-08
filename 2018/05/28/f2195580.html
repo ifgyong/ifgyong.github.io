@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.蓝图2.Nav的使用3.mysql使用4.模板的使用 蓝图使用新建user文件夹,在user文件夹下变新建tamplates，还有init.py和views.pyinit.py12345from flask import Blueprint&#x2F;&#x2F;声明蓝图user &#x3D; Blueprint(&#39;user&#39;, __name__,template_folder">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 Flask bootstrap教程(2)">
+<meta property="og:url" content="http://fgyong.cn/2018/05/28/f2195580.html">
+<meta property="og:site_name" content="fgyong的技术博客">
+<meta property="og:description" content="1.蓝图2.Nav的使用3.mysql使用4.模板的使用 蓝图使用新建user文件夹,在user文件夹下变新建tamplates，还有init.py和views.pyinit.py12345from flask import Blueprint&#x2F;&#x2F;声明蓝图user &#x3D; Blueprint(&#39;user&#39;, __name__,template_folder">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-05-28T04:02:22.000Z">
+<meta property="article:modified_time" content="2020-09-04T07:33:30.827Z">
+<meta property="article:author" content="fgyong">
+<meta property="article:tag" content="Flask">
+<meta property="article:tag" content="Python3">
+<meta name="twitter:card" content="summary">
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fgyong的技术博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://fgyong.cn/2018/05/28/f2195580.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python3 Flask bootstrap教程(2) | fgyong的技术博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fgyong的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">不忘初心 方得始终</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fgyong.cn/2018/05/28/f2195580.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fgyong">
+      <meta itemprop="description" content="在学习的路上，不忘初心 方得始终">
+      <meta itemprop="image" content="/images/favicon.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fgyong的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Python3 Flask bootstrap教程(2)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-28 12:02:22" itemprop="dateCreated datePublished" datetime="2018-05-28T12:02:22+08:00">2018-05-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-04 15:33:30" itemprop="dateModified" datetime="2020-09-04T15:33:30+08:00">2020-09-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.蓝图<br>2.Nav的使用<br>3.mysql使用<br>4.模板的使用</p>
+<h3 id="蓝图使用"><a href="#蓝图使用" class="headerlink" title="蓝图使用"></a>蓝图使用</h3><p>新建user文件夹,在user文件夹下变新建tamplates，还有<strong>init</strong>.py和views.py<br><strong>init.py</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from flask import Blueprint</span><br><span class="line">&#x2F;&#x2F;声明蓝图</span><br><span class="line">user &#x3D; Blueprint(&#39;user&#39;, __name__,template_folder&#x3D;&#39;templates&#39;)</span><br><span class="line"></span><br><span class="line">from api.v1.user import views</span><br></pre></td></tr></table></figure><br>然后在run.py中注册蓝图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">先导入</span><br><span class="line">from api.v1.user import user</span><br><span class="line"></span><br><span class="line">app.register_blueprint(user,url_prefix&#x3D;&#39;&#x2F;user&#39;) 后边的是路径</span><br></pre></td></tr></table></figure><br>然后在user的views中就可以写方法了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, request, jsonify,render_template</span><br><span class="line">from flask.json import tojson_filter</span><br><span class="line">from api.v1.user import user</span><br><span class="line">from api.v1 import first</span><br><span class="line">import pymysql</span><br><span class="line">import sys</span><br><span class="line">import json</span><br><span class="line">from flask_bootstrap import Bootstrap</span><br><span class="line">&#x2F;&#x2F;路由</span><br><span class="line">@user.route(&#39;&#x2F;&#39;,methods&#x3D;[&#39;GET&#39;,&#39;POST&#39;])</span><br><span class="line">&#x2F;&#x2F;方法</span><br><span class="line">def my_index():</span><br><span class="line">    args &#x3D; request.args;</span><br><span class="line">    age &#x3D; &#39;&#39;</span><br><span class="line">    name &#x3D; &#39;&#39;</span><br><span class="line">    if args.__contains__(&#39;name&#39;):</span><br><span class="line">        name &#x3D; request.args.getlist(key&#x3D;&#39;name&#39;)</span><br><span class="line">    if args.__contains__(&#39;age&#39;):</span><br><span class="line">        age &#x3D; request.args.__getitem__(&#39;age&#39;)</span><br><span class="line">&#x2F;&#x2F;返回数据是json</span><br><span class="line">    return jsonify(&#123;&#39;method&#39;:sys._getframe().f_code.co_name,</span><br><span class="line">                    &#39;name&#39;:str(name),</span><br><span class="line">                    &#39;age&#39;:age&#125;)</span><br></pre></td></tr></table></figure><br>现在我们想返回一个html，那么就在tamplates中新建一个index.html<br>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;结果&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;helloword&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure><br>然后在views中增加路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@user.route(&#39;&#x2F;helloword&#39;)</span><br><span class="line">def helloword():</span><br><span class="line">    return render_template(&#39;helloword.html&#39;)</span><br></pre></td></tr></table></figure><br>运行程序,输入地址<code>127.0.0.1：5000/helloword</code>，出现helloword，就算我们的程序跑起来了。</p>
+<h3 id="Nav的使用"><a href="#Nav的使用" class="headerlink" title="Nav的使用"></a>Nav的使用</h3><p>nav就是html的头部或者banner，我们写一个简单的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class&#x3D;&quot;nav nav-tabs&quot;&gt;</span><br><span class="line">    &lt;li role&#x3D;&quot;presentation&quot; class&#x3D;&quot;dropdown&quot; id&#x3D;&quot;myDropdown&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;dropdown-toggle&quot; data-toggle&#x3D;&quot;dropdown&quot;  data-target&#x3D;&quot;#&quot; role&#x3D;&quot;button&quot; aria-haspopup&#x3D;&quot;true&quot;</span><br><span class="line">           aria-expanded&#x3D;&quot;false&quot;&gt;</span><br><span class="line">            主页 &lt;span class&#x3D;&quot;caret&quot; id&#x3D;&quot;page1&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">        &lt;ul class&#x3D;&quot;dropdown-menu&quot; role&#x3D;&quot;menu&quot; aria-labelledby&#x3D;&quot;page1&quot;&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;add&quot;&gt;添加&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li class&#x3D;&quot;dropdown&quot;  &gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;dropdown-toggle&quot; id&#x3D;&quot;group2&quot; data-toggle&#x3D;&quot;dropdown&quot; href&#x3D;&quot;#&quot; role&#x3D;&quot;button&quot;&gt;</span><br><span class="line">            文章 &lt;span class&#x3D;&quot;caret&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">        &lt;ul class&#x3D;&quot;dropdown-menu&quot; role&#x3D;&quot;menu&quot; aria-labelledby&#x3D;&quot;group2&quot;&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                 &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;add&quot;&gt;添加&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                 &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                 &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line"></span><br><span class="line">    &lt;li class&#x3D;&quot;active&quot; role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;dropdown-toggle&quot; data-toggle&#x3D;&quot;&quot; href&#x3D;&quot;#&quot; role&#x3D;&quot;button&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;</span><br><span class="line">            关于</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure><br>这里边有一个ul 套着一个li，一个li套着一个ul，第二个 ul就是二级菜单。</p>
+<h3 id="mysql使用"><a href="#mysql使用" class="headerlink" title="mysql使用"></a>mysql使用</h3><p>本地需要装环境mysql，用户是root，密码是123456，数据库是test，格式是utf8。下边是我们一个函数返回查询到的表中所有user的名字和年龄。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def userList():</span><br><span class="line">    con &#x3D; pymysql.connect(&#39;127.0.0.1&#39;, &#39;root&#39;, &#39;123456&#39;, &#39;test&#39;, charset&#x3D;&#39;utf8&#39;)  # 添加utf8 否则中文乱码</span><br><span class="line">    cur &#x3D; con.cursor()</span><br><span class="line">    cur.execute(&#39;select * from user&#39;)</span><br><span class="line">    nums &#x3D; cur.rownumber</span><br><span class="line">    all &#x3D; cur.fetchall()</span><br><span class="line">    data &#x3D; []</span><br><span class="line">    for i in range(len(all)):</span><br><span class="line">        one &#x3D; all[i]</span><br><span class="line">        data.append(&#123;&#39;name&#39;: str(one[1]),</span><br><span class="line">                     &#39;age&#39;: one[2]&#125;)</span><br><span class="line"></span><br><span class="line">    con.close()</span><br><span class="line">    return data</span><br></pre></td></tr></table></figure></p>
+<h3 id="模板的使用"><a href="#模板的使用" class="headerlink" title="模板的使用"></a>模板的使用</h3><p>模板是需要我们在模板中先定义一个空的block，然后在继承这个html，把这个block给添加上，等于把一个html文件分拆成多个文件，也可以理解成组件化。添加一个base.html<br>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;edge&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1, maximum-scale&#x3D;1, user-scalable&#x3D;no&quot;&gt;</span><br><span class="line">    &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;</span><br><span class="line">    &lt;title&gt;Bootstrap 101 Template&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.bootcss.com&#x2F;jquery&#x2F;1.12.4&#x2F;jquery.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.bootcss.com&#x2F;bootstrap&#x2F;3.3.7&#x2F;js&#x2F;bootstrap.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Bootstrap --&gt;</span><br><span class="line">    &lt;link href&#x3D;&quot;https:&#x2F;&#x2F;cdn.bootcss.com&#x2F;bootstrap&#x2F;3.3.7&#x2F;css&#x2F;bootstrap.min.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 --&gt;</span><br><span class="line">    &lt;!-- 警告：通过 file:&#x2F;&#x2F; 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 --&gt;</span><br><span class="line">    &lt;!--[if lt IE 9]&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.bootcss.com&#x2F;html5shiv&#x2F;3.7.3&#x2F;html5shiv.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.bootcss.com&#x2F;respond.js&#x2F;1.4.2&#x2F;respond.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;![endif]--&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;ul class&#x3D;&quot;nav nav-tabs&quot;&gt;</span><br><span class="line">    &lt;li role&#x3D;&quot;presentation&quot; class&#x3D;&quot;dropdown&quot; id&#x3D;&quot;myDropdown&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;dropdown-toggle&quot; data-toggle&#x3D;&quot;dropdown&quot;  data-target&#x3D;&quot;#&quot; role&#x3D;&quot;button&quot; aria-haspopup&#x3D;&quot;true&quot;</span><br><span class="line">           aria-expanded&#x3D;&quot;false&quot;&gt;</span><br><span class="line">            主页 &lt;span class&#x3D;&quot;caret&quot; id&#x3D;&quot;page1&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">        &lt;ul class&#x3D;&quot;dropdown-menu&quot; role&#x3D;&quot;menu&quot; aria-labelledby&#x3D;&quot;page1&quot;&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;add&quot;&gt;添加&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li class&#x3D;&quot;dropdown&quot;  &gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;dropdown-toggle&quot; id&#x3D;&quot;group2&quot; data-toggle&#x3D;&quot;dropdown&quot; href&#x3D;&quot;#&quot; role&#x3D;&quot;button&quot;&gt;</span><br><span class="line">            文章 &lt;span class&#x3D;&quot;caret&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">        &lt;ul class&#x3D;&quot;dropdown-menu&quot; role&#x3D;&quot;menu&quot; aria-labelledby&#x3D;&quot;group2&quot;&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                 &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;add&quot;&gt;添加&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                 &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">                 &lt;a role&#x3D;&quot;menuitem&quot; href&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line"></span><br><span class="line">    &lt;li class&#x3D;&quot;active&quot; role&#x3D;&quot;presentation&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;dropdown-toggle&quot; data-toggle&#x3D;&quot;&quot; href&#x3D;&quot;#&quot; role&#x3D;&quot;button&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;</span><br><span class="line">            关于</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line">这下边就是定义的缺少的block</span><br><span class="line">&#123;% block page_content %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure><br>然后我们在子网页中继承这个模板并且添加上去block<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;继承刚才的网页</span><br><span class="line">&#123;% extends &#39;base.html&#39; %&#125;</span><br><span class="line">&#x2F;&#x2F;下边的block的对应刚才定义的代码块，对应不上的话，会展现不出来下边的代码</span><br><span class="line">&#123;% block page_content %&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;pager&quot;&gt;</span><br><span class="line">    &lt;h1 align&#x3D;&quot;center&quot;&gt;用户列表&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">    &lt;table class&#x3D;&quot;table nav-tabs&quot;&gt;</span><br><span class="line">        &#123;% for i in data %&#125;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;名字：&#123;&#123; i.name &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                &lt;td&gt;年龄：&#123;&#123; i.age &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;&#x2F;tr&gt;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td align&#x3D;&quot;center&quot;&gt;</span><br><span class="line">                &lt;a href&#x3D;&quot;add&quot;&gt;</span><br><span class="line">                    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;添加用户&quot;  align&#x3D;&quot;center&quot; style&#x3D;&quot;width: 200px&quot;&gt;</span><br><span class="line">                &lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td align&#x3D;&quot;center&quot;&gt;</span><br><span class="line">                &lt;a href&#x3D;&quot;list&quot; &gt;</span><br><span class="line">                    &lt;input type&#x3D;&quot;button&quot;  value&#x3D;&quot;用户列表&quot; style&#x3D;&quot;width: 200px&quot;&gt;</span><br><span class="line">                &lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;td&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flask/" rel="tag"># Flask</a>
+          
+            <a href="/tags/Python3/" rel="tag"># Python3</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/27/d9340643.html" rel="next" title="Python3 Flask bootstrap教程(1)">
+                <i class="fa fa-chevron-left"></i> Python3 Flask bootstrap教程(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/24/66f667ef.html" rel="prev" title="iOS 浅析指针、函数、typedef">
+                iOS 浅析指针、函数、typedef <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.ico"
+                alt="fgyong" />
+            
+              <p class="site-author-name" itemprop="name">fgyong</p>
+              <p class="site-description motion-element" itemprop="description">在学习的路上，不忘初心 方得始终</p>
+          </div>
+
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lmZ3lvbmc=" title="GitHub &rarr; https://github.com/ifgyong"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vdXNlci8xNzUwMDc4MjM5MjkwOTA5" title="掘金 &rarr; https://juejin.im/user/1750078239290909"><i class="fa fa-fw fa-掘金"></i>掘金</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#蓝图使用"><span class="nav-number">1.</span> <span class="nav-text">蓝图使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nav的使用"><span class="nav-number">2.</span> <span class="nav-text">Nav的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql使用"><span class="nav-number">3.</span> <span class="nav-text">mysql使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板的使用"><span class="nav-number">4.</span> <span class="nav-text">模板的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备17045226号 </span>&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fgyong</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Mist</span> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+    
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'a7800c37057fc3ce83df',
+          clientSecret: '0de240e28197f071e10fcb67d4337fd8afe8a9c3',
+          repo: 'ifgyong.github.io',
+          owner: 'ifgyong',
+          admin: ['ifgyong'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
