@@ -91,7 +91,8 @@ footer:
   # http://www.miitbeian.gov.cn
   beian:
     enable: true
-    icp: 豫ICP备17045226号
+    icp: 豫ICP备17045226号-1
+    url: https://beian.miit.gov.cn/
 
   # -------------------------------------------------------------
   # Any custom text can be defined here.
